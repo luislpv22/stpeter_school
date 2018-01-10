@@ -1,12 +1,12 @@
 class Persona{
 constructor(snombre,sapellido,sdni,stelefono,sdireccion,scorreo){
 
-	this.nombre=snombre;
-	this.apellido=sapellido;
-	this.dni=sdni;
-	this.telefono=stelefono;
-	this.direccion=sdireccion;
-	this.correo=scorreo;
+	this.Nombre=snombre;
+	this.Apellido=sapellido;
+	this.Dni=sdni;
+	this.Telefono=stelefono;
+	this.Direccion=sdireccion;
+	this.Correo=scorreo;
 
 
 }
