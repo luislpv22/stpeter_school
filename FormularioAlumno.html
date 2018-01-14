@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title></title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
+
+</head>
+<body>	
+
+<form class="form-horizontal" name="frmAlu" action="destino.html">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Alta de alumno</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nombreAlu">Nombre</label>  
+  <div class="col-md-4">
+  <input id="nombreAlu" name="nombreAlu" type="text" placeholder="nombre" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="apellidoAlu">Apellidos</label>  
+  <div class="col-md-4">
+  <input id="apellidoAlu" name="apellidoAlu" type="text" placeholder="apellidos" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="dniAlu">DNI</label>  
+  <div class="col-md-4">
+  <input id="dniAlu" name="dniAlu" type="text" placeholder="dni" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="telefonoAlu">Teléfono</label>  
+  <div class="col-md-4">
+  <input id="telefonoAlu" name="telefonoAlu" type="text" placeholder="teléfono" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="direAlu">Dirección</label>  
+  <div class="col-md-4">
+  <input id="direAlu" name="direAlu" type="text" placeholder="dirección" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="emailAlu">Email</label>  
+  <div class="col-md-4">
+  <input id="emailAlu" name="emailAlu" type="text" placeholder="email" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="altaAlu"></label>
+  <div class="col-md-8">
+    <button id="btnAltaAlu" name="btnAltaAlu" class="btn btn-success">Dar de Alta</button>
+    <button id="btnResetAlu" name="btnResetAlu" class="btn btn-danger">Limpiar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+<div class="panel panel-default" id="panelMensajes">
+  <div class="panel-heading">
+    <h3 class="panel-title">Mensajes</h3>
+  </div>
+  <div class="panel-body" id="divTextoMensaje">
+    <p id="pTextoMensaje"></p>
+    <div class="form-group">
+  <div class="col-md-4">
+    <input type="button" id="btnCerrar" name="btnCerrar" class="btn btn-primary" value="CerrarMensaje"/>
+  </div>
+</div>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="js/objetos.js"></script>
+<script type="text/javascript" src="js/codigoMatriAlu.js"></script>
+
+<script>
+var btnAceptar= document.frmAlu.altaAlu;
+btnAceptar.addEventListener("click", comprobarEnvio, false);
+var btnCerrarMensaje=document.getElementById('btnCerrar');
+ btnCerrarMensaje.addEventListener("click", cerrarMensaje, false);
+</script>
+</body>
+</html>

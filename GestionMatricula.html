@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title></title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
+
+</head>
+<body>	
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">stpeter_school</a>
+    </div>
+    <form class="navbar-form navbar-left" action="#" name="frmMenu">
+      <button type="submit" class="btn btn-default" id="altaMatri" name="altaMatri">Alta matrícula</button>
+      <button type="submit" class="btn btn-default" id="modMatri" name="modMatri">Modificar matrículas</button>
+      <button type="submit" class="btn btn-default" id="conMatri" name="conMatri">Consultar matriculas</button>
+      <button type="submit" class="btn btn-default" id="bajMatri" name="bajMatri">Dar de baja matriculas</button>
+      <button type="submit" class="btn btn-default" id="volver" name="volver">Volver</button>
+    </form>
+  </div>
+</nav>
+
+
+
+<script>
+	var btnPrueba= document.frmMenu.altaMatri;
+	btnPrueba.addEventListener("click", prueba, false);
+
+	function prueba ()
+	{
+		alert("wee");
+	}
+
+
+
+</script>
+
+
+	
+
+</body>
+</html>
