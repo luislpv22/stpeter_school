@@ -1,21 +1,36 @@
 datosIniciales();
 function datosIniciales()
 { 
-  //datos para comprobaciones rápidas solo válido hasta que hagamos el XML
-  var academia= new Academia();
-  academia.addAluAcademia( new Alumno ("Juan", "Mendez", "3025661F", "952145629", "Calle Urraca", "juan@hotmail.com", true, false));
-  academia.addAluAcademia( new Alumno ("Manu", "Dominguez", "2012661W", "672155629", "Calle Palacio", "manu@hotmail.com", true, false));
-  academia.addAluAcademia( new Alumno ("Fran", "Sanchez", "5012661T", "921465229", "Calle Antesala", "fran@hotmail.com", true, false));
+  academia= new Academia();
+  var oXML = loadXMLDoc("xml/alumno.xml");
+  var oAlumnos= oXML.getElementsByTagName("alumno");
+  crearAluConXml(oAlumnos);
 
 
- /*a= new Alumno ("Adri", "Dominguez", "3025661F", "952145629", "Calle Urraca", "adrirrf1@hotmail.com", true, false);
- curso = new Curso ("Ingles", "7 semanas", 450.25, "Precencial",false);
-
- curso.addAlumnoCurso(a);*/
 
 }
 
 /******** validación y alta de alumno*************************/
+function crearAluConXml(oAlumnos)
+{
+	for(var j = 0; j<oAlumnos.length; j++)
+	{
+	  nombre=oAlumnos[j].getElementsByTagName("nombre")[0].textContent;
+	  pass=oAlumnos[j].getElementsByTagName("password")[0].textContent;
+	  apellido=oAlumnos[j].getElementsByTagName("apellido")[0].textContent;
+	  dni=oAlumnos[j].getElementsByTagName("dni")[0].textContent;
+	  telefono=oAlumnos[j].getElementsByTagName("telefono")[0].textContent;
+	  direccion=oAlumnos[j].getElementsByTagName("direccion")[0].textContent;
+	  email=oAlumnos[j].getElementsByTagName("email")[0].textContent;
+	  activo=oAlumnos[j].getElementsByTagName("activo")[0].textContent;
+	  estadoCobro=oAlumnos[j].getElementsByTagName("estadoCobro")[0].textContent;
+
+	  academia.addAluAcademia(new Alumno(nombre, pass, apellido, dni, telefono, direccion, email, activo, estadoCobro));
+
+	}
+}
+
+
 function comprobarEnvio(oEvento)
 {
 	var oE = oEvento || window.event;
@@ -45,6 +60,32 @@ function comprobarEnvio(oEvento)
 		  document.frmAlu.nombreAlu.focus();
 		bValido = false;
 		sError += "El nombre no puede estar vacio \n";	
+	}
+
+	//password
+	var sPassword = document.frmAlu.passAlu.value.trim();
+	if (sPassword !="")
+	{
+		/*El campo apellido debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios.*/
+		var oExpReg = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}$/i;
+		if (oExpReg.test(sPassword) == false){
+
+				document.frmAlu.passAlu.classList.add("errorFormulario");
+				document.frmAlu.passAlu.focus();
+				bValido = false;
+				sError += "La contraseña tiene que tener entre 6 y 15 caracteres, y debe haber números, letras mayusculas y letras minusculas \n";
+  
+			} else {
+				document.frmAlu.passAlu.classList.remove("errorFormulario");
+			}
+	}
+	else
+	{
+		document.frmAlu.passAlu.classList.add("errorFormulario");
+		if(bValido) 
+		  document.frmAlu.passAlu.focus();
+		bValido = false;
+		sError += "El campo apellidos no puede estar vacio \n";		
 	}
 
 	//apellidos
@@ -212,6 +253,27 @@ function mensaje(sTexto)
 	document.getElementById("panelMensajes").style.display = 'block';
 }
 
+function irInicio()
+{
+	location.href ="indexProvisional.html";
+}
+
+function loadXMLDoc(filename)
+{
+	if (window.XMLHttpRequest)
+	  {
+	  xhttp=new XMLHttpRequest();
+	  }
+	else // code for IE5 and IE6
+	  {
+	  xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xhttp.open("GET",filename,false);
+	
+	xhttp.send();
+	
+	return xhttp.responseXML;
+} 
 
 
 

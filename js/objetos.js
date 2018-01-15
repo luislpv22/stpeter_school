@@ -1,13 +1,14 @@
 class Persona{
-constructor(snombre,sapellido,sdni,stelefono,sdireccion,scorreo, bActivo){
+constructor(snombre,spassword, sapellido,sdni,stelefono,sdireccion,scorreo, sActivo){
 
 	this.Nombre=snombre;
+	this.Password=spassword;
 	this.Apellido=sapellido;
 	this.Dni=sdni;
 	this.Telefono=stelefono;
 	this.Direccion=sdireccion;
 	this.Correo=scorreo;
-	this.activo=bActivo;
+	this.Activo=sActivo;
 
 
 }
@@ -17,10 +18,10 @@ constructor(snombre,sapellido,sdni,stelefono,sdireccion,scorreo, bActivo){
 
 class Profesor extends Persona{
 
-constructor(snombre,sapellido,sdni,stelefono,sdireccion,scorreo, bActivo, scargo,sdespacho,bestadoPago,dtinicioTutoria,dtfinTutoria)
+constructor(snombre,spassword, sapellido,sdni,stelefono,sdireccion,scorreo, bActivo, scargo,sdespacho,bestadoPago,dtinicioTutoria,dtfinTutoria)
 {
 
-super(snombre,sapellido,sdni,stelefono,sdireccion,scorreo, bActivo);
+super(snombre,spassword, sapellido,sdni,stelefono,sdireccion,scorreo, bActivo);
 
 	this.cargo=scargo;
 	this.despacho=sdespacho;
@@ -33,10 +34,10 @@ super(snombre,sapellido,sdni,stelefono,sdireccion,scorreo, bActivo);
 
 class Alumno extends Persona{
 
-constructor(snombre,sapellido,sdni,stelefono,sdireccion,scorreo,bActivo, bestadoCobro)
+constructor(snombre,spassword, sapellido,sdni,stelefono,sdireccion,scorreo,bActivo, bestadoCobro)
 {
 
-super(snombre,sapellido,sdni,stelefono,sdireccion,scorreo, bActivo);
+super(snombre,spassword,sapellido,sdni,stelefono,sdireccion,scorreo,bActivo);
 
 	this.estadoCobro=bestadoCobro;
 

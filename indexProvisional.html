@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title></title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
+
+</head>
+<body>	
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">stpeter_school</a>
+    </div>
+    <form class="navbar-form navbar-left"  name="frmMenu">
+      <button type="button" class="btn btn-default" id="regAlu" name="regAlu">Registrar Alumno</button>
+      <button type="button" class="btn btn-default ocultar" id="gestAlu" name="gestAlu">Gestor Alumno</button>
+    </form>
+  </div>
+</nav>
+
+<!-- formulario modificar datos alumno -->
+<div id="capaIniSesion">
+<form class="form-horizontal" name="frmIniSesion" action="indexProvisional.html">
+
+<fieldset>
+<!-- Form Name -->
+<legend>Inicio Sesión</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="dni" >DNI</label>  
+  <div class="col-md-4">
+  <input id="nombreAlu" name="nombreAlu" type="text" placeholder="dni" class="form-control input-md" >
+    
+  </div>
+</div>
+
+<!-- password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="password">Password</label>  
+  <div class="col-md-4">
+  <input id="passAlu" name="passAlu" type="password" placeholder="password" class="form-control input-md">
+
+  
+  </div>
+</div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="addCursoMatri"></label>
+      <div  id="botonAddCurso" class="col-md-4">
+        <button id="btnAddCursoMatri" name="btnAddCursoMatri" class="btn btn-primary">Iniciar Sesión</button>
+      </div>
+    </div>
+
+
+<script type="text/javascript" src="js/objetos.js"></script>
+<script type="text/javascript" src="js/codigoMatriAlu.js"></script>
+
+<script>
+
+	var btnModDatos= document.frmMenu.regAlu;
+	var btnMatricular= document.frmMenu.gestAlu;
+
+
+	btnModDatos.addEventListener("click", irRegAlu, false);
+	btnMatricular.addEventListener("click", irGestAlu, false);
+
+  function irRegAlu()
+  {
+    location.href ="FormularioAlumno.html";
+  }
+
+  function irGestAlu()
+  {
+    location.href ="GestionAlumno.html";
+  }
+
+
+
+
+
+
+
+</script>
+
+
+	
+
+</body>
+</html>

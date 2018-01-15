@@ -9,7 +9,7 @@
 </head>
 <body>	
 
-<form class="form-horizontal" name="frmAlu" action="destino.html">
+<form class="form-horizontal" name="frmAlu" action="indexProvisional.html">
 <fieldset>
 
 <!-- Form Name -->
@@ -22,6 +22,14 @@
   <input id="nombreAlu" name="nombreAlu" type="text" placeholder="nombre" class="form-control input-md" required="">
     
   </div>
+</div>
+
+<!-- password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="password">Password</label>  
+  <div class="col-md-4">
+  <input id="passAlu" name="passAlu" type="password" placeholder="password" class="form-control input-md" required="">
+</div>
 </div>
 
 <!-- Text input-->
@@ -75,6 +83,7 @@
   <div class="col-md-8">
     <button id="btnAltaAlu" name="btnAltaAlu" class="btn btn-success">Dar de Alta</button>
     <button id="btnResetAlu" name="btnResetAlu" class="btn btn-danger">Limpiar</button>
+    <button id="btnInicio" name="btnInicio" class="btn btn-danger">Ir a inicio</button>
   </div>
 </div>
 
@@ -99,11 +108,14 @@
 <script type="text/javascript" src="js/objetos.js"></script>
 <script type="text/javascript" src="js/codigoMatriAlu.js"></script>
 
+
 <script>
-var btnAceptar= document.frmAlu.altaAlu;
+var btnAceptar= document.frmAlu.btnAltaAlu;
+var btnVolver= document.frmAlu.btnInicio;
 btnAceptar.addEventListener("click", comprobarEnvio, false);
 var btnCerrarMensaje=document.getElementById('btnCerrar');
  btnCerrarMensaje.addEventListener("click", cerrarMensaje, false);
+ btnVolver.addEventListener("click", irInicio, false);
 </script>
 </body>
 </html>
