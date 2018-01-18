@@ -16,24 +16,447 @@
       <a class="navbar-brand" href="#">stpeter_school</a>
     </div>
     <form class="navbar-form navbar-left" action="#" name="frmMenu">
-      <button type="submit" class="btn btn-default" id="altaMatri" name="altaMatri">Alta matrícula</button>
-      <button type="submit" class="btn btn-default" id="modMatri" name="modMatri">Modificar matrículas</button>
-      <button type="submit" class="btn btn-default" id="conMatri" name="conMatri">Consultar matriculas</button>
-      <button type="submit" class="btn btn-default" id="bajMatri" name="bajMatri">Dar de baja matriculas</button>
-      <button type="submit" class="btn btn-default" id="volver" name="volver">Volver</button>
+      <button type="button" class="btn btn-default" id="altaMatri" name="altaMatri">Alta matrícula</button>
+      <button type="button" class="btn btn-default" id="modMatri" name="modMatri">Modificar matrículas</button>
+      <button type="button" class="btn btn-default" id="conMatri" name="conMatri">Consultar matriculas</button>
+      <button type="button" class="btn btn-default" id="bajMatri" name="bajMatri">Dar de baja matriculas</button>
+      <button type="button" class="btn btn-default" id="volver" name="volver">Volver</button>
     </form>
   </div>
 </nav>
 
 
 
-<script>
-	var btnPrueba= document.frmMenu.altaMatri;
-	btnPrueba.addEventListener("click", prueba, false);
+<!-- - Alta Matrícula- - - - - - - - - - -->
+<div id="capaAltaMatri" class="ocultar">
+		<form class="form-horizontal">
+	<fieldset>
 
-	function prueba ()
+	<!-- Form Name -->
+	<legend>Dar de alta una matrícula</legend>
+
+	<!-- Select Basic -->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="selMatricula">Seleccione matrícula</label>
+	  <div class="col-md-4">
+	    <select id="selMatricula" name="selMatricula" class="form-control">
+	      <option value="1">Option one</option>
+	      <option value="2">Option two</option>
+	    </select>
+	  </div>
+	  <button id="btnDarAltaMatri" name="btnDarAltaMatri" class="btn btn-primary">Dar de Alta</button>
+	</div>
+
+	<!-- Button -->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="btnVolverAltaMatri"></label>
+	  <div class="col-md-4">
+	    <button id="btnVolverAltaMatri" name="btnVolverAltaMatri" class="btn btn-danger">Volver</button>
+	  </div>
+	</div>
+	</fieldset>
+	</form>
+</div>
+<!--  - - - - - - - - - - - - - - - - - - - -->
+
+<!-- - Modificar Matrícula- - - - - - - - - - -->
+<div id="capaModMatri" class="ocultar">
+<form class="form-horizontal" name="frmModMatri">
+<fieldset>
+
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="selMatricula">Seleccione matrícula</label>
+	  <div class="col-md-4">
+	    <select id="selMatricula" name="selMatricula" class="form-control">
+	      <option value="1">Option one</option>
+	      <option value="2">Option two</option>
+	    </select>
+	  </div>
+	</div>
+
+	<!-- Form Name -->
+	<legend>Modificar matrícula</legend>
+		<!-- Text input-->
+	<div class="form-group" >
+	  <label class="col-md-2 control-label" for="nombreAlu" >Nombre</label>  
+	  <div class="col-md-4">
+	  <input id="nombreAlu" name="nombreAlu" type="text" placeholder="nombre" class="form-control input-md" required=""  >
+	  </div>
+	</div>
+
+		<!-- password input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="password">Password</label>  
+	  <div class="col-md-4">
+	  <input id="passAlu" name="passAlu" type="password" placeholder="password" class="form-control input-md" required="">
+	</div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="apellidoAlu">Apellidos</label>  
+	  <div class="col-md-4">
+	  <input id="apellidoAlu" name="apellidoAlu" type="text" placeholder="apellidos" class="form-control input-md" requited="" >
+	    
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="dniAlu">DNI</label>  
+	  <div class="col-md-4">
+	  <input id="dniAlu" name="dniAlu" type="text" placeholder="dni" class="form-control input-md"  required="">
+	    
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="telefonoAlu">Teléfono</label>  
+	  <div class="col-md-4">
+	  <input id="telefonoAlu" name="telefonoAlu" type="text" placeholder="teléfono" class="form-control input-md" required="">
+	    
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="direAlu">Dirección</label>  
+	  <div class="col-md-4">
+	  <input id="direAlu" name="direAlu" type="text" placeholder="dirección" class="form-control input-md" required="">
+	    
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="emailAlu">Email</label>  
+	  <div class="col-md-4">
+	  <input id="emailAlu" name="emailAlu" type="text" placeholder="email" class="form-control input-md" required="">
+	    
+	  </div>
+	</div>
+
+	<!-- Select Basic -->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="seltasa">Cobro de la tasa </label>
+	  <div class="col-md-4">
+	    <select id="selTasaMatri" name="selTasaMatri" class="form-control">
+	      <option value="pendiente">Pendiente</option>
+	      <option value="pagado">Pagado</option>
+	    </select>
+	  </div>
+	</div>
+
+	<div id="tablaMatriCurso">
+		<table class="table table-hover table-condensed">
+	    <thead>
+	      <tr>
+			<th>Tipo Curso</th>
+	        <th>Idiomas</th>
+	        <th>Nivel</th>
+	        <th>Duración curso</th>
+	        <th>Precio</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+		      <option value="1">Option one</option>
+		      <option value="2">Option two</option>
+		    </select></td>
+
+	       <td><select id="selectipoCursoModMatri" name="selecIdiomaCursoModMatri" class="form-control">
+		      <option value="1">Option one</option>
+		      <option value="2">Option two</option>
+		    </select></td>
+	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+		      <option value="1">Option one</option>
+		      <option value="2">Option two</option>
+		    </select></td>
+	        <td>john@example.com</td>
+	        <td>john@example.com</td>
+	      </tr>
+	      <tr>
+	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+		      <option value="1">Option one</option>
+		      <option value="2">Option two</option>
+		    </select></td>
+	        <td><select id="selectipoCursoModMatri" name="selecIdiomaCursoModMatri" class="form-control">
+		      <option value="1">Option one</option>
+		      <option value="2">Option two</option>
+		    </select></td>
+	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+		      <option value="1">Option one</option>
+		      <option value="2">Option two</option>
+		    </select></td>
+	        <td>john@example.com</td>
+	        <td>john@example.com</td>
+	      </tr>
+	      <tr>
+	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+		      <option value="1">Option one</option>
+		      <option value="2">Option two</option>
+		    </select></td>
+	        <td><select id="selectipoCursoModMatri" name="selecIdiomaCursoModMatri" class="form-control">
+		      <option value="1">Option one</option>
+		      <option value="2">Option two</option>
+		    </select></td>
+	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+		      <option value="1">Option one</option>
+		      <option value="2">Option two</option>
+		    </select></td>
+	        <td>john@example.com</td>
+	        <td>john@example.com</td>
+	      </tr>
+	     </tbody>
+	  	 </table>
+
+		<!-- Button (Double) -->
+		<div class="form-group">
+		<label class="col-md-4 control-label" for="AcepModMatri"></label>
+			<div class="col-md-8">
+				<button id="btnAcepModMatri" name="btnAcepModMatri" class="btn btn-success">Modificar Matrícula</button>
+			 	<button id="btnDesModMatri" name="btnDesModMatri" class="btn btn-danger">Deshacer cambios</button>
+			</div>
+		</div>
+	</div>
+
+
+	</fieldset>
+	</form>
+</div>
+<!--  - - - - - - - - - - - - - - - - - - - -->
+
+<!-- - Consultar Matrícula- - - - - - - - - - -->
+<div id="capaConsMatri" class="ocultar">
+	<form class="form-horizontal">
+<fieldset>
+
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="selMatricula">Seleccione matrícula</label>
+	  <div class="col-md-4">
+	    <select id="selMatricula" name="selMatricula" class="form-control">
+	      <option value="1">Option one</option>
+	      <option value="2">Option two</option>
+	    </select>
+	  </div>
+	</div>
+
+	<!-- Form Name -->
+	<legend>Consultar matrícula</legend>
+		<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="nombreAlu" >Nombre</label>  
+	  <div class="col-md-4">
+	  <input id="nombreAlu" name="nombreAlu" type="text" placeholder="nombre" class="form-control input-md" disabled  >
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="apellidoAlu">Apellidos</label>  
+	  <div class="col-md-4">
+	  <input id="apellidoAlu" name="apellidoAlu" type="text" placeholder="apellidos" class="form-control input-md" disabled >
+	    
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="dniAlu">DNI</label>  
+	  <div class="col-md-4">
+	  <input id="dniAlu" name="dniAlu" type="text" placeholder="dni" class="form-control input-md"  disabled>
+	    
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="telefonoAlu">Teléfono</label>  
+	  <div class="col-md-4">
+	  <input id="telefonoAlu" name="telefonoAlu" type="text" placeholder="teléfono" class="form-control input-md" disabled>
+	    
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="direAlu">Dirección</label>  
+	  <div class="col-md-4">
+	  <input id="direAlu" name="direAlu" type="text" placeholder="dirección" class="form-control input-md" disabled>
+	    
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="emailAlu">Email</label>  
+	  <div class="col-md-4">
+	  <input id="emailAlu" name="emailAlu" type="text" placeholder="email" class="form-control input-md" disabled>
+	    
+	  </div>
+	</div>
+
+	<!-- Select Basic -->
+	<div class="form-group">
+	  <label class="col-md-2 control-label" for="seltasa">Cobro de la tasa </label>
+	  <div class="col-md-4">
+	    <select id="selTasaMatri" name="selTasaMatri" class="form-control" disabled>
+	      <option value="pendiente">Pendiente</option>
+	      <option value="pagado">Pagado</option>
+	    </select>
+	  </div>
+	</div>
+
+	<div id="tablaMatriCurso">
+		<table class="table table-hover table-condensed">
+	    <thead>
+	      <tr>
+			<th>Tipo Curso</th>
+	        <th>Idiomas</th>
+	        <th>Nivel</th>
+	        <th>Duración curso</th>
+	        <th>Precio</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <td>tipo1</td>
+	        <td>idioma1</td>
+	        <td>Nivel1</td>
+	        <td>Duracion1</td>
+	        <td>Curso1</td>
+	      </tr>
+	      <tr>
+	        <td>tipo2</td>
+	        <td>idioma2</td>
+	       	<td>Nivel2</td>
+	        <td>Duracion2</td>
+	        <td>Curso2</td>
+	   	   </tr>
+	   	   <tr>
+	   	   	<td>tipo3</td>
+	   	   	<td>idioma3</td>
+	   	    <td>Nivel3</td>
+	        <td>Duracion3</td>
+	        <td>Curso3</td>
+	   	   </tr>
+	     </tbody>
+	  	 </table>
+	</fieldset>
+	</form>
+</div>
+<!--  - - - - - - - - - - - - - - - - - - - -->
+<!-- - dar de baja matricula -->
+<div id="capaDarBajaMatri" class="ocultar">
+	<form class="form-horizontal">
+	<fieldset>
+
+	<!-- Form Name -->
+	<legend>Dar de baja una matrícula</legend>
+	<!-- Select Basic -->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="selMatricula">Seleccione matrícula</label>
+	  <div class="col-md-4">
+	    <select id="selMatricula" name="selMatricula" class="form-control">
+	      <option value="1">Option one</option>
+	      <option value="2">Option two</option>
+	    </select>
+	  </div>
+	  <button id="btnDarBajaMatri" name="btnDarBajaMatri" class="btn btn-primary">Dar de Baja</button>
+	</div>
+
+	<!-- Button -->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="btnVolverBajaMatri"></label>
+	  <div class="col-md-4">
+	    <button id="btnVolverBajaMatri" name="btnVolverBajaMatri" class="btn btn-danger">Volver</button>
+	  </div>
+	</div>
+	</fieldset>
+	</form>
+</div>
+<!--  - - - - - - - - - - - - - - - - - - - -->
+<!-- - panel de mensajes -->
+<div class="panel panel-default" id="panelMensajes">
+  <div class="panel-heading">
+    <h3 class="panel-title">Mensajes</h3>
+  </div>
+  <div class="panel-body" id="divTextoMensaje">
+    <p id="pTextoMensaje"></p>
+    <div class="form-group">
+  <div class="col-md-4">
+    <input type="button" id="btnCerrar" name="btnCerrar" class="btn btn-primary" value="CerrarMensaje"/>
+  </div>
+</div>
+  </div>
+</div>
+<!-- - - - - - - - - - - - - - -->
+
+<script type="text/javascript" src="js/objetos.js"></script>
+<script type="text/javascript" src="js/codigoMatriAlu.js"></script>
+
+
+<script>
+	var btnAltaMatri= document.frmMenu.altaMatri;
+	var btnModMatri= document.frmMenu.modMatri;
+	var btnConMatri= document.frmMenu.conMatri;
+	var btnBajMatri= document.frmMenu.bajMatri;
+	var btnVolver= document.frmMenu.volver;
+
+	btnAltaMatri.addEventListener("click", mostrar, false);
+	btnModMatri.addEventListener("click", mostrar, false);
+	btnConMatri.addEventListener("click", mostrar, false);
+	btnBajMatri.addEventListener("click", mostrar, false);
+	btnVolver.addEventListener("click", mostrar, false);
+
+	var btnModMatri= document.querySelector("#btnAcepModMatri");
+	btnModMatri.addEventListener("click", comprobarFrmModMatri, false);
+
+
+	function mostrar(oEvento)
 	{
-		alert("wee");
+		oE= oEvento || window.event;
+		if (oE.target.id == "altaMatri")
+		{
+			document.getElementById("capaModMatri").classList.add("ocultar");
+			document.getElementById("capaConsMatri").classList.add("ocultar");
+			document.getElementById("capaDarBajaMatri").classList.add("ocultar");
+			document.getElementById("capaAltaMatri").classList.remove("ocultar");
+
+		}
+		else if (oE.target.id == "modMatri")
+		{
+			document.getElementById("capaConsMatri").classList.add("ocultar");
+			document.getElementById("capaAltaMatri").classList.add("ocultar");
+			document.getElementById("capaDarBajaMatri").classList.add("ocultar");
+			document.getElementById("capaModMatri").classList.remove("ocultar");
+		}
+		else if (oE.target.id == "conMatri")
+		{
+			document.getElementById("capaAltaMatri").classList.add("ocultar");
+			document.getElementById("capaModMatri").classList.add("ocultar");
+			document.getElementById("capaDarBajaMatri").classList.add("ocultar");
+
+			document.getElementById("capaConsMatri").classList.remove("ocultar");
+
+		}
+		else if (oE.target.id == "bajMatri")
+		{
+			document.getElementById("capaAltaMatri").classList.add("ocultar");
+			document.getElementById("capaModMatri").classList.add("ocultar");
+			document.getElementById("capaConsMatri").classList.add("ocultar");
+			document.getElementById("capaDarBajaMatri").classList.remove("ocultar");
+		}
+		else  
+		{
+			document.getElementById("capaAltaMatri").classList.add("ocultar");
+			document.getElementById("capaModMatri").classList.add("ocultar");
+			document.getElementById("capaConsMatri").classList.add("ocultar");
+			document.getElementById("capaDarBajaMatri").classList.add("ocultar");
+			irInicio();
+		}
 	}
 
 
