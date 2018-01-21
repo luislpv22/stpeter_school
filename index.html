@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>St. Peter School - Iniciar sesión</title>
+
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+<body>	
+    <div id="login-form">
+        <div class="tile">
+            <div class="tile-header">
+                <h2 style="color: white; opacity: .75; font-size: 2.5rem; display: flex; justify-content: center; align-items: center; height: 100%;">St. Peter School</h2>
+            </div>
+            <div class="tile-body">
+                <form class="form-horizontal" id="loginForm" name="formLogin" action="indexProvisional.html">
+                    <label class="form-input">
+                        <i class="material-icons">person</i>
+                        <input type="text" autofocus="true" required />
+                        <span class="label">DNI</span>
+                        <span class="underline"></span>
+                    </label>
+
+                    <label class="form-input">
+                        <i class="material-icons">lock</i>
+                        <input type="password" required />
+                        <span class="label">Contraseña</span>
+                        <div class="underline"></div>
+                    </label>
+
+                    <div class="submit-container clearfix" style="margin-top: 2rem;">          
+                        <div id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
+                            <span>Iniciar sesión</span>
+                        </div>
+                        <div class="login-pending">
+                            <div class=spinner>
+                                <span class="dot1"></span>
+                                <span class="dot2"></span>
+                            </div>
+                            <div class="login-granted-content">
+                                <i class="material-icons">done</i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        var $btn = document.getElementById("submit");
+                        var $loginForm = document.getElementById("loginForm");
+
+                        function signIn()
+                        {
+                            if ($loginForm.checkValidity())
+                            {
+                                $btn.classList.add('pending');
+                                window.setTimeout(function(){ $btn.classList.add('granted'); }, 1500);
+                            }
+                        }
+
+                        $btn.addEventListener("click", signIn);
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
