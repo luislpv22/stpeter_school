@@ -168,6 +168,35 @@ class Academia{ //clase contenedora
 		this._alumnos.push(oAlumno);
 	}
 
+	inicioSesion(sDni,sPass)
+	{
+		var oAlumno= null;
+		for (var i = 0; i < this._alumnos.length && oAlumno==null; i++)
+		{
+			if (this._alumnos[i].Dni == sDni && this._alumnos[i].Password== sPass)
+			{
+				oAlumno=this._alumnos[i]
+			}		
+		}
+		return oAlumno;
+	}
+
+	modDatosAlu(oAlMod)
+	{
+		//recorrer la array de alumnos hasta encontrar a los que tengan el mismo dni y modificarlo
+		var bCambio=false;
+		for (var i = 0; i < this._alumnos.length && bCambio==false; i++) 
+		{
+			if (this._alumnos[i].Dni== oAlMod.Dni)
+			{
+				this._alumnos[i]=oAlMod;
+				bCambio=true;
+			}
+		}
+
+
+	}
+
 
 }
 

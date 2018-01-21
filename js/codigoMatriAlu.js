@@ -1,14 +1,55 @@
 datosIniciales();
 function datosIniciales()
-{ 
-  academia= new Academia();
-  var oXML = loadXMLDoc("xml/alumno.xml");
-  var oAlumnos= oXML.getElementsByTagName("alumno");
-  crearAluConXml(oAlumnos);
+{
+	academia= new Academia();
+    var oXML = loadXMLDoc("xml/alumno.xml");
+	var oAlumnos= oXML.getElementsByTagName("alumno");
+	crearAluConXml(oAlumnos);
+	
+}  
 
 
+  function iniciarSesion(oEvento)
+  {
+  	var oE=oEvento;
+     var sDni= document.querySelector("#dniAlu").value;
+     var sPass= document.querySelector("#passAlu").value;
 
-}
+      oAluConectado= academia.inicioSesion(sDni,sPass);
+
+     if (oAluConectado == null)
+     {
+     	oE.preventDefault();
+     	mensaje(document.createTextNode("Fallo al iniciar sesión"));
+		btnCerrarMensaje.addEventListener("click", cerrarMensaje, false);
+
+     }
+     else
+     {
+     	oE.preventDefault();
+     	sessionStorage.setItem('session', JSON.stringify(oAluConectado));
+     	mensaje(document.createTextNode("Sesión iniciada"));
+		btnCerrarMensaje.addEventListener("click", cerrarMensaje, false);
+		document.querySelector("#capaIniSesion").classList.add("ocultar");
+		document.querySelector("#cerrarSesion").classList.remove("ocultar");
+		document.querySelector("#regAlu").classList.add("ocultar");
+		document.querySelector("#gestAlu").classList.remove("ocultar");
+		
+		
+
+     }
+  }
+
+  function cerrarSesion()
+  {
+  		oAluConectado= null;
+  		document.querySelector("#capaIniSesion").classList.remove("ocultar");
+		document.querySelector("#cerrarSesion").classList.add("ocultar");
+		document.querySelector("#regAlu").classList.remove("ocultar");
+		document.querySelector("#gestAlu").classList.add("ocultar");
+  }
+
+
 
 /******** validación y alta de alumno*************************/
 function crearAluConXml(oAlumnos)
@@ -92,7 +133,7 @@ function comprobarFrmModDatosAlu(oEvento)
 	if (sDireccion !="")
 	{
 		
-		var oExpReg = /^[a-z\d\s\,\º]{3,40}$/i;
+		var oExpReg = /^[a-z\d\s\,\º\/]{3,40}$/i;
 		if (oExpReg.test(sDireccion) == false){
 
 				document.frmModAlu.direAlu.classList.add("errorFormulario");
@@ -149,10 +190,18 @@ function comprobarFrmModDatosAlu(oEvento)
 	}
 	else
 	{  //modificar los daos del alumno
-		/*oE.preventDefault();
-		alumno= new Alumno(sNombre, sApellidos, sDni, sTelefono, sDireccion, sEmail, true, false);
-		mensaje(document.createTextNode("Alumno creado con éxito"));
-		btnCerrarMensaje.addEventListener("click", submit, false);*/
+		oE.preventDefault();
+		sNombre= document.frmModAlu.nombreAlu.value.trim();
+		sApellido= document.frmModAlu.apellidoAlu.value.trim();
+		sDni= document.frmModAlu.dniAlu.value.trim();
+
+		oAlMod= new Alumno(sNombre, sPassword, sApellido, sDni, sTelefono, sDireccion, sEmail, true, false);//objeto alumno con los datos modificados
+		academia.modDatosAlu(oAlMod);
+		//modificar los datos de sesión de usuario
+		sessionStorage.setItem('session', JSON.stringify(oAlMod));
+		
+		mensaje(document.createTextNode("Datos modificados"));
+		btnCerrarMensaje.addEventListener("click", cerrarMensaje, false);
 		
 	}
 }
@@ -297,7 +346,7 @@ function comprobarFrmModMatri(oEvento)
 	if (sDireccion !="")
 	{
 		
-		var oExpReg = /^[a-z\d\s\,\º]{3,40}$/i;
+		var oExpReg = /^[a-z\d\s\,\º\/]{3,40}$/i;
 		if (oExpReg.test(sDireccion) == false){
 
 				document.frmModMatri.direAlu.classList.add("errorFormulario");
@@ -355,6 +404,7 @@ function comprobarFrmModMatri(oEvento)
 	else
 	{
 		
+
 		
 	}
 
@@ -502,7 +552,7 @@ function comprobarEnvio(oEvento)
 	if (sDireccion !="")
 	{
 		
-		var oExpReg = /^[a-z\d\s\,\º]{3,40}$/i;
+		var oExpReg = /^[a-z\d\s\,\º\/]{3,40}$/i;
 		if (oExpReg.test(sDireccion) == false){
 
 				document.frmAlu.direAlu.classList.add("errorFormulario");
@@ -560,7 +610,7 @@ function comprobarEnvio(oEvento)
 	else
 	{
 		oE.preventDefault();
-		alumno= new Alumno(sNombre, sApellidos, sDni, sTelefono, sDireccion, sEmail, true, false);
+		alumno= new Alumno(sNombre,sPassword, sApellidos, sDni, sTelefono, sDireccion, sEmail, true, false);
 		mensaje(document.createTextNode("Alumno creado con éxito"));
 		btnCerrarMensaje.addEventListener("click", submit, false);
 		
@@ -583,6 +633,12 @@ function mensaje(sTexto)
 {
 	document.getElementById("pTextoMensaje").appendChild(sTexto);
 	document.getElementById("panelMensajes").style.display = 'block';
+}
+
+function cerrarMensaje()
+{
+	document.getElementById("pTextoMensaje").textContent="";
+	document.getElementById("panelMensajes").style.display = 'none';
 }
 
 function irInicio()
@@ -609,6 +665,16 @@ function loadXMLDoc(filename)
 
 
 
-/***************************************************************/
-
+/*******************************Cargar datos Alumno ********************************/
+function cargarDatosAlumnos()
+{
+	var oAluConectado = JSON.parse(sessionStorage.getItem('session'));
+	oNombre=document.querySelector("#frmModAlu #nombreAlu").value=oAluConectado.Nombre;
+	oApellido=document.querySelector("#frmModAlu #apellidoAlu").value=oAluConectado.Apellido;
+	oDni=document.querySelector("#frmModAlu #dniAlu").value=oAluConectado.Dni;
+	oPass=document.querySelector("#frmModAlu #passAlu").value=oAluConectado.Password;
+	oTelefono=document.querySelector("#frmModAlu #telefonoAlu").value=oAluConectado.Telefono;
+	oDire=document.querySelector("#frmModAlu #direAlu").value=oAluConectado.Direccion;
+	oEmail=document.querySelector("#frmModAlu #emailAlu").value=oAluConectado.Correo;
+}
 

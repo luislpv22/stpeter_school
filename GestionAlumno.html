@@ -26,7 +26,7 @@
 
 <!-- formulario modificar datos alumno -->
 <div id="capaModificarAlu" class="ocultar">
-<form class="form-horizontal" name="frmModAlu" action="destino.html">
+<form class="form-horizontal" name="frmModAlu" id="frmModAlu" action="#">
 <fieldset>
 
 <!-- Form Name -->
@@ -96,7 +96,7 @@
 
 <!-- Button (Double) -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="altaAlu"></label>
+  <label class="col-md-4 control-label" for="ModAlu"></label>
   <div class="col-md-8">
     <button id="btnModDatosAlu" name="btnModDatosAlu" class="btn btn-success">Modificar datos</button>
     <button id="btnResetModDatosAlu" name="btnResetModDatosAlu" class="btn btn-danger">Limpiar</button>
@@ -387,6 +387,10 @@
 
 	var btnModDatosAlu= document.querySelector("#btnModDatosAlu");
 	btnModDatosAlu.addEventListener("click", comprobarFrmModDatosAlu, false);
+	var btnResetModDatosAlu= document.querySelector("#btnResetModDatosAlu");
+	//btnResetModDatosAlu.addEventListener("click", resetearCamposModDatos, false);
+
+	   
 
 	function mostrar(oEvento)
 	{
@@ -397,6 +401,8 @@
 			document.getElementById("capaMatriCurso").classList.add("ocultar");
 			document.getElementById("capaModCurso").classList.add("ocultar");
 			document.getElementById("capaDarBaja").classList.add("ocultar");
+			cargarDatosAlumnos();
+			
 		}
 		else if (oE.target.id == "matriCurso")
 		{
