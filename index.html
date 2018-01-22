@@ -12,46 +12,21 @@
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">St. Peter School</a>
-        </div>
-        <form class="navbar-form navbar-left"  name="frmMenu">
-          <button type="button" class="btn btn-default" id="regAlu" name="regAlu">Registrar Alumno</button>
-          <button type="button" class="btn btn-default " id="gestAlu" name="gestAlu">Gestor Alumno</button>
-        </form>
-        <div class="navbar-right navbar-form">
-            <span class="usuario">Usuario</span>
-            <button id="btnCerrarSesion" name="btnCerrarSesion" class="btn btn-primary">Cerrar Sesión</button>
-        </div>
-      </div>
-    </nav>
-
     <script type="text/javascript" src="js/objetos.js"></script>
     <script type="text/javascript" src="js/codigoMatriAlu.js"></script>
     <script>
         var sesion = JSON.parse(sessionStorage.session);
-        document.querySelector('.navbar .usuario').innerHTML = sesion.Nombre;
+        //document.querySelector('.navbar .usuario').innerHTML = sesion.nombre;
 
-        var btnModDatos= document.frmMenu.regAlu;
-        var btnMatricular= document.frmMenu.gestAlu;
-        var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
-        var btnCargarSistema= document.querySelector("#cargarSistema");
+        if (sesion.tipo == 'administrador')
+            location.href = "administrador.html";
+        else if (sesion.tipo == 'profesor')
+            location.href = "profesor.html";
+        else
+            location.href = "alumno.html";
 
-        btnModDatos.addEventListener("click", irRegAlu, false);
-        btnMatricular.addEventListener("click", irGestAlu, false);
-        btnCerrarSesion.addEventListener("click", cerrarSesion, false);
-
-        function irRegAlu()
-        {
-            location.href ="FormularioAlumno.html";
-        }
-
-        function irGestAlu()
-        {
-            location.href ="GestionAlumno.html";
-        }
+        //var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
+        //btnCerrarSesion.addEventListener("click", cerrarSesion, false);
     </script>
 </body>
 </html>

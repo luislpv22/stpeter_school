@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listaProfesores>
+<profesor>
+	<nombre>Profesor</nombre>
+	<password>profesor</password>
+	<apellido>1</apellido>
+	<dni>profesor</dni>
+	<telefono>951357258</telefono>
+	<direccion>C/ Puerto Urraca</direccion>
+	<email>ivanSales@gmail.com</email>
+	<activo>si</activo>
+	<estadoCobro>pendiente</estadoCobro>
+</profesor>
+</listaProfesores>

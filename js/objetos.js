@@ -1,203 +1,165 @@
-class Persona{
-constructor(snombre,spassword, sapellido,sdni,stelefono,sdireccion,scorreo, sActivo){
-
-	this.Nombre=snombre;
-	this.Password=spassword;
-	this.Apellido=sapellido;
-	this.Dni=sdni;
-	this.Telefono=stelefono;
-	this.Direccion=sdireccion;
-	this.Correo=scorreo;
-	this.Activo=sActivo;
-
-
-}
-
-}
-
-
-class Profesor extends Persona{
-
-constructor(snombre,spassword, sapellido,sdni,stelefono,sdireccion,scorreo, bActivo, scargo,sdespacho,bestadoPago,dtinicioTutoria,dtfinTutoria)
+class Persona
 {
-
-super(snombre,spassword, sapellido,sdni,stelefono,sdireccion,scorreo, bActivo);
-
-	this.cargo=scargo;
-	this.despacho=sdespacho;
-	this.estadoPago=bestadoPago;
-	this.inicioTutoria=dtinicioTutoria;
-	this.finTutoria=dtfinTutoria;
-
+	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo)
+	{
+		this.nombre=sNombre;
+		this.password=sPassword;
+		this.apellido=sApellido;
+		this.dni=sDni;
+		this.telefono=iTelefono;
+		this.direccion=sDireccion;
+		this.correo=sCorreo;
+		this.activo=bActivo;
+	}
 }
-}
 
-class Alumno extends Persona{
-
-constructor(snombre,spassword, sapellido,sdni,stelefono,sdireccion,scorreo,bActivo, bestadoCobro)
+class Profesor extends Persona
 {
+	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo, iSalario)
+	{
+		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 
-super(snombre,spassword,sapellido,sdni,stelefono,sdireccion,scorreo,bActivo);
-
-	this.estadoCobro=bestadoCobro;
-
-
+		this.salario=iSalario;
+	}
 }
 
-}
-
-class ApunteContable{
-
-constructor(stipo,bestado,fimporte,sasunto,dtfecha_ven)
+class Alumno extends Persona
 {
+	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo, bEstadoCobro)
+	{
+		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 
-
-
-	this.tipo=stipo;
-	this.estado=bestado;
-	this.importe=fimporte;
-	this.asunto=sasunto;
-	this.fecha_ven=dtfecha_ven;
-
-
+		this.estadoCobro=bEstadoCobro;
+	}
 }
 
-}
-
-class Calificaciones{
-
-constructor(fnota,stipoExamen)
+class Administrador extends Persona
 {
-
-
-
-	this.nota=fnota;
-	this.tipoExamen=stipoExamen;
-
-
+	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo)
+	{
+		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
+	}
 }
 
-}
-
-class Curso{
-
-constructor(sidioma,sduracion,fprecio,sañoAcademico,stipo, bArchivado)
+class Contabilidad
 {
-
-
-
-	this.idioma=sidioma;
-	this.duracion=sduracion;
-	this.precio=fprecio;
-	this.añoAcademico=sañoAcademico;
-	this.tipo=stipo;
-	this.listaAlumno=[]; // una lista de los alumnos que están matriculados en el curso
-	this.bArchivado=bArchivado; //boolean para saber si el curso sigue activo, o ya termino, o se canceló
+	constructor(stipo,bestado,fimporte,sasunto,dtfecha_ven)
+	{
+		this.tipo=stipo;
+		this.estado=bestado;
+		this.importe=fimporte;
+		this.asunto=sasunto;
+		this.fecha_ven=dtfecha_ven;
+	}
 }
 
-	addAlumnoCurso(oAlumno)
+class Calificaciones
+{
+	constructor(fNota,sTipoExamen)
+	{
+		this.nota=fNota;
+		this.tipoExamen=sTipoExamen;
+	}
+}
+
+class Curso
+{
+	constructor(sIdioma, sDuracion, fPrecio, sAñoAcademico, sTipo, bArchivado)
+	{
+		this.idioma=sIdioma;
+		this.duracion=sDuracion;
+		this.precio=fPrecio;
+		this.añoAcademico=sAñoAcademico;
+		this.tipo=sTipo;
+		this.listaAlumno=[]; // una lista de los alumnos que están matriculados en el curso
+		this.bArchivado=bArchivado; //boolean para saber si el curso sigue activo, o ya termino, o se canceló
+	}
+
+	matricularAlumno(oAlumno)
 	{
 		this.listaAlumno.push(oAlumno); //añade alumno al curso
 	}
-
 }
 
-class Horario{
 
-constructor(scodigo,sdias,thoraInicio,thoraFin)
+class Aula
 {
-
-
-
-	this.codigo=scodigo;
-	this.dias=sdias;
-	this.horaInicio=thoraInicio;
-	this.horaFin=thoraFin;
-
-
+	constructor(sCodigo, iEdificio, iPlanta, iAula, iCapacidad, sTipo)
+	{
+		this.codigo=sCodigo;
+		this.edificio=iEdificio;
+		this.planta=iPlanta;
+		this.aula=iAula;
+		this.capacidad=iCapacidad;
+		this.tipo=sTipo;
+	}
 }
 
-}
-
-
-class Aula{
-
-constructor(scodigo,iedificio,iplanta,iaula,icapacidad,stipo)
-{
-
-
-
-	this.codigo=scodigo;
-	this.edificio=iedificio;
-	this.planta=iplanta;
-	this.aula=iaula;
-	this.capacidad=icapacidad;
-	this.tipo=stipo;
-
-
-}
-
-}
-
-class Equipamiento{
-
-constructor(scodigo,stipo,sdescripcion,dtfechaCompra)
-{
-
-
-
-	this.codigo=scodigo;
-	this.tipo=stipo;
-	this.descripcion=sdescripcion;
-	this.fechaCompra=dtfechaCompra;
-
-
-}
-
-}
-
-class Academia{ //clase contenedora 
-
+// Clase contenedora 
+class Academia
+{ 
 	constructor ()
 	{
 		this._alumnos=[]; //atributo privado, array que contiene todos los alumnos de la academia
+		this._usuarios=[]; //atributo privado, array que contiene todos los alumnos de la academia
 	}
 
-	addAluAcademia(oAlumno)
+	addAlumno(oAlumno)
 	{
 		this._alumnos.push(oAlumno);
+		this._usuarios.push(oAlumno);
+	}
+
+	addProfesor(oProfesor)
+	{
+		this._usuarios.push(oProfesor);
+	}
+
+	addAdministrador(oAdministrador)
+	{
+		this._usuarios.push(oAdministrador);
 	}
 
 	inicioSesion(sDni,sPass)
 	{
-		var oAlumno= null;
-		for (var i = 0; i < this._alumnos.length && oAlumno==null; i++)
+		var oUsuario = null;
+		for (var i=0; i<this._usuarios.length && oUsuario==null; i++)
 		{
-			if (this._alumnos[i].Dni == sDni && this._alumnos[i].Password== sPass)
+			if (this._usuarios[i].dni == sDni && this._usuarios[i].password == sPass)
 			{
-				oAlumno=this._alumnos[i]
+				oUsuario = this._usuarios[i];
 			}		
 		}
-		return oAlumno;
+		return oUsuario;
 	}
 
-	modDatosAlu(oAlMod)
+	modificarUsuario(oUsuario)
 	{
-		//recorrer la array de alumnos hasta encontrar a los que tengan el mismo dni y modificarlo
-		var bCambio=false;
-		for (var i = 0; i < this._alumnos.length && bCambio==false; i++) 
+		// recorrer la array de alumnos hasta encontrar a los que tengan el mismo dni y modificarlo
+		var bEncontrado=false;
+		for (var i=0; i<this._usuarios.length && bEncontrado==false; i++) 
 		{
-			if (this._alumnos[i].Dni== oAlMod.Dni)
+			if (this._usuarios[i].dni == oUsuario.dni)
 			{
-				this._alumnos[i]=oAlMod;
-				bCambio=true;
+				this._usuarios[i] = oUsuario;
+				bEncontrado = true;
 			}
 		}
-
-
 	}
 
+	loadXMLDoc(filename)
+	{
+		var xhttp = null;
 
+		if (window.XMLHttpRequest)
+			xhttp = new XMLHttpRequest();
+		else // IE 5/6
+			xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+
+		xhttp.open("GET", filename, false);
+		xhttp.send();
+		return xhttp.responseXML;
+	}
 }
 
 

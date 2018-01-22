@@ -19,8 +19,11 @@
       <button type="button" class="btn btn-default" id="matriCurso" name="matriCurso">Matricular cursos</button>
       <button type="button" class="btn btn-default" id="modMatriAlu" name="modMatriAlu">Modificar matriculas</button>
       <button type="button" class="btn btn-default" id="bajAlu" name="bajAlu">Dar de baja </button>
-      <button type="button" class="btn btn-default" id="volver" name="volver">Volver</button>
     </form>
+    <div class="navbar-right navbar-form">
+        <span class="usuario"></span>
+        <button id="btnCerrarSesion" name="btnCerrarSesion" class="btn btn-primary">Cerrar Sesión</button>
+    </div>
   </div>
 </nav>
 
@@ -373,17 +376,21 @@
 
 <script>
 
+    var sesion = JSON.parse(sessionStorage.session);
+    document.querySelector('.navbar .usuario').appendChild(document.createTextNode(sesion.nombre));
+
+    var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
+    btnCerrarSesion.addEventListener("click", cerrarSesion, false);
+
 	var btnModDatos= document.frmMenu.modDatos;
 	var btnMatricular= document.frmMenu.matriCurso;
 	var btnModMatri= document.frmMenu.modMatriAlu;
 	var btnDarBaja= document.frmMenu.bajAlu;
-	var btnVolver= document.frmMenu.volver;
 
 	btnModDatos.addEventListener("click", mostrar, false);
 	btnMatricular.addEventListener("click", mostrar, false);
 	btnModMatri.addEventListener("click", mostrar, false);
 	btnDarBaja.addEventListener("click", mostrar, false);
-	btnVolver.addEventListener("click", mostrar, false);
 
 	var btnModDatosAlu= document.querySelector("#btnModDatosAlu");
 	btnModDatosAlu.addEventListener("click", comprobarFrmModDatosAlu, false);
@@ -426,14 +433,6 @@
 			document.getElementById("capaModificarAlu").classList.add("ocultar");
 			document.getElementById("capaMatriCurso").classList.add("ocultar");
 			document.getElementById("capaModCurso").classList.add("ocultar");
-		}
-		else  
-		{
-			document.getElementById("capaModificarAlu").classList.add("ocultar");
-			document.getElementById("capaMatriCurso").classList.add("ocultar");
-			document.getElementById("capaModCurso").classList.add("ocultar");
-			document.getElementById("capaDarBaja").classList.add("ocultar");
-			irInicio();
 		}
 	}
 
