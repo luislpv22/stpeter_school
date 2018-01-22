@@ -1,53 +1,40 @@
 datosIniciales();
+
 function datosIniciales()
 {
 	academia= new Academia();
     var oXML = loadXMLDoc("xml/alumno.xml");
 	var oAlumnos= oXML.getElementsByTagName("alumno");
-	crearAluConXml(oAlumnos);
-	
-}  
+	crearAluConXml(oAlumnos);	
+}
 
+function iniciarSesion(oEvento)
+{
+	console.log(sessionStorage);
+    var sDni= document.querySelector("#dniAlu").value;
+    var sPass= document.querySelector("#passAlu").value;
 
-  function iniciarSesion(oEvento)
-  {
-  	var oE=oEvento;
-     var sDni= document.querySelector("#dniAlu").value;
-     var sPass= document.querySelector("#passAlu").value;
+    oAluConectado = academia.inicioSesion(sDni,sPass);
 
-      oAluConectado= academia.inicioSesion(sDni,sPass);
+    if (oAluConectado == null)
+    {
+        mensaje(document.createTextNode("Fallo al iniciar sesión"));
+	    return false;
+    }
+    else
+    {
+        sessionStorage.setItem('session', JSON.stringify(oAluConectado));
+    }
 
-     if (oAluConectado == null)
-     {
-     	oE.preventDefault();
-     	mensaje(document.createTextNode("Fallo al iniciar sesión"));
-		btnCerrarMensaje.addEventListener("click", cerrarMensaje, false);
+    return true;
+}
 
-     }
-     else
-     {
-     	oE.preventDefault();
-     	sessionStorage.setItem('session', JSON.stringify(oAluConectado));
-     	mensaje(document.createTextNode("Sesión iniciada"));
-		btnCerrarMensaje.addEventListener("click", cerrarMensaje, false);
-		document.querySelector("#capaIniSesion").classList.add("ocultar");
-		document.querySelector("#cerrarSesion").classList.remove("ocultar");
-		document.querySelector("#regAlu").classList.add("ocultar");
-		document.querySelector("#gestAlu").classList.remove("ocultar");
-		
-		
-
-     }
-  }
-
-  function cerrarSesion()
-  {
-  		oAluConectado= null;
-  		document.querySelector("#capaIniSesion").classList.remove("ocultar");
-		document.querySelector("#cerrarSesion").classList.add("ocultar");
-		document.querySelector("#regAlu").classList.remove("ocultar");
-		document.querySelector("#gestAlu").classList.add("ocultar");
-  }
+function cerrarSesion()
+{
+    oAluConectado= null;
+    sessionStorage.removeItem('session');
+    location.href = "login.html";
+}
 
 
 

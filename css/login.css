@@ -1,5 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i|Monoton');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+﻿@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 html, body {
 	min-height: 100vh;
 	font-size: 14px;
@@ -101,6 +100,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.85rem;
 }
 .btn {
+  border: 0;
+  font-size: 14px;
   border-radius: .2rem;
   display: inline-block;
   padding-top: 0.5rem;

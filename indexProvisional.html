@@ -49,7 +49,7 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="IniciarSesion"></label>
     <div  id="botonIniciarSesion" class="col-md-4">
-        <button id="btnInicioSesion" name="btnInicioSesion" class="btn btn-primary">Iniciar Sesión</button>
+        <button type="submit" id="btnInicioSesion" name="btnInicioSesion" class="btn btn-primary">Iniciar Sesión</button>
     </div>
   </div>
 </div>
@@ -76,25 +76,29 @@
   </div>
   </div>
 </div>
-
+</fieldset>
+</form>
+</div>
 
 <script type="text/javascript" src="js/objetos.js"></script>
 <script type="text/javascript" src="js/codigoMatriAlu.js"></script>
-
 <script>
-
 	var btnModDatos= document.frmMenu.regAlu;
 	var btnMatricular= document.frmMenu.gestAlu;
-  var btnInicioSesion= document.querySelector("#btnInicioSesion");
   var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
   var btnCargarSistema= document.querySelector("#cargarSistema");
 
-
-
 	btnModDatos.addEventListener("click", irRegAlu, false);
 	btnMatricular.addEventListener("click", irGestAlu, false);
-  btnInicioSesion.addEventListener("click", iniciarSesion, false);
   btnCerrarSesion.addEventListener("click", cerrarSesion, false);
+  document.frmIniSesion.addEventListener("submit", login);
+
+  function login(oEvento)
+  {
+    oEvento.preventDefault();
+    if (iniciarSesion(oEvento))
+      irGestAlu();
+  }
 
   function irRegAlu()
   {
@@ -105,21 +109,7 @@
   {
     location.href ="GestionAlumno.html";
   }
-
-
-
-
-
-
-
-
-
-
-
 </script>
-
-
-	
 
 </body>
 </html>

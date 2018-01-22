@@ -2,65 +2,56 @@
 <html>
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>St. Peter School - Iniciar sesión</title>
+    <title>St. Peter School - Página principal</title>
 
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
+    <script>
+        if (typeof sessionStorage.session === 'undefined')
+            location.href = "login.html";
+    </script>
 </head>
-<body>	
-    <div id="login-form">
-        <div class="tile">
-            <div class="tile-header">
-                <h2 style="color: white; opacity: .75; font-size: 2.5rem; display: flex; justify-content: center; align-items: center; height: 100%;">St. Peter School</h2>
-            </div>
-            <div class="tile-body">
-                <form class="form-horizontal" id="loginForm" name="formLogin" action="indexProvisional.html">
-                    <label class="form-input">
-                        <i class="material-icons">person</i>
-                        <input type="text" autofocus="true" required />
-                        <span class="label">DNI</span>
-                        <span class="underline"></span>
-                    </label>
-
-                    <label class="form-input">
-                        <i class="material-icons">lock</i>
-                        <input type="password" required />
-                        <span class="label">Contraseña</span>
-                        <div class="underline"></div>
-                    </label>
-
-                    <div class="submit-container clearfix" style="margin-top: 2rem;">          
-                        <div id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
-                            <span>Iniciar sesión</span>
-                        </div>
-                        <div class="login-pending">
-                            <div class=spinner>
-                                <span class="dot1"></span>
-                                <span class="dot2"></span>
-                            </div>
-                            <div class="login-granted-content">
-                                <i class="material-icons">done</i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <script>
-                        var $btn = document.getElementById("submit");
-                        var $loginForm = document.getElementById("loginForm");
-
-                        function signIn()
-                        {
-                            if ($loginForm.checkValidity())
-                            {
-                                $btn.classList.add('pending');
-                                window.setTimeout(function(){ $btn.classList.add('granted'); }, 1500);
-                            }
-                        }
-
-                        $btn.addEventListener("click", signIn);
-                    </script>
-                </form>
-            </div>
+<body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">St. Peter School</a>
         </div>
-    </div>
+        <form class="navbar-form navbar-left"  name="frmMenu">
+          <button type="button" class="btn btn-default" id="regAlu" name="regAlu">Registrar Alumno</button>
+          <button type="button" class="btn btn-default " id="gestAlu" name="gestAlu">Gestor Alumno</button>
+        </form>
+        <div class="navbar-right navbar-form">
+            <span class="usuario">Usuario</span>
+            <button id="btnCerrarSesion" name="btnCerrarSesion" class="btn btn-primary">Cerrar Sesión</button>
+        </div>
+      </div>
+    </nav>
+
+    <script type="text/javascript" src="js/objetos.js"></script>
+    <script type="text/javascript" src="js/codigoMatriAlu.js"></script>
+    <script>
+        var sesion = JSON.parse(sessionStorage.session);
+        document.querySelector('.navbar .usuario').innerHTML = sesion.Nombre;
+
+        var btnModDatos= document.frmMenu.regAlu;
+        var btnMatricular= document.frmMenu.gestAlu;
+        var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
+        var btnCargarSistema= document.querySelector("#cargarSistema");
+
+        btnModDatos.addEventListener("click", irRegAlu, false);
+        btnMatricular.addEventListener("click", irGestAlu, false);
+        btnCerrarSesion.addEventListener("click", cerrarSesion, false);
+
+        function irRegAlu()
+        {
+            location.href ="FormularioAlumno.html";
+        }
+
+        function irGestAlu()
+        {
+            location.href ="GestionAlumno.html";
+        }
+    </script>
 </body>
 </html>
