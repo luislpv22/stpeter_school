@@ -64,8 +64,9 @@ class Calificaciones
 
 class Curso
 {
-	constructor(sIdioma, sDuracion, fPrecio, sAñoAcademico, sTipo, bArchivado)
+	constructor(sCodigo, sIdioma, sDuracion, fPrecio, sAñoAcademico, sTipo, bArchivado)
 	{
+		this.codigo=sCodigo;
 		this.idioma=sIdioma;
 		this.duracion=sDuracion;
 		this.precio=fPrecio;
@@ -101,7 +102,8 @@ class Academia
 	constructor ()
 	{
 		this._alumnos=[]; //atributo privado, array que contiene todos los alumnos de la academia
-		this._usuarios=[]; //atributo privado, array que contiene todos los alumnos de la academia
+		this._usuarios=[]; //atributo privado, array que contiene todos los usuarios de la academia
+		this._cursos=[]; //atributo privado, array que contiene todos los cursos de la academia
 	}
 
 	addAlumno(oAlumno)
@@ -109,6 +111,7 @@ class Academia
 		this._alumnos.push(oAlumno);
 		this._usuarios.push(oAlumno);
 	}
+
 
 	addProfesor(oProfesor)
 	{
@@ -119,6 +122,12 @@ class Academia
 	{
 		this._usuarios.push(oAdministrador);
 	}
+
+	addCurso(oCurso)
+	{
+		this._cursos.push(oCurso);
+	}
+
 
 	inicioSesion(sDni,sPass)
 	{
@@ -135,7 +144,7 @@ class Academia
 
 	modificarUsuario(oUsuario)
 	{
-		// recorrer la array de alumnos hasta encontrar a los que tengan el mismo dni y modificarlo
+		// recorrer la array de usuarios hasta encontrar a los que tengan el mismo dni y modificarlo
 		var bEncontrado=false;
 		for (var i=0; i<this._usuarios.length && bEncontrado==false; i++) 
 		{
@@ -145,6 +154,22 @@ class Academia
 				bEncontrado = true;
 			}
 		}
+	}
+
+	dameAlumno(dni)
+	{
+		var bEncontrado=false;
+		var oAlu=null;
+		for (var i=0; i<this._usuarios.length && bEncontrado==false; i++) 
+		{
+			
+			if (this._usuarios[i].dni == dni)
+			{
+				oAlu= this._usuarios[i];
+				bEncontrado = true;
+			}
+		}
+		return oAlu;
 	}
 
 	loadXMLDoc(filename)

@@ -1,447 +1,505 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-	<title></title>
-	<link rel="stylesheet" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Peter School - Página principal</title>
 
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/panel.css">
+    <link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
+    <script>
+        if (typeof sessionStorage.session === 'undefined')
+            location.href = "login.html";
+    </script>
 </head>
-<body>	
+<body>
+	<div class="wrapper">
+        <nav id="sidebar">
+            <!-- Sidebar Header -->
+            <div class="sidebar-header">
+                <h3>St. Peter School</h3>
+                <strong>St.P</strong>
+            </div>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">stpeter_school</a>
+            <div class="usuario">
+            	<div class="nombre"></div>
+            	<button id="btnCerrarSesion" name="btnCerrarSesion" class="btn btn-default btn-sm">Cerrar Sesión</button>
+            </div>
+
+            <!-- Sidebar Links -->
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu"><i class="glyphicon glyphicon-home"></i>Inicio</a>
+                </li>
+                <li>
+                    <a href="#frmModAlu" id="enlaceMisDatos"><i class="glyphicon glyphicon-user"></i>Mis Datos</a>
+                </li>
+                <li>
+                      <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"><i class="glyphicon glyphicon-education"></i>Matriculación</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li><a href="#frmAltaMatri" id="enlaceMatricular">Matricularme en cursos</a></li>
+                        <li><a href="#frmModMatri" id="enlaceModMatri">Modificar matrícula</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false"><i class="glyphicon glyphicon-book"></i>Cursos</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu1">
+                        <li><a href="#">Curso 1</a></li>
+                        <li><a href="#">Curso 2</a></li>
+                        <li><a href="#">Curso 3</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="#capaDarBaja" id="enlaceBaja"><i class="glyphicon glyphicon-remove"></i>Darme de baja</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
+        <div>
+	</div>
+
+<!-- hasta aqui todo lo relacionado con el menú -->
+
+<div class="container-fluid">
+    <!-- formulario modificar datos alumno -->
+    <div id="capaModificarAlu" class="ocultar">
+    <form class="form-horizontal" name="frmModAlu" id="frmModAlu" action="#">
+    <fieldset>
+
+    <!-- Form Name -->
+    <legend>Modificar datos</legend>
+
+    <!-- Text input-->
+    <div class="form-group" id="mod">
+      <label class="col-md-4 control-label" for="nombreAlu" >Nombre</label>  
+      <div class="col-md-8">
+      <input id="nombreAlu" name="nombreAlu" type="text" placeholder="nombre" class="form-control input-md" disabled >
+        
+      </div>
     </div>
-    <form class="navbar-form navbar-left"  name="frmMenu">
-      <button type="button" class="btn btn-default" id="modDatos" name="modDatos">Modificar datos</button>
-      <button type="button" class="btn btn-default" id="matriCurso" name="matriCurso">Matricular cursos</button>
-      <button type="button" class="btn btn-default" id="modMatriAlu" name="modMatriAlu">Modificar matriculas</button>
-      <button type="button" class="btn btn-default" id="bajAlu" name="bajAlu">Dar de baja </button>
-    </form>
-    <div class="navbar-right navbar-form">
-        <span class="usuario"></span>
-        <button id="btnCerrarSesion" name="btnCerrarSesion" class="btn btn-primary">Cerrar Sesión</button>
-    </div>
-  </div>
-</nav>
 
-<!-- formulario modificar datos alumno -->
-<div id="capaModificarAlu" class="ocultar">
-<form class="form-horizontal" name="frmModAlu" id="frmModAlu" action="#">
-<fieldset>
-
-<!-- Form Name -->
-<legend>Modificar datos</legend>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="nombreAlu" >Nombre</label>  
-  <div class="col-md-4">
-  <input id="nombreAlu" name="nombreAlu" type="text" placeholder="nombre" class="form-control input-md" disabled >
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="apellidoAlu">Apellidos</label>  
-  <div class="col-md-4">
-  <input id="apellidoAlu" name="apellidoAlu" type="text" placeholder="apellidos" class="form-control input-md" disabled>
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="dniAlu">DNI</label>  
-  <div class="col-md-4">
-  <input id="dniAlu" name="dniAlu" type="text" placeholder="dni" class="form-control input-md" disabled>
-    
-  </div>
-</div>
-
-<!-- password input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="password">Password</label>  
-  <div class="col-md-4">
-  <input id="passAlu" name="passAlu" type="password" placeholder="password" class="form-control input-md" required="">
-</div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="telefonoAlu">Teléfono</label>  
-  <div class="col-md-4">
-  <input id="telefonoAlu" name="telefonoAlu" type="text" placeholder="teléfono" class="form-control input-md" required="">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="direAlu">Dirección</label>  
-  <div class="col-md-4">
-  <input id="direAlu" name="direAlu" type="text" placeholder="dirección" class="form-control input-md" required="">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="emailAlu">Email</label>  
-  <div class="col-md-4">
-  <input id="emailAlu" name="emailAlu" type="text" placeholder="email" class="form-control input-md" required="">
-    
-  </div>
-</div>
-
-<!-- Button (Double) -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="ModAlu"></label>
-  <div class="col-md-8">
-    <button id="btnModDatosAlu" name="btnModDatosAlu" class="btn btn-success">Modificar datos</button>
-    <button id="btnResetModDatosAlu" name="btnResetModDatosAlu" class="btn btn-danger">Limpiar</button>
-  </div>
-</div>
-
-</fieldset>
-</form>
-</div>
-
-<!--  - - - - - - - - - - - - - - - - - - - -->
-
-<!-- - Matricular curso -->
-<div id="capaMatriCurso" class="ocultar">
-<form class="frmMatricular">
-<fieldset>
-<!-- Form Name -->
-<legend>Matriculación</legend>
-
-	<div id= "matriCentral">
-		<!-- Select Basic -->
-		<div class="form-group">
-		  <label class="col-md-2 control-label" for="selectbasic">Año Académico</label>
-		  <div class="col-md-4">
-		    <select id="selectbasic" name="selectbasic" class="form-control">
-		      <option value="1">Option one</option>
-		      <option value="2">Option two</option>
-		    </select>
-		  </div>
-		</div>
-	</div>
-	<br>
-	<div id= "matriTipoCurso">
-			<!-- Select Basic -->
-		<div class="form-group">
-		  <label class="col-md-1 control-label" for="selectbasic">Tipo</label>
-		  <div class="col-md-2">
-		    <select id="selectbasic" name="selectbasic" class="form-control">
-		      <option value="1">Option one</option>
-		      <option value="2">Option two</option>
-		    </select>
-		  </div>
-		</div>
-	</div>
-	<div id= "idioma">
-		<!-- Select Basic -->
-		<div class="form-group">
-		  <label class="col-md-1 control-label" for="selectbasic">Idiomas</label>
-		  <div class="col-md-3">
-		    <select id="selectbasic" name="selectbasic" class="form-control">
-		      <option value="1">Option one</option>
-		      <option value="2">Option two</option>
-		    </select>
-		  </div>
-		</div>
-	</div>
-	<div id= "nivel"><!-- Select Basic -->
-		<div class="form-group">
-		  <label class="col-md-1 control-label" for="selectbasic">Nivel</label>
-		  <div class="col-md-2">
-		    <select id="selectbasic" name="selectbasic" class="form-control">
-		      <option value="1">Option one</option>
-		      <option value="2">Option two</option>
-		    </select>
-		  </div>
-		</div>
-	</div>
-
-	<div id="otrosDatosMatri">
-			<!-- Text input-->
-		<div class="form-group">
-		  <label class="col-md-1 control-label" for="duraCurso">Duración del curso</label>  
-		  <div class="col-md-2">
-		  <input id="duraCurso" name="duraCurso" type="text" class="form-control input-md" disabled>
-		    
-		  </div>
-		</div>
-
-		<!-- Text input-->
-		<div class="form-group">
-		  <label class="col-md-1 control-label" for="preCurso">Precio del curso</label>  
-		  <div class="col-md-2">
-		  <input id="preCurso" name="preCurso" type="text" class="form-control input-md" disabled>
-		    
-		  </div>
-		</div>
-
-				<!-- Button -->
-	 
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="addCursoMatri"></label>
-		  <div  id="botonAddCurso" class="col-md-4">
-		    <button id="btnAddCursoMatri" name="btnAddCursoMatri" class="btn btn-primary">Añadir Curso</button>
-		  </div>
-		</div>
-	
-	</div>
-
-
-
-	<div id="tablaMatriCurso">
-			<table class="table table-hover table-condensed">
-	    <thead>
-	      <tr>
-			<th>Tipo Curso</th>
-	        <th>Idiomas</th>
-	        <th>Nivel</th>
-	        <th>Duración curso</th>
-	        <th>Precio</th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	      <tr>
-	        <td>John</td>
-	        <td>Doe</td>
-	        <td>john@example.com</td>
-	        <td>john@example.com</td>
-	        <td>john@example.com</td>
-	      </tr>
-	      <tr>
-	        <td>Mary</td>
-	        <td>Moe</td>
-	        <td>mary@example.com</td>
-	        <td>john@example.com</td>
-	        <td>john@example.com</td>
-	      </tr>
-	      <tr>
-	        <td>July</td>
-	        <td>Dooley</td>
-	        <td>july@example.com</td>
-	        <td>john@example.com</td>
-	        <td>john@example.com</td>
-	      </tr>
-	    </tbody>
-	  </table>
-	</div>
-
-
-<!-- Button (Double) -->
-<div id="capaBotonesMatri">
-	<div class="form-group">
-	  <label class="col-md-4 control-label" for="altaAlu"></label>
-	  <div class="col-md-8">
-	    <button id="btnEnviarMatri" name="btnEnviarMatri" class="btn btn-success">Matricular</button>
-	    <button id="btnResetMatri" name="btnResetMatri" class="btn btn-danger">Limpiar</button>
-	  </div>
-	</div>
-</div>
-
-
-
-</fieldset>
-</form>
-</div>
-<!--  - - - - - - - - - - - - - - - - - - - -->
-
-<!-- - Modificar curso -->
-<div id="capaModCurso" class="ocultar">
-	<form class="frmModMatri">
-	<fieldset>
-	<!-- Form Name -->
-	<legend>Modificación de la matrícula</legend>
-
-	<div id= "matriCentral">
-		<div class="form-group">
-		  <label class="col-md-1 control-label" for="anyoAcaModCur">Año Académico</label>  
-		   <div class="col-md-2">
-		    <input id="anyoAcaModCur" name="anyoAcaModCur" type="text" class="form-control input-md" disabled>
-		  </div>
-	   </div>
-	</div>
-
-	<div id="tablaMatriCurso">
-		<table class="table table-hover table-condensed">
-	    <thead>
-	      <tr>
-			<th>Tipo Curso</th>
-	        <th>Idiomas</th>
-	        <th>Nivel</th>
-	        <th>Duración curso</th>
-	        <th>Precio</th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	      <tr>
-	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
-		      <option value="1">Option one</option>
-		      <option value="2">Option two</option>
-		    </select></td>
-
-	        <td>Doe</td>
-	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
-		      <option value="1">Option one</option>
-		      <option value="2">Option two</option>
-		    </select></td>
-	        <td>john@example.com</td>
-	        <td>john@example.com</td>
-	      </tr>
-	      <tr>
-	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
-		      <option value="1">Option one</option>
-		      <option value="2">Option two</option>
-		    </select></td>
-	        <td>Moe</td>
-	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
-		      <option value="1">Option one</option>
-		      <option value="2">Option two</option>
-		    </select></td>
-	        <td>john@example.com</td>
-	        <td>john@example.com</td>
-	      </tr>
-	      <tr>
-	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
-		      <option value="1">Option one</option>
-		      <option value="2">Option two</option>
-		    </select></td>
-	        <td>Dooley</td>
-	        <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
-		      <option value="1">Option one</option>
-		      <option value="2">Option two</option>
-		    </select></td>
-	        <td>john@example.com</td>
-	        <td>john@example.com</td>
-	      </tr>
-	     </tbody>
-	  	 </table>
-
-		<!-- Button (Double) -->
-		<div class="form-group">
-		<label class="col-md-4 control-label" for="AcepModMatri"></label>
-			<div class="col-md-8">
-				<button id="btnAcepModMatri" name="btnAcepModMatri" class="btn btn-success">Modificar Matrícula</button>
-			 	<button id="btnDesModMatri" name="btnDesModMatri" class="btn btn-danger">Deshacer cambios</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!--  - - - - - - - - - - - - - - - - - - - -->
-
-<!-- - dar de baja academia -->
-<div id="capaDarBaja" class="ocultar">
-	<h4> La siguiente acción te dará de baja en la academia, ¿estás seguro?</h4>
-	<div class="form-group">
-		<label class="col-md-4 control-label" for="addCursoMatri"></label>
-		<div  id="botonAddCurso" class="col-md-4">
-			<button id="btnDarBajaAca" name="btnDarBajaAca" class="btn btn-danger">Dar de baja</button>
-		</div>
-	</div>
-</div>
-<!--  - - - - - - - - - - - - - - - - - - - -->
-
-
-
-<!-- - panel de mensajes -->
-<div class="panel panel-default" id="panelMensajes">
-  <div class="panel-heading">
-    <h3 class="panel-title">Mensajes</h3>
-  </div>
-  <div class="panel-body" id="divTextoMensaje">
-    <p id="pTextoMensaje"></p>
+    <!-- Text input-->
     <div class="form-group">
-  <div class="col-md-4">
-    <input type="button" id="btnCerrar" name="btnCerrar" class="btn btn-primary" value="CerrarMensaje"/>
-  </div>
+      <label class="col-md-4 control-label" for="apellidoAlu">Apellidos</label>  
+      <div class="col-md-8">
+      <input id="apellidoAlu" name="apellidoAlu" type="text" placeholder="apellidos" class="form-control input-md" disabled>
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="dniAlu">DNI</label>  
+      <div class="col-md-8">
+      <input id="dniAlu" name="dniAlu" type="text" placeholder="dni" class="form-control input-md" disabled>
+        
+      </div>
+    </div>
+
+    <!-- password input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="password">Password</label>  
+      <div class="col-md-8">
+      <input id="passAlu" name="passAlu" type="password" placeholder="password" class="form-control input-md" required="">
+    </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="telefonoAlu">Teléfono</label>  
+      <div class="col-md-8">
+      <input id="telefonoAlu" name="telefonoAlu" type="text" placeholder="teléfono" class="form-control input-md" required="">
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="direAlu">Dirección</label>  
+      <div class="col-md-8">
+      <input id="direAlu" name="direAlu" type="text" placeholder="dirección" class="form-control input-md" required="">
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="emailAlu">Email</label>  
+      <div class="col-md-8">
+      <input id="emailAlu" name="emailAlu" type="text" placeholder="email" class="form-control input-md" required="">
+        
+      </div>
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="ModAlu"></label>
+      <div class="col-md-8">
+        <button id="btnModDatosAlu" name="btnModDatosAlu" class="btn btn-success">Modificar datos</button>
+      </div>
+    </div>
+
+    </fieldset>
+    </form>
+    </div>
+
+    <!--  - - - - - - - - - - - - - - - - - - - -->
+
+    <!-- - Matricular curso -->
+    <div id="capaMatriCurso" class="ocultar">
+    <form class="frmMatricular" id="frmAltaMatri">
+    <fieldset>
+    <!-- Form Name -->
+    <legend>Matriculación</legend>
+
+        <div id= "matriCentral">
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="selectbasic">Año Académico</label>
+              <div class="col-md-4">
+                <select id="selectbasic" name="selectbasic" class="form-control">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <br>
+        <div id= "matriTipoCurso">
+                <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-1 control-label" for="selectbasic">Tipo</label>
+              <div class="col-md-2">
+                <select id="selectbasic" name="selectbasic" class="form-control">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div id= "idioma">
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-1 control-label" for="selectbasic">Idiomas</label>
+              <div class="col-md-3">
+                <select id="selectbasic" name="selectbasic" class="form-control">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div id= "nivel"><!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-1 control-label" for="selectbasic">Nivel</label>
+              <div class="col-md-2">
+                <select id="selectbasic" name="selectbasic" class="form-control">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select>
+              </div>
+            </div>
+        </div>
+
+        <div id="otrosDatosMatri">
+                <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="duraCurso">Duración del curso</label>  
+              <div class="col-md-3">
+              <input id="duraCurso" name="duraCurso" type="text" class="form-control input-md" disabled>
+                
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="preCurso">Precio del curso</label>  
+              <div class="col-md-3">
+              <input id="preCurso" name="preCurso" type="text" class="form-control input-md" disabled>
+                
+              </div>
+            </div>
+
+                    <!-- Button -->
+         
+            <div class="form-group">
+              <label class="col-md-6 control-label" for="addCursoMatri"></label>
+              <div  id="botonAddCurso" class="col-md-4">
+                <button id="btnAddCursoMatri" name="btnAddCursoMatri" class="btn btn-primary">Añadir Curso</button>
+              </div>
+            </div>
+        
+        </div>
+
+
+
+        <div id="tablaMatriCurso">
+                <table class="table table-hover table-condensed">
+            <thead>
+              <tr>
+                <th>Tipo Curso</th>
+                <th>Idiomas</th>
+                <th>Nivel</th>
+                <th>Duración curso</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+                <td>john@example.com</td>
+                <td>john@example.com</td>
+              </tr>
+              <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+                <td>john@example.com</td>
+                <td>john@example.com</td>
+              </tr>
+              <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+                <td>john@example.com</td>
+                <td>john@example.com</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+    <!-- Button (Double) -->
+    <div id="capaBotonesMatri">
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="altaAlu"></label>
+          <div class="col-md-8">
+            <button id="btnEnviarMatri" name="btnEnviarMatri" class="btn btn-success">Matricular</button>
+            <button id="btnResetMatri" name="btnResetMatri" class="btn btn-danger">Limpiar</button>
+          </div>
+        </div>
+    </div>
+
+
+
+    </fieldset>
+    </form>
+    </div>
+    <!--  - - - - - - - - - - - - - - - - - - - -->
+
+    <!-- - Modificar curso -->
+
+    <div id="capaModCurso" class="ocultar">
+        <form class="frmModMatri" id="frmModMatri">
+        <fieldset>
+        <!-- Form Name -->
+        <legend>Modificación de la matrícula</legend>
+
+        <div id= "matriCentral">
+            <div class="form-group">
+              <label class="col-md-1 control-label" for="anyoAcaModCur">Año Académico</label>  
+               <div class="col-md-2">
+                <input id="anyoAcaModCur" name="anyoAcaModCur" type="text" class="form-control input-md" disabled>
+              </div>
+           </div>
+        </div>
+
+        <div id="tablaMatriCurso">
+            <table class="table table-hover table-condensed">
+            <thead>
+              <tr>
+                <th>Tipo Curso</th>
+                <th>Idiomas</th>
+                <th>Nivel</th>
+                <th>Duración curso</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select></td>
+
+                <td>Doe</td>
+                <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select></td>
+                <td>john@example.com</td>
+                <td>john@example.com</td>
+              </tr>
+              <tr>
+                <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select></td>
+                <td>Moe</td>
+                <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select></td>
+                <td>john@example.com</td>
+                <td>john@example.com</td>
+              </tr>
+              <tr>
+                <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select></td>
+                <td>Dooley</td>
+                <td><select id="selectipoCursoModMatri" name="selectipoCursoModMatri" class="form-control">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select></td>
+                <td>john@example.com</td>
+                <td>john@example.com</td>
+              </tr>
+             </tbody>
+             </table>
+
+            <!-- Button (Double) -->
+            <div class="form-group">
+            <label class="col-md-4 control-label" for="AcepModMatri"></label>
+                <div class="col-md-8">
+                    <button id="btnAcepModMatri" name="btnAcepModMatri" class="btn btn-success">Modificar Matrícula</button>
+                    <button id="btnDesModMatri" name="btnDesModMatri" class="btn btn-danger">Deshacer cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  - - - - - - - - - - - - - - - - - - - -->
+
+    <!-- - dar de baja academia -->
+    <div id="capaDarBaja" class="ocultar">
+        <h4> La siguiente acción te dará de baja en la academia, ¿estás seguro?</h4>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="addCursoMatri"></label>
+            <div  id="botonAddCurso" class="col-md-4">
+                <button id="btnDarBajaAca" name="btnDarBajaAca" class="btn btn-danger">Dar de baja</button>
+            </div>
+        </div>
+    </div>
+    <!--  - - - - - - - - - - - - - - - - - - - -->
+
+
+
+    <!-- - panel de mensajes -->
+    <div class="panel panel-default" id="panelMensajes">
+      <div class="panel-heading">
+        <h3 class="panel-title">Mensajes</h3>
+      </div>
+      <div class="panel-body" id="divTextoMensaje">
+        <p id="pTextoMensaje"></p>
+        <div class="form-group">
+      <div class="col-md-4">
+        <input type="button" id="btnCerrar" name="btnCerrar" class="btn btn-primary" value="CerrarMensaje"/>
+      </div>
+    </div>
+      </div>
+    </div>
+    <!-- - - - - - - - - - - - - - -->
 </div>
-  </div>
-</div>
-<!-- - - - - - - - - - - - - - -->
-
-<script type="text/javascript" src="js/objetos.js"></script>
-<script type="text/javascript" src="js/codigoMatriAlu.js"></script>
 
 
-<script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/objetos.js"></script>
+    <script type="text/javascript" src="js/codigoMatriAlu.js"></script>
+    <script type="text/javascript" src="js/validacionFormAlu.js"></script>
+    <script>
+        var sesion = JSON.parse(sessionStorage.session);
+        document.querySelector('#sidebar .usuario .nombre').appendChild(document.createTextNode(sesion.nombre));
 
-    var sesion = JSON.parse(sessionStorage.session);
-    document.querySelector('.navbar .usuario').appendChild(document.createTextNode(sesion.nombre));
+        if (sesion.tipo != 'alumno')
+            location.href = "index.html";
 
-    var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
-    btnCerrarSesion.addEventListener("click", cerrarSesion, false);
+		
+		document.querySelector('#sidebarCollapse').addEventListener("click", mostrarSidebar, false);
 
-	var btnModDatos= document.frmMenu.modDatos;
-	var btnMatricular= document.frmMenu.matriCurso;
-	var btnModMatri= document.frmMenu.modMatriAlu;
-	var btnDarBaja= document.frmMenu.bajAlu;
-
-	btnModDatos.addEventListener("click", mostrar, false);
-	btnMatricular.addEventListener("click", mostrar, false);
-	btnModMatri.addEventListener("click", mostrar, false);
-	btnDarBaja.addEventListener("click", mostrar, false);
-
-	var btnModDatosAlu= document.querySelector("#btnModDatosAlu");
-	btnModDatosAlu.addEventListener("click", comprobarFrmModDatosAlu, false);
-	var btnResetModDatosAlu= document.querySelector("#btnResetModDatosAlu");
-	//btnResetModDatosAlu.addEventListener("click", resetearCamposModDatos, false);
-
-	   
-
-	function mostrar(oEvento)
-	{
-		oE= oEvento || window.event;
-		if (oE.target.id == "modDatos")
+		function mostrarSidebar()
 		{
-			document.getElementById("capaModificarAlu").classList.remove("ocultar");
-			document.getElementById("capaMatriCurso").classList.add("ocultar");
-			document.getElementById("capaModCurso").classList.add("ocultar");
-			document.getElementById("capaDarBaja").classList.add("ocultar");
-			cargarDatosAlumnos();
-			
+			var sidebar = document.querySelector('#sidebar');
+			if (sidebar.classList.contains('active'))
+				sidebar.classList.remove('active');
+			else
+				sidebar.classList.add('active');
 		}
-		else if (oE.target.id == "matriCurso")
-		{
-			document.getElementById("capaMatriCurso").classList.remove("ocultar");
-			document.getElementById("capaModificarAlu").classList.add("ocultar");
-			document.getElementById("capaModCurso").classList.add("ocultar");
-			document.getElementById("capaDarBaja").classList.add("ocultar");
 
-
-		}
-		else if (oE.target.id == "modMatriAlu")
-		{
-			document.getElementById("capaModCurso").classList.remove("ocultar");
-			document.getElementById("capaModificarAlu").classList.add("ocultar");
-			document.getElementById("capaMatriCurso").classList.add("ocultar");
-			document.getElementById("capaDarBaja").classList.add("ocultar");
-		}
-		else if (oE.target.id == "bajAlu")
-		{
-			document.getElementById("capaDarBaja").classList.remove("ocultar");
-			document.getElementById("capaModificarAlu").classList.add("ocultar");
-			document.getElementById("capaMatriCurso").classList.add("ocultar");
-			document.getElementById("capaModCurso").classList.add("ocultar");
-		}
-	}
+        var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
+        btnCerrarSesion.addEventListener("click", cerrarSesion, false);
 
 
 
-</script>
+            
+              /*zona de configuración de eventos*/
+
+    var enlaces = document.getElementsByTagName("a");
+    for (var i = 0; i < enlaces.length ; i++) 
+    {  
+        enlaces[i].addEventListener("click", function (event)
+        {
+                event.preventDefault();
+                mostrar(event);
+        }, false);
+    }
+
+    var btnModDatosAlu= document.querySelector("#btnModDatosAlu");
+    btnModDatosAlu.addEventListener("click", comprobarFrmModDatosAlu, false);
+    var btnResetModDatosAlu= document.querySelector("#btnResetModDatosAlu");
+    //btnResetModDatosAlu.addEventListener("click", resetearCamposModDatos, false);
 
 
-	
 
+    
+
+
+        /* zona para mostrar y ocultar div*/
+    function mostrar(oEvento)
+    {
+        oE= oEvento || window.event;
+        if (oE.target.id == "enlaceMisDatos")
+        {
+            document.getElementById("capaModificarAlu").classList.remove("ocultar");
+            document.getElementById("capaMatriCurso").classList.add("ocultar");
+            document.getElementById("capaModCurso").classList.add("ocultar");
+            document.getElementById("capaDarBaja").classList.add("ocultar");
+            cargarDatosUsuario();
+            
+        }
+        else if (oE.target.id == "enlaceMatricular")
+        {
+            document.getElementById("capaMatriCurso").classList.remove("ocultar");
+            document.getElementById("capaModificarAlu").classList.add("ocultar");
+            document.getElementById("capaModCurso").classList.add("ocultar");
+            document.getElementById("capaDarBaja").classList.add("ocultar");
+
+
+        }
+        else if (oE.target.id == "enlaceModMatri")
+        {
+            document.getElementById("capaModCurso").classList.remove("ocultar");
+            document.getElementById("capaModificarAlu").classList.add("ocultar");
+            document.getElementById("capaMatriCurso").classList.add("ocultar");
+            document.getElementById("capaDarBaja").classList.add("ocultar");
+        }
+        else if (oE.target.id == "enlaceBaja")
+        {
+            document.getElementById("capaDarBaja").classList.remove("ocultar");
+            document.getElementById("capaModificarAlu").classList.add("ocultar");
+            document.getElementById("capaMatriCurso").classList.add("ocultar");
+            document.getElementById("capaModCurso").classList.add("ocultar");
+        }
+    }
+
+
+
+    </script>
 </body>
 </html>

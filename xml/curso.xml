@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listaCurso>
+<curso>
+	<codigo>1</codigo>
+	<idioma>ingles</idioma>
+	<duracion>4 meses</duracion>
+	<precio>400</precio>
+	<anyoAcademico>2018-2019</anyoAcademico>
+	<tipo>presencial</tipo>
+	<nivel>A2</nivel>
+	<listadoAlumno>
+		<dni>21345687M</dni>
+		<dni>23645812R</dni>
+		<dni>42010210B</dni>
+	</listadoAlumno>
+	<activo>si</activo>
+</curso>
+<curso>
+	<codigo>2</codigo>
+	<idioma>ingles</idioma>
+	<duracion>8 meses</duracion>
+	<precio>1200</precio>
+	<anyoAcademico>2018-2019</anyoAcademico>
+	<tipo>semipresencial</tipo>
+	<nivel>B1</nivel>
+	<listadoAlumno>
+		<dni>04568915V</dni>
+		<dni>95425821Q</dni>
+	</listadoAlumno>
+	<activo>si</activo>
+</curso>
+<curso>
+	<codigo>3</codigo>
+	<idioma>ingles</idioma>
+	<duracion>15 meses</duracion>
+	<precio>1500</precio>
+	<anyoAcademico>2018-2019</anyoAcademico>
+	<tipo>distancia</tipo>
+	<nivel>B2</nivel>
+	<listadoAlumno>
+		<dni>54629812T</dni>
+	</listadoAlumno>
+	<activo>si</activo>
+</curso>
+
+<curso>
+	<codigo>4</codigo>
+	<idioma>frances</idioma>
+	<duracion>5 meses</duracion>
+	<precio>500</precio>
+	<anyoAcademico>2018-2019</anyoAcademico>
+	<tipo>presencial</tipo>
+	<nivel>A2</nivel>
+	<listadoAlumno>
+		<dni>23420102E</dni>
+		<dni>72158961T</dni>
+	</listadoAlumno>
+	<activo>si</activo>
+</curso>
+<curso>
+	<codigo>5</codigo>
+	<idioma>frances</idioma>
+	<duracion>10 meses</duracion>
+	<precio>900</precio>
+	<anyoAcademico>2018-2019</anyoAcademico>
+	<tipo>semipresencial</tipo>
+	<nivel>B1</nivel>
+	<listadoAlumno>
+		<dni>54629812T</dni>
+	</listadoAlumno>
+	<activo>si</activo>
+</curso>
+
+<curso>
+	<codigo>6</codigo>
+	<idioma>aleman</idioma>
+	<duracion>4 meses</duracion>
+	<precio>500€</precio>
+	<anyoAcademico>2018-2019</anyoAcademico>
+	<tipo>presencial</tipo>
+	<nivel>A2</nivel>
+	<listadoAlumno>
+	</listadoAlumno>
+	<activo>si</activo>
+</curso>
+<curso>
+	<codigo>7</codigo>
+	<idioma>aleman</idioma>
+	<duracion>8 meses</duracion>
+	<precio>1000</precio>
+	<anyoAcademico>2018-2019</anyoAcademico>
+	<tipo>presencial</tipo>
+	<nivel>B1</nivel>
+	<listadoAlumno>
+	</listadoAlumno>
+	<activo>si</activo>
+</curso>
+<curso>
+	<codigo>8</codigo>
+	<idioma>aleman</idioma>
+	<duracion>12 meses</duracion>
+	<precio>1500</precio>
+	<anyoAcademico>2018-2019</anyoAcademico>
+	<tipo>presencial</tipo>
+	<nivel>B2</nivel>
+	<listadoAlumno>
+	</listadoAlumno>
+	<activo>si</activo>
+</curso>
+
+
+</listaCurso>
