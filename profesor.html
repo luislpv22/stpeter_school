@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title></title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
+  <link rel="stylesheet" type="text/css" href="css/panel.css">
+    <script>
+        if (typeof sessionStorage.session === 'undefined')
+            location.href = "login.html";
+    </script>
+</head>
+<body onload="inicio();">	
+
+<!--<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">stpeter_school</a>
+    </div>
+    <form class="navbar-form navbar-left"  name="frmMenu">
+      <button type="button" class="btn btn-default" id="calAlum" name="calAlum">Calificar Alumno</button>
+      <button type="button" class="btn btn-default" id="consNotas" name="consNotas">Consultar Notas</button>
+      <button type="button" class="btn btn-default" id="modNotaAlu" name="modNotaAlu">Modificar Notas</button>
+    </form>
+  </div>
+</nav>
+-->
+
+  <div class="wrapper">
+        <nav id="sidebar">
+            <!-- Sidebar Header -->
+            <div class="sidebar-header">
+                <h3>St. Peter School</h3>
+                <strong>St.P</strong>
+            </div>
+
+            <div class="usuario">
+              <div class="nombre"></div>
+              <button id="btnCerrarSesion" name="btnCerrarSesion" class="btn btn-default btn-sm">Cerrar Sesión</button>
+            </div>
+
+            <!-- Sidebar Links -->
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu"><i class="glyphicon glyphicon-home"></i>Inicio</a>
+                </li>
+                <li>
+                    <a href="#frmModAlu" id="enlaceMisDatos"><i class="glyphicon glyphicon-user"></i>Mis Datos</a>
+                </li>
+            
+                    
+                        <li><a href="#capaCalificarAlu" id="enlaceMatricular"><i class="glyphicon glyphicon-education"></i>Añadir Notas</a></li>
+                        <li><a href="#frmModNotas" id="enlaceModMatri"><i class="glyphicon glyphicon-education"></i>Modificar Notas</a></li>
+                   
+                
+                <li>
+                    <a href="#pageSubmenu1" id="consNotas"><i class="glyphicon glyphicon-book"></i>Consultar Alumnos</a>
+                </li>
+                
+              
+            </ul>
+        </nav>
+
+        <div id="content">
+            <button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
+        </div>
+  </div>
+
+    <div id="capaModificarAlu" class="ocultar">
+    <form class="form-horizontal" name="frmModAlu" id="frmModAlu" action="#">
+    <fieldset>
+
+    <!-- Form Name -->
+    <legend>Modificar datos</legend>
+
+    <!-- Text input-->
+   
+    <div class="form-group" id="mod">
+      <label class="col-md-4 control-label" for="nombreAlu" >Nombre</label>  
+      <div class="col-md-8">
+      <input id="nombreAlu" name="nombreAlu" type="text" placeholder="nombre" class="form-control input-md" disabled >
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="apellidoAlu">Apellidos</label>  
+      <div class="col-md-8">
+      <input id="apellidoAlu" name="apellidoAlu" type="text" placeholder="apellidos" class="form-control input-md" disabled>
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="dniAlu">DNI</label>  
+      <div class="col-md-8">
+      <input id="dniAlu" name="dniAlu" type="text" placeholder="dni" class="form-control input-md" disabled>
+        
+      </div>
+    </div>
+
+    <!-- password input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="password">Password</label>  
+      <div class="col-md-8">
+      <input id="passAlu" name="passAlu" type="password" placeholder="password" class="form-control input-md" required="">
+    </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="telefonoAlu">Teléfono</label>  
+      <div class="col-md-8">
+      <input id="telefonoAlu" name="telefonoAlu" type="text" placeholder="teléfono" class="form-control input-md" required="">
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="direAlu">Dirección</label>  
+      <div class="col-md-8">
+      <input id="direAlu" name="direAlu" type="text" placeholder="dirección" class="form-control input-md" required="">
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="emailAlu">Email</label>  
+      <div class="col-md-8">
+      <input id="emailAlu" name="emailAlu" type="text" placeholder="email" class="form-control input-md" required="">
+        
+      </div>
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="ModAlu"></label>
+      <div class="col-md-8">
+        <button id="btnModDatosAlu" name="btnModDatosAlu" class="btn btn-success">Modificar datos</button>
+      </div>
+    </div>
+
+    </fieldset>
+    </form>
+    </div>
+
+
+
+<div id="capaCalificarAlu" class="ocultar">
+<fieldset>
+
+
+<legend>Calificar Alumno</legend>
+<form class="form-group  col-md-5"  name="frmPuntuar">
+<div id="capaSelectCursos" >
+  <label class="col-md-2 control-label" for="selectCursos">Cursos</label>
+<select id="selectCursos" class="form-control ">
+
+
+</select>
+
+</div>
+
+<div id="capaSelectAlumno" class="ocultar col-md-4">
+<label class="col-md-1 control-label" for="selectAlumno">Alumnos</label>
+<select id="selectAlumno" class="form-control ">
+
+</select>
+
+</div>
+<div class="ocultar col-md-4 " id="CapNotaAlu">
+  <label class="col-md-2 control-label" for="NotaAlu">Nota</label>
+      <input type="text" size="4" id="NotaAlu" name="NotaAlu" class="form-control"/>
+      <button type="button" class="btn btn-success " id="puntuar" name="puntuar">Puntuar</button>
+</div>
+    </form>
+
+
+
+</fieldset>
+</div>
+
+
+<div id="capaConsultarNotas" class="ocultar">
+
+<fieldset>
+
+<legend>Consultar Notas</legend>
+
+<div id="capaSelectCursos" class="col-md-4 form-group">
+<select id="selectCursos3" class="form-control">
+  <option value="Todo">Todo</option>
+</select>
+</div>
+	<div id="capaNotas" class="col-md-9"></div>
+</fieldset>
+</div>
+
+
+<div id="capaModificarNotas" class="ocultar">
+	<fieldset>
+	<legend>Modificar Notas</legend>
+   <form class="form-group  col-md-5"  name="frmModNotas">
+<div id="capaSelectCursos">
+  <label class="col-md-2 control-label" for="selectCursos2">Cursos</label>
+<select id="selectCursos2" class="form-control">
+</select>
+</div>
+
+<div id="capaSelectAlumno2" class="ocultar col-md-4">
+<label class="col-md-1 control-label" for="selectAlumno2">Alumnos</label>
+<select id="selectAlumno2" class="form-control">
+
+
+
+
+  
+  
+
+
+
+</select>
+
+</div>
+      <div class="ocultar col-md-4 " id="CapNotaAlu2">
+        <label class="col-md-2 control-label" for="modTxtNotaAlu">Nota</label>
+      <input type="text" size="4" id="modTxtNotaAlu" name="modTxtNotaAlu" class="form-control"/>
+      <button type="button" class="btn btn-success" id="editar" name="editar">Modificar</button>
+</div>
+    </form>
+
+
+	</fieldset>
+	</div>
+	    
+
+
+
+
+<script type="text/javascript" src="js/objetos.js"></script>
+    <script type="text/javascript" src="js/codigoMatriAlu.js"></script>
+    <script type="text/javascript" src="js/validacionFormAlu.js"></script>
+<script type="text/javascript" src="js/codigoProfesor.js"></script>
+
+</body>
+</html>
