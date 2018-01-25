@@ -46,7 +46,10 @@ class Alumno extends Persona
 	{
 this.listaCalificaciones.push(oCalificacion);//Añade Calificacion
 	}
-	
+		addCurso(oCurso)
+	{
+		this._cursos.push(oCurso);
+	}
 
 }
 
