@@ -277,7 +277,7 @@ class Academia
 
 
 
-// Creacion de la tabla con los numeros del sorteo
+
     var oTabla = document.createElement("table");
     oTabla.classList.add("table");
     oTabla.classList.add("table-hover");
@@ -298,7 +298,7 @@ class Academia
     oTH.textContent = "Tipo";
     oFila.appendChild(oTH);
     oTH = document.createElement("th");
-    oTH.textContent = "Año Academico";
+    oTH.textContent = "Nivel";
     oFila.appendChild(oTH);
     oTH = document.createElement("th");
     oTH.textContent = "Alumno";
@@ -325,7 +325,7 @@ for (var i = 0; i < oTablaCurProv.length; i++) {
 	  	 oCelda = oFila.insertCell(-1);
 	  oCelda.textContent = oTablaCurProv[i].tipo;
 	   	 oCelda = oFila.insertCell(-1);
-	  oCelda.textContent = oTablaCurProv[i].añoAcademico;
+	  oCelda.textContent = oTablaCurProv[i].nivel;
 	  oTablaCurAlumProv=oTablaCurProv[i].listaAlumno;
 
 
