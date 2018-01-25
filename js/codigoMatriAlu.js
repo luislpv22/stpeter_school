@@ -152,13 +152,12 @@ function cargarCursos(oCursos)
 		idioma=oCursos[j].getElementsByTagName("idioma")[0].textContent;
 		duracion=oCursos[j].getElementsByTagName("duracion")[0].textContent;
 		precio=oCursos[j].getElementsByTagName("precio")[0].textContent;
-		anyoAcademico=oCursos[j].getElementsByTagName("anyoAcademico")[0].textContent;
 		tipo=oCursos[j].getElementsByTagName("tipo")[0].textContent;
 		nivel=oCursos[j].getElementsByTagName("nivel")[0].textContent;
 		activo=oCursos[j].getElementsByTagName("activo")[0].textContent;
 		listadoAlumnos=oCursos[j].querySelector("listadoAlumno").children;
 
-		oCurso= new Curso (codigo, idioma, duracion, precio, anyoAcademico, tipo, nivel, activo);
+		oCurso= new Curso (codigo, idioma, duracion, precio, tipo, nivel, activo);
 
 		if (listadoAlumnos.length!=0)
 		{
@@ -427,13 +426,12 @@ function cerrarMensaje()
  para que puedan modificar sus datos*/
 function cargarDatosUsuario()
 {
-	var oUsuario = JSON.parse(sessionStorage.getItem('usuario'));
-	oNombre=document.querySelector("#frmModAlu #nombreAlu").value=oUsuario.nombre;
-	oApellido=document.querySelector("#frmModAlu #apellidoAlu").value=oUsuario.apellido;
-	oDni=document.querySelector("#frmModAlu #dniAlu").value=oUsuario.dni;
-	oPass=document.querySelector("#frmModAlu #passAlu").value=oUsuario.password;
-	oTelefono=document.querySelector("#frmModAlu #telefonoAlu").value=oUsuario.telefono;
-	oDire=document.querySelector("#frmModAlu #direAlu").value=oUsuario.direccion;
-	oEmail=document.querySelector("#frmModAlu #emailAlu").value=oUsuario.correo;
+	oNombre=document.querySelector("#frmModAlu #nombreAlu").value=sesion.nombre;
+	oApellido=document.querySelector("#frmModAlu #apellidoAlu").value=sesion.apellido;
+	oDni=document.querySelector("#frmModAlu #dniAlu").value=sesion.dni;
+	oPass=document.querySelector("#frmModAlu #passAlu").value=sesion.password;
+	oTelefono=document.querySelector("#frmModAlu #telefonoAlu").value=sesion.telefono;
+	oDire=document.querySelector("#frmModAlu #direAlu").value=sesion.direccion;
+	oEmail=document.querySelector("#frmModAlu #emailAlu").value=sesion.correo;
 }
 

@@ -5,7 +5,6 @@
 	<idioma>ingles</idioma>
 	<duracion>4 meses</duracion>
 	<precio>400</precio>
-	<anyoAcademico>2018-2019</anyoAcademico>
 	<tipo>presencial</tipo>
 	<nivel>A2</nivel>
 	<listadoAlumno>
@@ -20,7 +19,6 @@
 	<idioma>ingles</idioma>
 	<duracion>8 meses</duracion>
 	<precio>1200</precio>
-	<anyoAcademico>2018-2019</anyoAcademico>
 	<tipo>semipresencial</tipo>
 	<nivel>B1</nivel>
 	<listadoAlumno>
@@ -34,7 +32,6 @@
 	<idioma>ingles</idioma>
 	<duracion>15 meses</duracion>
 	<precio>1500</precio>
-	<anyoAcademico>2018-2019</anyoAcademico>
 	<tipo>distancia</tipo>
 	<nivel>B2</nivel>
 	<listadoAlumno>
@@ -48,7 +45,6 @@
 	<idioma>frances</idioma>
 	<duracion>5 meses</duracion>
 	<precio>500</precio>
-	<anyoAcademico>2018-2019</anyoAcademico>
 	<tipo>presencial</tipo>
 	<nivel>A2</nivel>
 	<listadoAlumno>
@@ -62,7 +58,6 @@
 	<idioma>frances</idioma>
 	<duracion>10 meses</duracion>
 	<precio>900</precio>
-	<anyoAcademico>2018-2019</anyoAcademico>
 	<tipo>semipresencial</tipo>
 	<nivel>B1</nivel>
 	<listadoAlumno>
@@ -76,7 +71,6 @@
 	<idioma>aleman</idioma>
 	<duracion>4 meses</duracion>
 	<precio>500€</precio>
-	<anyoAcademico>2018-2019</anyoAcademico>
 	<tipo>presencial</tipo>
 	<nivel>A2</nivel>
 	<listadoAlumno>
@@ -88,7 +82,6 @@
 	<idioma>aleman</idioma>
 	<duracion>8 meses</duracion>
 	<precio>1000</precio>
-	<anyoAcademico>2018-2019</anyoAcademico>
 	<tipo>presencial</tipo>
 	<nivel>B1</nivel>
 	<listadoAlumno>
@@ -100,7 +93,6 @@
 	<idioma>aleman</idioma>
 	<duracion>12 meses</duracion>
 	<precio>1500</precio>
-	<anyoAcademico>2018-2019</anyoAcademico>
 	<tipo>presencial</tipo>
 	<nivel>B2</nivel>
 	<listadoAlumno>

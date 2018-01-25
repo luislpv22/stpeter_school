@@ -170,12 +170,6 @@
 									<div class="modal-body">
 										<!--contenido de la matriculación-->
 										<div class="form-group">
-											<label class="col-md-6 control-label" for="AnyoAcademico">Año Académico</label>  
-											<div class="col-md-6">
-												<input id="AnyoAcademico" name="AnyoAcademico" type="text" class="form-control input-md" disabled>
-											</div>
-										</div>
-										<div class="form-group">
 											<label class="col-md-3 control-label" for="selectIdioma">Idiomas</label>
 											<div class="col-md-3">
 												<select id="selectIdioma" name="selectIdioma" class="form-control">
@@ -231,7 +225,7 @@
 						<div id="tablaMatriCurso">
 						</div>
 
-						<form class="frmMatricular" id="frmAltaMatri">
+						
 							<!-- Button (Double) -->
 							<div id="capaBotonesMatri">
 								<div class="form-group">
@@ -241,7 +235,7 @@
 									</div>
 								</div>
 							</div>
-						</form>
+					
 
 
 
@@ -258,14 +252,7 @@
 							<!-- Form Name -->
 							<legend>Modificación de la matrícula</legend>
 
-							<div id= "matriCentral">
-								<div class="form-group">
-									<label class="col-md-1 control-label" for="anyoAcaModCur">Año Académico</label>  
-									<div class="col-md-2">
-										<input id="anyoAcaModCur" name="anyoAcaModCur" type="text" class="form-control input-md" disabled>
-									</div>
-								</div>
-							</div>
+						
 
 							<div id="tablaMatriCurso">
 								<table class="table table-hover table-condensed">
@@ -374,8 +361,10 @@
 					<script type="text/javascript" src="js/validacionFormAlu.js"></script>
 					<script>
 
-						
+						 if (typeof(sesion) === "undefined")
+						 {
 							var sesion = JSON.parse(sessionStorage.usuario);	 
+						 }
 						
 						document.querySelector('#sidebar .usuario .nombre').appendChild(document.createTextNode(sesion.nombre));
 
@@ -436,6 +425,44 @@
 						btnEnviarMatri= document.querySelector("#btnEnviarMatri");
 						btnEnviarMatri.addEventListener("click", realizarMatricula, false);
 
+						menuCursoUsuario(); //llamada al método para que cargue los cursos en los que esté inicialmente matriculado
+
+						function menuCursoUsuario()
+						{
+							oLiCurso=document.querySelector("#pageSubmenu1");
+
+							if(sesion.listaCursos.length>0)
+							{
+								borrarLi();
+								for (var i = 0; i < sesion.listaCursos.length; i++) 
+								{
+
+									oCurso= academia.getCurso(sesion.listaCursos[i]);
+									oLi=document.createElement("LI");
+									oA=document.createElement("A");
+									oA.href="#"+i;
+									oA.textContent=oCurso.idioma+" "+ oCurso.nivel;
+									oLi.appendChild(oA);
+									oLiCurso.appendChild(oLi);
+								}  	
+							}
+							else
+							{
+								borrarLi();
+								oLi=document.createElement("LI");
+								oLi.textContent= "No estas matriculado en ningún curso";
+								oLiCurso.appendChild(oLi);
+							}
+						}
+						
+						function borrarLi()
+						{
+								oLis= document.querySelectorAll("#pageSubmenu1 LI");
+								for (var i = 0; i < oLis.length; i++) 
+								{
+									 oLis[i].parentNode.removeChild(oLis[i]);
+								}
+						}
 
 
 						/* zona para mostrar y ocultar div*/
@@ -477,29 +504,7 @@
 							}
 						}
 
-
-						oLiCurso=document.querySelector("#pageSubmenu1");
-
-						if(sesion.listaCursos.length>0)
-						{
-							for (var i = 0; i < sesion.listaCursos.length; i++) 
-							{
-								oCurso= academia.buscaCurso(sesion.listaCursos[i]);
-								oLi=document.createElement("LI");
-								oA=document.createElement("A");
-								oA.href="#"+i;
-								oA.textContent=oCurso.idioma+" "+ oCurso.nivel;
-								oLi.appendChild(oA);
-								oLiCurso.appendChild(oLi);
-							}  	
-						}
-						else
-						{
-							oLi=document.createElement("LI");
-							oLi.textContent= "No estas matriculado en ningún curso";
-							oLiCurso.appendChild(oLi);
-						}
-
+			
 
 					</script>
 				</body>
