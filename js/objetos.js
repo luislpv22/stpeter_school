@@ -374,6 +374,11 @@ class Academia
     	}
     }*/
 
+	codNuevaMatri()
+	{
+		var oMatri=this._matriculas[this._matriculas.length -1]; //obteiene el último elemento de una array
+		return oMatri.codigoMatri+1;
+	}
 
 }
 

@@ -480,6 +480,7 @@ function cargarTipo ()
 
 function resetearSelectTipo()
 {
+  document.querySelector("#txtInformacion").textContent="";	
   oSelctTipo= document.querySelector("#selectTipo");
   listaOptions=document.querySelectorAll("#selectTipo OPTION");
   for (var i = 0; i < listaOptions.length; i++) 
@@ -526,6 +527,7 @@ function cargarCurso()
 
 function addCursoMatri(oEvento)
 {
+
 	oSelctTipo= document.querySelector("#selectTipo");
 	if (oSelctTipo !="seleTipo")
 	{
@@ -535,7 +537,7 @@ function addCursoMatri(oEvento)
 
 		if (typeof(cursosElegidos) === "undefined")
 		 {
-	    	cursosElegidos= [];
+	    	  cursosElegidos= [];
 		 }
 
 		 //ver si el curso ya está en la array
@@ -556,7 +558,9 @@ function addCursoMatri(oEvento)
 					document.querySelector("#btnAddCursoMatri").disabled="disabled";	
 
 	    			cursosElegidos.push(oCurso);
-	    			mensaje(document.createTextNode("Curso añadido a la matrícula"));
+	    			document.querySelector("#txtInformacion").textContent="Curso añadido a la matrícula";
+    			 	document.querySelector("#txtInformacion").style.color="green";
+
 	    			borrartabla();
 	    			crearTabla(cursosElegidos);
 	    			document.querySelector("#btnEnviarMatri").removeAttribute("disabled");
@@ -564,21 +568,38 @@ function addCursoMatri(oEvento)
     			}
     			else
     			{
-    			mensaje(document.createTextNode("Ya estás matriculado en ese curso"));
-    			}
+    			 document.querySelector("#txtInformacion").textContent="Ya estás matriculado en ese curso";
+    			 document.querySelector("#txtInformacion").style.color="red";
     		
+    			}
     		}
     		else
     		{
-    			mensaje(document.createTextNode("Ya has seleccionado ese curso"));
+    			 document.querySelector("#txtInformacion").textContent="Ya has seleccionado ese curso";
+    			 document.querySelector("#txtInformacion").style.color="red";
     		}
-
 	}
 	else
 	{
-		mensaje(document.createTextNode("Debes seleccionar un tipo de curso"));
+		document.querySelector("#txtInformacion").textContent="Debes seleccionar un tipo de curso";
+    	document.querySelector("#txtInformacion").style.color="red";
 	}
 	
+}
+
+function realizarMatricula()
+{
+	var oUsuario = JSON.parse(sessionStorage.getItem('session'));
+	for (var i = 0; i < cursosElegidos.length; i++) 
+	{
+		oUsuario.listaCurso.push(cursosElegidos[i].codigo)
+	}
+	oMatricula = new Matricula(academia.codNuevaMatri(), "abierta", oUsuario);
+
+	academia.addMatricula(oMatricula);
+	borrartabla();
+	document.getElementById("capaMatriCurso").classList.add("ocultar");
+
 }
 
 
