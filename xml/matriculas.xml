@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listaMatriculas>
+<matricula dni="21345687M">
+   <codigo>1</codigo>
+	<listaCursos>
+	<curso>
+	  <codigo>inglesA2presencial</codigo>
+	</curso>
+   </listaCursos>
+   <estado>encurso</estado>
+</matricula>
+
+<matricula dni="23645812R">
+ <codigo>2</codigo>
+ <listaCursos>
+	<curso>
+	  <codigo>inglesA2presencial</codigo>
+	</curso>
+  </listaCursos>
+  <estado>encurso</estado>
+</matricula>
+
+<matricula dni="42010210B">
+ <codigo>3</codigo>
+  <listaCursos>
+	<curso>
+	  <codigo>inglesA2presencial</codigo>
+	</curso>
+  </listaCursos>
+  <estado>encurso</estado>
+</matricula>
+
+<matricula dni="04568915V">
+<codigo>4</codigo>
+  <listaCursos>
+	<curso>
+	  <codigo>inglesB1semipresencial</codigo>
+	</curso>
+  </listaCursos>
+  <estado>encurso</estado>
+</matricula>
+
+<matricula dni="95425821Q">
+   <codigo>5</codigo>
+  <listaCursos>
+	<curso>
+	  <codigo>inglesB1semipresencial</codigo>
+	</curso>
+  </listaCursos>
+  <estado>encurso</estado>
+</matricula>
+
+<matricula dni="54629812T">
+ <codigo>6</codigo>
+  <listaCursos>
+	<curso>
+	  <codigo>inglesB2distancia</codigo>
+	</curso>
+	<curso>
+	  <codigo>francesB1semipresencial</codigo>
+	</curso>
+  </listaCursos>
+  <estado>cerrado</estado>
+</matricula>
+
+<matricula dni="23420102E">
+   <codigo>7</codigo>
+  <listaCursos>
+	<curso>
+	  <codigo>francesA2presencial</codigo>
+	</curso>
+  </listaCursos>
+  <estado>encurso</estado>
+</matricula>
+
+<matricula dni="72158961T">
+   <codigo>8</codigo>
+  <listaCursos>
+	<curso>
+	  <codigo>francesA2presencial</codigo>
+	</curso>
+  </listaCursos>
+  <estado>encurso</estado>
+</matricula>
+</listaMatriculas>

@@ -16,6 +16,10 @@ function datosIniciales()
 	var oXMLCursos= academia.loadXMLDoc("xml/curso.xml");
 	var oCursos=oXMLCursos.getElementsByTagName("curso");
 	cargarCursos(oCursos);
+
+	var oXMLMatriculas= academia.loadXMLDoc("xml/matriculas.xml");
+	var oMatriculas=oXMLMatriculas.getElementsByTagName("matricula");
+	cargarMatriculas(oMatriculas);
 }
 
 function iniciarSesion(oEvento)
@@ -135,6 +139,37 @@ function cargarCursos(oCursos)
 	  }
 	}
 }
+
+function cargarMatriculas(oMatriculas)
+{
+	for(var j = 0; j<oMatriculas.length; j++)
+	{
+	  dni=oMatriculas[j].getAttribute('dni');
+	  estado=oMatriculas[j].getElementsByTagName("estado")[0].textContent;
+	  codigoMatri=oMatriculas[j].getElementsByTagName("codigo")[0].textContent;
+
+	  oAlumno= academia.dameAlumno(dni);
+
+	  listadoCursos=oMatriculas[j].querySelector("listaCursos");
+	  cursos=listadoCursos.querySelectorAll("codigo");
+
+	  if (cursos.length !=0)
+	  {
+		  	
+		  for (var i = 0; i < cursos.length; i++) 
+		  {
+		  	
+		  	oAlumno.listaCurso.push(cursos[i].textContent);
+		  }
+
+		  academia.addMatricula(new Matricula(codigoMatri, estado, oAlumno));
+
+	  }
+	}
+
+}
+
+
 
 /*esta validación la dejo aqui porque puede servir casi perfecto tanto para crear alumnos, profesores, y administrativos*/
 function comprobarEnvio(oEvento)

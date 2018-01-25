@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listaCurso>
 <curso>
-	<codigo>1</codigo>
+	<codigo>inglesA2presencial</codigo>
 	<idioma>ingles</idioma>
 	<duracion>4 meses</duracion>
 	<precio>400</precio>
@@ -16,7 +16,7 @@
 	<activo>si</activo>
 </curso>
 <curso>
-	<codigo>2</codigo>
+	<codigo>inglesB1semipresencial</codigo>
 	<idioma>ingles</idioma>
 	<duracion>8 meses</duracion>
 	<precio>1200</precio>
@@ -30,7 +30,7 @@
 	<activo>si</activo>
 </curso>
 <curso>
-	<codigo>3</codigo>
+	<codigo>inglesB2distancia</codigo>
 	<idioma>ingles</idioma>
 	<duracion>15 meses</duracion>
 	<precio>1500</precio>
@@ -44,7 +44,7 @@
 </curso>
 
 <curso>
-	<codigo>4</codigo>
+	<codigo>francesA2presencial</codigo>
 	<idioma>frances</idioma>
 	<duracion>5 meses</duracion>
 	<precio>500</precio>
@@ -58,7 +58,7 @@
 	<activo>si</activo>
 </curso>
 <curso>
-	<codigo>5</codigo>
+	<codigo>francesB1semipresencial</codigo>
 	<idioma>frances</idioma>
 	<duracion>10 meses</duracion>
 	<precio>900</precio>
@@ -72,7 +72,7 @@
 </curso>
 
 <curso>
-	<codigo>6</codigo>
+	<codigo>alemanA2presencial</codigo>
 	<idioma>aleman</idioma>
 	<duracion>4 meses</duracion>
 	<precio>500€</precio>
@@ -84,7 +84,7 @@
 	<activo>si</activo>
 </curso>
 <curso>
-	<codigo>7</codigo>
+	<codigo>alemanB1presencial</codigo>
 	<idioma>aleman</idioma>
 	<duracion>8 meses</duracion>
 	<precio>1000</precio>
@@ -93,10 +93,10 @@
 	<nivel>B1</nivel>
 	<listadoAlumno>
 	</listadoAlumno>
-	<activo>si</activo>
+	<activo>no</activo>
 </curso>
 <curso>
-	<codigo>8</codigo>
+	<codigo>alemanB2presencial</codigo>
 	<idioma>aleman</idioma>
 	<duracion>12 meses</duracion>
 	<precio>1500</precio>
@@ -105,7 +105,7 @@
 	<nivel>B2</nivel>
 	<listadoAlumno>
 	</listadoAlumno>
-	<activo>si</activo>
+	<activo>no</activo>
 </curso>
 
 

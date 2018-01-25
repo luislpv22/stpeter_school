@@ -30,6 +30,7 @@ class Alumno extends Persona
 		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 
 		this.estadoCobro=bEstadoCobro;
+		this.listaCurso=[]; // una lista de los cursos que están matriculado el alumno
 	}
 }
 
@@ -64,7 +65,7 @@ class Calificaciones
 
 class Curso
 {
-	constructor(sCodigo, sIdioma, sDuracion, fPrecio, sAñoAcademico, sTipo, bArchivado)
+	constructor(sCodigo, sIdioma, sDuracion, fPrecio, sAñoAcademico, sTipo, sNivel, bArchivado)
 	{
 		this.codigo=sCodigo;
 		this.idioma=sIdioma;
@@ -72,6 +73,7 @@ class Curso
 		this.precio=fPrecio;
 		this.añoAcademico=sAñoAcademico;
 		this.tipo=sTipo;
+		this.nivel=sNivel;
 		this.listaAlumno=[]; // una lista de los alumnos que están matriculados en el curso
 		this.bArchivado=bArchivado; //boolean para saber si el curso sigue activo, o ya termino, o se canceló
 	}
@@ -96,6 +98,20 @@ class Aula
 	}
 }
 
+
+class Matricula
+{
+	constructor(sCodigoMatri, sEstado, oAlumno)
+	{
+		this.codigoMatri=sCodigoMatri;
+		this.oAlumno=oAlumno;
+		this.estado=sEstado;
+	}
+}
+
+
+
+
 // Clase contenedora 
 class Academia
 { 
@@ -104,6 +120,7 @@ class Academia
 		this._alumnos=[]; //atributo privado, array que contiene todos los alumnos de la academia
 		this._usuarios=[]; //atributo privado, array que contiene todos los usuarios de la academia
 		this._cursos=[]; //atributo privado, array que contiene todos los cursos de la academia
+		this._matriculas=[]; //atributo privado, array que contiene todos las matrículas de la academia
 	}
 
 	addAlumno(oAlumno)
@@ -111,6 +128,12 @@ class Academia
 		this._alumnos.push(oAlumno);
 		this._usuarios.push(oAlumno);
 	}
+
+	addMatricula(oMatricula)
+	{
+		this._matriculas.push(oMatricula);
+	}
+
 
 
 	addProfesor(oProfesor)
@@ -172,6 +195,26 @@ class Academia
 		return oAlu;
 	}
 
+	dameListaCursos()
+	{
+		return this._cursos;
+	}
+
+	buscaCurso(sCodigo)
+	{
+		oCurso=null;
+		for (var i = 0; i < this._cursos.length; i++) 
+		{
+			if (this._cursos[i].codigo== sCodigo)
+			{
+				oCurso= this._cursos[i];
+			}
+		}
+		return oCurso;
+	}
+
+
+
 	loadXMLDoc(filename)
 	{
 		var xhttp = null;
@@ -185,6 +228,7 @@ class Academia
 		xhttp.send();
 		return xhttp.responseXML;
 	}
+
 }
 
 

@@ -364,3 +364,274 @@ function cargarDatosUsuario()
 	oEmail=document.querySelector("#frmModAlu #emailAlu").value=oUsuario.correo;
 }
 
+//método que carga los cursos que existan en los distintos select del div de matriculación
+function cargarCursos()
+{
+	oSelectIdioma= document.querySelector("#selectIdioma");
+    oListaCursos= academia.dameListaCursos();
+    var arrayCurso=[];
+
+    for (var i = 0; i < oListaCursos.length; i++) 
+    {
+    	if (!arrayCurso.includes(oListaCursos[i].idioma))
+    	{
+    		arrayCurso.push(oListaCursos[i].idioma);
+    	}
+    }
+
+    for (var i = 0; i < arrayCurso.length; i++) 
+    {
+    	
+    	oOption=document.createElement("OPTION");
+    	oOption.textContent= arrayCurso[i];
+    	oOption.value=arrayCurso[i];
+    	oSelectIdioma.appendChild(oOption);  	
+    }
+}
+
+
+function cargarNivel()
+{
+	oListaCursos= academia.dameListaCursos();
+	oSelectIdioma= document.querySelector("#selectIdioma");
+	oSelectNivel= document.querySelector("#selectNivel");
+   resetearSelectNivel();
+   resetearCamposDatosCurso();
+	if (oSelectIdioma.value != "seleIdi")
+	{
+
+		var arrayNivel=[];
+	    for (var i = 0; i < oListaCursos.length; i++) 
+   		 {
+	    	if ( oListaCursos[i].idioma== oSelectIdioma.value   &&  !arrayNivel.includes(oListaCursos[i].nivel))
+	    	{
+	    		arrayNivel.push(oListaCursos[i].nivel);
+	    	}
+   		 }
+
+	     for (var i = 0; i < arrayNivel.length; i++) 
+	    {
+	    	oOption=document.createElement("OPTION");
+	    	oOption.textContent= arrayNivel[i];
+	    	oOption.value=arrayNivel[i];
+	    	oSelectNivel.appendChild(oOption);  	
+	    }
+	}
+}
+
+function resetearSelectNivel()
+{
+  
+  listaOptions=document.querySelectorAll("#selectNivel OPTION");
+  for (var i = 0; i < listaOptions.length; i++) 
+		{
+			listaOptions[i].parentNode.removeChild(listaOptions[i]);
+
+		}
+		oOption=document.createElement("OPTION");
+	    oOption.textContent= "Seleccione Idioma";
+	    oOption.value="seleNi";
+	    oSelectNivel.appendChild(oOption); 
+
+}
+
+function cargarTipo ()
+{
+	oListaCursos= academia.dameListaCursos();
+	oSelectIdioma= document.querySelector("#selectIdioma");
+	oSelectNivel= document.querySelector("#selectNivel");
+	oSelctTipo= document.querySelector("#selectTipo");
+
+	resetearSelectTipo();
+	resetearCamposDatosCurso();
+
+	 if (oSelectIdioma.value != "seleIdi" && oSelectNivel.value != "seleNi" )
+	 {
+	 	var arrayTipo=[];
+	    for (var i = 0; i < oListaCursos.length; i++) 
+   		 {
+	    	if ( oListaCursos[i].idioma== oSelectIdioma.value   &&  oListaCursos[i].nivel== oSelectNivel.value)
+	    	{
+	    		if (!arrayTipo.includes(oListaCursos[i].tipo))
+			    	{
+			    		arrayTipo.push(oListaCursos[i].tipo);
+			    	}
+	    	} 
+   		 }
+
+	     for (var i = 0; i < arrayTipo.length; i++) 
+	    {
+	    	oOption=document.createElement("OPTION");
+	    	oOption.textContent= arrayTipo[i];
+	    	oOption.value=arrayTipo[i];
+	    	oSelctTipo.appendChild(oOption);  	
+	    }
+
+
+	 	oSelctTipo.removeAttribute("disabled"); 
+	 	
+	 }
+	 else
+	 {
+	 	oSelctTipo.disabled="disabled";	
+	 	document.querySelector("#btnAddCursoMatri").disabled="disabled";	
+	 }
+}
+
+function resetearSelectTipo()
+{
+  oSelctTipo= document.querySelector("#selectTipo");
+  listaOptions=document.querySelectorAll("#selectTipo OPTION");
+  for (var i = 0; i < listaOptions.length; i++) 
+		{
+			listaOptions[i].parentNode.removeChild(listaOptions[i]);
+
+		}
+		oOption=document.createElement("OPTION");
+	    oOption.textContent= "Seleccione Tipo";
+	    oOption.value="seleTipo";
+	    oSelctTipo.appendChild(oOption); 
+
+}
+
+function resetearCamposDatosCurso()
+{
+	oAnyo= document.querySelector("#AnyoAcademico").value="";
+	oDuracionCurso= document.querySelector("#duraCurso").value="";;
+	oPrecioCurso= document.querySelector("#preCurso").value="";;
+
+}
+
+function cargarCurso()
+{
+	resetearCamposDatosCurso();
+
+	oSelectIdioma= document.querySelector("#selectIdioma");
+	oSelectNivel= document.querySelector("#selectNivel");
+	oSelctTipo= document.querySelector("#selectTipo");
+	var codigoCurso= oSelectIdioma.value+oSelectNivel.value+oSelctTipo.value;
+	var oCurso =academia.buscaCurso(codigoCurso);
+
+	oAnyo= document.querySelector("#AnyoAcademico").value=oCurso.añoAcademico;
+	oDuracionCurso= document.querySelector("#duraCurso").value=oCurso.duracion;
+	oPrecioCurso= document.querySelector("#preCurso").value=oCurso.precio;
+
+	
+	document.querySelector("#btnAddCursoMatri").removeAttribute("disabled"); 
+	
+
+
+	
+}
+
+function addCursoMatri(oEvento)
+{
+	oSelctTipo= document.querySelector("#selectTipo");
+	if (oSelctTipo !="seleTipo")
+	{
+			var oE = oEvento || window.event;
+		oE.preventDefault();
+
+
+		if (typeof(cursosElegidos) === "undefined")
+		 {
+	    	cursosElegidos= [];
+		 }
+
+		 //ver si el curso ya está en la array
+		 if (!cursosElegidos.includes(oCurso))
+	    	{
+    			var oUsuario = JSON.parse(sessionStorage.getItem('session'));
+    			//ver si no estaba ya matriculado en el curso
+    			if (!oUsuario.listaCurso.includes(oCurso))
+    			{
+	    			resetearCamposDatosCurso();			
+					oSelectIdioma= document.querySelector("#selectIdioma").selectedIndex=0;
+					oSelectNivel= document.querySelector("#selectNivel");
+					oSelectNivel.selectedIndex=0;
+
+					oSelctTipo= document.querySelector("#selectTipo");
+					oSelctTipo.selectedIndex=0;
+					oSelctTipo.disabled="disabled";	
+					document.querySelector("#btnAddCursoMatri").disabled="disabled";	
+
+	    			cursosElegidos.push(oCurso);
+	    			mensaje(document.createTextNode("Curso añadido a la matrícula"));
+	    			borrartabla();
+	    			crearTabla(cursosElegidos);
+	    			document.querySelector("#btnEnviarMatri").removeAttribute("disabled");
+	    			resetearSelectNivel()
+    			}
+    			else
+    			{
+    			mensaje(document.createTextNode("Ya estás matriculado en ese curso"));
+    			}
+    		
+    		}
+    		else
+    		{
+    			mensaje(document.createTextNode("Ya has seleccionado ese curso"));
+    		}
+
+	}
+	else
+	{
+		mensaje(document.createTextNode("Debes seleccionar un tipo de curso"));
+	}
+	
+}
+
+
+function borrartabla()
+{
+	oTablas= document.querySelectorAll("TABLE");
+	for (var i = 0; i < oTablas.length; i++) 
+	{
+		 oTablas[i].parentNode.removeChild(oTablas[i]);
+	}
+}
+
+function crearTabla(cursos)
+{
+	oTabla= document.createElement("TABLE");
+	oTabla.classList.add("table");
+	oTabla.classList.add("table-hover");
+	oTabla.classList.add("table-condensed");
+	oTHead= oTabla.createTHead();
+	oFila= oTHead.insertRow(-1);
+	oCelda= oFila.insertCell(-1);
+	oCelda.textContent="Tipo Curso";
+	oCelda= oFila.insertCell(-1);
+	oCelda.textContent="Idiomas";
+	oCelda= oFila.insertCell(-1);
+	oCelda.textContent="Nivel";
+	oCelda= oFila.insertCell(-1);
+	oCelda.textContent="Duración";
+	oCelda= oFila.insertCell(-1);
+	oCelda.textContent="Precio";
+	oTBody=oTabla.createTBody();
+
+
+	document.querySelector("#tablaMatriCurso").appendChild(oTabla);
+
+	for (var i = 0; i < cursos.length; i++)
+	{
+		oFila= oTabla.insertRow(-1);		
+		oCelda= oFila.insertCell(-1);
+		oCelda.textContent=cursos[i].tipo;
+		oCelda= oFila.insertCell(-1);
+		oCelda.textContent=cursos[i].idioma;
+		oCelda= oFila.insertCell(-1);
+		oCelda.textContent= cursos[i].nivel;
+		oCelda= oFila.insertCell(-1);
+		oCelda.textContent=cursos[i].duracion;
+		oCelda= oFila.insertCell(-1);
+		oCelda.textContent=cursos[i].precio;
+	  
+	}
+
+
+}
+
+
+

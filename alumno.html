@@ -45,9 +45,6 @@
                 <li>
                     <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false"><i class="glyphicon glyphicon-book"></i>Cursos</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu1">
-                        <li><a href="#">Curso 1</a></li>
-                        <li><a href="#">Curso 2</a></li>
-                        <li><a href="#">Curso 3</a></li>
                     </ul>
                 </li>
                 
@@ -72,6 +69,7 @@
     <legend>Modificar datos</legend>
 
     <!-- Text input-->
+   
     <div class="form-group" id="mod">
       <label class="col-md-4 control-label" for="nombreAlu" >Nombre</label>  
       <div class="col-md-8">
@@ -155,26 +153,24 @@
     <legend>Matriculación</legend>
 
         <div id= "matriCentral">
-            <!-- Select Basic -->
+            
+             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-2 control-label" for="selectbasic">Año Académico</label>
-              <div class="col-md-4">
-                <select id="selectbasic" name="selectbasic" class="form-control">
-                  <option value="1">Option one</option>
-                  <option value="2">Option two</option>
-                </select>
+              <label class="col-md-3 control-label" for="AnyoAcademico">Año Académico</label>  
+              <div class="col-md-3">
+              <input id="AnyoAcademico" name="AnyoAcademico" type="text" class="form-control input-md" disabled>
               </div>
             </div>
         </div>
         <br>
+
         <div id= "matriTipoCurso">
                 <!-- Select Basic -->
             <div class="form-group">
-              <label class="col-md-1 control-label" for="selectbasic">Tipo</label>
+              <label class="col-md-1 control-label" for="selectTipo">Tipo</label>
               <div class="col-md-2">
-                <select id="selectbasic" name="selectbasic" class="form-control">
-                  <option value="1">Option one</option>
-                  <option value="2">Option two</option>
+                <select id="selectTipo" name="selectTipo" class="form-control" disabled>
+                  <option value="seleTipo">Seleccione Tipo</option>
                 </select>
               </div>
             </div>
@@ -182,22 +178,22 @@
         <div id= "idioma">
             <!-- Select Basic -->
             <div class="form-group">
-              <label class="col-md-1 control-label" for="selectbasic">Idiomas</label>
+              <label class="col-md-1 control-label" for="selectIdioma">Idiomas</label>
               <div class="col-md-3">
-                <select id="selectbasic" name="selectbasic" class="form-control">
-                  <option value="1">Option one</option>
-                  <option value="2">Option two</option>
+                <select id="selectIdioma" name="selectIdioma" class="form-control">
+                  <option value="seleIdi">Seleccione Idioma</option>
+          
                 </select>
               </div>
             </div>
         </div>
         <div id= "nivel"><!-- Select Basic -->
             <div class="form-group">
-              <label class="col-md-1 control-label" for="selectbasic">Nivel</label>
+              <label class="col-md-1 control-label" for="selectNivel">Nivel</label>
               <div class="col-md-2">
-                <select id="selectbasic" name="selectbasic" class="form-control">
-                  <option value="1">Option one</option>
-                  <option value="2">Option two</option>
+                <select id="selectNivel" name="selectNivel" class="form-control">
+                  <option value="seleNi">Seleccione Idioma</option>
+
                 </select>
               </div>
             </div>
@@ -218,7 +214,6 @@
               <label class="col-md-3 control-label" for="preCurso">Precio del curso</label>  
               <div class="col-md-3">
               <input id="preCurso" name="preCurso" type="text" class="form-control input-md" disabled>
-                
               </div>
             </div>
 
@@ -227,49 +222,13 @@
             <div class="form-group">
               <label class="col-md-6 control-label" for="addCursoMatri"></label>
               <div  id="botonAddCurso" class="col-md-4">
-                <button id="btnAddCursoMatri" name="btnAddCursoMatri" class="btn btn-primary">Añadir Curso</button>
+                <button id="btnAddCursoMatri" name="btnAddCursoMatri" class="btn btn-primary" disabled>Añadir Curso</button>
               </div>
             </div>
         
         </div>
 
-
-
         <div id="tablaMatriCurso">
-                <table class="table table-hover table-condensed">
-            <thead>
-              <tr>
-                <th>Tipo Curso</th>
-                <th>Idiomas</th>
-                <th>Nivel</th>
-                <th>Duración curso</th>
-                <th>Precio</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-                <td>john@example.com</td>
-                <td>john@example.com</td>
-              </tr>
-              <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-                <td>john@example.com</td>
-                <td>john@example.com</td>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-                <td>john@example.com</td>
-                <td>john@example.com</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
 
 
@@ -278,8 +237,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="altaAlu"></label>
           <div class="col-md-8">
-            <button id="btnEnviarMatri" name="btnEnviarMatri" class="btn btn-success">Matricular</button>
-            <button id="btnResetMatri" name="btnResetMatri" class="btn btn-danger">Limpiar</button>
+            <button id="btnEnviarMatri" name="btnEnviarMatri" class="btn btn-success" disabled>Matricular</button>
           </div>
         </div>
     </div>
@@ -453,13 +411,21 @@
     var btnModDatosAlu= document.querySelector("#btnModDatosAlu");
     btnModDatosAlu.addEventListener("click", comprobarFrmModDatosAlu, false);
     var btnResetModDatosAlu= document.querySelector("#btnResetModDatosAlu");
-    //btnResetModDatosAlu.addEventListener("click", resetearCamposModDatos, false);
 
+    oSelectIdioma= document.querySelector("#selectIdioma");
+	oSelectIdioma.addEventListener("change", cargarNivel, false);
+	oSelectIdioma.addEventListener("change", cargarTipo, false);
 
+	oSelectNivel= document.querySelector("#selectNivel");
+	oSelectNivel.addEventListener("change", cargarTipo, false);
 
-    
+	oSelectTipo= document.querySelector("#selectTipo");
+	oSelectTipo.addEventListener("change", cargarCurso, false);
 
+	btnAddCursoMatri= document.querySelector("#btnAddCursoMatri");
+	btnAddCursoMatri.addEventListener("click", addCursoMatri, false);
 
+  
         /* zona para mostrar y ocultar div*/
     function mostrar(oEvento)
     {
@@ -479,6 +445,7 @@
             document.getElementById("capaModificarAlu").classList.add("ocultar");
             document.getElementById("capaModCurso").classList.add("ocultar");
             document.getElementById("capaDarBaja").classList.add("ocultar");
+            cargarCursos();
 
 
         }
@@ -498,7 +465,29 @@
         }
     }
 
+    var oUsuario = JSON.parse(sessionStorage.getItem('session'));
+    oLiCurso=document.querySelector("#pageSubmenu1");
 
+    if(oUsuario.listaCurso.length>0)
+    {
+    	for (var i = 0; i < oUsuario.listaCurso.length; i++) 
+    	{
+    		oCurso= academia.buscaCurso(oUsuario.listaCurso[i]);
+    		oLi=document.createElement("LI");
+    		oA=document.createElement("A");
+    		oA.href="#"+i;
+    		oA.textContent=oCurso.idioma+" "+ oCurso.nivel;
+    		oLi.appendChild(oA);
+    		oLiCurso.appendChild(oLi);
+    	}  	
+    }
+    else
+    {
+    	oLi=document.createElement("LI");
+    	oLi.textContent= "No estas matriculado en ningún curso";
+    	oLiCurso.appendChild(oLi);
+    }
+  	
 
     </script>
 </body>
