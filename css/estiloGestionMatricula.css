@@ -16,29 +16,35 @@
 	display:none;
 
 }
-
+/*
 #matriCentral
 {
 	margin-left: 30%;
-	margin-bottom: 4%;
+	margin-bottom: 10%;
 }
 
 #matriTipoCurso
 {
-	margin-left: 10%;
+	margin-left: 12%;
 }
 
 #otrosDatosMatri
 {
-	margin-top: 7%;
-	margin-left: 10%;
+	margin-top: 13%;
 }
+*/
+
+.modal-footer
+{
+	margin-right: 32%;
+}
+
+
 
 #tablaMatriCurso
 {
-	width: 75%;
-	margin-left: 11%;
-	padding: 5%;
+
+	padding: 15%;
 }
 
 #capaBotonesMatri
@@ -49,7 +55,8 @@
 
 #botonAddCurso
 {
-	margin-left: 12%;
+	margin-left: -7%;
+	margin-top: 7%;
 }
 
 h4

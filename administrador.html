@@ -50,74 +50,7 @@
 
         <div id="content">
             <button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
-            <div class="container-fluid">
-            	<h3>Lista de cursos</h3>
-	            <table id="tablaCursos" class="table table-striped">
-					<thead>
-						<tr>
-							<th width="15%">#</th>
-							<th width="15%">Idioma</th>
-							<th width="10%">Nivel</th>
-							<th width="25%">Tipo</th>
-							<th width="10%">Activo</th>
-							<th width="15%">Acciones</th>
-						</tr>
-					</thead>
-	            </table>
-	            <input type="button" id="btnAddCurso" class="btn btn-success" value="Añadir curso" />
-	        </div>
-            <div class="container-fluid" style="display:none;">
-            	<h3>Lista de alumnos</h3>
-	            <table id="tablaAlumnos" class="table table-striped">
-					<thead>
-						<tr>
-							<th width="15%">DNI</th>
-							<th width="15%">Nombre</th>
-							<th width="10%">Apellidos</th>
-							<th width="25%">E-mail</th>
-							<th width="10%">Activo</th>
-							<th width="15%">Acciones</th>
-						</tr>
-					</thead>
-	            </table>
-	            <input type="button" id="btnAddCurso" class="btn btn-success" value="Añadir curso" />
-	        </div>
         <div>
-	</div>
-
-	<div class="modal fade" id="modal">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">Editar curso</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	<div class="container-fluid">
-		      	<form id="formEditarCurso" class="form-horizontal">
-		      		<div class="form-group row">
-				      	<label class="col-sm-2">Código:</label>
-				      	<div class="col-sm-10">
-				      		<input type="text" class="form-control" name="codigo" />
-				      	</div>
-				    </div>
-		      		<div class="form-group row">
-				      	<label class="col-sm-2">Idioma:</label>
-				      	<div class="col-sm-10">
-				      		<input type="text" class="form-control" name="codigo" />
-				      	</div>
-				    </div>
-				</form>
-			</div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-success">Guardar</button>
-	        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-	      </div>
-	    </div>
-	  </div>
 	</div>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -141,63 +74,6 @@
 				sidebar.classList.remove('active');
 			else
 				sidebar.classList.add('active');
-		}
-
-		function editarCurso(codigo)
-		{
-			var curso = academia.getCurso(codigo);
-			document.getElementById("formEditarCurso").style.display = "block";
-		}
-
-		var tablaCursos = document.querySelector('#tablaCursos');
-
-		var cursos = academia.getCursos();
-		for (var i=0; i<cursos.length; i++)
-		{
-			var fila = tablaCursos.insertRow(-1);
-			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].codigo.toUpperCase()));
-			fila.insertCell(-1).appendChild(document.createTextNode(capitalize(cursos[i].idioma)));
-			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].nivel.toUpperCase()));
-			fila.insertCell(-1).appendChild(document.createTextNode(capitalize(cursos[i].tipo)));
-			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].bArchivado.toUpperCase()));
-			var btn = document.createElement("input");
-			btn.type = "button";
-			btn.value = "Editar";
-			btn.setAttribute("onclick", "editarCurso('"+cursos[i].codigo+"');");
-			btn.setAttribute("data-toggle", "modal");
-			btn.setAttribute("data-target", "#modal");
-			btn.classList.add("btn");
-			btn.classList.add("btn-danger");
-			btn.classList.add("btn-sm");
-			fila.insertCell(-1).appendChild(btn);
-		}
-
-
-		var tablaAlumnos = document.querySelector('#tablaAlumnos');
-
-		var alumnos = academia.getAlumnos();
-		for (var i=0; i<alumnos.length; i++)
-		{
-			var fila = tablaAlumnos.insertRow(-1);
-			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].dni.toUpperCase()));
-			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].nombre));
-			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].apellido));
-			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].correo));
-			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].activo.toUpperCase()));
-			var btn = document.createElement("input");
-			btn.type = "button";
-			btn.value = "Editar";
-			btn.setAttribute("onclick", "editarAlumno('"+alumnos[i].codigo+"');");
-			btn.setAttribute("data-toggle", "modal");
-			btn.setAttribute("data-target", "#modal");
-			btn.classList.add("btn");
-			btn.classList.add("btn-danger");
-			btn.classList.add("btn-sm");
-			fila.insertCell(-1).appendChild(btn);
-		}
-
-		function capitalize(string) {
-		    return string.charAt(0).toUpperCase() + string.slice(1);
 		}
 
         var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
