@@ -20,12 +20,12 @@ class Profesor extends Persona
 		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 
 		this.salario=iSalario;
-		this.listaCursos=[];
+		this.listaCurso=[];
 
 	}
 	addCursoProf(oCurso)
 	{
-this.listaCursos.push(oCurso);//Añade Curso
+this.listaCurso.push(oCurso);//Añade Curso
 	}
 
 }
@@ -37,7 +37,7 @@ class Alumno extends Persona
 		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 
 		this.estadoCobro=bEstadoCobro;
-		this.listaCursos=[];
+		this.listaCurso=[];
 		this.listaCalificaciones=[];
 		
 	}
@@ -46,6 +46,8 @@ class Alumno extends Persona
 	{
 this.listaCalificaciones.push(oCalificacion);//Añade Calificacion
 	}
+	
+
 }
 
 class Administrador extends Persona
@@ -80,7 +82,7 @@ class Calificaciones
 
 class Curso
 {
-	constructor(sCodigo, sIdioma, sDuracion, fPrecio, sAñoAcademico, sTipo, bArchivado)
+	constructor(sCodigo, sIdioma, sDuracion, fPrecio, sAñoAcademico, sTipo,sNivel, bArchivado)
 	{
 		this.codigo=sCodigo;
 		this.idioma=sIdioma;
@@ -88,6 +90,7 @@ class Curso
 		this.precio=fPrecio;
 		this.añoAcademico=sAñoAcademico;
 		this.tipo=sTipo;
+		this.nivel=sNivel;
 		this.listaAlumno=[]; // una lista de los alumnos que están matriculados en el curso
 		this.bArchivado=bArchivado; //boolean para saber si el curso sigue activo, o ya termino, o se canceló
 	}
@@ -141,6 +144,11 @@ class Academia
 	{
 		this._alumnos.push(oAlumno);
 		this._usuarios.push(oAlumno);
+	}
+	
+		addMatricula(oMatricula)
+	{
+		this._matriculas.push(oMatricula);
 	}
 
 
@@ -246,7 +254,7 @@ class Academia
 
     		if(this._profesores[i].dni==sDni)
     		{
-    			oTablaCurProv=this._profesores[i].listaCursos;
+    			oTablaCurProv=this._profesores[i].listaCurso;
 
 
     		}
@@ -353,7 +361,7 @@ getCursosProf(sDni)
 
     		if(this._profesores[i].dni==sDni)
     		{
-    			oTablaCurProv=this._profesores[i].listaCursos;
+    			oTablaCurProv=this._profesores[i].listaCurso;
 
 
     		}
@@ -396,19 +404,19 @@ calificarAlumno(sCodigo,sDni,fNota)
       // var oAlum=this.getListaAlumCurso(sCodigo);
      //  var oAlum;
                 
-for (var i=0; i<this._profesores[0].listaCursos.length; i++) 
+for (var i=0; i<this._profesores[0].listaCurso.length; i++) 
 		{
 			
-			if (this._profesores[0].listaCursos[i].codigo == sCodigo)
+			if (this._profesores[0].listaCurso[i].codigo == sCodigo)
 			{
-				var oTR=this._profesores[0].listaCursos[i].listaAlumno;
+				var oTR=this._profesores[0].listaCurso[i].listaAlumno;
            for (var j=0; j<oTR.length; j++) 
 		{
 			
-			if (this._profesores[0].listaCursos[i].listaAlumno[j].dni == sDni)
+			if (this._profesores[0].listaCurso[i].listaAlumno[j].dni == sDni)
 			{
 				
-				this._profesores[0].listaCursos[i].listaAlumno[j].addNota(new Calificaciones(fNota,sCodigo));
+				this._profesores[0].listaCurso[i].listaAlumno[j].addNota(new Calificaciones(fNota,sCodigo));
 
 				 
 			}
@@ -427,24 +435,24 @@ for (var i=0; i<this._profesores[0].listaCursos.length; i++)
 modificarNotaAlumno(sCodigo,sDni,fNota)
 {
 
-for (var i=0; i<this._profesores[0].listaCursos.length; i++) 
+for (var i=0; i<this._profesores[0].listaCurso.length; i++) 
 		{
 			
-			if (this._profesores[0].listaCursos[i].codigo == sCodigo)
+			if (this._profesores[0].listaCurso[i].codigo == sCodigo)
 			{
-				var oTR=this._profesores[0].listaCursos[i].listaAlumno;
+				var oTR=this._profesores[0].listaCurso[i].listaAlumno;
 for (var j=0; j<oTR.length; j++) 
 		{
 			
-			if (this._profesores[0].listaCursos[i].listaAlumno[j].dni == sDni)
+			if (this._profesores[0].listaCurso[i].listaAlumno[j].dni == sDni)
 			{
 				
-				var oTR2=this._profesores[0].listaCursos[i].listaAlumno[j].listaCalificaciones;
+				var oTR2=this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones;
 				for (var k=0; k<oTR.length; k++){
 
-		if (this._profesores[0].listaCursos[i].listaAlumno[j].listaCalificaciones[k].codCurso == sCodigo)
+		if (this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones[k].codCurso == sCodigo)
 		{
-			this._profesores[0].listaCursos[i].listaAlumno[j].listaCalificaciones[k].nota=fNota;
+			this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones[k].nota=fNota;
 
 		}
 
