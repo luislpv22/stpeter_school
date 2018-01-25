@@ -15,13 +15,36 @@ function datosIniciales()
 	    var oXMLAdministradores = academia.loadXMLDoc("xml/administradores.xml");
 		var oAdministradores = oXMLAdministradores.getElementsByTagName("administrador");
 		cargarAdministradores(oAdministradores);
-		sessionStorage.setItem('tUsuarios', JSON.stringify(academia.getUsuarios()));
+
+		var tUsuarios = academia.getUsuarios();
+		for (var i=0; i<tUsuarios.length; i++)
+		{
+	    	if (tUsuarios[i] instanceof Administrador)
+	    		tUsuarios[i].tipo = 'administrador';
+	    	else if (tUsuarios[i] instanceof Profesor)
+	    		tUsuarios[i].tipo = 'profesor';
+	    	else
+	    		tUsuarios[i].tipo = 'alumno';
+		}
+		sessionStorage.setItem('tUsuarios', JSON.stringify(tUsuarios));
 	}
-	else {
+	else
+	{
 		var tUsuarios = JSON.parse(sessionStorage.tUsuarios);
 
 		for (var i=0; i<tUsuarios.length; i++)
-			academia.addUsuario(tUsuarios[i]);
+		{
+			var oUsuario = null;
+			var us = tUsuarios[i];
+	    	if (us.tipo == 'administrador')
+	    		oUsuario = new Administrador(us.nombre, us.password, us.apellido, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.salario);
+	    	else if (us.tipo == 'profesor')
+	    		oUsuario = new Profesor(us.nombre, us.password, us.apellido, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.salario);
+	    	else
+	    		oUsuario = new Alumno(us.nombre, us.password, us.apellido, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.estadoCobro);
+
+	    	academia.addUsuario(oUsuario);
+    	}
 	}
 
 	var oXMLCursos= academia.loadXMLDoc("xml/curso.xml");
