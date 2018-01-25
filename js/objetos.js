@@ -48,7 +48,7 @@ this.listaCalificaciones.push(oCalificacion);//Añade Calificacion
 	}
 		addCurso(oCurso)
 	{
-		this._cursos.push(oCurso);
+		this.listaCurso.push(oCurso);
 	}
 
 }
