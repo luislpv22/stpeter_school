@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
     <script>
-        if (typeof sessionStorage.session === 'undefined')
+        if (typeof sessionStorage.usuario === 'undefined')
             location.href = "login.html";
     </script>
 </head>
@@ -15,7 +15,7 @@
     <script type="text/javascript" src="js/objetos.js"></script>
     <script type="text/javascript" src="js/codigoMatriAlu.js"></script>
     <script>
-        var sesion = JSON.parse(sessionStorage.session);
+        var sesion = JSON.parse(sessionStorage.usuario);
         //document.querySelector('.navbar .usuario').innerHTML = sesion.nombre;
 
         if (sesion.tipo == 'administrador')

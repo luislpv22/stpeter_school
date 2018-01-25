@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/panel.css">
     <link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
     <script>
-        if (typeof sessionStorage.session === 'undefined')
+        if (typeof sessionStorage.usuario === 'undefined')
             location.href = "login.html";
     </script>
 </head>
@@ -372,7 +372,7 @@
     <script type="text/javascript" src="js/codigoMatriAlu.js"></script>
     <script type="text/javascript" src="js/validacionFormAlu.js"></script>
     <script>
-        var sesion = JSON.parse(sessionStorage.session);
+        var sesion = JSON.parse(sessionStorage.usuario);
         document.querySelector('#sidebar .usuario .nombre').appendChild(document.createTextNode(sesion.nombre));
 
         if (sesion.tipo != 'alumno')
@@ -465,14 +465,14 @@
         }
     }
 
-    var oUsuario = JSON.parse(sessionStorage.getItem('session'));
+    var sesion = JSON.parse(sessionStorage.getItem('usuario'));
     oLiCurso=document.querySelector("#pageSubmenu1");
 
-    if(oUsuario.listaCurso.length>0)
+    if(sesion.listaCursos.length>0)
     {
-    	for (var i = 0; i < oUsuario.listaCurso.length; i++) 
+    	for (var i = 0; i < sesion.listaCursos.length; i++) 
     	{
-    		oCurso= academia.buscaCurso(oUsuario.listaCurso[i]);
+    		oCurso= academia.buscaCurso(sesion.listaCursos[i]);
     		oLi=document.createElement("LI");
     		oA=document.createElement("A");
     		oA.href="#"+i;

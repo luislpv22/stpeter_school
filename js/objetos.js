@@ -2,14 +2,14 @@ class Persona
 {
 	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo)
 	{
-		this.nombre=sNombre;
-		this.password=sPassword;
-		this.apellido=sApellido;
-		this.dni=sDni;
-		this.telefono=iTelefono;
-		this.direccion=sDireccion;
-		this.correo=sCorreo;
-		this.activo=bActivo;
+		this.nombre    = sNombre;
+		this.password  = sPassword;
+		this.apellido  = sApellido;
+		this.dni       = sDni;
+		this.telefono  = iTelefono;
+		this.direccion = sDireccion;
+		this.correo    = sCorreo;
+		this.activo    = bActivo;
 	}
 }
 
@@ -19,15 +19,14 @@ class Profesor extends Persona
 	{
 		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 
-		this.salario=iSalario;
-		this.listaCurso=[];
-
+		this.salario     = iSalario;
+		this.listaCursos = [];
 	}
-	addCursoProf(oCurso)
+
+	addCurso(oCurso)
 	{
-this.listaCurso.push(oCurso);//Añade Curso
+		this.listaCursos.push(oCurso); // Añade un curso al profesor
 	}
-
 }
 
 class Alumno extends Persona
@@ -36,18 +35,15 @@ class Alumno extends Persona
 	{
 		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 
-		this.estadoCobro=bEstadoCobro;
-		this.listaCurso=[];
-		this.listaCalificaciones=[];
-		
+		this.estadoCobro         = bEstadoCobro;
+		this.listaCursos         = [];
+		this.listaCalificaciones = [];
 	}
 
 	addNota(oCalificacion)
 	{
-this.listaCalificaciones.push(oCalificacion);//Añade Calificacion
+		this.listaCalificaciones.push(oCalificacion); // Añade una calificacion al alumno
 	}
-	
-
 }
 
 class Administrador extends Persona
@@ -60,114 +56,120 @@ class Administrador extends Persona
 
 class Contabilidad
 {
-	constructor(stipo,bestado,fimporte,sasunto,dtfecha_ven)
+	constructor(sTipo, bEstado, fImporte, sAsunto, dtFecha_ven)
 	{
-		this.tipo=stipo;
-		this.estado=bestado;
-		this.importe=fimporte;
-		this.asunto=sasunto;
-		this.fecha_ven=dtfecha_ven;
+		this.tipo      = sTipo;
+		this.estado    = bEstado;
+		this.importe   = fImporte;
+		this.asunto    = sAsunto;
+		this.fecha_ven = dtFecha_ven;
 	}
 }
 
 
 class Calificaciones
 {
-	constructor(fNota,sCodigoCurso)
+	constructor(fNota, sCodigoCurso)
 	{
-		this.nota=fNota;
-		this.codCurso=sCodigoCurso;
+		this.nota     = fNota;
+		this.codCurso = sCodigoCurso;
 	}
 }
 
 class Curso
 {
-	constructor(sCodigo, sIdioma, sDuracion, fPrecio, sAñoAcademico, sTipo,sNivel, bArchivado)
+	constructor(sCodigo, sIdioma, sDuracion, fPrecio, sTipo, sNivel, bArchivado)
 	{
-		this.codigo=sCodigo;
-		this.idioma=sIdioma;
-		this.duracion=sDuracion;
-		this.precio=fPrecio;
-		this.añoAcademico=sAñoAcademico;
-		this.tipo=sTipo;
-		this.nivel=sNivel;
-		this.listaAlumno=[]; // una lista de los alumnos que están matriculados en el curso
-		this.bArchivado=bArchivado; //boolean para saber si el curso sigue activo, o ya termino, o se canceló
+		this.codigo       = sCodigo;
+		this.idioma       = sIdioma;
+		this.duracion     = sDuracion;
+		this.precio       = fPrecio;
+		this.tipo         = sTipo;
+		this.nivel        = sNivel;
+		this.listaAlumnos = []; // una lista de los alumnos que están matriculados en el curso
+		this.bArchivado   = bArchivado; // boolean para saber si el curso sigue activo, o ya termino, o se canceló
 	}
 
 	matricularAlumno(oAlumno)
 	{
-		this.listaAlumno.push(oAlumno); //añade alumno al curso
+		this.listaAlumnos.push(oAlumno); // añade un alumno al curso
 	}
-
 }
 
 class Aula
 {
 	constructor(sCodigo, iEdificio, iPlanta, iAula, iCapacidad, sTipo)
 	{
-		this.codigo=sCodigo;
-		this.edificio=iEdificio;
-		this.planta=iPlanta;
-		this.aula=iAula;
-		this.capacidad=iCapacidad;
-		this.tipo=sTipo;
+		this.codigo    = sCodigo;
+		this.edificio  = iEdificio;
+		this.planta    = iPlanta;
+		this.aula      = iAula;
+		this.capacidad = iCapacidad;
+		this.tipo      = sTipo;
 	}
 }
 
 class Matricula
 {
-	constructor(sCodigoMatri, sEstado, oAlumno)
+	constructor(iNumero, sEstado, oAlumno)
 	{
-		this.codigoMatri=sCodigoMatri;
-		this.oAlumno=oAlumno;
-		this.estado=sEstado;
+		this.numero  = iNumero;
+		this.oAlumno = oAlumno;
+		this.estado  = sEstado;
 	}
 }
-
-
 
 
 // Clase contenedora 
 class Academia
 { 
-	constructor ()
+	constructor()
 	{
-		this._alumnos=[]; //atributo privado, array que contiene todos los alumnos de la academia
-		this._usuarios=[]; //atributo privado, array que contiene todos los usuarios de la academia
-		this._cursos=[]; //atributo privado, array que contiene todos los cursos de la academia
-		this._profesores=[];//atributo privado, array que contiene todos los profesores de la academia
-		this._matriculas=[]; //atributo privado, array que contiene todos las matrículas de la academia
+		this._alumnos    = []; // atributo privado, array que contiene todos los alumnos de la academia
+		this._usuarios   = []; // atributo privado, array que contiene todos los usuarios de la academia
+		this._cursos     = []; // atributo privado, array que contiene todos los cursos de la academia
+		this._profesores = []; // atributo privado, array que contiene todos los profesores de la academia
+		this._matriculas = []; // atributo privado, array que contiene todos las matrículas de la academia
 	}
 
-	addAlumno(oAlumno)
+	addMatricula(oMatricula)
 	{
-		this._alumnos.push(oAlumno);
-		this._usuarios.push(oAlumno);
-	}
-	
-		addMatricula(oMatricula)
-	{
-		this._matriculas.push(oMatricula);
-	}
+		var bEncontrado = false;
+		for (var i=0; i<this._matriculas.length && !bEncontrado; i++)
+			if (this._matriculas[i].numero == oMatricula.numero)
+				bEncontrado = true;
 
+		if (!bEncontrado)
+			this._matriculas.push(oMatricula);
 
-	addProfesor(oProfesor)
-	{
-		this._profesores.push(oProfesor);
-		this._usuarios.push(oProfesor);
+		return !bEncontrado;
 	}
 
-	addAdministrador(oAdministrador)
+	addUsuario(oUsuario)
 	{
-		this._usuarios.push(oAdministrador);
+		var bEncontrado = false;
+		for (var i=0; i<this._usuarios.length && !bEncontrado; i++)
+			if (this._usuarios[i].dni == oUsuario.dni)
+				bEncontrado = true;
+
+		if (!bEncontrado)
+			this._usuarios.push(oUsuario);
+
+		return !bEncontrado;
 	}
 
 	addCurso(oCurso)
 	{
-		this._cursos.push(oCurso);
-	}
+		var bEncontrado = false;
+		for (var i=0; i<this._cursos.length && !bEncontrado; i++)
+			if (this._cursos[i].codigo == oCurso.codigo)
+				bEncontrado = true;
 
+		if (!bEncontrado)
+			this._cursos.push(oCurso);
+
+		return !bEncontrado;
+	}
 
 	inicioSesion(sDni,sPass)
 	{
@@ -185,7 +187,7 @@ class Academia
 	modificarUsuario(oUsuario)
 	{
 		// recorrer la array de usuarios hasta encontrar a los que tengan el mismo dni y modificarlo
-		var bEncontrado=false;
+		var bEncontrado = false;
 		for (var i=0; i<this._usuarios.length && bEncontrado==false; i++) 
 		{
 			if (this._usuarios[i].dni == oUsuario.dni)
@@ -194,39 +196,35 @@ class Academia
 				bEncontrado = true;
 			}
 		}
+		sessionStorage.setItem('tUsuarios', JSON.stringify(this._usuarios));
 	}
 
-	dameAlumno(dni)
+	getUsuarios()
 	{
-		var bEncontrado=false;
-		var oAlu=null;
-		for (var i=0; i<this._usuarios.length && bEncontrado==false; i++) 
-		{
-			
-			if (this._usuarios[i].dni == dni)
-			{
-				oAlu= this._usuarios[i];
-				bEncontrado = true;
-			}
-		}
-		return oAlu;
+		return this._usuarios;
 	}
 
-	dameListaCursos()
+	getAlumno(dni)
+	{
+		var oAlumno = null;
+		for (var i=0; i<this._usuarios.length && oAlumno==null; i++) 
+			if (this._usuarios[i].dni == dni)
+				oAlumno = this._usuarios[i];
+		return oAlumno;
+	}
+
+	getCursos()
 	{
 		return this._cursos;
 	}
 
-	buscaCurso(sCodigo)
+	getCurso(sCodigo)
 	{
 		oCurso=null;
-		for (var i = 0; i < this._cursos.length; i++) 
-		{
+		for (var i=0; i<this._cursos.length && oCurso==null; i++) 
 			if (this._cursos[i].codigo== sCodigo)
-			{
 				oCurso= this._cursos[i];
-			}
-		}
+
 		return oCurso;
 	}
 
@@ -250,229 +248,131 @@ class Academia
 
     	var oTablaCurProv;
     	var oTablaCurAlumProv;
-    	for (var i = 0; i < this._profesores.length; i++) {
-
+    	for (var i = 0; i < this._profesores.length; i++)
+    	{
     		if(this._profesores[i].dni==sDni)
-    		{
     			oTablaCurProv=this._profesores[i].listaCurso;
-
-
-    		}
-
-    	}
-
 
             var oTablas = document.querySelectorAll("table");
 
-            if (oTablas != null) {
-                for (i = 0; i < oTablas.length; i++) {
-
+            if (oTablas != null)
+            {
+                for (i = 0; i < oTablas.length; i++)
+                {
                     var iNumFilas = oTablas[i].rows.length;
-                    for (j = 0; j < iNumFilas; j++) {
+                    for (j = 0; j < iNumFilas; j++)
                         oTablas[i].deleteRow(0);
-                    }
                 }
             }
-
-
-
-
-// Creacion de la tabla con los numeros del sorteo
-    var oTabla = document.createElement("table");
-    oTabla.classList.add("table");
-    oTabla.classList.add("table-hover");
-
-    var oTHead = oTabla.createTHead();
-    var oFila = oTHead.insertRow(-1);
-    var oTH = document.createElement("th");
-    oTH.textContent = "Curso";
-    oFila.appendChild(oTH);
-
-    oTH = document.createElement("th");
-    oTH.textContent = "Idioma";
-    oFila.appendChild(oTH);
-    oTH = document.createElement("th");
-    oTH.textContent = "Duracion";
-    oFila.appendChild(oTH);
-    oTH = document.createElement("th");
-    oTH.textContent = "Tipo";
-    oFila.appendChild(oTH);
-    oTH = document.createElement("th");
-    oTH.textContent = "Año Academico";
-    oFila.appendChild(oTH);
-    oTH = document.createElement("th");
-    oTH.textContent = "Alumno";
-    oFila.appendChild(oTH);
-    oTH = document.createElement("th");
-    oTH.textContent = "Nota";
-    oFila.appendChild(oTH);
-
-
-    // Cuerpo de la tabla
-    var oTBody = oTabla.createTBody();
-    
-
-
-for (var i = 0; i < oTablaCurProv.length; i++) {
-	if(oTablaCurProv[i].codigo==SFiltro || SFiltro=="todo"){
-	oFila = oTBody.insertRow(-1);
-	var oCelda = oFila.insertCell(-1);
-	 oCelda.textContent = oTablaCurProv[i].codigo;
-	 oCelda = oFila.insertCell(-1);
-	  oCelda.textContent = oTablaCurProv[i].idioma;
-	  	 oCelda = oFila.insertCell(-1);
-	  oCelda.textContent = oTablaCurProv[i].duracion;
-	  	 oCelda = oFila.insertCell(-1);
-	  oCelda.textContent = oTablaCurProv[i].tipo;
-	   	 oCelda = oFila.insertCell(-1);
-	  oCelda.textContent = oTablaCurProv[i].añoAcademico;
-	  oTablaCurAlumProv=oTablaCurProv[i].listaAlumno;
-
-
-    for (var j = 0; j < oTablaCurAlumProv.length; j++) {
-            oCelda = oFila.insertCell(-1);
-        oCelda.textContent = oTablaCurAlumProv[j].nombre;
-
-        var oTablaCalif= oTablaCurAlumProv[j].listaCalificaciones;
-        
-        for (var k = 0; k < oTablaCalif.length; k++) {
-        	
-        	if(oTablaCalif[k].codCurso==oTablaCurProv[i].codigo)
-        	{
-                    oCelda = oFila.insertCell(-1);
-        oCelda.textContent = oTablaCalif[k].nota;
-                          
-        	}
         }
+
+		// Creacion de la tabla con los numeros del sorteo
+	    var oTabla = document.createElement("table");
+	    oTabla.classList.add("table");
+	    oTabla.classList.add("table-hover");
+
+	    var oTHead = oTabla.createTHead();
+	    var oFila = oTHead.insertRow(-1);
+	    var oTH = document.createElement("th");
+	    oTH.textContent = "Curso";
+	    oFila.appendChild(oTH);
+
+	    oTH = document.createElement("th");
+	    oTH.textContent = "Idioma";
+	    oFila.appendChild(oTH);
+	    oTH = document.createElement("th");
+	    oTH.textContent = "Duracion";
+	    oFila.appendChild(oTH);
+	    oTH = document.createElement("th");
+	    oTH.textContent = "Tipo";
+	    oFila.appendChild(oTH);
+	    oTH = document.createElement("th");
+	    oTH.textContent = "Año Academico";
+	    oFila.appendChild(oTH);
+	    oTH = document.createElement("th");
+	    oTH.textContent = "Alumno";
+	    oFila.appendChild(oTH);
+	    oTH = document.createElement("th");
+	    oTH.textContent = "Nota";
+	    oFila.appendChild(oTH);
+
+	    // Cuerpo de la tabla
+	    var oTBody = oTabla.createTBody();
+
+		for (var i = 0; i < oTablaCurProv.length; i++)
+		{
+			if(oTablaCurProv[i].codigo==SFiltro || SFiltro=="todo")
+			{
+				oFila = oTBody.insertRow(-1);
+				var oCelda = oFila.insertCell(-1);
+			 	oCelda.textContent = oTablaCurProv[i].codigo;
+			 	oCelda = oFila.insertCell(-1);
+			  	oCelda.textContent = oTablaCurProv[i].idioma;
+			  	oCelda = oFila.insertCell(-1);
+			  	oCelda.textContent = oTablaCurProv[i].duracion;
+			  	oCelda = oFila.insertCell(-1);
+			  	oCelda.textContent = oTablaCurProv[i].tipo;
+			   	oCelda = oFila.insertCell(-1);
+			  	oCelda.textContent = oTablaCurProv[i].añoAcademico;
+			  	oTablaCurAlumProv=oTablaCurProv[i].listaAlumno;
+
+
+		    	for (var j=0; j<oTablaCurAlumProv.length; j++)
+		    	{
+		            oCelda = oFila.insertCell(-1);
+		        	oCelda.textContent = oTablaCurAlumProv[j].nombre;
+
+		        	var oTablaCalif= oTablaCurAlumProv[j].listaCalificaciones;
+		        
+		        	for (var k=0; k<oTablaCalif.length; k++)
+		        	{
+		        		if(oTablaCalif[k].codCurso==oTablaCurProv[i].codigo)
+		        		{
+		                    oCelda = oFila.insertCell(-1);
+		        			oCelda.textContent = oTablaCalif[k].nota;        
+		        		}
+		        	}
+		    	}
+			}
+		}
+
+		return oTabla;
     }
-}
 
-}
+/*    modificarNotaAlumno(sCodigo,sDni,fNota)
+    {
 
+    	for (var i=0; i<this._profesores[0].listaCurso.length; i++) 
+    	{
 
-return oTabla;
-    }
-
-getCursosProf(sDni)
-{
-
-    	var oTablaCurProv;
-    	for (var i = 0; i < this._profesores.length; i++) {
-
-    		if(this._profesores[i].dni==sDni)
+    		if (this._profesores[0].listaCurso[i].codigo == sCodigo)
     		{
-    			oTablaCurProv=this._profesores[i].listaCurso;
+    			var oTR=this._profesores[0].listaCurso[i].listaAlumno;
+    			for (var j=0; j<oTR.length; j++) 
+    			{
+
+    				if (this._profesores[0].listaCurso[i].listaAlumno[j].dni == sDni)
+    				{
+
+    					var oTR2=this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones;
+    					for (var k=0; k<oTR.length; k++){
+
+    						if (this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones[k].codCurso == sCodigo)
+    						{
+    							this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones[k].nota=fNota;
+
+    						}
 
 
+    					}
+
+
+
+    				}
+    			}
     		}
-
     	}
-
-return oTablaCurProv;
-
-}
-
-
-
-getListaAlumCurso(sCodigo,sDni)
-{
-
-var oTablaCurProv=this.getCursosProf(sDni);
-var oTablaAlumnoCurso;
-
-    	for (var i = 0; i < oTablaCurProv.length; i++) {
-
-    		if(oTablaCurProv[i].codigo==sCodigo)
-    		{
-    			oTablaAlumnoCurso=oTablaCurProv[i].listaAlumno;
-               
-
-    		}
-
-    	}
-
-return oTablaAlumnoCurso;
-
-
-
-}
-
-calificarAlumno(sCodigo,sDni,fNota)
-{
-
-
-      // var oAlum=this.getListaAlumCurso(sCodigo);
-     //  var oAlum;
-                
-for (var i=0; i<this._profesores[0].listaCurso.length; i++) 
-		{
-			
-			if (this._profesores[0].listaCurso[i].codigo == sCodigo)
-			{
-				var oTR=this._profesores[0].listaCurso[i].listaAlumno;
-           for (var j=0; j<oTR.length; j++) 
-		{
-			
-			if (this._profesores[0].listaCurso[i].listaAlumno[j].dni == sDni)
-			{
-				
-				this._profesores[0].listaCurso[i].listaAlumno[j].addNota(new Calificaciones(fNota,sCodigo));
-
-				 
-			}
-		}
-			}
-		}
-
-
-
-       //oAlum.addNota(new Calificaciones(fNota,sCodigo));
-
-
-
-}
-
-modificarNotaAlumno(sCodigo,sDni,fNota)
-{
-
-for (var i=0; i<this._profesores[0].listaCurso.length; i++) 
-		{
-			
-			if (this._profesores[0].listaCurso[i].codigo == sCodigo)
-			{
-				var oTR=this._profesores[0].listaCurso[i].listaAlumno;
-for (var j=0; j<oTR.length; j++) 
-		{
-			
-			if (this._profesores[0].listaCurso[i].listaAlumno[j].dni == sDni)
-			{
-				
-				var oTR2=this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones;
-				for (var k=0; k<oTR.length; k++){
-
-		if (this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones[k].codCurso == sCodigo)
-		{
-			this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones[k].nota=fNota;
-
-		}
-
-
-		}
-
-
-				 
-			}
-		}
-			}
-		}
-
-
-
-
-}
-
-
-
+    }*/
 
 
 }

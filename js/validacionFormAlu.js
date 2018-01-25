@@ -125,7 +125,7 @@ function comprobarFrmModDatosAlu(oEvento)
 		oAlMod= new Alumno(sNombre, sPassword, sApellido, sDni, sTelefono, sDireccion, sEmail, true, false);//objeto alumno con los datos modificados
 		academia.modificarUsuario(oAlMod);
 		//modificar los datos de sesión de usuario
-		sessionStorage.setItem('session', JSON.stringify(oAlMod));
+		sessionStorage.setItem('usuario', JSON.stringify(oAlMod));
 		
 		mensaje(document.createTextNode("Datos modificados"));
 		
@@ -354,7 +354,7 @@ function cerrarMensaje()
 /*******************************Cargar datos Usuario ********************************/
 function cargarDatosUsuario()
 {
-	var oUsuario = JSON.parse(sessionStorage.getItem('session'));
+	var oUsuario = JSON.parse(sessionStorage.getItem('usuario'));
 	oNombre=document.querySelector("#frmModAlu #nombreAlu").value=oUsuario.nombre;
 	oApellido=document.querySelector("#frmModAlu #apellidoAlu").value=oUsuario.apellido;
 	oDni=document.querySelector("#frmModAlu #dniAlu").value=oUsuario.dni;
@@ -367,9 +367,9 @@ function cargarDatosUsuario()
 //método que carga los cursos que existan en los distintos select del div de matriculación
 function cargarCursos()
 {
-	oSelectIdioma= document.querySelector("#selectIdioma");
-    oListaCursos= academia.dameListaCursos();
-    var arrayCurso=[];
+	oSelectIdioma = document.querySelector("#selectIdioma");
+    oListaCursos = academia.getCursos();
+    var arrayCurso = [];
 
     for (var i = 0; i < oListaCursos.length; i++) 
     {
@@ -541,7 +541,7 @@ function addCursoMatri(oEvento)
 		 //ver si el curso ya está en la array
 		 if (!cursosElegidos.includes(oCurso))
 	    	{
-    			var oUsuario = JSON.parse(sessionStorage.getItem('session'));
+    			var oUsuario = JSON.parse(sessionStorage.getItem('usuario'));
     			//ver si no estaba ya matriculado en el curso
     			if (!oUsuario.listaCurso.includes(oCurso))
     			{
