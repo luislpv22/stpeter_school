@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/panel.css">
     <link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
     <script>
-        if (typeof sessionStorage.session === 'undefined')
+        if (typeof sessionStorage.usuario === 'undefined')
             location.href = "login.html";
     </script>
 </head>
@@ -147,106 +147,105 @@
 
     <!-- - Matricular curso -->
     <div id="capaMatriCurso" class="ocultar">
-    
+    <form class="frmMatricular" id="frmAltaMatri">
     <fieldset>
     <!-- Form Name -->
     <legend>Matriculación</legend>
 
-    <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Seleccionar Curso</button>
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-
-
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Seleccione un curso</h4>
-      </div>
-      <div class="modal-body">
-      						<!--contenido de la matriculación-->
+        <div id= "matriCentral">
+            
+             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-6 control-label" for="AnyoAcademico">Año Académico</label>  
-              	<div class="col-md-6">
-              		<input id="AnyoAcademico" name="AnyoAcademico" type="text" class="form-control input-md" disabled>
-              	</div>
-            </div>
-          	<div class="form-group">
-            	<label class="col-md-3 control-label" for="selectIdioma">Idiomas</label>
-            <div class="col-md-3">
-            	<select id="selectIdioma" name="selectIdioma" class="form-control">
-            		<option value="seleIdi">Seleccione Idioma</option>
-            	</select>
+              <label class="col-md-3 control-label" for="AnyoAcademico">Año Académico</label>  
+              <div class="col-md-3">
+              <input id="AnyoAcademico" name="AnyoAcademico" type="text" class="form-control input-md" disabled>
               </div>
-             </div>
+            </div>
+        </div>
+        <br>
 
+        <div id= "matriTipoCurso">
+                <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-1 control-label" for="selectTipo">Tipo</label>
+              <div class="col-md-2">
+                <select id="selectTipo" name="selectTipo" class="form-control" disabled>
+                  <option value="seleTipo">Seleccione Tipo</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div id= "idioma">
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-1 control-label" for="selectIdioma">Idiomas</label>
+              <div class="col-md-3">
+                <select id="selectIdioma" name="selectIdioma" class="form-control">
+                  <option value="seleIdi">Seleccione Idioma</option>
+          
+                </select>
+              </div>
+            </div>
+        </div>
+        <div id= "nivel"><!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-1 control-label" for="selectNivel">Nivel</label>
+              <div class="col-md-2">
+                <select id="selectNivel" name="selectNivel" class="form-control">
+                  <option value="seleNi">Seleccione Idioma</option>
 
-           		<div class="form-group">
-              		<label class="col-md-3 control-label" for="selectNivel">Nivel</label>
-             	  <div class="col-md-3">
-                	<select id="selectNivel" name="selectNivel" class="form-control">
-                 		 <option value="seleNi">Seleccione Idioma</option>
-                	</select>
-              	  </div>
-            	</div>
-
-
-            	<div class="form-group">
-              		<label class="col-md-3 control-label" for="selectTipo">Tipo</label>
-              		<div class="col-md-3">
-                		<select id="selectTipo" name="selectTipo" class="form-control" disabled>
-                  			<option value="seleTipo">Seleccione Tipo</option>
-                		</select>
-              		</div>
-            	</div>
-
-            	<div class="form-group">
-              		<label class="col-md-3 control-label" for="duraCurso">Duración del curso</label>  
-              		<div class="col-md-3">
-              			<input id="duraCurso" name="duraCurso" type="text" class="form-control input-md" disabled>
-              		</div>
-            	</div>
-            	<div class="form-group">
-             		<label class="col-md-6 control-label" for="preCurso">Precio del curso</label>  
-              		<div class="col-md-6">
-              			<input id="preCurso" name="preCurso" type="text" class="form-control input-md" disabled>
-              		</div>
-            	</div>
-
-            	<p id="txtInformacion"></p>
-
-    	</div>
-       <div class="modal-footer"> 
-       	<button  type="button" id="btnAddCursoMatri" name="btnAddCursoMatri" class="btn btn-primary" disabled>Añadir Curso</button>
-       	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-       </div>
-  </div>
-</div>
-</div>
-<!-- fin modal-->
-      <div id="tablaMatriCurso">
+                </select>
+              </div>
+            </div>
         </div>
 
-	<form class="frmMatricular" id="frmAltaMatri">
-		    <!-- Button (Double) -->
-		    <div id="capaBotonesMatri">
-		        <div class="form-group">
-		          <label class="col-md-4 control-label" for="altaAlu"></label>
-		          <div class="col-md-8">
-		            <button id="btnEnviarMatri" name="btnEnviarMatri" class="btn btn-success" disabled>Matricular</button>
-		          </div>
-		        </div>
-		    </div>
-		</form>
-   
-  
-       
+        <div id="otrosDatosMatri">
+                <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="duraCurso">Duración del curso</label>  
+              <div class="col-md-3">
+              <input id="duraCurso" name="duraCurso" type="text" class="form-control input-md" disabled>
+                
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="preCurso">Precio del curso</label>  
+              <div class="col-md-3">
+              <input id="preCurso" name="preCurso" type="text" class="form-control input-md" disabled>
+              </div>
+            </div>
+
+                    <!-- Button -->
+         
+            <div class="form-group">
+              <label class="col-md-6 control-label" for="addCursoMatri"></label>
+              <div  id="botonAddCurso" class="col-md-4">
+                <button id="btnAddCursoMatri" name="btnAddCursoMatri" class="btn btn-primary" disabled>Añadir Curso</button>
+              </div>
+            </div>
+        
+        </div>
+
+        <div id="tablaMatriCurso">
+        </div>
+
+
+    <!-- Button (Double) -->
+    <div id="capaBotonesMatri">
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="altaAlu"></label>
+          <div class="col-md-8">
+            <button id="btnEnviarMatri" name="btnEnviarMatri" class="btn btn-success" disabled>Matricular</button>
+          </div>
+        </div>
+    </div>
+
+
 
     </fieldset>
+    </form>
     </div>
     <!--  - - - - - - - - - - - - - - - - - - - -->
 
@@ -373,11 +372,7 @@
     <script type="text/javascript" src="js/codigoMatriAlu.js"></script>
     <script type="text/javascript" src="js/validacionFormAlu.js"></script>
     <script>
-
-    	if (typeof(sesion) === "undefined")
-		 {
-       		 var sesion = JSON.parse(sessionStorage.session);	 
-         }
+        var sesion = JSON.parse(sessionStorage.usuario);
         document.querySelector('#sidebar .usuario .nombre').appendChild(document.createTextNode(sesion.nombre));
 
         if (sesion.tipo != 'alumno')
@@ -397,10 +392,6 @@
 
         var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
         btnCerrarSesion.addEventListener("click", cerrarSesion, false);
-
-        document.querySelectorAll(".modal-footer button")[1].addEventListener("click", function(){
-        	document.querySelector("#txtInformacion").textContent="";}, false);
-
 
 
 
@@ -433,10 +424,6 @@
 
 	btnAddCursoMatri= document.querySelector("#btnAddCursoMatri");
 	btnAddCursoMatri.addEventListener("click", addCursoMatri, false);
-
-	btnEnviarMatri= document.querySelector("#btnEnviarMatri");
-	btnEnviarMatri.addEventListener("click", realizarMatricula, false);
-
 
   
         /* zona para mostrar y ocultar div*/
@@ -477,15 +464,15 @@
             document.getElementById("capaModCurso").classList.add("ocultar");
         }
     }
-    	
 
+    var sesion = JSON.parse(sessionStorage.getItem('usuario'));
     oLiCurso=document.querySelector("#pageSubmenu1");
 
-    if(sesion.listaCurso.length>0)
+    if(sesion.listaCursos.length>0)
     {
-    	for (var i = 0; i < sesion.listaCurso.length; i++) 
+    	for (var i = 0; i < sesion.listaCursos.length; i++) 
     	{
-    		oCurso= academia.buscaCurso(sesion.listaCurso[i]);
+    		oCurso= academia.buscaCurso(sesion.listaCursos[i]);
     		oLi=document.createElement("LI");
     		oA=document.createElement("A");
     		oA.href="#"+i;

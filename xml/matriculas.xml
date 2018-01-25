@@ -7,7 +7,7 @@
 	  <codigo>inglesA2presencial</codigo>
 	</curso>
    </listaCursos>
-   <estado>abierta</estado>
+   <estado>encurso</estado>
 </matricula>
 
 <matricula dni="23645812R">
@@ -17,7 +17,7 @@
 	  <codigo>inglesA2presencial</codigo>
 	</curso>
   </listaCursos>
-  <estado>abierta</estado>
+  <estado>encurso</estado>
 </matricula>
 
 <matricula dni="42010210B">
@@ -27,7 +27,7 @@
 	  <codigo>inglesA2presencial</codigo>
 	</curso>
   </listaCursos>
-  <estado>abierta</estado>
+  <estado>encurso</estado>
 </matricula>
 
 <matricula dni="04568915V">
@@ -37,7 +37,7 @@
 	  <codigo>inglesB1semipresencial</codigo>
 	</curso>
   </listaCursos>
-  <estado>abierta</estado>
+  <estado>encurso</estado>
 </matricula>
 
 <matricula dni="95425821Q">
@@ -47,7 +47,7 @@
 	  <codigo>inglesB1semipresencial</codigo>
 	</curso>
   </listaCursos>
-  <estado>abierta</estado>
+  <estado>encurso</estado>
 </matricula>
 
 <matricula dni="54629812T">
@@ -60,7 +60,7 @@
 	  <codigo>francesB1semipresencial</codigo>
 	</curso>
   </listaCursos>
-  <estado>cerrada</estado>
+  <estado>cerrado</estado>
 </matricula>
 
 <matricula dni="23420102E">
@@ -70,7 +70,7 @@
 	  <codigo>francesA2presencial</codigo>
 	</curso>
   </listaCursos>
-  <estado>abierta</estado>
+  <estado>encurso</estado>
 </matricula>
 
 <matricula dni="72158961T">
@@ -80,6 +80,6 @@
 	  <codigo>francesA2presencial</codigo>
 	</curso>
   </listaCursos>
-  <estado>abierta</estado>
+  <estado>encurso</estado>
 </matricula>
 </listaMatriculas>
