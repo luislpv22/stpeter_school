@@ -54,6 +54,12 @@ function datosIniciales()
 	var oXMLMatriculas= academia.loadXMLDoc("xml/matriculas.xml");
 	var oMatriculas=oXMLMatriculas.getElementsByTagName("matricula");
 	cargarMatriculas(oMatriculas);
+
+	var oXMLCalificaciones= academia.loadXMLDoc("xml/calificaciones.xml");
+	var oCalificaciones=oXMLCalificaciones.getElementsByTagName("alumno");
+	cargarCalificaciones(oCalificaciones);
+
+
 }
 
 function iniciarSesion(oEvento)
@@ -194,6 +200,32 @@ function cargarMatriculas(oMatriculas)
 
 			academia.addMatricula(new Matricula(codigoMatri, estado, oAlumno));
 		}
+	}
+}
+
+function cargarCalificaciones(oCalificaciones)
+{
+	for(var j = 0; j<oCalificaciones.length; j++)
+	{
+		dni=oCalificaciones[j].getAttribute('dni');
+		
+		listaCursos=oCalificaciones[j].querySelectorAll("curso");
+		
+		//por si tiene notas de más de 1 curso
+		for (var i = 0; i < listaCursos.length; i++) 
+		{
+			listaNotas=[];
+			codCurso=oCalificaciones[j].querySelectorAll("curso")[i].getAttribute('codigo');
+			//obtenemos las notas del curso  que recorre el for
+			notas=listaCursos[i].querySelectorAll("nota");
+			for (var k = 0; k < notas.length; k++) 
+			{
+				listaNotas[k]=notas[k].textContent;
+			}
+			oCalificacion= new Calificaciones (listaNotas, codCurso);
+			academia.addCalificacionesAlu(dni, oCalificacion);
+		}
+
 	}
 }
 

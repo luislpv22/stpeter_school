@@ -380,6 +380,59 @@ class Academia
 		return oMatri.codigoMatri+1;
 	}
 
+	borrarUsuario(sDni)
+	{
+		for (var i=0; i<this._usuarios.length; i++) 
+			if (this._usuarios[i].dni == sDni)
+				this._usuarios[i].activo="no";
+	}
+
+
+
+	getCalificaciones(codCurso, dniAlu)
+	{
+		//buscamos en la lista de calificación del alumno que tiene la sesión, las notas que tenga el código del curso,
+		//dichas notas las metemos en un array y la devolvemos
+		var listaCalificaciones=[];
+		var indice=0;
+		var oAlu=null;
+		for (var i=0; i<this._usuarios.length; i++) 
+			if (this._usuarios[i].dni == dniAlu)
+				oAlu=this._usuarios[i];
+
+
+			for (var i = 0; i < oAlu.listaCalificaciones.length; i++) 
+			{
+				if (oAlu.listaCalificaciones[i].codCurso== codCurso)
+				{
+					for (var j=0; j< oAlu.listaCalificaciones[i].nota.length; j++)
+					{
+						listaCalificaciones[indice]=oAlu.listaCalificaciones[i].nota[j];
+						indice++;
+					}
+					
+				}
+			}
+				
+		return listaCalificaciones;
+	}
+
+	addCalificacionesAlu(dni, oCalificacion)
+	{
+			for (var i = 0; i < this._usuarios.length; i++) 
+			{
+				if (this._usuarios[i].dni== dni)
+				{
+					this._usuarios[i].addNota(oCalificacion);
+				}
+			}
+
+	}
+
+
+
+
+
 }
 
 

@@ -379,6 +379,9 @@ function cargarCursos()
     	}
     }
 
+
+
+
     for (var i = 0; i < arrayCurso.length; i++) 
     {
     	
@@ -601,8 +604,9 @@ function addCursoMatri(oEvento)
 	
 }
 
-function realizarMatricula()
+function realizarMatricula(oEvento)
 {
+	var oE = oEvento || window.event;
 	for (var i = 0; i < cursosElegidos.length; i++) 
 	{
 		sesion.listaCursos.push(cursosElegidos[i].codigo)
@@ -617,6 +621,7 @@ function realizarMatricula()
 	cursosElegidos= []; //resetear el array de los cursos elegidos
 	resetearSelectIdiomas();
 	menuCursoUsuario();
+	oE.preventDefault();
 
 }
 
@@ -672,5 +677,54 @@ function crearTabla(cursos)
 
 }
 
+function cargarListadoCurso(oEvento)
+{
+	//tengo que hacer un método que replace el nodo div por otro nuevo cada vez que se inicie este método
+	limpiarListadoCurso();
+	oE= oEvento || window.event;
+	var listaNotas= academia.getCalificaciones(oE.target.value, sesion.dni);
+	if (listaNotas.length==0)
+	{
+		oP=document.createElement("P");
+		oP.textContent="No hay calificaciones disponibles";
+		oP.style.color="red";
+		document.querySelector("#listaCalificaciones").appendChild(oP);
+	}
+	else
+	{
+		borrartabla();
+		oTabla= document.createElement("TABLE");
+		oTabla.classList.add("table");
+		oTabla.classList.add("table-hover");
+		oTabla.classList.add("table-condensed");
+		oTHead= oTabla.createTHead();
+		oFila= oTHead.insertRow(-1);
+		oCelda= oFila.insertCell(-1);
+		oCelda.textContent="Examenes";
+		oCelda= oFila.insertCell(-1);
+		oCelda.textContent="Notas";
+		oTBody=oTabla.createTBody();
+
+		for (var i = 0; i < listaNotas.length; i++) 
+		{
+			oFila= oTabla.insertRow(-1);		
+			oCelda= oFila.insertCell(-1);
+			oCelda.textContent="Examen "+(i+1);
+			oCelda= oFila.insertCell(-1);
+			oCelda.textContent=listaNotas[i];
+		}
+
+		document.querySelector("#listaCalificaciones").appendChild(oTabla);
+	}
+								
+}
+
+function limpiarListadoCurso()
+{
+	oDiv= document.createElement("DIV");
+	oDiv.id="listaCalificaciones";
+	oDivBorrar=document.querySelector("#listaCalificaciones");
+	oDivBorrar.parentNode.replaceChild(oDiv, oDivBorrar);
+}
 
 
