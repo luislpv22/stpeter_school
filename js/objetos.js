@@ -23,9 +23,23 @@ class Profesor extends Persona
 		this.listaCursos = [];
 	}
 
-	addCurso(oCurso)
+	addCurso(codigo)
 	{
-		this.listaCursos.push(oCurso); // Añade un curso al profesor
+		if (this.listaCursos.indexOf(codigo) == -1)
+			this.listaCursos.push(codigo); // Añade un curso al profesor
+	}
+
+	getCursos()
+	{
+		var tCursos = [];
+		var cursos = academia.getCursos();
+
+		for(var i=0; i<this.listaCursos.length; i++)
+			for (var j=0; j<cursos.length; j++)
+				if (this.listaCursos[i] == cursos[j].codigo)
+					tCursos.push(cursos[j]);
+
+		return tCursos;
 	}
 }
 
@@ -204,13 +218,43 @@ class Academia
 		return this._usuarios;
 	}
 
-	getAlumno(dni)
+	getUsuario(dni)
 	{
-		var oAlumno = null;
-		for (var i=0; i<this._usuarios.length && oAlumno==null; i++) 
+		var oUsuario = null;
+		for (var i=0; i<this._usuarios.length && oUsuario==null; i++) 
 			if (this._usuarios[i].dni == dni)
-				oAlumno = this._usuarios[i];
-		return oAlumno;
+				oUsuario = this._usuarios[i];
+		return oUsuario;
+	}
+
+	getAlumnos()
+	{
+		var alumnos = [];
+		for (var i=0; i<this._usuarios.length; i++)
+			if (this._usuarios[i] instanceof Alumno)
+				alumnos.push(this._usuarios[i]);
+
+		return alumnos;
+	}
+
+	getProfesores()
+	{
+		var profesores = [];
+		for (var i=0; i<this._usuarios.length; i++)
+			if (this._usuarios[i] instanceof Profesor)
+				profesores.push(this._usuarios[i]);
+
+		return profesores;
+	}
+
+	getAdministradores()
+	{
+		var administradores = [];
+		for (var i=0; i<this._usuarios.length; i++)
+			if (this._usuarios[i] instanceof Administrador)
+				administradores.push(this._usuarios[i]);
+
+		return administradores;
 	}
 
 	getCursos()
@@ -222,7 +266,7 @@ class Academia
 	{
 		oCurso=null;
 		for (var i=0; i<this._cursos.length && oCurso==null; i++) 
-			if (this._cursos[i].codigo== sCodigo)
+			if (this._cursos[i].codigo == sCodigo)
 				oCurso= this._cursos[i];
 
 		return oCurso;
@@ -245,24 +289,21 @@ class Academia
 
     consultarNotas(sDni,SFiltro)
     {
-
     	var oTablaCurProv;
     	var oTablaCurAlumProv;
-    	for (var i = 0; i < this._profesores.length; i++)
-    	{
-    		if(this._profesores[i].dni==sDni)
-    			oTablaCurProv=this._profesores[i].listaCurso;
 
-            var oTablas = document.querySelectorAll("table");
+		var oProfesor = this.getUsuario(sDni);
+		oTablaCurProv = oProfesor.getCursos();
 
-            if (oTablas != null)
+        var oTablas = document.querySelectorAll("table");
+
+        if (oTablas != null)
+        {
+            for (i=0; i<oTablas.length; i++)
             {
-                for (i = 0; i < oTablas.length; i++)
-                {
-                    var iNumFilas = oTablas[i].rows.length;
-                    for (j = 0; j < iNumFilas; j++)
-                        oTablas[i].deleteRow(0);
-                }
+                var iNumFilas = oTablas[i].rows.length;
+                for (j=0; j<iNumFilas; j++)
+                    oTablas[i].deleteRow(0);
             }
         }
 
@@ -287,7 +328,7 @@ class Academia
 	    oTH.textContent = "Tipo";
 	    oFila.appendChild(oTH);
 	    oTH = document.createElement("th");
-	    oTH.textContent = "Año Academico";
+	    oTH.textContent = "Nivel";
 	    oFila.appendChild(oTH);
 	    oTH = document.createElement("th");
 	    oTH.textContent = "Alumno";
@@ -299,9 +340,9 @@ class Academia
 	    // Cuerpo de la tabla
 	    var oTBody = oTabla.createTBody();
 
-		for (var i = 0; i < oTablaCurProv.length; i++)
+		for (var i=0; i<oTablaCurProv.length; i++)
 		{
-			if(oTablaCurProv[i].codigo==SFiltro || SFiltro=="todo")
+			if(oTablaCurProv[i].codigo == SFiltro || SFiltro == "todo")
 			{
 				oFila = oTBody.insertRow(-1);
 				var oCelda = oFila.insertCell(-1);
@@ -313,8 +354,8 @@ class Academia
 			  	oCelda = oFila.insertCell(-1);
 			  	oCelda.textContent = oTablaCurProv[i].tipo;
 			   	oCelda = oFila.insertCell(-1);
-			  	oCelda.textContent = oTablaCurProv[i].añoAcademico;
-			  	oTablaCurAlumProv=oTablaCurProv[i].listaAlumno;
+			  	oCelda.textContent = oTablaCurProv[i].nivel;
+			  	oTablaCurAlumProv=oTablaCurProv[i].listaAlumnos;
 
 
 		    	for (var j=0; j<oTablaCurAlumProv.length; j++)
