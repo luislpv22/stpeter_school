@@ -74,11 +74,11 @@ function inicio()
         }, false);
     }
    
-    enlaces[2].addEventListener("click", actualiza0, false);
+    enlaces[2].addEventListener("change", actualiza0, false);
   
-    enlaces[3].addEventListener("click", actualiza1, false);
+    enlaces[3].addEventListener("change", actualiza1, false);
  
-    enlaces[4].addEventListener("click", actualiza2, false);
+    enlaces[4].addEventListener("change", actualiza2, false);
 
 
 
