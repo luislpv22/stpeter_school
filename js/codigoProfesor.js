@@ -17,26 +17,27 @@ function inicio()
 	 btncalAlum= document.frmMenu.calAlum;
 	 btnconsNotas= document.frmMenu.consNotas;
 	btnmodNotaAlu= document.frmMenu.modNotaAlu;
+	*/
 	sel=document.frmPuntuar.selectCursos;
 	sel2=document.frmModNotas.selectCursos2;
 	sel3=document.getElementById("selectCursos3");
     btnPuntuar=document.frmPuntuar.puntuar;
     btnEditar=document.frmModNotas.editar;
 
-
+/*
 	btncalAlum.addEventListener("click", mostrar, false);
 	btncalAlum.addEventListener("click", actualiza0, false);
 	btnconsNotas.addEventListener("click", mostrar, false);
 	btnconsNotas.addEventListener("click", actualiza1, false);
 	btnmodNotaAlu.addEventListener("click", mostrar, false);
 	btnmodNotaAlu.addEventListener("click", actualiza2, false);
-    
+    */
 	sel.addEventListener("click", actualizaAlum, false);
 	sel2.addEventListener("click", actualizaAlum2, false);
 	sel3.addEventListener("click", filtro, false);
 	btnPuntuar.addEventListener("click", calificar, false);
 	btnEditar.addEventListener("click", Modificar, false);
-	*/
+	
 	
 
 
