@@ -1,7 +1,4 @@
-    var btncalAlum;
-	var btnconsNotas;
-	var btnmodNotaAlu;
-	var btnVolver;
+
 	var academia= new Academia();
 	var btnPuntuar;
 	var sel;
