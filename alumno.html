@@ -168,51 +168,52 @@
 										<h4 class="modal-title">Seleccione un curso</h4>
 									</div>
 									<div class="modal-body">
-										<!--contenido de la matriculación-->
-										<div class="form-group">
-											<label class="col-md-3 control-label" for="selectIdioma">Idiomas</label>
-											<div class="col-md-3">
-												<select id="selectIdioma" name="selectIdioma" class="form-control">
-													<option value="seleIdi">Seleccione Idioma</option>
-												</select>
+										<div class="container-fluid">
+											<!--contenido de la matriculación-->
+											<div class="form-group">
+												<label class="col-md-3 control-label" for="selectIdioma">Idiomas</label>
+												<div class="col-md-3">
+													<select id="selectIdioma" name="selectIdioma" class="form-control">
+														<option value="seleIdi">Seleccione Idioma</option>
+													</select>
+												</div>
 											</div>
-										</div>
 
 
-										<div class="form-group">
-											<label class="col-md-3 control-label" for="selectNivel">Nivel</label>
-											<div class="col-md-3">
-												<select id="selectNivel" name="selectNivel" class="form-control">
-													<option value="seleNi">Seleccione Idioma</option>
-												</select>
+											<div class="form-group">
+												<label class="col-md-3 control-label" for="selectNivel">Nivel</label>
+												<div class="col-md-3">
+													<select id="selectNivel" name="selectNivel" class="form-control">
+														<option value="seleNi">Seleccione Idioma</option>
+													</select>
+												</div>
 											</div>
-										</div>
 
 
-										<div class="form-group">
-											<label class="col-md-3 control-label" for="selectTipo">Tipo</label>
-											<div class="col-md-3">
-												<select id="selectTipo" name="selectTipo" class="form-control" disabled>
-													<option value="seleTipo">Seleccione Tipo</option>
-												</select>
+											<div class="form-group">
+												<label class="col-md-3 control-label" for="selectTipo">Tipo</label>
+												<div class="col-md-3">
+													<select id="selectTipo" name="selectTipo" class="form-control" disabled>
+														<option value="seleTipo">Seleccione Tipo</option>
+													</select>
+												</div>
 											</div>
-										</div>
 
-										<div class="form-group">
-											<label class="col-md-3 control-label" for="duraCurso">Duración del curso</label>  
-											<div class="col-md-3">
-												<input id="duraCurso" name="duraCurso" type="text" class="form-control input-md" disabled>
+											<div class="form-group">
+												<label class="col-md-3 control-label" for="duraCurso">Duración del curso</label>  
+												<div class="col-md-3">
+													<input id="duraCurso" name="duraCurso" type="text" class="form-control input-md" disabled>
+												</div>
 											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-md-6 control-label" for="preCurso">Precio del curso</label>  
-											<div class="col-md-6">
-												<input id="preCurso" name="preCurso" type="text" class="form-control input-md" disabled>
+											<div class="form-group">
+												<label class="col-md-6 control-label" for="preCurso">Precio del curso</label>  
+												<div class="col-md-6">
+													<input id="preCurso" name="preCurso" type="text" class="form-control input-md" disabled>
+												</div>
 											</div>
+
+											<p id="txtInformacion"></p>
 										</div>
-
-										<p id="txtInformacion"></p>
-
 									</div>
 									<div class="modal-footer"> 
 										<button  type="button" id="btnAddCursoMatri" name="btnAddCursoMatri" class="btn btn-primary" disabled>Añadir Curso</button>
@@ -357,8 +358,8 @@
 					<script type="text/javascript" src="js/jquery.min.js"></script>
 					<script type="text/javascript" src="js/bootstrap.min.js"></script>
 					<script type="text/javascript" src="js/objetos.js"></script>
-					<script type="text/javascript" src="js/codigoMatriAlu.js"></script>
-					<script type="text/javascript" src="js/validacionFormAlu.js"></script>
+					<script type="text/javascript" src="js/principal.js"></script>
+					<script type="text/javascript" src="js/alumno.js"></script>
 					<script>
 
 						 if (typeof(sesion) === "undefined")
