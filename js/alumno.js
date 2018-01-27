@@ -525,21 +525,17 @@ function cargarCurso()
 {
 	resetearCamposDatosCurso();
 
-	oSelectIdioma= document.querySelector("#selectIdioma");
-	oSelectNivel= document.querySelector("#selectNivel");
-	oSelctTipo= document.querySelector("#selectTipo");
-	var codigoCurso= oSelectIdioma.value+oSelectNivel.value+oSelctTipo.value;
-	var oCurso =academia.getCurso(codigoCurso);
+	sSelectIdioma= document.querySelector("#selectIdioma").value;
+	sSelectNivel= document.querySelector("#selectNivel").value;
+	sSelctTipo= document.querySelector("#selectTipo").value;
+
+	var oCurso =academia.getCurso(sSelectIdioma, sSelectNivel, sSelctTipo);
 
 	oDuracionCurso= document.querySelector("#duraCurso").value=oCurso.duracion;
 	oPrecioCurso= document.querySelector("#preCurso").value=oCurso.precio;
 
 	
-	document.querySelector("#btnAddCursoMatri").removeAttribute("disabled"); 
-	
-
-
-	
+	document.querySelector("#btnAddCursoMatri").removeAttribute("disabled"); 	
 }
 
 function addCursoMatri(oEvento)
@@ -679,7 +675,6 @@ function crearTabla(cursos)
 
 function cargarListadoCurso(oEvento)
 {
-	//tengo que hacer un método que replace el nodo div por otro nuevo cada vez que se inicie este método
 	limpiarListadoCurso();
 	oE= oEvento || window.event;
 	var listaNotas= academia.getCalificaciones(oE.target.value, sesion.dni);

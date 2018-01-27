@@ -351,8 +351,7 @@
 									borrarLi();
 									for (var i = 0; i < sesion.listaCursos.length; i++) 
 									{
-
-										oCurso= academia.getCurso(sesion.listaCursos[i]);
+										oCurso= academia.getCursoPorCodigo(sesion.listaCursos[i]);
 										oLi=document.createElement("LI");
 										oA=document.createElement("A");
 										oA.href="#listaCalificaciones";
