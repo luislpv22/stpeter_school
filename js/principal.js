@@ -51,7 +51,7 @@ function datosIniciales()
     	}
 	}
 
-	var oXMLCursos= academia.loadXMLDoc("xml/curso.xml");
+	var oXMLCursos= academia.loadXMLDoc("xml/cursos.xml");
 	var oCursos=oXMLCursos.getElementsByTagName("curso");
 	cargarCursos(oCursos);
 
@@ -62,7 +62,6 @@ function datosIniciales()
 	var oXMLCalificaciones= academia.loadXMLDoc("xml/calificaciones.xml");
 	var oCalificaciones=oXMLCalificaciones.getElementsByTagName("alumno");
 	cargarCalificaciones(oCalificaciones);
-
 
 }
 
@@ -207,19 +206,19 @@ function cargarMatriculas(oMatriculas)
 
 function cargarCalificaciones(oCalificaciones)
 {
-	for(var j = 0; j<oCalificaciones.length; j++)
+	for(var i = 0; i<oCalificaciones.length; i++)
 	{
-		dni=oCalificaciones[j].getAttribute('dni');
+		dni=oCalificaciones[i].getAttribute('dni');
 		
-		listaCursos=oCalificaciones[j].querySelectorAll("curso");
+		listaCursos=oCalificaciones[i].querySelectorAll("curso");
 		
 		//por si tiene notas de más de 1 curso
-		for (var i = 0; i < listaCursos.length; i++) 
+		for (var j = 0; j < listaCursos.length; j++) 
 		{
 			listaNotas=[];
-			codCurso=oCalificaciones[j].querySelectorAll("curso")[i].getAttribute('codigo');
+			codCurso=oCalificaciones[i].querySelectorAll("curso")[j].getAttribute('codigo');
 			//obtenemos las notas del curso  que recorre el for
-			notas=listaCursos[i].querySelectorAll("nota");
+			notas=listaCursos[j].querySelectorAll("nota");
 			for (var k = 0; k < notas.length; k++) 
 			{
 				listaNotas[k]=notas[k].textContent;
@@ -230,8 +229,6 @@ function cargarCalificaciones(oCalificaciones)
 
 	}
 }
-
-
 
 /*esta validación la dejo aqui porque puede servir casi perfecto tanto para crear alumnos, profesores, y administrativos*/
 function comprobarEnvio(oEvento)

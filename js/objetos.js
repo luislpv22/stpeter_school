@@ -307,7 +307,7 @@ class Academia
             }
         }
 
-		// Creacion de la tabla con los numeros del sorteo
+		// Creacion de la tabla 
 	    var oTabla = document.createElement("table");
 	    oTabla.classList.add("table");
 	    oTabla.classList.add("table-hover");
@@ -469,8 +469,6 @@ class Academia
 			}
 
 	}
-
-
 
 
 
