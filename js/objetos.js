@@ -231,6 +231,21 @@ class Academia
 		sessionStorage.setItem('tCursos', JSON.stringify(this._cursos));
 	}
 
+	modificarMatricula(oMatricula)
+	{
+		// recorrer la array de cursos hasta encontrar a los que tengan el mismo codigo y modificarlo
+		var bEncontrado = false;
+		for (var i=0; i<this._matriculas.length && bEncontrado==false; i++) 
+		{
+			if (this._matriculas[i].numero == oMatricula.numero)
+			{
+				this._matriculas[i] = oMatricula;
+				bEncontrado = true;
+			}
+		}
+		sessionStorage.setItem('tMatriculas', JSON.stringify(this._matriculas));
+	}
+
 	getUsuarios()
 	{
 		return this._usuarios;
@@ -490,7 +505,7 @@ class Academia
 			}
 
 	}
-
+/*
 	cambiarEstadoMatri(oMatri)
 	{
 		for (var i = 0; i < this._matriculas.length; i++) 
@@ -508,7 +523,7 @@ class Academia
 			}
 		}
 	}
-
+*/
 
 
 }

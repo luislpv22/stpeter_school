@@ -201,17 +201,14 @@ function mostrarPagina(pagina)
 				fila.insertCell(-1).appendChild(document.createTextNode(sTexto));
 				fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].estado.toUpperCase()));
 
-				var btn = document.createElement("input");
-				btn.type = "button";
-				btn.value = "Editar";
-				btn.setAttribute("onclick", "editarMatricula('"+matriculas[i].numero+"');");
-				btn.setAttribute("data-toggle", "modal");
-				btn.setAttribute("data-target", "#modal");
-				btn.classList.add("btn");
-				btn.classList.add("btn-warning");
-				btn.classList.add("btn-sm");
-				btn.id="btnModMatri";
-				fila.insertCell(-1).appendChild(btn);
+				var swActivo = switchActivo();
+				if (cursos[i].bArchivado == "si")
+					swActivo.querySelector('.switch-activo').checked = "checked";
+
+				swActivo.querySelector('.switch-activo').setAttribute("data-numero", matriculas[i].numero);
+				swActivo.querySelector('.switch-activo').addEventListener("click", desactivarMatricula);
+				fila.insertCell(-1).appendChild(swActivo);
+
 				var btn = document.createElement("input");
 				btn.type = "button";
 				btn.value = "Cambiar Estado";
@@ -277,7 +274,7 @@ function desactivarCurso()
 {
 	var codigo = this.getAttribute("data-codigo");
 	var oCurso = academia.getCurso(codigo);
-
+	
 	if (oCurso.bArchivado == "si")
 		oCurso.bArchivado = "no";
 	else
@@ -286,48 +283,26 @@ function desactivarCurso()
 	academia.modificarCurso(oCurso);
 }
 
+function desactivarMatricula()
+{
+	var numero = this.getAttribute("data-numero");
+	var oMatricula = academia.getMatricula(numero);
+
+	if (oMatricula.estado == "encurso")
+		oMatricula.estado = "cerrado";
+	else
+		oMatricula.estado = "encurso";
+
+	academia.modificarMatricula(oMatricula);
+}
+
+
 function guardarCurso(codigo)
 {
-<<<<<<< HEAD
 	var curso = academia.getCurso(codigo);
 	document.getElementById("formEditarCurso").style.display = "block";
 }
 
-
-function cambiarEstadoMatricula(codigoMatri)
-{
-	var matricula = academia.getMatricula(codigoMatri);
-	academia.cambiarEstadoMatri(matricula);
-	mostrarPagina("matriculaciones");
-	document.querySelector("#cambiarEstadoMatri").preventDefault;
-
-	
-	
-=======
-	var form = document.getElementById("formEditarCurso");
-
-	var sCodigo = form.codigo.value;
-
-	if (codigo != null)
-		sCodigo = codigo;
-
-	var sIdioma = form.idioma.value;
-	var sNivel = form.nivel.value;
-	var sTipo = form.tipo.value;
-	var fPrecio = parseFloat(form.precio.value);
-	var sDuracion = form.duracion1.value + " " + form.duracion2.value;
-	var bActivo = form.activo.value;
-
-	var oCurso = new Curso(sCodigo, sIdioma, sDuracion, fPrecio, sTipo, sNivel, bActivo);
-
-	if (codigo != null)
-		academia.modificarCurso(oCurso);
-	else
-		academia.addCurso(oCurso);
-
-	mostrarPagina('cursos');
-	document.querySelector('#modal .close').click();
-}
 
 function switchActivo()
 {
@@ -345,5 +320,4 @@ function switchActivo()
 	lblActivo.appendChild(divOuter);
 
 	return lblActivo;
->>>>>>> 93a5eb60fa22d8ff72735707ed6d544755571c96
 }
