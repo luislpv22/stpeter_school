@@ -48,10 +48,11 @@ function mostrarPagina(pagina)
 			var btn = document.createElement("input");
 			btn.type = "button";
 			btn.value = "Editar";
+			btn.classList.add("btn", "btn-danger", "btn-sm");
 			btn.setAttribute("data-toggle", "modal");
 			btn.setAttribute("data-target", "#modal");
-			btn.classList.add("btn", "btn-danger", "btn-sm");
-			btn.addEventListener("click", function() { editarCurso(cursos[i].codigo); });
+			btn.setAttribute("data-codigo", cursos[i].codigo);
+			btn.addEventListener("click", editarCurso);
 			fila.insertCell(-1).appendChild(btn);
 		}
 
@@ -237,8 +238,9 @@ function mostrarPagina(pagina)
 
 }
 
-function editarCurso(codigo)
+function editarCurso()
 {
+	var codigo = this.getAttribute("data-codigo");
 	var oCurso = academia.getCurso(codigo);
 	var form = document.getElementById("formEditarCurso");
 	form.codigo.value = oCurso.codigo;

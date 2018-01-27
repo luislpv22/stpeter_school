@@ -10,13 +10,13 @@ function datosIniciales()
 {
 	if (typeof sessionStorage.tUsuarios === 'undefined')
 	{
-	    var oXMLAlumnos = academia.loadXMLDoc("xml/alumnos.xml");
+	    var oXMLAlumnos = loadXMLDoc("xml/alumnos.xml");
 		var oAlumnos = oXMLAlumnos.getElementsByTagName("alumno");
 		cargarAlumnos(oAlumnos);
-	    var oXMLProfesores = academia.loadXMLDoc("xml/profesores.xml");
+	    var oXMLProfesores = loadXMLDoc("xml/profesores.xml");
 		var oProfesores = oXMLProfesores.getElementsByTagName("profesor");
 		cargarProfesores(oProfesores);
-	    var oXMLAdministradores = academia.loadXMLDoc("xml/administradores.xml");
+	    var oXMLAdministradores = loadXMLDoc("xml/administradores.xml");
 		var oAdministradores = oXMLAdministradores.getElementsByTagName("administrador");
 		cargarAdministradores(oAdministradores);
 
@@ -51,16 +51,26 @@ function datosIniciales()
     	}
 	}
 
-	var oXMLCursos= academia.loadXMLDoc("xml/cursos.xml");
-	var oCursos=oXMLCursos.getElementsByTagName("curso");
-	cargarCursos(oCursos);
+	if (typeof sessionStorage.tCursos === 'undefined')
+	{
+		var oXMLCursos = loadXMLDoc("xml/cursos.xml");
+		var oCursos = oXMLCursos.getElementsByTagName("curso");
+		var tCursos = cargarCursos(oCursos);
+		sessionStorage.setItem('tCursos', JSON.stringify(tCursos));
+	}
+	else
+	{
+		var tCursos = JSON.parse(sessionStorage.tCursos);
+		for (var i=0; i<tCursos.length; i++)
+			academia.addCurso(tCursos[i]);
+	}
 
-	var oXMLMatriculas= academia.loadXMLDoc("xml/matriculas.xml");
-	var oMatriculas=oXMLMatriculas.getElementsByTagName("matricula");
+	var oXMLMatriculas = loadXMLDoc("xml/matriculas.xml");
+	var oMatriculas = oXMLMatriculas.getElementsByTagName("matricula");
 	cargarMatriculas(oMatriculas);
 
-	var oXMLCalificaciones= academia.loadXMLDoc("xml/calificaciones.xml");
-	var oCalificaciones=oXMLCalificaciones.getElementsByTagName("alumno");
+	var oXMLCalificaciones = loadXMLDoc("xml/calificaciones.xml");
+	var oCalificaciones = oXMLCalificaciones.getElementsByTagName("alumno");
 	cargarCalificaciones(oCalificaciones);
 
 }
@@ -476,3 +486,16 @@ function cargarDatosUsuario()
 	oEmail=document.querySelector("#frmModAlu #emailAlu").value=sesion.correo;
 }
 
+function loadXMLDoc(filename)
+{
+	var xhttp = null;
+
+	if (window.XMLHttpRequest)
+		xhttp = new XMLHttpRequest();
+	else // IE 5/6
+		xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+
+	xhttp.open("GET", filename, false);
+	xhttp.send();
+	return xhttp.responseXML;
+}
