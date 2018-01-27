@@ -170,6 +170,14 @@ a.article, a.article:hover {
   width: 100%;
 }
 
+.alert {
+  position: absolute;
+  top: 120px;
+  right: 30px;
+  width: 350px;
+  box-shadow: 2px 2px 10px 0 rgba(0,0,0,0.2);
+}
+
 @media (max-width: 768px) {
   #sidebar {
     min-width: 80px;

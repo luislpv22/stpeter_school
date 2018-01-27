@@ -50,8 +50,6 @@
 
 		<div id="content">
 			<button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
-			<div>
-			</div>
 
 			<!-- hasta aqui todo lo relacionado con el menú -->
 
@@ -67,8 +65,8 @@
 							<!-- Text input-->
 
 							<div class="form-group" id="mod">
-								<label class="col-md-4 control-label" for="nombreAlu" >Nombre</label>  
-								<div class="col-md-8">
+								<label class="col-md-2 control-label" for="nombreAlu" >Nombre</label>  
+								<div class="col-md-4">
 									<input id="nombreAlu" name="nombreAlu" type="text" placeholder="nombre" class="form-control input-md" disabled >
 
 								</div>
@@ -76,8 +74,8 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="apellidoAlu">Apellidos</label>  
-								<div class="col-md-8">
+								<label class="col-md-2 control-label" for="apellidoAlu">Apellidos</label>  
+								<div class="col-md-4">
 									<input id="apellidoAlu" name="apellidoAlu" type="text" placeholder="apellidos" class="form-control input-md" disabled>
 
 								</div>
@@ -85,8 +83,8 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="dniAlu">DNI</label>  
-								<div class="col-md-8">
+								<label class="col-md-2 control-label" for="dniAlu">DNI</label>  
+								<div class="col-md-4">
 									<input id="dniAlu" name="dniAlu" type="text" placeholder="dni" class="form-control input-md" disabled>
 
 								</div>
@@ -94,16 +92,16 @@
 
 							<!-- password input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="password">Password</label>  
-								<div class="col-md-8">
+								<label class="col-md-2 control-label" for="password">Password</label>  
+								<div class="col-md-4">
 									<input id="passAlu" name="passAlu" type="password" placeholder="password" class="form-control input-md" required="">
 								</div>
 							</div>
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="telefonoAlu">Teléfono</label>  
-								<div class="col-md-8">
+								<label class="col-md-2 control-label" for="telefonoAlu">Teléfono</label>  
+								<div class="col-md-4">
 									<input id="telefonoAlu" name="telefonoAlu" type="text" placeholder="teléfono" class="form-control input-md" required="">
 
 								</div>
@@ -111,8 +109,8 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="direAlu">Dirección</label>  
-								<div class="col-md-8">
+								<label class="col-md-2 control-label" for="direAlu">Dirección</label>  
+								<div class="col-md-4">
 									<input id="direAlu" name="direAlu" type="text" placeholder="dirección" class="form-control input-md" required="">
 
 								</div>
@@ -120,8 +118,8 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="emailAlu">Email</label>  
-								<div class="col-md-8">
+								<label class="col-md-2 control-label" for="emailAlu">Email</label>  
+								<div class="col-md-4">
 									<input id="emailAlu" name="emailAlu" type="text" placeholder="email" class="form-control input-md" required="">
 
 								</div>
@@ -129,8 +127,8 @@
 
 							<!-- Button (Double) -->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="ModAlu"></label>
-								<div class="col-md-8">
+								<label class="col-md-2 control-label" for="ModAlu"></label>
+								<div class="col-md-4">
 									<button id="btnModDatosAlu" name="btnModDatosAlu" class="btn btn-success">Modificar datos</button>
 								</div>
 							</div>
@@ -143,293 +141,284 @@
 
 				<!-- - Matricular curso -->
 				<div id="capaMatriCurso" class="ocultar">
-				<form action="#" method="post" name="frmAltaMod" id="frmAltaMod">
+					<form action="#" method="post" name="frmAltaMod" id="frmAltaMod">
+						<fieldset>
+							<!-- Form Name -->
+							<legend>Matriculación</legend>
 
-					<fieldset>
-						<!-- Form Name -->
-						<legend>Matriculación</legend>
-
-										<div class="container-fluid">
-
-											<!--contenido de la matriculación-->
-											<div class="form-group">
-												<label class="col-md-3 control-label" for="selectIdioma">Idiomas</label>
-												<div class="col-md-3">
-													<select id="selectIdioma" name="selectIdioma" class="form-control">
-														<option value="seleIdi">Seleccione Idioma</option>
-													</select>
-												</div>
-											</div>
-
-
-											<div class="form-group">
-												<label class="col-md-3 control-label" for="selectNivel">Nivel</label>
-												<div class="col-md-3">
-													<select id="selectNivel" name="selectNivel" class="form-control">
-														<option value="seleNi">Seleccione Idioma</option>
-													</select>
-												</div>
-											</div>
-
-
-											<div class="form-group">
-												<label class="col-md-3 control-label" for="selectTipo">Tipo</label>
-												<div class="col-md-3">
-													<select id="selectTipo" name="selectTipo" class="form-control" disabled>
-														<option value="seleTipo">Seleccione Tipo</option>
-													</select>
-												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="col-md-3 control-label" for="duraCurso">Duración del curso</label>  
-												<div class="col-md-3">
-													<input id="duraCurso" name="duraCurso" type="text" class="form-control input-md" disabled>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-md-6 control-label" for="preCurso">Precio del curso</label>  
-												<div class="col-md-6">
-													<input id="preCurso" name="preCurso" type="text" class="form-control input-md" disabled>
-												</div>
-											</div>
-
-											<button  type="button" id="btnAddCursoMatri" name="btnAddCursoMatri" class="btn btn-primary" disabled>Añadir Curso</button>	
-
-											<p id="txtInformacion"></p>
-
-											<div id="tablaMatriCurso"></div>
-
-
-
+							<div class="container-fluid">
+								<div class="form-horizontal">
+									<!--contenido de la matriculación-->
+									<div class="form-group">
+										<label class="col-md-2 control-label" for="selectIdioma">Idiomas</label>
+										<div class="col-md-3">
+											<select id="selectIdioma" name="selectIdioma" class="form-control">
+												<option value="seleIdi">Seleccione Idioma</option>
+											</select>
 										</div>
-						
-							
-						<div id="tablaMatriCurso">
-						</div>
+									</div>
 
-						
-							<!-- Button (Double) -->
-							<div id="capaBotonesMatri">
-								<div class="form-group">
-									<label class="col-md-4 control-label" for="altaAlu"></label>
-									<div class="col-md-8">
-										<button id="btnEnviarMatri" name="btnEnviarMatri" class="btn btn-success" disabled>Matricular</button>
+									<div class="form-group">
+										<label class="col-md-2 control-label" for="selectNivel">Nivel</label>
+										<div class="col-md-3">
+											<select id="selectNivel" name="selectNivel" class="form-control">
+												<option value="seleNi">Seleccione Idioma</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-2 control-label" for="selectTipo">Tipo</label>
+										<div class="col-md-3">
+											<select id="selectTipo" name="selectTipo" class="form-control" disabled>
+												<option value="seleTipo">Seleccione Tipo</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-2 control-label" for="duraCurso">Duración del curso</label>  
+										<div class="col-md-3">
+											<input id="duraCurso" name="duraCurso" type="text" class="form-control input-md" disabled>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label" for="preCurso">Precio del curso</label>  
+										<div class="col-md-3">
+											<input id="preCurso" name="preCurso" type="text" class="form-control input-md" disabled>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-2"></div>
+										<div class="col-md-3">
+											<button type="button" id="btnAddCursoMatri" name="btnAddCursoMatri" class="btn btn-primary" disabled>Seleccionar</button>
+										</div>
+									</div>
+								</div>
+
+
+								<div id="txtInformacion" class="alert alert-dismissible hide"><span></span><button type="button" class="close" data-dismiss="alert">&times;</button></div>
+
+								<table id="tablaMatriCurso" class="table table-hover">
+									<thead>
+										<tr>
+											<th>Tipo curso</th>
+											<th>Idioma</th>
+											<th>Nivel</th>
+											<th>Duración</th>
+											<th>Precio</th>
+										</tr>
+									</thead>
+								</table>
+
+								<div id="capaBotonesMatri">
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="altaAlu"></label>
+										<div class="col-md-8">
+											<button id="btnEnviarMatri" name="btnEnviarMatri" class="btn btn-success" disabled>Matricular</button>
+										</div>
 									</div>
 								</div>
 							</div>
-					
+						</fieldset>
+					</form>
+				</div>
 
-
-
-
-					</fieldset>
+				<!-- - dar de baja academia -->
+				<div id="capaDarBaja" class="ocultar">
+					<h4> La siguiente acción te dará de baja en la academia, ¿estás seguro?</h4>
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="addCursoMatri"></label>
+						<div  id="botonAddCurso" class="col-md-4">
+							<button id="btnDarBajaAca" name="btnDarBajaAca" class="btn btn-danger">Dar de baja</button>
+						</div>
+					</div>
 				</div>
 				<!--  - - - - - - - - - - - - - - - - - - - -->
 
+				<div id="listaCalificaciones" class="ocultar col-md-12">
+				</div>
 
-						<!--  - - - - - - - - - - - - - - - - - - - -->
-
-						<!-- - dar de baja academia -->
-						<div id="capaDarBaja" class="ocultar">
-							<h4> La siguiente acción te dará de baja en la academia, ¿estás seguro?</h4>
-							<div class="form-group">
-								<label class="col-md-4 control-label" for="addCursoMatri"></label>
-								<div  id="botonAddCurso" class="col-md-4">
-									<button id="btnDarBajaAca" name="btnDarBajaAca" class="btn btn-danger">Dar de baja</button>
-								</div>
-							</div>
-						</div>
-						<!--  - - - - - - - - - - - - - - - - - - - -->
-
-						<div id="listaCalificaciones" class="ocultar col-md-12">
-						</div>
-
-						<!-- - panel de mensajes -->
-						<div class="panel panel-default" id="panelMensajes">
-							<div class="panel-heading">
-								<h3 class="panel-title">Mensajes</h3>
-							</div>
-							<div class="panel-body" id="divTextoMensaje">
-								<p id="pTextoMensaje"></p>
-								<div class="form-group">
-									<div class="col-md-4">
-										<input type="button" id="btnCerrar" name="btnCerrar" class="btn btn-primary" value="CerrarMensaje"/>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- - - - - - - - - - - - - - -->
+				<!-- - panel de mensajes -->
+				<div class="panel panel-default" id="panelMensajes">
+					<div class="panel-heading">
+						<h3 class="panel-title">Mensajes</h3>
 					</div>
+					<div class="panel-body" id="divTextoMensaje">
+						<p id="pTextoMensaje"></p>
+						<div class="form-group">
+							<div class="col-md-4">
+								<input type="button" id="btnCerrar" name="btnCerrar" class="btn btn-primary" value="CerrarMensaje"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- - - - - - - - - - - - - - -->
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/objetos.js"></script>
+	<script type="text/javascript" src="js/principal.js"></script>
+	<script type="text/javascript" src="js/alumno.js"></script>
+	<script>
+
+		if (typeof(sesion) === "undefined")
+			var sesion = JSON.parse(sessionStorage.usuario);
+
+		document.querySelector('#sidebar .usuario .nombre').appendChild(document.createTextNode(sesion.nombre));
+
+		if (sesion.tipo != 'alumno')
+			location.href = "index.html";
 
 
-					<script type="text/javascript" src="js/jquery.min.js"></script>
-					<script type="text/javascript" src="js/bootstrap.min.js"></script>
-					<script type="text/javascript" src="js/objetos.js"></script>
-					<script type="text/javascript" src="js/principal.js"></script>
-					<script type="text/javascript" src="js/alumno.js"></script>
-					<script>
+		document.querySelector('#sidebarCollapse').addEventListener("click", mostrarSidebar, false);
 
-							 if (typeof(sesion) === "undefined")
-							 {
-								var sesion = JSON.parse(sessionStorage.usuario);	 
-							 }
-							
-							document.querySelector('#sidebar .usuario .nombre').appendChild(document.createTextNode(sesion.nombre));
+		function mostrarSidebar()
+		{
+			var sidebar = document.querySelector('#sidebar');
+			if (sidebar.classList.contains('active'))
+				sidebar.classList.remove('active');
+			else
+				sidebar.classList.add('active');
+		}
 
-							if (sesion.tipo != 'alumno')
-								location.href = "index.html";
+		var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
+		btnCerrarSesion.addEventListener("click", cerrarSesion, false);
 
 
-							document.querySelector('#sidebarCollapse').addEventListener("click", mostrarSidebar, false);
+		/*zona de configuración de eventos*/
 
-							function mostrarSidebar()
-							{
-								var sidebar = document.querySelector('#sidebar');
-								if (sidebar.classList.contains('active'))
-									sidebar.classList.remove('active');
-								else
-									sidebar.classList.add('active');
-							}
+		var enlaces = document.getElementsByTagName("a");
+		for (var i = 0; i < enlaces.length ; i++) 
+		{  
+			enlaces[i].addEventListener("click", function (event)
+			{
+				event.preventDefault();
+				mostrar(event);
+			}, false);
+		}
 
-							var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
-							btnCerrarSesion.addEventListener("click", cerrarSesion, false);
+		var btnModDatosAlu= document.querySelector("#btnModDatosAlu");
+		btnModDatosAlu.addEventListener("click", comprobarFrmModDatosAlu, false);
+		var btnResetModDatosAlu= document.querySelector("#btnResetModDatosAlu");
 
+		oSelectIdioma= document.querySelector("#selectIdioma");
+		oSelectIdioma.addEventListener("change", cargarNivel, false);
+		oSelectIdioma.addEventListener("change", cargarTipo, false);
 
-							/*zona de configuración de eventos*/
+		oSelectNivel= document.querySelector("#selectNivel");
+		oSelectNivel.addEventListener("change", cargarTipo, false);
 
-							var enlaces = document.getElementsByTagName("a");
-							for (var i = 0; i < enlaces.length ; i++) 
-							{  
-								enlaces[i].addEventListener("click", function (event)
-								{
-									event.preventDefault();
-									mostrar(event);
-								}, false);
-							}
+		oSelectTipo= document.querySelector("#selectTipo");
+		oSelectTipo.addEventListener("change", cargarCurso, false);
 
-							var btnModDatosAlu= document.querySelector("#btnModDatosAlu");
-							btnModDatosAlu.addEventListener("click", comprobarFrmModDatosAlu, false);
-							var btnResetModDatosAlu= document.querySelector("#btnResetModDatosAlu");
+		btnAddCursoMatri= document.querySelector("#btnAddCursoMatri");
+		btnAddCursoMatri.addEventListener("click", addCursoMatri, false); 
 
-							oSelectIdioma= document.querySelector("#selectIdioma");
-							oSelectIdioma.addEventListener("change", cargarNivel, false);
-							oSelectIdioma.addEventListener("change", cargarTipo, false);
+		btnEnviarMatri= document.querySelector("#btnEnviarMatri");
+		btnEnviarMatri.addEventListener("click", realizarMatricula, false);
 
-							oSelectNivel= document.querySelector("#selectNivel");
-							oSelectNivel.addEventListener("change", cargarTipo, false);
+		btnDarBajaAca= document.querySelector("#btnDarBajaAca"); 
+		btnDarBajaAca.addEventListener("click", function(oEvento){
+			var oE = oEvento || window.event;
+			oE.preventDefault();
+			academia.borrarUsuario(sesion.dni);
+			location.href = "login.html";
 
-							oSelectTipo= document.querySelector("#selectTipo");
-							oSelectTipo.addEventListener("change", cargarCurso, false);
-
-							btnAddCursoMatri= document.querySelector("#btnAddCursoMatri");
-							btnAddCursoMatri.addEventListener("click", addCursoMatri, false); 
-
-							btnEnviarMatri= document.querySelector("#btnEnviarMatri");
-							btnEnviarMatri.addEventListener("click", realizarMatricula, false);
-							document.querySelector("#btnEnviarMatri").addEventListener("click", function(){
-								document.querySelector("#txtInformacion").textContent="";}, false);
-
-							btnDarBajaAca= document.querySelector("#btnDarBajaAca"); 
-							btnDarBajaAca.addEventListener("click", function(oEvento){
-								var oE = oEvento || window.event;
-								oE.preventDefault();
-								academia.borrarUsuario(sesion.dni);
-								location.href = "login.html";
-
-							}, false); 
+		}, false); 
 
 
-							menuCursoUsuario(); //llamada al método para que cargue los cursos en los que esté inicialmente matriculado
+		menuCursoUsuario(); //llamada al método para que cargue los cursos en los que esté inicialmente matriculado
 
-							function menuCursoUsuario()
-							{
-								oLiCurso=document.querySelector("#pageSubmenu1");
+		function menuCursoUsuario()
+		{
+			oLiCurso=document.querySelector("#pageSubmenu1");
 
-								if(sesion.listaCursos.length>0)
-								{
-									borrarLi();
-									for (var i = 0; i < sesion.listaCursos.length; i++) 
-									{
+			if(sesion.listaCursos.length>0)
+			{
+				borrarLi();
+				for (var i = 0; i < sesion.listaCursos.length; i++) 
+				{
 
-										oCurso= academia.getCurso(sesion.listaCursos[i]);
-										oLi=document.createElement("LI");
-										oA=document.createElement("A");
-										oA.href="#listaCalificaciones";
-										oA.textContent=oCurso.idioma+" "+ oCurso.nivel;
-										oA.id="enlaceMisCursos";
-										oA.value=oCurso.codigo;
-										oA.dataset.codigoCurso=oCurso.codigo;
-										oLi.appendChild(oA);
-										oLiCurso.appendChild(oLi);
-											//meterle eventos a los nuevos a creados
-										document.querySelectorAll("#enlaceMisCursos")[i].addEventListener("click", function (event)
-										{
-						         			event.preventDefault();
-											mostrar(event);
-										}, false);
-									}  	
-								}
-								else
-								{
-									borrarLi();
-									oLi=document.createElement("LI");
-									oLi.textContent= "No estas matriculado en ningún curso";
-									oLiCurso.appendChild(oLi);
-								}
-							}
-							
-							function borrarLi()
-							{
-									oLis= document.querySelectorAll("#pageSubmenu1 LI");
-									for (var i = 0; i < oLis.length; i++) 
-									{
-										 oLis[i].parentNode.removeChild(oLis[i]);
-									}
-							}
+					oCurso= academia.getCurso(sesion.listaCursos[i]);
+					oLi=document.createElement("LI");
+					oA=document.createElement("A");
+					oA.href="#listaCalificaciones";
+					oA.textContent=oCurso.idioma+" "+ oCurso.nivel;
+					oA.id="enlaceMisCursos";
+					oA.value=oCurso.codigo;
+					oA.dataset.codigoCurso=oCurso.codigo;
+					oLi.appendChild(oA);
+					oLiCurso.appendChild(oLi);
+						//meterle eventos a los nuevos a creados
+						document.querySelectorAll("#enlaceMisCursos")[i].addEventListener("click", function (event)
+						{
+							event.preventDefault();
+							mostrar(event);
+						}, false);
+				}   
+			}
+			else
+			{
+				borrarLi();
+				oLi=document.createElement("LI");
+				oLi.textContent= "No estas matriculado en ningún curso";
+				oLiCurso.appendChild(oLi);
+			}
+		}
+
+		function borrarLi()
+		{
+			oLis= document.querySelectorAll("#pageSubmenu1 LI");
+			for (var i = 0; i < oLis.length; i++) 
+			{
+				oLis[i].parentNode.removeChild(oLis[i]);
+			}
+		}
+
+		/* zona para mostrar y ocultar div*/
+		function mostrar(oEvento)
+		{
+			oE= oEvento || window.event;
+			if (oE.target.id == "enlaceMisDatos")
+			{
+				document.getElementById("capaModificarAlu").classList.remove("ocultar");
+				document.getElementById("capaMatriCurso").classList.add("ocultar");
+				document.getElementById("capaDarBaja").classList.add("ocultar");
+				document.getElementById("listaCalificaciones").classList.add("ocultar");
+				cargarDatosUsuario();
+
+			}
+			else if (oE.target.id == "enlaceMatricular")
+			{
+				document.getElementById("capaMatriCurso").classList.remove("ocultar");
+				document.getElementById("capaModificarAlu").classList.add("ocultar");
+				document.getElementById("capaDarBaja").classList.add("ocultar");
+				document.getElementById("listaCalificaciones").classList.add("ocultar");
+
+				cargarCursos();
 
 
-							/* zona para mostrar y ocultar div*/
-							function mostrar(oEvento)
-							{
-								oE= oEvento || window.event;
-								if (oE.target.id == "enlaceMisDatos")
-								{
-									document.getElementById("capaModificarAlu").classList.remove("ocultar");
-									document.getElementById("capaMatriCurso").classList.add("ocultar");
-									document.getElementById("capaDarBaja").classList.add("ocultar");
-									document.getElementById("listaCalificaciones").classList.add("ocultar");
-									cargarDatosUsuario();
-
-								}
-								else if (oE.target.id == "enlaceMatricular")
-								{
-									document.getElementById("capaMatriCurso").classList.remove("ocultar");
-									document.getElementById("capaModificarAlu").classList.add("ocultar");
-									document.getElementById("capaDarBaja").classList.add("ocultar");
-									document.getElementById("listaCalificaciones").classList.add("ocultar");
-
-									cargarCursos();
-
-
-								}
-								else if (oE.target.id == "enlaceBaja")
-								{
-									document.getElementById("capaDarBaja").classList.remove("ocultar");
-									document.getElementById("capaModificarAlu").classList.add("ocultar");
-									document.getElementById("capaMatriCurso").classList.add("ocultar");
-									document.getElementById("listaCalificaciones").classList.add("ocultar");
-								}
-								else if (oE.target.id == "enlaceMisCursos")
-								{
-									document.getElementById("listaCalificaciones").classList.remove("ocultar");
-									document.getElementById("capaModificarAlu").classList.add("ocultar");
-									document.getElementById("capaMatriCurso").classList.add("ocultar");
-									document.getElementById("capaDarBaja").classList.add("ocultar");
-									cargarListadoCurso(oEvento);
-								}
-							}
-
-					</script>
-				</body>
-				</html>
+			}
+			else if (oE.target.id == "enlaceBaja")
+			{
+				document.getElementById("capaDarBaja").classList.remove("ocultar");
+				document.getElementById("capaModificarAlu").classList.add("ocultar");
+				document.getElementById("capaMatriCurso").classList.add("ocultar");
+				document.getElementById("listaCalificaciones").classList.add("ocultar");
+			}
+			else if (oE.target.id == "enlaceMisCursos")
+			{
+				document.getElementById("listaCalificaciones").classList.remove("ocultar");
+				document.getElementById("capaModificarAlu").classList.add("ocultar");
+				document.getElementById("capaMatriCurso").classList.add("ocultar");
+				document.getElementById("capaDarBaja").classList.add("ocultar");
+				cargarListadoCurso(oEvento);
+			}
+		}
+	</script>
+</body>
+</html>

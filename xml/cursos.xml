@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listaCursos>
 <curso>
-	<codigo>inglesA2presencial</codigo>
-	<idioma>ingles</idioma>
+	<codigo>ENA2P</codigo>
+	<idioma>Inglés</idioma>
 	<duracion>4 meses</duracion>
 	<precio>400</precio>
-	<tipo>presencial</tipo>
+	<tipo>Presencial</tipo>
 	<nivel>A2</nivel>
 	<listadoAlumnos>
 		<dni>21345687M</dni>
@@ -15,11 +15,11 @@
 	<activo>si</activo>
 </curso>
 <curso>
-	<codigo>inglesB1semipresencial</codigo>
-	<idioma>ingles</idioma>
+	<codigo>ENB1S</codigo>
+	<idioma>Inglés</idioma>
 	<duracion>8 meses</duracion>
 	<precio>1200</precio>
-	<tipo>semipresencial</tipo>
+	<tipo>Semipresencial</tipo>
 	<nivel>B1</nivel>
 	<listadoAlumnos>
 		<dni>04568915V</dni>
@@ -28,11 +28,11 @@
 	<activo>si</activo>
 </curso>
 <curso>
-	<codigo>inglesB2distancia</codigo>
-	<idioma>ingles</idioma>
+	<codigo>ENB2D</codigo>
+	<idioma>Inglés</idioma>
 	<duracion>15 meses</duracion>
 	<precio>1500</precio>
-	<tipo>distancia</tipo>
+	<tipo>Distancia</tipo>
 	<nivel>B2</nivel>
 	<listadoAlumnos>
 		<dni>54629812T</dni>
@@ -41,11 +41,11 @@
 </curso>
 
 <curso>
-	<codigo>francesA2presencial</codigo>
-	<idioma>frances</idioma>
+	<codigo>FRA2P</codigo>
+	<idioma>Francés</idioma>
 	<duracion>5 meses</duracion>
 	<precio>500</precio>
-	<tipo>presencial</tipo>
+	<tipo>Presencial</tipo>
 	<nivel>A2</nivel>
 	<listadoAlumnos>
 		<dni>23420102E</dni>
@@ -54,11 +54,11 @@
 	<activo>si</activo>
 </curso>
 <curso>
-	<codigo>francesB1semipresencial</codigo>
-	<idioma>frances</idioma>
+	<codigo>FRB1S</codigo>
+	<idioma>Francés</idioma>
 	<duracion>10 meses</duracion>
 	<precio>900</precio>
-	<tipo>semipresencial</tipo>
+	<tipo>Semipresencial</tipo>
 	<nivel>B1</nivel>
 	<listadoAlumnos>
 		<dni>54629812T</dni>
@@ -67,38 +67,36 @@
 </curso>
 
 <curso>
-	<codigo>alemanA2presencial</codigo>
+	<codigo>DEA2P</codigo>
 	<idioma>aleman</idioma>
 	<duracion>4 meses</duracion>
 	<precio>500€</precio>
-	<tipo>presencial</tipo>
+	<tipo>Presencial</tipo>
 	<nivel>A2</nivel>
 	<listadoAlumnos>
 	</listadoAlumnos>
 	<activo>si</activo>
 </curso>
 <curso>
-	<codigo>alemanB1presencial</codigo>
+	<codigo>DEB1P</codigo>
 	<idioma>aleman</idioma>
 	<duracion>8 meses</duracion>
 	<precio>1000</precio>
-	<tipo>presencial</tipo>
+	<tipo>Presencial</tipo>
 	<nivel>B1</nivel>
 	<listadoAlumnos>
 	</listadoAlumnos>
 	<activo>no</activo>
 </curso>
 <curso>
-	<codigo>alemanB2presencial</codigo>
+	<codigo>DEB2P</codigo>
 	<idioma>aleman</idioma>
 	<duracion>12 meses</duracion>
 	<precio>1500</precio>
-	<tipo>presencial</tipo>
+	<tipo>Presencial</tipo>
 	<nivel>B2</nivel>
 	<listadoAlumnos>
 	</listadoAlumnos>
 	<activo>no</activo>
 </curso>
-
-
 </listaCursos>
