@@ -4,8 +4,6 @@
 
 var academia = new Academia();
 
-sessionStorage.removeItem("tUsuarios");
-
 datosIniciales();
 
 function datosIniciales()
@@ -34,7 +32,10 @@ function datosIniciales()
 	    	if (us.tipo == 'administrador')
 	    		oUsuario = new Administrador(us.nombre, us.password, us.apellidos, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.salario);
 	    	else if (us.tipo == 'profesor')
+	    	{
 	    		oUsuario = new Profesor(us.nombre, us.password, us.apellidos, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.salario);
+				oUsuario.listaCursos = us.listaCursos;
+	    	}
 	    	else
 	    		oUsuario = new Alumno(us.nombre, us.password, us.apellidos, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.estadoCobro);
 
@@ -138,7 +139,7 @@ function cargarProfesores(oProfesores)
 		var oProfesor = new Profesor(nombre, pass, apellidos, dni, telefono, direccion, email, activo, salario);
 
 		if (listadoCursos.length > 0)
-			for (var j=0; j<listadoCursos.length; j++) 
+			for (var j=0; j<listadoCursos.length; j++)
 				oProfesor.addCurso(listadoCursos[j].textContent);
 
 		academia.addUsuario(oProfesor);

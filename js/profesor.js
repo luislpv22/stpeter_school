@@ -19,17 +19,11 @@ function mostrarSidebar()
         sidebar.classList.add('active');
 }
 
- 	var academia= new Academia();
-  	var btnPuntuar;
-  	var sel;
- 	var btnEditar;
-
- 	sel=document.frmPuntuar.selectCursos;
- 	sel2=document.frmModNotas.selectCursos2;
- 	sel3=document.getElementById("selectCursos3");
-     btnPuntuar=document.frmPuntuar.puntuar;
-     btnEditar=document.frmModNotas.editar;
-
+var sel = document.frmPuntuar.selectCursos;
+var sel2 = document.frmModNotas.selectCursos2;
+var sel3 = document.getElementById("selectCursos3");
+var btnPuntuar = document.frmPuntuar.puntuar;
+var btnEditar = document.frmModNotas.editar;
 
 
 /* Configuración de eventos */
@@ -91,7 +85,6 @@ function mostrar(oEvento)
 function actualiza1()
 {
 	var oProfesor = academia.getUsuario(sesion.dni);
-	oProfesor.addCurso('inglesA2presencial');
 	var oTablaActu = oProfesor.getCursos();
 	var oSelec = document.querySelectorAll("#selectCursos");
 	var bEnc = false;
@@ -114,7 +107,6 @@ function actualiza1()
 function actualiza2()
 {
 	var oProfesor = academia.getUsuario(sesion.dni);
-	oProfesor.addCurso('inglesA2presencial');
 	var oTablaActu = oProfesor.getCursos();
 	var oSelec = document.querySelectorAll("#selectCursos3");
 	var bEnc = false;
@@ -137,7 +129,6 @@ function actualiza2()
 function actualiza0()
 {	
 	var oProfesor = academia.getUsuario(sesion.dni);
-	oProfesor.addCurso('inglesA2presencial');
 	var oTablaActu = oProfesor.getCursos();
 	var oSelec = document.querySelectorAll("#selectCursos2");
 	var bEnc = false;
