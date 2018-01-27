@@ -392,7 +392,7 @@ class Academia
 			   	oCelda = oFila.insertCell(-1);
 			  	oCelda.textContent = oTablaCurProv[i].nivel;
 			  	oTablaCurAlumProv=oTablaCurProv[i].listaAlumnos;
-
+                     
 
 		    	for (var j=0; j<oTablaCurAlumProv.length; j++)
 		    	{
@@ -403,9 +403,11 @@ class Academia
 		        
 		        	for (var k=0; k<oTablaCalif.length; k++)
 		        	{
+		        		oCelda = oFila.insertCell(-1);
 		        		if(oTablaCalif[k].codCurso==oTablaCurProv[i].codigo)
 		        		{
-		                    oCelda = oFila.insertCell(-1);
+
+		                    
 		        			oCelda.textContent = oTablaCalif[k].nota;        
 		        		}
 		        	}

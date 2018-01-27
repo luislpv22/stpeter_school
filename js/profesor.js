@@ -19,9 +19,11 @@ function mostrarSidebar()
         sidebar.classList.add('active');
 }
 
- 	var academia= new Academia();
+ 	
   	var btnPuntuar;
   	var sel;
+  	var sel2;
+  	var sel3;
  	var btnEditar;
 
  	sel=document.frmPuntuar.selectCursos;
@@ -30,6 +32,11 @@ function mostrarSidebar()
      btnPuntuar=document.frmPuntuar.puntuar;
      btnEditar=document.frmModNotas.editar;
 
+ 	sel.addEventListener("change", actualizaAlum, false);
+ 	sel2.addEventListener("change", actualizaAlum2, false);
+ 	sel3.addEventListener("change", filtro, false);
+     btnPuntuar.addEventListener("click", calificar, false);
+     btnEditar.addEventListener("click", Modificar, false);
 
 
 /* Configuración de eventos */
@@ -163,7 +170,7 @@ function actualizaAlum()
 
     var oSelec = document.getElementById("selectCursos").options[document.getElementById("selectCursos").selectedIndex];
     var oSelec2 = document.getElementById("selectAlumno");
-	var oTablaActu = academia.getListaAlumCurso(oSelec.value,sesion.dni);
+	var oTablaActu = academia.getCurso(oSelec.value).listaAlumnos;
 
 	document.getElementById("capaSelectAlumno").classList.remove("ocultar");
 	document.getElementById("CapNotaAlu").classList.remove("ocultar");
@@ -181,7 +188,7 @@ function actualizaAlum()
 		if(!bEnc2)
 		{
 			var oOption = document.createElement("option");
-			oOption.text = oTablaActu[i].nombre+", "+oTablaActu[i].apellido;
+			oOption.text = oTablaActu[i].nombre+", "+oTablaActu[i].apellidos;
 			oOption.value = oTablaActu[i].dni;
 		}
 
@@ -201,7 +208,7 @@ function actualizaAlum2()
 
 	var oSelec = document.getElementById("selectCursos2").options[document.getElementById("selectCursos2").selectedIndex];
 	var oSelec2 = document.getElementById("selectAlumno2");
-	var oTablaActu = academia.getListaAlumCurso(oSelec.value,sesion.dni);
+	var oTablaActu = academia.getCurso(oSelec.value).listaAlumnos;
 
 	document.getElementById("capaSelectAlumno2").classList.remove("ocultar");
 	document.getElementById("CapNotaAlu2").classList.remove("ocultar");
@@ -215,7 +222,7 @@ function actualizaAlum2()
 			if(oListaProvCali[k].codCurso == oSelec.value)
 			{
 				var oOption = document.createElement("option");
-				oOption.text = oTablaActu[i].nombre+", "+oTablaActu[i].apellido;
+				oOption.text = oTablaActu[i].nombre+", "+oTablaActu[i].apellidos;
 				oOption.value = oTablaActu[i].dni;
 			}
 		}
@@ -235,7 +242,7 @@ function calificar()
     var oSelec2 = document.getElementById("selectAlumno").options[document.getElementById("selectAlumno").selectedIndex];
     var nota = document.getElementById("NotaAlu");
 
-	academia.calificarAlumno(oSelec.value,oSelec2.value,nota.value);
+	academia.addCalificacionesAlu(oSelec2.value,new Calificaciones(nota.value,oSelec.value));
 	document.getElementById("capaSelectAlumno").classList.add("ocultar");
 	document.getElementById("CapNotaAlu").classList.add("ocultar");
 	nota.value = "";
