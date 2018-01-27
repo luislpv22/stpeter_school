@@ -210,6 +210,7 @@ function mostrarPagina(pagina)
 				btn.classList.add("btn");
 				btn.classList.add("btn-warning");
 				btn.classList.add("btn-sm");
+				btn.id="btnModMatri";
 				fila.insertCell(-1).appendChild(btn);
 				var btn = document.createElement("input");
 				btn.type = "button";
@@ -220,7 +221,8 @@ function mostrarPagina(pagina)
 				btn.classList.add("btn");
 				btn.classList.add("btn-danger");
 				btn.classList.add("btn-sm");
-				fila.insertCell(-1).appendChild(btn);
+				btn.id="cambiarEstadoMatri";
+				fila.appendChild(btn);
 			}
 	     }
 
@@ -295,6 +297,22 @@ function desactivarCurso()
 
 function guardarCurso()
 {
+<<<<<<< HEAD
+	var curso = academia.getCurso(codigo);
+	document.getElementById("formEditarCurso").style.display = "block";
+}
+
+
+function cambiarEstadoMatricula(codigoMatri)
+{
+	var matricula = academia.getMatricula(codigoMatri);
+	academia.cambiarEstadoMatri(matricula);
+	mostrarPagina("matriculaciones");
+	document.querySelector("#cambiarEstadoMatri").preventDefault;
+
+	
+	
+=======
 	var form = document.getElementById("formEditarCurso");
 
 	var sCodigo = form.codigo.value;
@@ -337,4 +355,5 @@ function switchActivo()
 	lblActivo.appendChild(divOuter);
 
 	return lblActivo;
+>>>>>>> 93a5eb60fa22d8ff72735707ed6d544755571c96
 }
