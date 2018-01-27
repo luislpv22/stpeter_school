@@ -38,14 +38,7 @@
 #tablaMatriCurso
 {
 	width: 75%;
-	margin-left: 11%;
-	padding: 5%;
-}
-
-#capaBotonesMatri
-{
-	margin-top: -4%;
-	margin-left: 10%;
+	margin: 40px auto;
 }
 
 #botonAddCurso

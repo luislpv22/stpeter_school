@@ -1,11 +1,8 @@
-
-
-
 /*zona de validaciones de formularios*/
 function comprobarFrmModDatosAlu(oEvento)
 {
 	var oE = oEvento || window.event;
-	var bValido=true;
+	var bValido = true;
 	var sError = "";
 
 	//password
@@ -31,12 +28,12 @@ function comprobarFrmModDatosAlu(oEvento)
 		if(bValido) 
 		  document.frmModAlu.passAlu.focus();
 		bValido = false;
-		sError += "La contraseña no puede estar vacia \n";		
+		sError += "La contraseña no puede estar vacia \n";      
 	}
 
 	//teléfono
 	var sTelefono = document.frmModAlu.telefonoAlu.value.trim();
-	if (sTelefono !="")
+	if (sTelefono != "")
 	{
 		var oExpReg = /^[0-9]{2,3}-? ?[0-9]{6,7}$/i;
 		if (oExpReg.test(sTelefono) == false)
@@ -56,12 +53,12 @@ function comprobarFrmModDatosAlu(oEvento)
 		if(bValido) 
 		  document.frmModAlu.telefonoAlu.focus();
 		bValido = false;
-		sError += "El campo teléfono no puede estar vacio \n";		
+		sError += "El campo teléfono no puede estar vacio \n";      
 	}
 
 	//dirección
 	var sDireccion = document.frmModAlu.direAlu.value.trim();
-	if (sDireccion !="")
+	if (sDireccion != "")
 	{
 		var oExpReg = /^[a-z\d\s\,\º\/]{3,40}$/i;
 		if (oExpReg.test(sDireccion) == false)
@@ -81,12 +78,12 @@ function comprobarFrmModDatosAlu(oEvento)
 		if(bValido) 
 		  document.frmModAlu.direAlu.focus();
 		bValido = false;
-		sError += "El campo dirección no puede estar vacio \n";		
+		sError += "El campo dirección no puede estar vacio \n";     
 	}
 
 	//email
 	var sEmail = document.frmModAlu.emailAlu.value.trim();
-	if (sEmail !="")
+	if (sEmail != "")
 	{
 		var oExpReg = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i;
 		if (oExpReg.test(sEmail) == false)
@@ -118,11 +115,11 @@ function comprobarFrmModDatosAlu(oEvento)
 	{
 		//modificar los daos del alumno
 		oE.preventDefault();
-		sNombre= document.frmModAlu.nombreAlu.value.trim();
-		sApellido= document.frmModAlu.apellidoAlu.value.trim();
-		sDni= document.frmModAlu.dniAlu.value.trim();
+		sNombre = document.frmModAlu.nombreAlu.value.trim();
+		sApellido = document.frmModAlu.apellidoAlu.value.trim();
+		sDni = document.frmModAlu.dniAlu.value.trim();
 
-		oAlMod= new Alumno(sNombre, sPassword, sApellido, sDni, sTelefono, sDireccion, sEmail, true, false);//objeto alumno con los datos modificados
+		oAlMod = new Alumno(sNombre, sPassword, sApellido, sDni, sTelefono, sDireccion, sEmail, true, false);//objeto alumno con los datos modificados
 		academia.modificarUsuario(oAlMod);
 		//modificar los datos de sesión de usuario
 		sessionStorage.setItem('usuario', JSON.stringify(oAlMod));
@@ -162,7 +159,7 @@ function comprobarFrmModMatri(oEvento)
 		if(bValido) 
 		  document.frmModMatri.nombreAlu.focus();
 		bValido = false;
-		sError += "El nombre no puede estar vacio \n";	
+		sError += "El nombre no puede estar vacio \n";  
 	}
 
 	//password
@@ -188,7 +185,7 @@ function comprobarFrmModMatri(oEvento)
 		if(bValido) 
 		  document.frmModMatri.passAlu.focus();
 		bValido = false;
-		sError += "La contraseña no puede estar vacia \n";		
+		sError += "La contraseña no puede estar vacia \n";      
 	}
 
 	//apellidos
@@ -214,11 +211,11 @@ function comprobarFrmModMatri(oEvento)
 		if(bValido) 
 		  document.frmModMatri.apellidoAlu.focus();
 		bValido = false;
-		sError += "El campo apellidos no puede estar vacio \n";		
+		sError += "El campo apellidos no puede estar vacio \n";     
 	}
 
 	//dni
-		var sDni = document.frmModMatri.dniAlu.value.trim();
+	var sDni = document.frmModMatri.dniAlu.value.trim();
 	if (sDni !="")
 	{
 		/*El campo dni debe tener 8 dígitos y 1 letra mayúscula*/
@@ -240,12 +237,12 @@ function comprobarFrmModMatri(oEvento)
 		if(bValido) 
 		  document.frmModMatri.dniAlu.focus();
 		bValido = false;
-		sError += "El dni no puede estar vacio \n";		
+		sError += "El dni no puede estar vacio \n";     
 	}
 
 
 	//teléfono
-		var sTelefono = document.frmModMatri.telefonoAlu.value.trim();
+	var sTelefono = document.frmModMatri.telefonoAlu.value.trim();
 	if (sTelefono !="")
 	{
 		
@@ -267,7 +264,7 @@ function comprobarFrmModMatri(oEvento)
 		if(bValido) 
 		  document.frmModMatri.telefonoAlu.focus();
 		bValido = false;
-		sError += "El campo teléfono no puede estar vacio \n";		
+		sError += "El campo teléfono no puede estar vacio \n";      
 	}
 
 
@@ -293,7 +290,7 @@ function comprobarFrmModMatri(oEvento)
 		if(bValido) 
 		  document.frmModMatri.direAlu.focus();
 		bValido = false;
-		sError += "El campo dirección no puede estar vacio \n";		
+		sError += "El campo dirección no puede estar vacio \n";     
 	}
 
 	//email
@@ -336,436 +333,382 @@ function comprobarFrmModMatri(oEvento)
 }
 
 
-
 function mensaje(sTexto)
 {
 	document.getElementById("pTextoMensaje").appendChild(sTexto);
-	document.getElementById("panelMensajes").style.display = 'block'
+	document.getElementById("panelMensajes").style.display = 'block';
 	document.getElementById("btnCerrar").addEventListener("click", cerrarMensaje, false);;
 
 }
 
 function cerrarMensaje()
 {
-	document.getElementById("pTextoMensaje").textContent="";
+	document.getElementById("pTextoMensaje").textContent = "";
 	document.getElementById("panelMensajes").style.display = 'none';
 }
 
 /*******************************Cargar datos Usuario ********************************/
 function cargarDatosUsuario()
 {
-	oNombre=document.querySelector("#frmModAlu #nombreAlu").value=sesion.nombre;
-	oApellido=document.querySelector("#frmModAlu #apellidoAlu").value=sesion.apellido;
-	oDni=document.querySelector("#frmModAlu #dniAlu").value=sesion.dni;
-	oPass=document.querySelector("#frmModAlu #passAlu").value=sesion.password;
-	oTelefono=document.querySelector("#frmModAlu #telefonoAlu").value=sesion.telefono;
-	oDire=document.querySelector("#frmModAlu #direAlu").value=sesion.direccion;
-	oEmail=document.querySelector("#frmModAlu #emailAlu").value=sesion.correo;
+	document.querySelector("#frmModAlu #nombreAlu").value = sesion.nombre;
+	document.querySelector("#frmModAlu #apellidoAlu").value = sesion.apellido;
+	document.querySelector("#frmModAlu #dniAlu").value = sesion.dni;
+	document.querySelector("#frmModAlu #passAlu").value = sesion.password;
+	document.querySelector("#frmModAlu #telefonoAlu").value = sesion.telefono;
+	document.querySelector("#frmModAlu #direAlu").value = sesion.direccion;
+	document.querySelector("#frmModAlu #emailAlu").value = sesion.correo;
 }
 
 //método que carga los cursos que existan en los distintos select del div de matriculación
 function cargarCursos()
 {
-
 	oSelectIdioma = document.querySelector("#selectIdioma");
-    oListaCursos = academia.getCursos();
-    var arrayCurso = [];
+	oListaCursos = academia.getCursos();
+	var arrayCurso = [];
 
-    for (var i = 0; i < oListaCursos.length; i++) 
-    {
-    	if (!arrayCurso.includes(oListaCursos[i].idioma))
-    	{
-    		arrayCurso.push(oListaCursos[i].idioma);
-    	}
-    }
+	for (var i=0; i<oListaCursos.length; i++) 
+	{
+		if (!arrayCurso.includes(oListaCursos[i].idioma))
+			arrayCurso.push(oListaCursos[i].idioma);
+	}
 
-
-
-
-    for (var i = 0; i < arrayCurso.length; i++) 
-    {
-    	
-    	oOption=document.createElement("OPTION");
-    	oOption.textContent= arrayCurso[i];
-    	oOption.value=arrayCurso[i];
-    	oSelectIdioma.appendChild(oOption);  	
-    }
+	for (var i = 0; i < arrayCurso.length; i++) 
+	{
+		oOption = document.createElement("OPTION");
+		oOption.textContent = arrayCurso[i];
+		oOption.value = arrayCurso[i];
+		oSelectIdioma.appendChild(oOption);     
+	}
 }
 
 
 function cargarNivel()
 {
-	oListaCursos= academia.getCursos();
-	oSelectIdioma= document.querySelector("#selectIdioma");
-	oSelectNivel= document.querySelector("#selectNivel");
-   resetearSelectNivel();
-   resetearCamposDatosCurso();
+	oListaCursos = academia.getCursos();
+	oSelectIdioma = document.querySelector("#selectIdioma");
+	oSelectNivel = document.querySelector("#selectNivel");
+	resetearSelectNivel();
+	resetearCamposDatosCurso();
 	if (oSelectIdioma.value != "seleIdi")
 	{
-
 		var arrayNivel=[];
-	    for (var i = 0; i < oListaCursos.length; i++) 
-   		 {
-	    	if ( oListaCursos[i].idioma== oSelectIdioma.value   &&  !arrayNivel.includes(oListaCursos[i].nivel))
-	    	{
-	    		arrayNivel.push(oListaCursos[i].nivel);
-	    	}
-   		 }
+		for (var i=0; i<oListaCursos.length; i++) 
+		{
+			if (oListaCursos[i].idioma == oSelectIdioma.value && !arrayNivel.includes(oListaCursos[i].nivel))
+				arrayNivel.push(oListaCursos[i].nivel);
+		}
 
-	     for (var i = 0; i < arrayNivel.length; i++) 
-	    {
-	    	oOption=document.createElement("OPTION");
-	    	oOption.textContent= arrayNivel[i];
-	    	oOption.value=arrayNivel[i];
-	    	oSelectNivel.appendChild(oOption);  	
-	    }
+		for (var i=0; i<arrayNivel.length; i++) 
+		{
+			oOption = document.createElement("OPTION");
+			oOption.textContent = arrayNivel[i];
+			oOption.value = arrayNivel[i];
+			oSelectNivel.appendChild(oOption);      
+		}
 	}
 }
 
 function resetearSelectIdiomas()
 {
-  
-  listaOptions=document.querySelectorAll("#selectIdioma OPTION");
-  for (var i = 0; i < listaOptions.length; i++) 
-		{
-			listaOptions[i].parentNode.removeChild(listaOptions[i]);
+	listaOptions=document.querySelectorAll("#selectIdioma OPTION");
+	for (var i=0; i<listaOptions.length; i++) 
+		listaOptions[i].parentNode.removeChild(listaOptions[i]);
 
-		}
-		oOption=document.createElement("OPTION");
-	    oOption.textContent= "Seleccione Idioma";
-	    oOption.value="seleIdioma";
-	    document.querySelector("#selectIdioma").appendChild(oOption); 
+	oOption = document.createElement("OPTION");
+	oOption.textContent = "Seleccione Idioma";
+	oOption.value = "seleIdioma";
+	document.querySelector("#selectIdioma").appendChild(oOption); 
 
 }
 
 function resetearSelectNivel()
 {
-  
-  listaOptions=document.querySelectorAll("#selectNivel OPTION");
-  for (var i = 0; i < listaOptions.length; i++) 
-		{
-			listaOptions[i].parentNode.removeChild(listaOptions[i]);
+	listaOptions=document.querySelectorAll("#selectNivel OPTION");
+	for (var i=0; i<listaOptions.length; i++) 
+		listaOptions[i].parentNode.removeChild(listaOptions[i]);
 
-		}
-		oOption=document.createElement("OPTION");
-	    oOption.textContent= "Seleccione Idioma";
-	    oOption.value="seleNi";
-	    oSelectNivel.appendChild(oOption); 
-
+	oOption = document.createElement("OPTION");
+	oOption.textContent = "Seleccione Idioma";
+	oOption.value = "seleNi";
+	oSelectNivel.appendChild(oOption); 
 }
 
 function cargarTipo ()
 {
-	oListaCursos= academia.getCursos();
-	oSelectIdioma= document.querySelector("#selectIdioma");
-	oSelectNivel= document.querySelector("#selectNivel");
-	oSelctTipo= document.querySelector("#selectTipo");
+	oListaCursos = academia.getCursos();
+	oSelectIdioma = document.querySelector("#selectIdioma");
+	oSelectNivel = document.querySelector("#selectNivel");
+	oSelctTipo = document.querySelector("#selectTipo");
 
 	resetearSelectTipo();
 	resetearCamposDatosCurso();
 
-	 if (oSelectIdioma.value != "seleIdi" && oSelectNivel.value != "seleNi" )
-	 {
-	 	var arrayTipo=[];
-	    for (var i = 0; i < oListaCursos.length; i++) 
-   		 {
-	    	if ( oListaCursos[i].idioma== oSelectIdioma.value   &&  oListaCursos[i].nivel== oSelectNivel.value)
-	    	{
-	    		if (!arrayTipo.includes(oListaCursos[i].tipo))
-			    	{
-			    		arrayTipo.push(oListaCursos[i].tipo);
-			    	}
-	    	} 
-   		 }
+	if (oSelectIdioma.value != "seleIdi" && oSelectNivel.value != "seleNi" )
+	{
+		var arrayTipo=[];
+		for (var i = 0; i < oListaCursos.length; i++) 
+		{
+			if (oListaCursos[i].idioma== oSelectIdioma.value && oListaCursos[i].nivel == oSelectNivel.value)
+				if (!arrayTipo.includes(oListaCursos[i].tipo))
+					arrayTipo.push(oListaCursos[i].tipo);
+		}
 
-	     for (var i = 0; i < arrayTipo.length; i++) 
-	    {
-	    	oOption=document.createElement("OPTION");
-	    	oOption.textContent= arrayTipo[i];
-	    	oOption.value=arrayTipo[i];
-	    	oSelctTipo.appendChild(oOption);  	
-	    }
+		for (var i = 0; i < arrayTipo.length; i++) 
+		{
+			oOption=document.createElement("OPTION");
+			oOption.textContent = arrayTipo[i];
+			oOption.value = arrayTipo[i];
+			oSelctTipo.appendChild(oOption);    
+		}
 
-
-	 	oSelctTipo.removeAttribute("disabled"); 
-	 	
+		oSelctTipo.removeAttribute("disabled"); 
+		
 	 }
 	 else
 	 {
-	 	oSelctTipo.disabled="disabled";	
-	 	document.querySelector("#btnAddCursoMatri").disabled="disabled";	
+		oSelctTipo.disabled="disabled"; 
+		document.querySelector("#btnAddCursoMatri").disabled="disabled";    
 	 }
 }
 
 function resetearSelectTipo()
 {
-  document.querySelector("#txtInformacion").textContent="";	
-  oSelctTipo= document.querySelector("#selectTipo");
-  listaOptions=document.querySelectorAll("#selectTipo OPTION");
-  for (var i = 0; i < listaOptions.length; i++) 
-		{
-			listaOptions[i].parentNode.removeChild(listaOptions[i]);
+	document.querySelector("#txtInformacion span").textContent = "";
+	document.querySelector("#txtInformacion").classList.add("hide");
+	oSelctTipo = document.querySelector("#selectTipo");
+	listaOptions = document.querySelectorAll("#selectTipo OPTION");
+	for (var i=0; i<listaOptions.length; i++) 
+		listaOptions[i].parentNode.removeChild(listaOptions[i]);
 
-		}
-		oOption=document.createElement("OPTION");
-	    oOption.textContent= "Seleccione Tipo";
-	    oOption.value="seleTipo";
-	    oSelctTipo.appendChild(oOption); 
+	oOption=document.createElement("OPTION");
+	oOption.textContent = "Seleccione Tipo";
+	oOption.value = "seleTipo";
+	oSelctTipo.appendChild(oOption); 
 
 }
 
 function resetearCamposDatosCurso()
 {
-	oDuracinCurso= document.querySelector("#duraCurso").value="";;
-	oPrecioCurso= document.querySelector("#preCurso").value="";;
-
+	oDuracinCurso= document.querySelector("#duraCurso").value = "";
+	oPrecioCurso= document.querySelector("#preCurso").value = "";
 }
 
 function cargarCurso()
 {
 	resetearCamposDatosCurso();
 
-	sSelectIdioma= document.querySelector("#selectIdioma").value;
-	sSelectNivel= document.querySelector("#selectNivel").value;
-	sSelctTipo= document.querySelector("#selectTipo").value;
+	sSelectIdioma = document.querySelector("#selectIdioma").value;
+	sSelectNivel = document.querySelector("#selectNivel").value;
+	sSelctTipo = document.querySelector("#selectTipo").value;
 
 	var oCurso =academia.getCurso(sSelectIdioma, sSelectNivel, sSelctTipo);
 
-	oDuracionCurso= document.querySelector("#duraCurso").value=oCurso.duracion;
-	oPrecioCurso= document.querySelector("#preCurso").value=oCurso.precio;
-
+	oDuracionCurso = document.querySelector("#duraCurso").value = oCurso.duracion;
+	oPrecioCurso = document.querySelector("#preCurso").value = oCurso.precio;
 	
-	document.querySelector("#btnAddCursoMatri").removeAttribute("disabled"); 	
+	document.querySelector("#btnAddCursoMatri").removeAttribute("disabled"); 
 }
 
 function addCursoMatri(oEvento)
 {
-
 	oSelctTipo= document.querySelector("#selectTipo");
-	if (oSelctTipo !="seleTipo")
+	if (oSelctTipo != "seleTipo")
 	{
-			var oE = oEvento || window.event;
+		var oE = oEvento || window.event;
 		oE.preventDefault();
 
-
 		if (typeof(cursosElegidos) === "undefined")
-		 {
-	    	  cursosElegidos= [];
-		 }
+			cursosElegidos = [];
 
-		 //ver si el curso ya está en la array
-		 if (!cursosElegidos.includes(oCurso))
-	    	{
-    			//ver si no estaba ya matriculado en el curso
-    			if (!sesion.listaCursos.includes(oCurso.codigo))
-    			{
-	    			resetearCamposDatosCurso();			
-					oSelectIdioma= document.querySelector("#selectIdioma").selectedIndex=0;
-					oSelectNivel= document.querySelector("#selectNivel");
-					oSelectNivel.selectedIndex=0;
+		//ver si el curso ya está en la array
+		if (!cursosElegidos.includes(oCurso))
+		{
+			//ver si no estaba ya matriculado en el curso
+			if (!sesion.listaCursos.includes(oCurso.codigo))
+			{
+				resetearCamposDatosCurso();         
+				oSelectIdioma = document.querySelector("#selectIdioma").selectedIndex = 0;
+				oSelectNivel = document.querySelector("#selectNivel");
+				oSelectNivel.selectedIndex = 0;
 
-					oSelctTipo= document.querySelector("#selectTipo");
-					oSelctTipo.selectedIndex=0;
-					oSelctTipo.disabled="disabled";	
-					document.querySelector("#btnAddCursoMatri").disabled="disabled";	
+				oSelctTipo = document.querySelector("#selectTipo");
+				oSelctTipo.selectedIndex = 0;
+				oSelctTipo.disabled = "disabled";   
+				document.querySelector("#btnAddCursoMatri").disabled = "disabled";  
 
-	    			cursosElegidos.push(oCurso);
-	    			document.querySelector("#txtInformacion").textContent="Curso añadido a la matrícula";
-    			 	document.querySelector("#txtInformacion").style.color="green";
+				cursosElegidos.push(oCurso);
+				document.querySelector("#txtInformacion span").textContent = "Curso añadido a la matrícula";
+				document.querySelector("#txtInformacion").classList.remove("alert-success", "alert-warning", "alert-danger", "hide");
+				document.querySelector("#txtInformacion").classList.add("alert-success");
 
-	    			borrartabla();
-	    			crearTabla(cursosElegidos);
-	    			document.querySelector("#btnEnviarMatri").removeAttribute("disabled");
-	    			resetearSelectNivel();
-
-    			}
-    			else
-    			{
-    			 document.querySelector("#txtInformacion").textContent="Ya estás matriculado en ese curso";
-    			 document.querySelector("#txtInformacion").style.color="red";
-    		
-    			}
-    		}
-    		else
-    		{
-    			 document.querySelector("#txtInformacion").textContent="Ya has seleccionado ese curso";
-    			 document.querySelector("#txtInformacion").style.color="red";
-    		}
+				borrartabla();
+				crearTabla(cursosElegidos);
+				document.querySelector("#btnEnviarMatri").removeAttribute("disabled");
+				resetearSelectNivel();
+			}
+			else
+			{
+				document.querySelector("#txtInformacion span").textContent = "Ya estás matriculado en ese curso";
+				document.querySelector("#txtInformacion").classList.remove("alert-success", "alert-warning", "alert-danger", "hide");
+				document.querySelector("#txtInformacion").classList.add("alert-danger");
+			}
+		}
+		else
+		{
+			document.querySelector("#txtInformacion span").textContent = "Ya has seleccionado ese curso";
+			document.querySelector("#txtInformacion").classList.remove("alert-success", "alert-warning", "alert-danger", "hide");
+			document.querySelector("#txtInformacion").classList.add("alert-warning");
+		}
 	}
 	else
 	{
-		document.querySelector("#txtInformacion").textContent="Debes seleccionar un tipo de curso";
-    	document.querySelector("#txtInformacion").style.color="red";
+		document.querySelector("#txtInformacion span").textContent = "Debes seleccionar un tipo de curso";
+		document.querySelector("#txtInformacion").classList.remove("alert-success", "alert-warning", "alert-danger", "hide");
+		document.querySelector("#txtInformacion").classList.add("alert-danger");
 	}
-	
 }
 
 function realizarMatricula(oEvento)
 {
 	var oE = oEvento || window.event;
-	for (var i = 0; i < cursosElegidos.length; i++) 
-	{
+	for (var i=0; i<cursosElegidos.length; i++) 
 		sesion.listaCursos.push(cursosElegidos[i].codigo)
-	}
+
 	oMatricula = new Matricula(academia.codNuevaMatri(), "abierta", sesion);
 
-
 	academia.addMatricula(oMatricula);
-	document.querySelector("#txtInformacion").textContent="";
+	document.querySelector("#txtInformacion span").textContent = "";
+	document.querySelector("#txtInformacion").classList.add("hide");
 	borrartabla();
 	document.getElementById("capaMatriCurso").classList.add("ocultar");
-	cursosElegidos= []; //resetear el array de los cursos elegidos
+	cursosElegidos = []; // resetear el array de los cursos elegidos
 	resetearSelectIdiomas();
 	menuCursoUsuario();
 	oE.preventDefault();
-
 }
-
 
 function borrartabla()
 {
-	oTablas= document.querySelectorAll("TABLE");
-	for (var i = 0; i < oTablas.length; i++) 
-	{
-		 oTablas[i].parentNode.removeChild(oTablas[i]);
-	}
+	oTabla = document.querySelector('#tablaMatriCurso');
+	for (var i=oTabla.rows.length-1; i>0; i--)
+		oTabla.deleteRow(i);
 }
 
 function crearTabla(cursos)
 {
-	oTabla= document.createElement("TABLE");
-	oTabla.classList.add("table");
-	oTabla.classList.add("table-hover");
-	oTabla.classList.add("table-condensed");
-	oTHead= oTabla.createTHead();
-	oFila= oTHead.insertRow(-1);
-	oCelda= oFila.insertCell(-1);
-	oCelda.textContent="Tipo Curso";
-	oCelda= oFila.insertCell(-1);
-	oCelda.textContent="Idiomas";
-	oCelda= oFila.insertCell(-1);
-	oCelda.textContent="Nivel";
-	oCelda= oFila.insertCell(-1);
-	oCelda.textContent="Duración";
-	oCelda= oFila.insertCell(-1);
-	oCelda.textContent="Precio";
-	oTBody=oTabla.createTBody();
+	var oTabla = document.querySelector('#tablaMatriCurso');
+	oTBody = oTabla.createTBody();
 
-
-	document.querySelector("#tablaMatriCurso").appendChild(oTabla);
-
-	for (var i = 0; i < cursos.length; i++)
+	for (var i=0; i<cursos.length; i++)
 	{
-		oFila= oTabla.insertRow(-1);		
-		oCelda= oFila.insertCell(-1);
-		oCelda.textContent=cursos[i].tipo;
-		oCelda= oFila.insertCell(-1);
-		oCelda.textContent=cursos[i].idioma;
-		oCelda= oFila.insertCell(-1);
-		oCelda.textContent= cursos[i].nivel;
-		oCelda= oFila.insertCell(-1);
-		oCelda.textContent=cursos[i].duracion;
-		oCelda= oFila.insertCell(-1);
-		oCelda.textContent=cursos[i].precio;
-	  
+		oFila = oTabla.insertRow(-1);       
+		oCelda = oFila.insertCell(-1);
+		oCelda.textContent = cursos[i].tipo;
+		oCelda = oFila.insertCell(-1);
+		oCelda.textContent = cursos[i].idioma;
+		oCelda = oFila.insertCell(-1);
+		oCelda.textContent = cursos[i].nivel;
+		oCelda = oFila.insertCell(-1);
+		oCelda.textContent = cursos[i].duracion;
+		oCelda = oFila.insertCell(-1);
+		oCelda.textContent = cursos[i].precio;
 	}
-
-
 }
 
 function cargarListadoCurso(oEvento)
 {
+	//tengo que hacer un método que replace el nodo div por otro nuevo cada vez que se inicie este método
 	limpiarListadoCurso();
-	oE= oEvento || window.event;
-	var listaNotas= academia.getCalificaciones(oE.target.value, sesion.dni);
-	if (listaNotas.length==0)
+	oE = oEvento || window.event;
+	var listaNotas = academia.getCalificaciones(oE.target.value, sesion.dni);
+	if (listaNotas.length == 0)
 	{
-		oP=document.createElement("P");
-		oP.textContent="No hay calificaciones disponibles";
-		oP.style.color="red";
+		oP = document.createElement("P");
+		oP.textContent = "No hay calificaciones disponibles";
+		oP.style.color = "red";
 		document.querySelector("#listaCalificaciones").appendChild(oP);
 	}
 	else
 	{
 		borrartabla();
-		oTabla= document.createElement("TABLE");
+		oTabla = document.createElement("TABLE");
 		oTabla.classList.add("table");
 		oTabla.classList.add("table-hover");
 		oTabla.classList.add("table-condensed");
-		oTHead= oTabla.createTHead();
-		oFila= oTHead.insertRow(-1);
-		oCelda= oFila.insertCell(-1);
-		oCelda.textContent="Examenes";
-		oCelda= oFila.insertCell(-1);
-		oCelda.textContent="Notas";
-		oTBody=oTabla.createTBody();
+		oTHead = oTabla.createTHead();
+		oFila = oTHead.insertRow(-1);
+		oCelda = oFila.insertCell(-1);
+		oCelda.textContent = "Examenes";
+		oCelda = oFila.insertCell(-1);
+		oCelda.textContent = "Notas";
+		oTBody = oTabla.createTBody();
 
-		for (var i = 0; i < listaNotas.length; i++) 
+		for (var i=0; i<listaNotas.length; i++) 
 		{
-			oFila= oTabla.insertRow(-1);		
-			oCelda= oFila.insertCell(-1);
-			oCelda.textContent="Examen "+(i+1);
-			oCelda= oFila.insertCell(-1);
-			oCelda.textContent=listaNotas[i];
-			oCelda.dataset.nota=listaNotas[i];
-			oCelda.id="nota";
+			oFila = oTabla.insertRow(-1);
+			oCelda = oFila.insertCell(-1);
+			oCelda.textContent = "Examen "+(i+1);
+			oCelda = oFila.insertCell(-1);
+			oCelda.textContent = listaNotas[i];
+			oCelda.dataset.nota = listaNotas[i];
+			oCelda.id = "nota";
 		}
 
 		document.querySelector("#listaCalificaciones").appendChild(oTabla);
 
 		oBr= document.createElement("BR");
-	document.querySelector("#listaCalificaciones").appendChild(oBr);
-	oParrafo= document.createElement("P");
-	oParrafo.textContent="Opciones de filtrado y ordenación";
-	document.querySelector("#listaCalificaciones").appendChild(oParrafo);
-	oBr= document.createElement("BR");
-	document.querySelector("#listaCalificaciones").appendChild(oBr);
+		document.querySelector("#listaCalificaciones").appendChild(oBr);
+		oParrafo= document.createElement("P");
+		oParrafo.textContent="Opciones de filtrado y ordenación";
+		document.querySelector("#listaCalificaciones").appendChild(oParrafo);
+		oBr= document.createElement("BR");
+		document.querySelector("#listaCalificaciones").appendChild(oBr);
 
-	//crear select para los filtrados
-	oSelect= document.createElement("SELECT");
-	oSelect.id="filtraNotas";
-	oP= document.createElement("OPTION");
-	oP.value="99";
-	oP.textContent="Seleccione filtrado";
-	oSelect.appendChild(oP);
-	oP= document.createElement("OPTION");
-	oP.value="5";
-	oP.textContent="Aprobados";
-	oSelect.appendChild(oP);
-	oP= document.createElement("OPTION");
-	oP.value="4.99";
-	oP.textContent="Suspensos";
-	oSelect.appendChild(oP);
-	document.querySelector("#listaCalificaciones").appendChild(oSelect);
+		//crear select para los filtrados
+		oSelect= document.createElement("SELECT");
+		oSelect.id="filtraNotas";
+		oP= document.createElement("OPTION");
+		oP.value="99";
+		oP.textContent="Seleccione filtrado";
+		oSelect.appendChild(oP);
+		oP= document.createElement("OPTION");
+		oP.value="5";
+		oP.textContent="Aprobados";
+		oSelect.appendChild(oP);
+		oP= document.createElement("OPTION");
+		oP.value="4.99";
+		oP.textContent="Suspensos";
+		oSelect.appendChild(oP);
+		document.querySelector("#listaCalificaciones").appendChild(oSelect);
 
-	document.querySelector("#filtraNotas").addEventListener("change", filtaTabla, false);
+		document.querySelector("#filtraNotas").addEventListener("change", filtaTabla, false);
 
-	//crear select para ordenar notas
-	oSelect= document.createElement("SELECT");
-	oSelect.id="ordenaNotas";
-	oP= document.createElement("OPTION");
-	oP.value="nulo";
-	oP.textContent="Seleccione tipo de orden";
-	oSelect.appendChild(oP);
-	oP= document.createElement("OPTION");
-	oP.value="creciente";
-	oP.textContent="De menor a mayor";
-	oSelect.appendChild(oP);
-	oP= document.createElement("OPTION");
-	oP.value="decreciente";
-	oP.textContent="De mayor a menor";
-	oSelect.appendChild(oP);
-	document.querySelector("#listaCalificaciones").appendChild(oSelect);
+		//crear select para ordenar notas
+		oSelect= document.createElement("SELECT");
+		oSelect.id="ordenaNotas";
+		oP= document.createElement("OPTION");
+		oP.value="nulo";
+		oP.textContent="Seleccione tipo de orden";
+		oSelect.appendChild(oP);
+		oP= document.createElement("OPTION");
+		oP.value="creciente";
+		oP.textContent="De menor a mayor";
+		oSelect.appendChild(oP);
+		oP= document.createElement("OPTION");
+		oP.value="decreciente";
+		oP.textContent="De mayor a menor";
+		oSelect.appendChild(oP);
+		document.querySelector("#listaCalificaciones").appendChild(oSelect);
 
-	document.querySelector("#ordenaNotas").addEventListener("change", ordenaTabla, false);
+		document.querySelector("#ordenaNotas").addEventListener("change", ordenaTabla, false);
 	}							
 }
 
 function limpiarListadoCurso()
 {
-	oDiv= document.createElement("DIV");
-	oDiv.id="listaCalificaciones";
-	oDivBorrar=document.querySelector("#listaCalificaciones");
+	oDiv = document.createElement("DIV");
+	oDiv.id = "listaCalificaciones";
+	oDivBorrar = document.querySelector("#listaCalificaciones");
 	oDivBorrar.parentNode.replaceChild(oDiv, oDivBorrar);
 }
 
@@ -775,48 +718,37 @@ function filtaTabla()
 	iSele= parseInt(document.querySelector("#filtraNotas").value);
 	var oTabla= document.querySelector("TABLE");
 	var oFilas = oTabla.rows; //el número de filas de una tabla
-	desfiltrar(oFilas);
+	borrarFiltro(oFilas);
 
 	if (iSele!= 99)
 	{
 		if (iSele == 5)
 		{
-			for (var i = 0; i < oFilas.length; i++) 
+			for (var i=0; i<oFilas.length; i++) 
 			{
-				var oCeldas = oTabla.rows[i].cells;  //las celdas de una fila en concreto
-				for (var j = 0; j < oCeldas.length; j++) 
-			    {
-				    if (parseInt(oCeldas[j].dataset.nota)< iSele)
-					{
+				var oCeldas = oTabla.rows[i].cells;  // las celdas de una fila en concreto
+				for (var j=0; j<oCeldas.length; j++) 
+					if (parseInt(oCeldas[j].dataset.nota)<iSele)
 						oFilas[i].classList.add("ocultar");
-					}
-					
-				}
 			}
 		}
 		else
 		{
-			for (var i = 0; i < oFilas.length; i++) 
+			for (var i=0; i<oFilas.length; i++) 
 			{
-				var oCeldas = oTabla.rows[i].cells;  //las celdas de una fila en concreto
-				for (var j = 0; j < oCeldas.length; j++) 
-			    {
-					if (parseInt(oCeldas[j].dataset.nota)> iSele)
-					{
+				var oCeldas = oTabla.rows[i].cells;  // las celdas de una fila en concreto
+				for (var j=0; j<oCeldas.length; j++) 
+					if (parseInt(oCeldas[j].dataset.nota) > iSele)
 						oFilas[i].classList.add("ocultar");
-					}
-				}
 			}
 		}
 	}
 }
 
-function desfiltrar(oFilas)
+function borrarFiltro(oFilas)
 {
-	for (var i = 0; i < oFilas.length; i++) 
-	{
+	for (var i=0; i<oFilas.length; i++) 
 		oFilas[i].classList.remove("ocultar");
-	}
 }
 
 function ordenaTabla()
@@ -832,31 +764,29 @@ function ordenaTabla()
 
 		for (var i = 0; i < arrayTrNotas.length; i++)
 		{
-		    arrayNotas[i]=parseInt(arrayTrNotas[i].dataset.nota);
+			arrayNotas[i]=parseInt(arrayTrNotas[i].dataset.nota);
 		}
 
 		if (sSele =="creciente" )
-	       var arrayNotaOrdenado= arrayNotas.sort(function(a, b){return a-b}); //ordena de menor a mayor;
-	    else
-	    	var arrayNotaOrdenado= arrayNotas.sort(function(a, b){return a<b}); //ordena de menor a mayor;
+			var arrayNotaOrdenado= arrayNotas.sort(function(a, b){return a-b}); // ordena de menor a mayor;
+		else
+			var arrayNotaOrdenado= arrayNotas.sort(function(a, b){return a<b}); // ordena de menor a mayor;
 
+		var oFilas = oTabla.rows; // el número de filas de una tabla
 
-	    var oFilas = oTabla.rows; //el número de filas de una tabla
-
-	   for (var i = 0; i < arrayNotaOrdenado.length; i++) 
-	   {
-		    for (var j = 0; j < oFilas.length; j++) 
+		for (var i=0; i<arrayNotaOrdenado.length; i++) 
+		{
+			for (var j=0; j<oFilas.length; j++) 
+			{
+				var oCeldas = oTabla.rows[j].cells;  // las celdas de una fila en concreto
+				for (var k=0; k<oCeldas.length; k++) 
 				{
-					var oCeldas = oTabla.rows[j].cells;  //las celdas de una fila en concreto
-					for (var k = 0; k < oCeldas.length; k++) 
+					if (parseInt(oCeldas[k].dataset.nota )== arrayNotaOrdenado[i])
 					{
-						if (parseInt(oCeldas[k].dataset.nota)== arrayNotaOrdenado[i])
-						{
-							oTBody.appendChild(oFilas[j]);
-						}
-							
+						oTBody.appendChild(oFila[j]);
 					}
 				}
+			}
 		}
 	}	
 }
