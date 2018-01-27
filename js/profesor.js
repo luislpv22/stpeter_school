@@ -44,8 +44,8 @@ enlaces[4].addEventListener("click", actualiza2, false);
 
 function filtro()
 {
-	var oSelec=document.getElementById("selectCursos3").options[document.getElementById("selectCursos3").selectedIndex];
-	var oTabla=academia.consultarNotas(sesion.dni,oSelec.value);
+	var oSelec = document.getElementById("selectCursos3").options[document.getElementById("selectCursos3").selectedIndex];
+	var oTabla = academia.consultarNotas(sesion.dni,oSelec.value);
 	var oFieldset = document.querySelectorAll("div #capaNotas");
     oFieldset[0].appendChild(oTabla);
 }

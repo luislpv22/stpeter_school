@@ -25,7 +25,7 @@ class Profesor extends Persona
 
 	addCurso(codigo)
 	{
-		if (this.listaCursos.indexOf(codigo) == -1)
+		if (!this.listaCursos.includes(codigo))
 			this.listaCursos.push(codigo); // Añade un curso al profesor
 	}
 
