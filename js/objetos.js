@@ -125,11 +125,12 @@ class Aula
 
 class Matricula
 {
-	constructor(iNumero, sEstado, oAlumno)
+	constructor(iNumero, sEstado, oAlumno, sListaCursosMatri)
 	{
 		this.numero  = iNumero;
 		this.oAlumno = oAlumno;
 		this.estado  = sEstado;
+		this.listaCursosMatri= sListaCursosMatri;
 	}
 }
 
@@ -255,6 +256,11 @@ class Academia
 				administradores.push(this._usuarios[i]);
 
 		return administradores;
+	}
+
+	getMatriculas()
+	{
+		return this._matriculas;
 	}
 
 	getCursos()

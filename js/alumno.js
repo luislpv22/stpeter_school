@@ -574,7 +574,7 @@ function realizarMatricula(oEvento)
 	for (var i=0; i<cursosElegidos.length; i++) 
 		sesion.listaCursos.push(cursosElegidos[i].codigo)
 
-	oMatricula = new Matricula(academia.codNuevaMatri(), "abierta", sesion);
+	oMatricula = new Matricula(academia.codNuevaMatri(), "abierta", sesion, cursosElegidos);
 
 	academia.addMatricula(oMatricula);
 	document.querySelector("#txtInformacion span").textContent = "";

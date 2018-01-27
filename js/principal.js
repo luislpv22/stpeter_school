@@ -199,7 +199,7 @@ function cargarMatriculas(oMatriculas)
 			for (var j=0; j<cursos.length; j++) 
 				oAlumno.listaCursos.push(cursos[j].textContent);
 
-			academia.addMatricula(new Matricula(codigoMatri, estado, oAlumno));
+			academia.addMatricula(new Matricula(codigoMatri, estado, oAlumno, oAlumno.listaCursos));
 		}
 	}
 }
