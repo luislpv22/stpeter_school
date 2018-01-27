@@ -2,7 +2,7 @@
 <listaCalificaciones>
  <alumno dni="21345687M">
  	<calificaciones>
- 		<curso codigo="inglesA2presencial">
+ 		<curso codigo="ENA2P">
  			<nota>7</nota>
  			<nota>6</nota>
  			<nota>9</nota>
@@ -12,7 +12,7 @@
  </alumno>
   <alumno dni="23645812R">
  	<calificaciones>
- 		<curso codigo="inglesA2presencial">
+ 		<curso codigo="ENA2P">
  			<nota>4</nota>
  			<nota>6</nota>
  			<nota>2</nota>
@@ -22,7 +22,7 @@
  </alumno>
   <alumno dni="42010210B">
  	<calificaciones>
- 		<curso codigo="inglesA2presencial">
+ 		<curso codigo="ENA2P">
  			<nota>9</nota>
  			<nota>8</nota>
  			<nota>7</nota>
@@ -32,7 +32,7 @@
  </alumno>
    <alumno dni="04568915V">
  	<calificaciones>
- 		<curso codigo="inglesB1semipresencial">
+ 		<curso codigo="ENB1S">
  			<nota>7</nota>
  			<nota>8</nota>
  			<nota>2</nota>
@@ -44,7 +44,7 @@
  </alumno>
  <alumno dni="95425821Q">
  	<calificaciones>
- 		<curso codigo="inglesB1semipresencial">
+ 		<curso codigo="ENB1S">
  			<nota>6</nota>
  			<nota>5</nota>
  			<nota>4</nota>
@@ -56,11 +56,11 @@
  </alumno>
   <alumno dni="54629812T">
  	<calificaciones>
- 		<curso codigo="inglesB2distancia">
+ 		<curso codigo="ENB2D">
  			<nota>6</nota>
  			<nota>5</nota>
  		</curso>
- 		<curso codigo="francesB1semipresencial">
+ 		<curso codigo="FRB1S">
  			<nota>9</nota>
  			<nota>8</nota>
  			<nota>4</nota>
@@ -69,7 +69,7 @@
  </alumno>
  <alumno dni="23420102E">
  	<calificaciones>
- 		<curso codigo="francesA2presencial">
+ 		<curso codigo="FRA2P">
  			<nota>9</nota>
  			<nota>3</nota>
  			<nota>4</nota>
@@ -79,7 +79,7 @@
  </alumno>
   <alumno dni="72158961T">
  	<calificaciones>
- 		<curso codigo="francesA2presencial">
+ 		<curso codigo="FRA2P">
  			<nota>7</nota>
  			<nota>6</nota>
  			<nota>6</nota>

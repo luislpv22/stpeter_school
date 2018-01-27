@@ -125,11 +125,12 @@ class Aula
 
 class Matricula
 {
-	constructor(iNumero, sEstado, oAlumno)
+	constructor(iNumero, sEstado, oAlumno, sListaCursosMatri)
 	{
 		this.numero  = iNumero;
 		this.oAlumno = oAlumno;
 		this.estado  = sEstado;
+		this.listaCursosMatri= sListaCursosMatri;
 	}
 }
 
@@ -272,16 +273,31 @@ class Academia
 		return administradores;
 	}
 
+	getMatriculas()
+	{
+		return this._matriculas;
+	}
+
 	getCursos()
 	{
 		return this._cursos;
 	}
 
-	getCurso(sCodigo)
+	getCursoPorCodigo(sCodigo)
 	{
 		oCurso=null;
 		for (var i=0; i<this._cursos.length && oCurso==null; i++) 
-			if (this._cursos[i].codigo == sCodigo)
+			if (this._cursos[i].codigo == sCodigo )
+				oCurso= this._cursos[i];
+
+		return oCurso;
+	}
+
+	getCurso(sIdioma, sNivel, sTipo)
+	{
+		oCurso=null;
+		for (var i=0; i<this._cursos.length && oCurso==null; i++) 
+			if (this._cursos[i].idioma == sIdioma && this._cursos[i].nivel==sNivel && this._cursos[i].tipo==sTipo )
 				oCurso= this._cursos[i];
 
 		return oCurso;
@@ -433,7 +449,7 @@ class Academia
 	codNuevaMatri()
 	{
 		var oMatri=this._matriculas[this._matriculas.length -1]; //obteiene el último elemento de una array
-		return oMatri.codigoMatri+1;
+		return parseInt(oMatri.numero)+1;
 	}
 
 	borrarUsuario(sDni)

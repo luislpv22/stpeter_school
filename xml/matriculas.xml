@@ -4,7 +4,7 @@
    <codigo>1</codigo>
 	<listaCursos>
 	<curso>
-	  <codigo>inglesA2presencial</codigo>
+	  <codigo>ENA2P</codigo>
 	</curso>
    </listaCursos>
    <estado>encurso</estado>
@@ -14,7 +14,7 @@
  <codigo>2</codigo>
  <listaCursos>
 	<curso>
-	  <codigo>inglesA2presencial</codigo>
+	  <codigo>ENA2P</codigo>
 	</curso>
   </listaCursos>
   <estado>encurso</estado>
@@ -24,7 +24,7 @@
  <codigo>3</codigo>
   <listaCursos>
 	<curso>
-	  <codigo>inglesA2presencial</codigo>
+	  <codigo>ENA2P</codigo>
 	</curso>
   </listaCursos>
   <estado>encurso</estado>
@@ -34,7 +34,7 @@
 <codigo>4</codigo>
   <listaCursos>
 	<curso>
-	  <codigo>inglesB1semipresencial</codigo>
+	  <codigo>ENB1S</codigo>
 	</curso>
   </listaCursos>
   <estado>encurso</estado>
@@ -44,7 +44,7 @@
    <codigo>5</codigo>
   <listaCursos>
 	<curso>
-	  <codigo>inglesB1semipresencial</codigo>
+	  <codigo>ENB1S</codigo>
 	</curso>
   </listaCursos>
   <estado>encurso</estado>
@@ -54,10 +54,10 @@
  <codigo>6</codigo>
   <listaCursos>
 	<curso>
-	  <codigo>inglesB2distancia</codigo>
+	  <codigo>ENB2D</codigo>
 	</curso>
 	<curso>
-	  <codigo>francesB1semipresencial</codigo>
+	  <codigo>FRB1S</codigo>
 	</curso>
   </listaCursos>
   <estado>cerrado</estado>
@@ -67,7 +67,7 @@
    <codigo>7</codigo>
   <listaCursos>
 	<curso>
-	  <codigo>francesA2presencial</codigo>
+	  <codigo>FRA2P</codigo>
 	</curso>
   </listaCursos>
   <estado>encurso</estado>
@@ -77,7 +77,7 @@
    <codigo>8</codigo>
   <listaCursos>
 	<curso>
-	  <codigo>francesA2presencial</codigo>
+	  <codigo>FRA2P</codigo>
 	</curso>
   </listaCursos>
   <estado>encurso</estado>

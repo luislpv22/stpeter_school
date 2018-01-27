@@ -11,6 +11,7 @@ document.querySelector('#btnCursos').addEventListener("click", function () { mos
 document.querySelector('#btnAlumnos').addEventListener("click", function () { mostrarPagina('alumnos'); });
 document.querySelector('#btnProfesores').addEventListener("click", function () { mostrarPagina('profesores'); });
 document.querySelector('#btnAdministradores').addEventListener("click", function () { mostrarPagina('administradores'); });
+document.querySelector('#btnMatriculas').addEventListener("click", function () { mostrarPagina('matriculaciones'); });
 
 document.querySelector('#btnAddCurso').addEventListener("click", crearCurso);
 
@@ -176,6 +177,64 @@ function mostrarPagina(pagina)
 		document.querySelector('#paginaAdministradores').classList.remove('hidden');
 		document.querySelector('#btnAdministradores').parentNode.classList.add('active');
 	}
+	else if (pagina == 'matriculaciones')
+	{
+		var tablaMatriculas = document.querySelector('#tablaMatriculas');
+
+		if (tablaMatriculas.rows.length == 1)
+		{
+			var matriculas = academia.getMatriculas();
+			for (var i=0; i<matriculas.length; i++)
+			{
+				var fila = tablaMatriculas.insertRow(-1);
+				fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].numero));
+				fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].oAlumno.dni.toUpperCase()));
+
+					//para mostrar los códigos de las asignaturas de la matrícula
+				sTexto="";
+				for (var j = 0; j < matriculas[i].listaCursosMatri.length; j++)
+				{
+					oCurso= academia.getCursoPorCodigo(matriculas[i].listaCursosMatri[j]);
+					sTexto+=  oCurso.idioma+" "+oCurso.nivel+" "+oCurso.tipo+"\n";
+				}
+				fila.insertCell(-1).appendChild(document.createTextNode(sTexto));
+				fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].estado.toUpperCase()));
+
+				var btn = document.createElement("input");
+				btn.type = "button";
+				btn.value = "Editar";
+				btn.setAttribute("onclick", "editarMatricula('"+matriculas[i].numero+"');");
+				btn.setAttribute("data-toggle", "modal");
+				btn.setAttribute("data-target", "#modal");
+				btn.classList.add("btn");
+				btn.classList.add("btn-warning");
+				btn.classList.add("btn-sm");
+				fila.insertCell(-1).appendChild(btn);
+				var btn = document.createElement("input");
+				btn.type = "button";
+				btn.value = "Cambiar Estado";
+				btn.setAttribute("onclick", "cambiarEstadoMatricula('"+matriculas[i].numero+"');");
+				btn.setAttribute("data-toggle", "modal");
+				btn.setAttribute("data-target", "#modal");
+				btn.classList.add("btn");
+				btn.classList.add("btn-danger");
+				btn.classList.add("btn-sm");
+				fila.insertCell(-1).appendChild(btn);
+			}
+	     }
+
+	    var capas = document.querySelectorAll('#content > .container-fluid');
+		for (var i=0; i<capas.length; i++)
+			capas[i].classList.add('hidden'); 
+
+		var menus = document.querySelectorAll('nav li');
+		for (var i=0; i<menus.length; i++)
+			menus[i].classList.remove('active');
+
+		document.querySelector('#paginaMatriculaciones').classList.remove('hidden');
+		document.querySelector('#btnMatriculas').parentNode.classList.add('active');
+	 }
+
 }
 
 function editarCurso(codigo)

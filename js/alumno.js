@@ -497,11 +497,11 @@ function cargarCurso()
 {
 	resetearCamposDatosCurso();
 
-	oSelectIdioma = document.querySelector("#selectIdioma");
-	oSelectNivel = document.querySelector("#selectNivel");
-	oSelctTipo = document.querySelector("#selectTipo");
-	var codigoCurso = oSelectIdioma.value + oSelectNivel.value + oSelctTipo.value;
-	var oCurso = academia.getCurso(codigoCurso);
+	sSelectIdioma = document.querySelector("#selectIdioma").value;
+	sSelectNivel = document.querySelector("#selectNivel").value;
+	sSelctTipo = document.querySelector("#selectTipo").value;
+
+	var oCurso =academia.getCurso(sSelectIdioma, sSelectNivel, sSelctTipo);
 
 	oDuracionCurso = document.querySelector("#duraCurso").value = oCurso.duracion;
 	oPrecioCurso = document.querySelector("#preCurso").value = oCurso.precio;
@@ -574,7 +574,7 @@ function realizarMatricula(oEvento)
 	for (var i=0; i<cursosElegidos.length; i++) 
 		sesion.listaCursos.push(cursosElegidos[i].codigo)
 
-	oMatricula = new Matricula(academia.codNuevaMatri(), "abierta", sesion);
+	oMatricula = new Matricula(academia.codNuevaMatri(), "abierta", sesion, cursosElegidos);
 
 	academia.addMatricula(oMatricula);
 	document.querySelector("#txtInformacion span").textContent = "";
@@ -780,7 +780,12 @@ function ordenaTabla()
 			{
 				var oCeldas = oTabla.rows[j].cells;  // las celdas de una fila en concreto
 				for (var k=0; k<oCeldas.length; k++) 
+				{
 					if (parseInt(oCeldas[k].dataset.nota )== arrayNotaOrdenado[i])
+					{
+						oTBody.appendChild(oFila[j]);
+					}
+				}
 			}
 		}
 	}	
