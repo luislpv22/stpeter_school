@@ -256,7 +256,8 @@ function editarCurso()
 	form.activo.value = oCurso.bArchivado;
 
 	document.querySelector('#modal .btn-success').id = "btnGuardarCurso";
-	document.querySelector('#btnGuardarCurso').addEventListener("click", function () { guardarCurso(oCurso.codigo); });
+	document.querySelector('#btnGuardarCurso').setAttribute("data-codigo", codigo);
+	document.querySelector('#btnGuardarCurso').addEventListener("click", guardarCurso);
 
 	form.style.display = "block";
 }
@@ -265,8 +266,16 @@ function crearCurso()
 {
 	var form = document.getElementById("formEditarCurso");
 	document.querySelector('#modal .btn-success').id = "btnGuardarCurso";
-	document.querySelector('#btnGuardarCurso').addEventListener("click", function () { guardarCurso(null); });
+	document.querySelector('#btnGuardarCurso').removeAttribute("data-codigo");
+	document.querySelector('#btnGuardarCurso').addEventListener("click", guardarCurso);
 	form.codigo.removeAttribute("readonly");
+	form.codigo.value = "";
+	form.idioma.value = "Inglés";
+	form.nivel.value = "A1";
+	form.tipo.value = "Presencial";
+	form.duracion1.value = "1";
+	form.duracion2.value = "meses";
+	form.precio.value = "0.00";
 	form.activo.value = "si";
 	form.style.display = "block";
 }
@@ -284,14 +293,15 @@ function desactivarCurso()
 	academia.modificarCurso(oCurso);
 }
 
-function guardarCurso(codigo)
+function guardarCurso()
 {
 	var form = document.getElementById("formEditarCurso");
 
 	var sCodigo = form.codigo.value;
 
-	if (codigo != null)
-		sCodigo = codigo;
+	var dataCod = this.getAttribute("data-codigo");
+	if (dataCod != null)
+		sCodigo = dataCod;
 
 	var sIdioma = form.idioma.value;
 	var sNivel = form.nivel.value;
@@ -302,7 +312,7 @@ function guardarCurso(codigo)
 
 	var oCurso = new Curso(sCodigo, sIdioma, sDuracion, fPrecio, sTipo, sNivel, bActivo);
 
-	if (codigo != null)
+	if (dataCod != null)
 		academia.modificarCurso(oCurso);
 	else
 		academia.addCurso(oCurso);
