@@ -263,6 +263,19 @@ class Academia
 		return this._matriculas;
 	}
 
+	getMatricula(numero)
+	{
+		var oMatri= null;
+		for (var i = 0; i < this._matriculas.length; i++) 
+		{
+			if (this._matriculas[i].numero == numero)
+			{
+				oMatri=this._matriculas[i];
+			}
+		}
+		return oMatri;
+	}
+
 	getCursos()
 	{
 		return this._cursos;
@@ -484,6 +497,24 @@ class Academia
 				}
 			}
 
+	}
+
+	cambiarEstadoMatri(oMatri)
+	{
+		for (var i = 0; i < this._matriculas.length; i++) 
+		{
+			if (this._matriculas[i] == oMatri)
+			{
+				if (oMatri.estado =="encurso")
+				{
+					this._matriculas[i].estado = "cerrado";
+				}
+				else
+				{
+					this._matriculas[i].estado = "encurso";
+				}
+			}
+		}
 	}
 
 
