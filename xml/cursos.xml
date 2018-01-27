@@ -39,7 +39,6 @@
 	</listadoAlumnos>
 	<activo>si</activo>
 </curso>
-
 <curso>
 	<codigo>FRA2P</codigo>
 	<idioma>Francés</idioma>
@@ -65,12 +64,11 @@
 	</listadoAlumnos>
 	<activo>si</activo>
 </curso>
-
 <curso>
 	<codigo>DEA2P</codigo>
 	<idioma>aleman</idioma>
 	<duracion>4 meses</duracion>
-	<precio>500€</precio>
+	<precio>500</precio>
 	<tipo>Presencial</tipo>
 	<nivel>A2</nivel>
 	<listadoAlumnos>

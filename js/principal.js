@@ -55,7 +55,8 @@ function datosIniciales()
 	{
 		var oXMLCursos = loadXMLDoc("xml/cursos.xml");
 		var oCursos = oXMLCursos.getElementsByTagName("curso");
-		var tCursos = cargarCursos(oCursos);
+		cargarCursos(oCursos);
+		var tCursos = academia.getCursos();
 		sessionStorage.setItem('tCursos', JSON.stringify(tCursos));
 	}
 	else
@@ -167,14 +168,14 @@ function cargarCursos(oCursos)
 {
 	for(var i=0; i<oCursos.length; i++)
 	{
-		codigo=oCursos[i].getElementsByTagName("codigo")[0].textContent;
-		idioma=oCursos[i].getElementsByTagName("idioma")[0].textContent;
-		duracion=oCursos[i].getElementsByTagName("duracion")[0].textContent;
-		precio=oCursos[i].getElementsByTagName("precio")[0].textContent;
-		tipo=oCursos[i].getElementsByTagName("tipo")[0].textContent;
-		nivel=oCursos[i].getElementsByTagName("nivel")[0].textContent;
-		activo=oCursos[i].getElementsByTagName("activo")[0].textContent;
-		listadoAlumnos=oCursos[i].querySelector("listadoAlumnos").children;
+		codigo = oCursos[i].getElementsByTagName("codigo")[0].textContent;
+		idioma = oCursos[i].getElementsByTagName("idioma")[0].textContent;
+		duracion = oCursos[i].getElementsByTagName("duracion")[0].textContent;
+		precio = oCursos[i].getElementsByTagName("precio")[0].textContent;
+		tipo = oCursos[i].getElementsByTagName("tipo")[0].textContent;
+		nivel = oCursos[i].getElementsByTagName("nivel")[0].textContent;
+		activo = oCursos[i].getElementsByTagName("activo")[0].textContent;
+		listadoAlumnos = oCursos[i].querySelector("listadoAlumnos").children;
 
 		oCurso = new Curso (codigo, idioma, duracion, precio, tipo, nivel, activo);
 
@@ -185,9 +186,8 @@ function cargarCursos(oCursos)
 				oAlumno = academia.getUsuario(listadoAlumnos[j].textContent)
 				oCurso.listaAlumnos.push(oAlumno);
 			}
-
-			academia.addCurso(oCurso);
 		}
+		academia.addCurso(oCurso);
 	}
 }
 
@@ -457,7 +457,8 @@ function cerrarMensaje()
 	document.getElementById("panelMensajes").style.display = 'none';
 }
 
-document.querySelector('#sidebarCollapse').addEventListener("click", mostrarSidebar, false);
+if (document.querySelector('#sidebarCollapse') != null)
+	document.querySelector('#sidebarCollapse').addEventListener("click", mostrarSidebar, false);
 
 function mostrarSidebar()
 {

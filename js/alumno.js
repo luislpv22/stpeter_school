@@ -433,7 +433,7 @@ function resetearSelectNivel()
 	oSelectNivel.appendChild(oOption); 
 }
 
-function cargarTipo ()
+function cargarTipo()
 {
 	oListaCursos = academia.getCursos();
 	oSelectIdioma = document.querySelector("#selectIdioma");
@@ -515,7 +515,16 @@ function cargarCurso()
 
 function addCursoMatri(oEvento)
 {
-	oSelctTipo= document.querySelector("#selectTipo");
+	sSelectIdioma = document.querySelector("#selectIdioma").value;
+	sSelectNivel = document.querySelector("#selectNivel").value;
+	sSelctTipo = document.querySelector("#selectTipo").value;
+
+	var tCursos = academia.getCursos();
+	var oCurso = null;
+	for (var i=0; i<tCursos.length && oCurso==null; i++) 
+		if (tCursos[i].idioma == sSelectIdioma && tCursos[i].nivel == sSelectNivel && tCursos[i].tipo == sSelctTipo)
+			oCurso= tCursos[i];
+
 	if (oSelctTipo != "seleTipo")
 	{
 		var oE = oEvento || window.event;
@@ -524,10 +533,10 @@ function addCursoMatri(oEvento)
 		if (typeof(cursosElegidos) === "undefined")
 			cursosElegidos = [];
 
-		//ver si el curso ya está en la array
+		// ver si el curso ya está en la array
 		if (!cursosElegidos.includes(oCurso))
 		{
-			//ver si no estaba ya matriculado en el curso
+			// ver si no estaba ya matriculado en el curso
 			if (!sesion.listaCursos.includes(oCurso.codigo))
 			{
 				resetearCamposDatosCurso();         

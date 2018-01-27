@@ -255,7 +255,8 @@ function editarCurso()
 	form.activo.value = oCurso.bArchivado;
 
 	document.querySelector('#modal .btn-success').id = "btnGuardarCurso";
-	document.querySelector('#btnGuardarCurso').addEventListener("click", function () { guardarCurso(oCurso.codigo); });
+	document.querySelector('#btnGuardarCurso').setAttribute("data-codigo", codigo);
+	document.querySelector('#btnGuardarCurso').addEventListener("click", guardarCurso);
 
 	form.style.display = "block";
 }
@@ -264,8 +265,16 @@ function crearCurso()
 {
 	var form = document.getElementById("formEditarCurso");
 	document.querySelector('#modal .btn-success').id = "btnGuardarCurso";
-	document.querySelector('#btnGuardarCurso').addEventListener("click", function () { guardarCurso(null); });
+	document.querySelector('#btnGuardarCurso').removeAttribute("data-codigo");
+	document.querySelector('#btnGuardarCurso').addEventListener("click", guardarCurso);
 	form.codigo.removeAttribute("readonly");
+	form.codigo.value = "";
+	form.idioma.value = "Inglés";
+	form.nivel.value = "A1";
+	form.tipo.value = "Presencial";
+	form.duracion1.value = "1";
+	form.duracion2.value = "meses";
+	form.precio.value = "0.00";
 	form.activo.value = "si";
 	form.style.display = "block";
 }
@@ -283,19 +292,30 @@ function desactivarCurso()
 	academia.modificarCurso(oCurso);
 }
 
-function desactivarMatricula()
+function guardarCurso()
 {
-	var numero = this.getAttribute("data-numero");
-	var oMatricula = academia.getMatricula(numero);
+	var form = document.getElementById("formEditarCurso");
 
-	if (oMatricula.estado == "encurso")
-		oMatricula.estado = "cerrado";
+	var sCodigo = form.codigo.value;
+
+	var dataCod = this.getAttribute("data-codigo");
+	if (dataCod != null)
+		sCodigo = dataCod;
+
+	var sIdioma = form.idioma.value;
+	var sNivel = form.nivel.value;
+	var sTipo = form.tipo.value;
+	var fPrecio = parseFloat(form.precio.value);
+	var sDuracion = form.duracion1.value + " " + form.duracion2.value;
+	var bActivo = form.activo.value;
+
+	var oCurso = new Curso(sCodigo, sIdioma, sDuracion, fPrecio, sTipo, sNivel, bActivo);
+
+	if (dataCod != null)
+		academia.modificarCurso(oCurso);
 	else
-		oMatricula.estado = "encurso";
-
-	academia.modificarMatricula(oMatricula);
+		academia.addCurso(oCurso);
 }
-
 
 function guardarCurso(codigo)
 {
@@ -305,9 +325,7 @@ function guardarCurso(codigo)
 
 
 function switchActivo()
-{
-	var lblActivo = document.createElement("label");
-	lblActivo.classList.add("switch-container");
+{ssList.add("switch-container");
 	var chkActivo = document.createElement("input");
 	chkActivo.type = "checkbox";
 	chkActivo.classList.add("switch-activo");
@@ -321,3 +339,19 @@ function switchActivo()
 
 	return lblActivo;
 }
+
+/*
+function desactivarMatricula()
+{
+	var numero = this.getAttribute("data-numero");
+	var oMatric
+	var lblActivo = document.createElement("label");
+	lblActivo.claula = academia.getMatricula(numero);
+
+	if (oMatricula.estado == "encurso")
+		oMatricula.estado = "cerrado";
+	else
+		oMatricula.estado = "encurso";
+
+	academia.modificarMatricula(oMatricula);
+}*/
