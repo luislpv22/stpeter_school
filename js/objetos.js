@@ -380,36 +380,33 @@ class Academia
 		{
 			if(oTablaCurProv[i].codigo == SFiltro || SFiltro == "todo")
 			{
-				oFila = oTBody.insertRow(-1);
-				var oCelda = oFila.insertCell(-1);
-			 	oCelda.textContent = oTablaCurProv[i].codigo;
-			 	oCelda = oFila.insertCell(-1);
-			  	oCelda.textContent = oTablaCurProv[i].idioma;
-			  	oCelda = oFila.insertCell(-1);
-			  	oCelda.textContent = oTablaCurProv[i].duracion;
-			  	oCelda = oFila.insertCell(-1);
-			  	oCelda.textContent = oTablaCurProv[i].tipo;
-			   	oCelda = oFila.insertCell(-1);
-			  	oCelda.textContent = oTablaCurProv[i].nivel;
 			  	oTablaCurAlumProv=oTablaCurProv[i].listaAlumnos;
-                     
 
 		    	for (var j=0; j<oTablaCurAlumProv.length; j++)
 		    	{
-		            oCelda = oFila.insertCell(-1);
-		        	oCelda.textContent = oTablaCurAlumProv[j].nombre;
+					oFila = oTBody.insertRow(-1);
+					var oCelda = oFila.insertCell(-1);
+				 	oCelda.textContent = oTablaCurProv[i].codigo;
+				 	oCelda = oFila.insertCell(-1);
+				  	oCelda.textContent = oTablaCurProv[i].idioma;
+				  	oCelda = oFila.insertCell(-1);
+				  	oCelda.textContent = oTablaCurProv[i].duracion;
+				  	oCelda = oFila.insertCell(-1);
+				  	oCelda.textContent = oTablaCurProv[i].tipo;
+				   	oCelda = oFila.insertCell(-1);
+				  	oCelda.textContent = oTablaCurProv[i].nivel;
 
-		        	var oTablaCalif= oTablaCurAlumProv[j].listaCalificaciones;
+		            var oUsuario = this.getUsuario(oTablaCurAlumProv[j]);
+		            oCelda = oFila.insertCell(-1);
+		        	oCelda.textContent = oUsuario.nombre;
+
+		        	var oTablaCalif = oUsuario.listaCalificaciones;
 		        
 		        	for (var k=0; k<oTablaCalif.length; k++)
 		        	{
 		        		oCelda = oFila.insertCell(-1);
-		        		if(oTablaCalif[k].codCurso==oTablaCurProv[i].codigo)
-		        		{
-
-		                    
-		        			oCelda.textContent = oTablaCalif[k].nota;        
-		        		}
+		        		if(oTablaCalif[k].codCurso == oTablaCurProv[i].codigo)
+		        			oCelda.textContent = oTablaCalif[k].nota;
 		        	}
 		    	}
 			}

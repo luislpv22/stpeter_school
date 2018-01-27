@@ -2,12 +2,6 @@
 <listaCalificaciones>
  <alumno dni="21345687M">
  	<calificaciones>
- 		<curso codigo="ENA2P">
- 			<nota>7</nota>
- 			<nota>6</nota>
- 			<nota>9</nota>
- 			<nota>5</nota>
- 		</curso>
  	</calificaciones>
  </alumno>
   <alumno dni="23645812R">
@@ -22,12 +16,6 @@
  </alumno>
   <alumno dni="42010210B">
  	<calificaciones>
- 		<curso codigo="ENA2P">
- 			<nota>9</nota>
- 			<nota>8</nota>
- 			<nota>7</nota>
- 			<nota>10</nota>
- 		</curso>
  	</calificaciones>
  </alumno>
    <alumno dni="04568915V">
@@ -44,14 +32,6 @@
  </alumno>
  <alumno dni="95425821Q">
  	<calificaciones>
- 		<curso codigo="ENB1S">
- 			<nota>6</nota>
- 			<nota>5</nota>
- 			<nota>4</nota>
- 			<nota>8</nota>
- 			<nota>4</nota>
- 			<nota>6</nota>
- 		</curso>
  	</calificaciones>
  </alumno>
   <alumno dni="54629812T">
@@ -69,12 +49,6 @@
  </alumno>
  <alumno dni="23420102E">
  	<calificaciones>
- 		<curso codigo="FRA2P">
- 			<nota>9</nota>
- 			<nota>3</nota>
- 			<nota>4</nota>
- 			<nota>4</nota>
- 		</curso>
  	</calificaciones>
  </alumno>
   <alumno dni="72158961T">
