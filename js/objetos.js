@@ -1,10 +1,10 @@
 class Persona
 {
-	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo)
+	constructor(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo)
 	{
 		this.nombre    = sNombre;
 		this.password  = sPassword;
-		this.apellido  = sApellido;
+		this.apellidos  = sApellidos;
 		this.dni       = sDni;
 		this.telefono  = iTelefono;
 		this.direccion = sDireccion;
@@ -15,9 +15,9 @@ class Persona
 
 class Profesor extends Persona
 {
-	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo, iSalario)
+	constructor(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo, iSalario)
 	{
-		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
+		super(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 
 		this.salario     = iSalario;
 		this.listaCursos = [];
@@ -25,7 +25,7 @@ class Profesor extends Persona
 
 	addCurso(codigo)
 	{
-		if (this.listaCursos.indexOf(codigo) == -1)
+		if (!this.listaCursos.includes(codigo))
 			this.listaCursos.push(codigo); // Añade un curso al profesor
 	}
 
@@ -45,9 +45,9 @@ class Profesor extends Persona
 
 class Alumno extends Persona
 {
-	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo, bEstadoCobro)
+	constructor(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo, bEstadoCobro)
 	{
-		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
+		super(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 
 		this.estadoCobro         = bEstadoCobro;
 		this.listaCursos         = [];
@@ -62,9 +62,9 @@ class Alumno extends Persona
 
 class Administrador extends Persona
 {
-	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo)
+	constructor(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo)
 	{
-		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
+		super(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 	}
 }
 
@@ -104,9 +104,9 @@ class Curso
 		this.bArchivado   = bArchivado; // boolean para saber si el curso sigue activo, o ya termino, o se canceló
 	}
 
-	matricularAlumno(oAlumno)
+	matricularAlumno(sDni)
 	{
-		this.listaAlumnos.push(oAlumno); // añade un alumno al curso
+		this.listaAlumnos.push(sDni); // añade un alumno al curso
 	}
 }
 
@@ -125,11 +125,11 @@ class Aula
 
 class Matricula
 {
-	constructor(iNumero, sEstado, oAlumno, sListaCursosMatri)
+	constructor(iNumero, sEstado, sDniAlumno, sListaCursosMatri)
 	{
 		this.numero  = iNumero;
-		this.oAlumno = oAlumno;
 		this.estado  = sEstado;
+		this.dniAlumno = sDniAlumno;
 		this.listaCursosMatri= sListaCursosMatri;
 	}
 }
@@ -169,7 +169,7 @@ class Academia
 
 		if (!bEncontrado) {
 			this._usuarios.push(oUsuario);
-			sessionStorage.setItem('tUsuarios', JSON.stringify(this._usuarios));
+			this.actualizarSesionUsuarios();
 		}
 
 		return !bEncontrado;
@@ -213,7 +213,7 @@ class Academia
 				bEncontrado = true;
 			}
 		}
-		sessionStorage.setItem('tUsuarios', JSON.stringify(this._usuarios));
+		this.actualizarSesionUsuarios();
 	}
 
 	modificarCurso(oCurso)
@@ -229,21 +229,6 @@ class Academia
 			}
 		}
 		sessionStorage.setItem('tCursos', JSON.stringify(this._cursos));
-	}
-
-	modificarMatricula(oMatricula)
-	{
-		// recorrer la array de cursos hasta encontrar a los que tengan el mismo codigo y modificarlo
-		var bEncontrado = false;
-		for (var i=0; i<this._matriculas.length && bEncontrado==false; i++) 
-		{
-			if (this._matriculas[i].numero == oMatricula.numero)
-			{
-				this._matriculas[i] = oMatricula;
-				bEncontrado = true;
-			}
-		}
-		sessionStorage.setItem('tMatriculas', JSON.stringify(this._matriculas));
 	}
 
 	getUsuarios()
@@ -323,6 +308,21 @@ class Academia
 		return oCurso;
 	}
 
+	actualizarSesionUsuarios()
+	{
+		var tUsuarios = this._usuarios;
+		for (var i=0; i<tUsuarios.length; i++)
+		{
+	    	if (tUsuarios[i] instanceof Administrador)
+	    		tUsuarios[i].tipo = 'administrador';
+	    	else if (tUsuarios[i] instanceof Profesor)
+	    		tUsuarios[i].tipo = 'profesor';
+	    	else
+	    		tUsuarios[i].tipo = 'alumno';
+		}
+		sessionStorage.setItem('tUsuarios', JSON.stringify(tUsuarios));
+	}
+
     consultarNotas(sDni,SFiltro)
     {
     	var oTablaCurProv;
@@ -380,34 +380,33 @@ class Academia
 		{
 			if(oTablaCurProv[i].codigo == SFiltro || SFiltro == "todo")
 			{
-				oFila = oTBody.insertRow(-1);
-				var oCelda = oFila.insertCell(-1);
-			 	oCelda.textContent = oTablaCurProv[i].codigo;
-			 	oCelda = oFila.insertCell(-1);
-			  	oCelda.textContent = oTablaCurProv[i].idioma;
-			  	oCelda = oFila.insertCell(-1);
-			  	oCelda.textContent = oTablaCurProv[i].duracion;
-			  	oCelda = oFila.insertCell(-1);
-			  	oCelda.textContent = oTablaCurProv[i].tipo;
-			   	oCelda = oFila.insertCell(-1);
-			  	oCelda.textContent = oTablaCurProv[i].nivel;
 			  	oTablaCurAlumProv=oTablaCurProv[i].listaAlumnos;
-
 
 		    	for (var j=0; j<oTablaCurAlumProv.length; j++)
 		    	{
-		            oCelda = oFila.insertCell(-1);
-		        	oCelda.textContent = oTablaCurAlumProv[j].nombre;
+					oFila = oTBody.insertRow(-1);
+					var oCelda = oFila.insertCell(-1);
+				 	oCelda.textContent = oTablaCurProv[i].codigo;
+				 	oCelda = oFila.insertCell(-1);
+				  	oCelda.textContent = oTablaCurProv[i].idioma;
+				  	oCelda = oFila.insertCell(-1);
+				  	oCelda.textContent = oTablaCurProv[i].duracion;
+				  	oCelda = oFila.insertCell(-1);
+				  	oCelda.textContent = oTablaCurProv[i].tipo;
+				   	oCelda = oFila.insertCell(-1);
+				  	oCelda.textContent = oTablaCurProv[i].nivel;
 
-		        	var oTablaCalif= oTablaCurAlumProv[j].listaCalificaciones;
+		            var oUsuario = this.getUsuario(oTablaCurAlumProv[j]);
+		            oCelda = oFila.insertCell(-1);
+		        	oCelda.textContent = oUsuario.nombre;
+
+		        	var oTablaCalif = oUsuario.listaCalificaciones;
 		        
 		        	for (var k=0; k<oTablaCalif.length; k++)
 		        	{
-		        		if(oTablaCalif[k].codCurso==oTablaCurProv[i].codigo)
-		        		{
-		                    oCelda = oFila.insertCell(-1);
-		        			oCelda.textContent = oTablaCalif[k].nota;        
-		        		}
+		        		oCelda = oFila.insertCell(-1);
+		        		if(oTablaCalif[k].codCurso == oTablaCurProv[i].codigo)
+		        			oCelda.textContent = oTablaCalif[k].nota;
 		        	}
 		    	}
 			}
@@ -505,7 +504,7 @@ class Academia
 			}
 
 	}
-/*
+
 	cambiarEstadoMatri(oMatri)
 	{
 		for (var i = 0; i < this._matriculas.length; i++) 
@@ -523,7 +522,7 @@ class Academia
 			}
 		}
 	}
-*/
+
 
 
 }

@@ -19,222 +19,220 @@ function mostrarSidebar()
         sidebar.classList.add('active');
 }
 
-/* Configuración de eventos */
-var enlaces = document.getElementsByTagName("a");
-for (var i = 0; i < enlaces.length ; i++) 
-    enlaces[i].addEventListener("click", function (event) { event.preventDefault(); mostrar(event); }, false);
-   
-enlaces[2].addEventListener("click", actualiza0, false);
-enlaces[3].addEventListener("click", actualiza1, false);
-enlaces[4].addEventListener("click", actualiza2, false);
+var selectCursoCalificar = document.frmCalificar.selectCursoCalificar;
+var selectCursoModificar = document.frmModificar.selectCursoModificar;
+var selectCursoConsultar = document.getElementById("selectCursoConsultar");
+var btnCalificar = document.frmCalificar.calificar;
+var btnModificar = document.frmModificar.modificar;
+
+selectCursoCalificar.addEventListener("change", actualizaSelectCalificar, false);
+selectCursoModificar.addEventListener("change", actualizaSelectModificar, false);
+selectCursoConsultar.addEventListener("change", actualizaSelectConsultar, false);
+btnCalificar.addEventListener("click", addCalificacion, false);
+btnModificar.addEventListener("click", modificarCalificacion, false);
+
+document.querySelector('#enlaceMisDatos').addEventListener("click", mostrarPagina, false);
+document.querySelector('#enlaceCalificar').addEventListener("click", mostrarPagina, false);
+document.querySelector('#enlaceModificar').addEventListener("click", mostrarPagina, false);
+document.querySelector('#enlaceConsultar').addEventListener("click", mostrarPagina, false);
 
 
-function filtro()
+function actualizaSelectConsultar()
 {
-	var oSelec=document.getElementById("selectCursos3").options[document.getElementById("selectCursos3").selectedIndex];
-	var oTabla=academia.consultarNotas(sesion.dni,oSelec.value);
+	var selectCursoConsultar = document.getElementById("selectCursoConsultar");
+	var oTabla = academia.consultarNotas(sesion.dni, selectCursoConsultar.value);
 	var oFieldset = document.querySelectorAll("div #capaNotas");
     oFieldset[0].appendChild(oTabla);
 }
 
-function mostrar(oEvento)
+function mostrarPagina(oEvento)
 {
 	oE= oEvento || window.event;
-	if (oE.target.id == "enlaceModMatri")
+	if (oE.target.id == "enlaceCalificar")
 	{
-		document.getElementById("capaCalificarAlu").classList.remove("ocultar");
 		document.getElementById("capaConsultarNotas").classList.add("ocultar");
 		document.getElementById("capaModificarNotas").classList.add("ocultar");
+		document.getElementById("capaModificarAlu").classList.add("ocultar");
+		document.getElementById("capaCalificarAlu").classList.remove("ocultar");
+
+		var oProfesor = academia.getUsuario(sesion.dni);
+		var oTablaActu = oProfesor.getCursos();
+		var oSelec = document.querySelector("#selectCursoCalificar");
+		var bEnc = false;
+
+		for (var i=0; i<oTablaActu.length; i++)
+		{
+			var oOption = document.createElement("option");
+	     	oOption.text = capitalize(oTablaActu[i].idioma)+" "+oTablaActu[i].nivel+" "+capitalize(oTablaActu[i].tipo);
+	     	oOption.value = oTablaActu[i].codigo;
+			for (var j=0; j<oSelec.options.length && !bEnc; j++)
+	     		if(oSelec.options[j].value == oOption.value)
+	                bEnc = true;
+
+			if(!bEnc)
+				oSelec.add(oOption);
+	    }
 	}
-	else if (oE.target.id == "consNotas")
-	{
-		document.getElementById("capaConsultarNotas").classList.remove("ocultar");
-		document.getElementById("capaCalificarAlu").classList.add("ocultar");
-		document.getElementById("capaModificarNotas").classList.add("ocultar");
-		var oTabla=academia.consultarNotas(sesion.dni,"todo");
-		    var oFieldset = document.querySelectorAll("div #capaNotas");
-            oFieldset[0].appendChild(oTabla);
-	}
-	else if (oE.target.id == "enlaceMatricular")
+	else if (oE.target.id == "enlaceModificar")
 	{
 		document.getElementById("capaModificarNotas").classList.remove("ocultar");
 		document.getElementById("capaCalificarAlu").classList.add("ocultar");
 		document.getElementById("capaConsultarNotas").classList.add("ocultar");
+		document.getElementById("capaModificarAlu").classList.add("ocultar");
 
+		var oProfesor = academia.getUsuario(sesion.dni);
+		var tCursos = oProfesor.getCursos();
+		var oSelec = document.querySelector("#selectCursoModificar");
+		var bEnc = false;
+
+		for (var i=0; i<tCursos.length; i++)
+		{
+			var oOption = document.createElement("option");
+			oOption.text = capitalize(tCursos[i].idioma)+" "+tCursos[i].nivel+" "+capitalize(tCursos[i].tipo);
+			oOption.value = tCursos[i].codigo;
+
+			for (var j=0; j<oSelec.options.length && !bEnc; j++)
+				if(oSelec.options[j].value == oOption.value)
+	          		bEnc = true;
+
+			if(!bEnc)
+				oSelec.add(oOption);
+		}
+	}
+	else if (oE.target.id == "enlaceConsultar")
+	{
+		document.getElementById("capaCalificarAlu").classList.add("ocultar");
+		document.getElementById("capaModificarNotas").classList.add("ocultar");
+		document.getElementById("capaModificarAlu").classList.add("ocultar");
+		document.getElementById("capaConsultarNotas").classList.remove("ocultar");
+		var oTabla = academia.consultarNotas(sesion.dni, "todo");
+		var oFieldset = document.querySelectorAll("div #capaNotas");
+        oFieldset[0].appendChild(oTabla);
+
+		var oProfesor = academia.getUsuario(sesion.dni);
+		var tCursos = oProfesor.getCursos();
+		var oSelec = document.querySelector("#selectCursoConsultar");
+		var bEnc = false;
+
+		for (var i=0; i<tCursos.length; i++)
+		{
+			var oOption = document.createElement("option");
+			oOption.text = capitalize(tCursos[i].idioma)+" "+tCursos[i].nivel+" "+capitalize(tCursos[i].tipo);
+			oOption.value = tCursos[i].codigo;
+			for (var j=0; j<oSelec.options.length && !bEnc; j++)
+				if(oSelec.options[j].value == oOption.value)
+					bEnc = true;
+
+			if(!bEnc)
+				oSelec.add(oOption);
+		}
 	}
 	else if (oE.target.id == "enlaceMisDatos")
     {
-        document.getElementById("capaModificarAlu").classList.remove("ocultar");
         document.getElementById("capaModificarNotas").classList.add("ocultar");
         document.getElementById("capaCalificarAlu").classList.add("ocultar");
         document.getElementById("capaConsultarNotas").classList.add("ocultar");
+        document.getElementById("capaModificarAlu").classList.remove("ocultar");
         cargarDatosUsuario();
     }
 }
 
-function actualiza1()
+function actualizaSelectCalificar()
 {
-	var oProfesor = academia.getUsuario(sesion.dni);
-	oProfesor.addCurso('inglesA2presencial');
-	var oTablaActu = oProfesor.getCursos();
-	var oSelec = document.querySelectorAll("#selectCursos");
-	var bEnc = false;
+	document.getElementById("selectAlumnoCalificar").remove(0);
 
-	for (var i=0; i<oTablaActu.length; i++)
+    var oSelectCurso = document.getElementById("selectCursoCalificar");
+    var oSelectAlumno = document.getElementById("selectAlumnoCalificar");
+	var tAlumnos = academia.getCurso(oSelectCurso.value).listaAlumnos;
+
+	document.getElementById("capaSelectAlumnoCalificar").classList.remove("ocultar");
+	document.getElementById("CapNotaAluCalificar").classList.remove("ocultar");
+
+	var bCursoEnc = false;
+	var bAluEnc = false;
+	for (var i=0; i<tAlumnos.length; i++)
 	{
-		var oOption = document.createElement("option");
-		oOption.text = capitalize(oTablaActu[i].idioma)+" "+oTablaActu[i].nivel+" "+capitalize(oTablaActu[i].tipo);
-		oOption.value=oTablaActu[i].codigo;
+		var oAlumno = academia.getUsuario(tAlumnos[i]);
+		var tCalificaciones = oAlumno.listaCalificaciones;
 
-		for (var j=0; j<oSelec[0].options.length && !bEnc; j++)
-			if(oSelec[0].options[j].value == oOption.value)
-          		bEnc = true;
+		for (var k=0; k<tCalificaciones.length && !bCursoEnc; k++)
+			if(tCalificaciones[k].codCurso == oSelectCurso.value)
+				bCursoEnc = true;
 
-		if(!bEnc)
-			oSelec[0].add(oOption);
-	}
-}
-
-function actualiza2()
-{
-	var oProfesor = academia.getUsuario(sesion.dni);
-	oProfesor.addCurso('inglesA2presencial');
-	var oTablaActu = oProfesor.getCursos();
-	var oSelec = document.querySelectorAll("#selectCursos3");
-	var bEnc = false;
-
-	for (var i=0; i<oTablaActu.length; i++)
-	{
-
-		var oOption = document.createElement("option");
-		oOption.text = capitalize(oTablaActu[i].idioma)+" "+oTablaActu[i].nivel+" "+capitalize(oTablaActu[i].tipo);
-		oOption.value = oTablaActu[i].codigo;
-		for (var j=0; j<oSelec[0].options.length && !bEnc; j++)
-			if(oSelec[0].options[j].value == oOption.value)
-				bEnc = true;
-
-		if(!bEnc)
-			oSelec[0].add(oOption);
-	}
-}
-
-function actualiza0()
-{	
-	var oProfesor = academia.getUsuario(sesion.dni);
-	oProfesor.addCurso('inglesA2presencial');
-	var oTablaActu = oProfesor.getCursos();
-	var oSelec = document.querySelectorAll("#selectCursos2");
-	var bEnc = false;
-
-	for (var i=0; i<oTablaActu.length; i++)
-	{
-		var oOption = document.createElement("option");
-     	oOption.text = capitalize(oTablaActu[i].idioma)+" "+oTablaActu[i].nivel+" "+capitalize(oTablaActu[i].tipo);
-     	oOption.value = oTablaActu[i].codigo;
-		for (var j=0; j<oSelec[0].options.length && !bEnc; j++)
-     		if(oSelec[0].options[j].value == oOption.value)
-                bEnc = true;
-
-		if(!bEnc)
-			oSelec[0].add(oOption);
-    }
-}
-
-function actualizaAlum()
-{
-	var vaciar = document.getElementById("selectAlumno");
-    vaciar.remove(vaciar);
-
-    var oSelec = document.getElementById("selectCursos").options[document.getElementById("selectCursos").selectedIndex];
-    var oSelec2 = document.getElementById("selectAlumno");
-	var oTablaActu = academia.getListaAlumCurso(oSelec.value,sesion.dni);
-
-	document.getElementById("capaSelectAlumno").classList.remove("ocultar");
-	document.getElementById("CapNotaAlu").classList.remove("ocultar");
-
-	var bEnc = false;
-	var bEnc2 = false;
-	for (var i=0; i<oTablaActu.length; i++)
-	{
-		var oListaProvCali=oTablaActu[i].listaCalificaciones;
-
-		for (var k=0; k<oListaProvCali.length && !bEnc2; k++)
-			if(oListaProvCali[k].codCurso == oSelec.value)
-				bEnc2 = true;
-
-		if(!bEnc2)
+		if(!bCursoEnc)
 		{
 			var oOption = document.createElement("option");
-			oOption.text = oTablaActu[i].nombre+", "+oTablaActu[i].apellido;
-			oOption.value = oTablaActu[i].dni;
+			oOption.text = oAlumno.nombre+", "+oAlumno.apellidos;
+			oOption.value = oAlumno.dni;
 		}
 
-		for (var j=0; j<oSelec2.options.length && !bEnc; j++)
-			if(oSelec2.options[j].value == oOption.value)
-				bEnc = true;
+		for (var j=0; j<oSelectAlumno.options.length && !bAluEnc; j++)
+			if(oSelectAlumno.options[j].value == oOption.value)
+				bAluEnc = true;
 
-		if(!bEnc && oOption != null)
-			oSelec2.add(oOption);
+		if(!bAluEnc && oOption != null)
+			oSelectAlumno.add(oOption);
 	}
 }
 
-function actualizaAlum2()
+function actualizaSelectModificar()
 {
-	var vaciar = document.getElementById("selectAlumno2");
-	vaciar.remove(vaciar);
+	document.getElementById("selectAlumnoModificar").remove(0);
 
-	var oSelec = document.getElementById("selectCursos2").options[document.getElementById("selectCursos2").selectedIndex];
-	var oSelec2 = document.getElementById("selectAlumno2");
-	var oTablaActu = academia.getListaAlumCurso(oSelec.value,sesion.dni);
+	var oSelectCurso = document.getElementById("selectCursoModificar");
+	var oSelectAlumno = document.getElementById("selectAlumnoModificar");
+	var tAlumnos = academia.getCurso(oSelectCurso.value).listaAlumnos;
 
-	document.getElementById("capaSelectAlumno2").classList.remove("ocultar");
-	document.getElementById("CapNotaAlu2").classList.remove("ocultar");
+	document.getElementById("capaSelectAlumnoModificar").classList.remove("ocultar");
+	document.getElementById("CapNotaAluModificar").classList.remove("ocultar");
 
-	var bEnc=false;
-	for (var i=0; i<oTablaActu.length; i++)
+	var bAluEnc=false;
+	for (var i=0; i<tAlumnos.length; i++)
 	{
-		var oListaProvCali=oTablaActu[i].listaCalificaciones;
-		for (var k=0; k<oListaProvCali.length; k++)
+		var oAlumno = academia.getUsuario(tAlumnos[i]);
+		var tCalificaciones = oAlumno.listaCalificaciones;
+
+		for (var k=0; k<tCalificaciones.length; k++)
 		{
-			if(oListaProvCali[k].codCurso == oSelec.value)
+			if(tCalificaciones[k].codCurso == oSelectCurso.value)
 			{
 				var oOption = document.createElement("option");
-				oOption.text = oTablaActu[i].nombre+", "+oTablaActu[i].apellido;
-				oOption.value = oTablaActu[i].dni;
+				oOption.text = oAlumno.nombre+", "+oAlumno.apellidos;
+				oOption.value = oAlumno.dni;
 			}
 		}
 
-		for (var j=0; j<oSelec2.options.length && !bEnc; j++)
-     		if(oSelec2.options[j].value == oOption.value)
-				bEnc = true;
+		for (var j=0; j<oSelectAlumno.options.length && !bAluEnc; j++)
+     		if(oSelectAlumno.options[j].value == oOption.value)
+				bAluEnc = true;
 
-     	if(!bEnc && oOption != null)
-     		oSelec2.add(oOption);
+     	if(!bAluEnc && oOption != null)
+     		oSelectAlumno.add(oOption);
     }
 }
 
-function calificar()
+function addCalificacion()
 {
-    var oSelec = document.getElementById("selectCursos").options[document.getElementById("selectCursos").selectedIndex];
-    var oSelec2 = document.getElementById("selectAlumno").options[document.getElementById("selectAlumno").selectedIndex];
+    var oSelectCurso = document.getElementById("selectCursoCalificar");
+    var oSelectAlumno = document.getElementById("selectAlumnoCalificar");
     var nota = document.getElementById("NotaAlu");
 
-	academia.calificarAlumno(oSelec.value,oSelec2.value,nota.value);
-	document.getElementById("capaSelectAlumno").classList.add("ocultar");
-	document.getElementById("CapNotaAlu").classList.add("ocultar");
+	academia.addCalificacionesAlu(oSelectAlumno.value,new Calificaciones(nota.value,oSelectCurso.value));
+	document.getElementById("capaSelectAlumnoCalificar").classList.add("ocultar");
+	document.getElementById("CapNotaAluCalificar").classList.add("ocultar");
 	nota.value = "";
 }
 
-function Modificar()
+function modificarCalificacion()
 {
-    var oSelec = document.getElementById("selectCursos2").options[document.getElementById("selectCursos2").selectedIndex];
-   	var oSelec2 = document.getElementById("selectAlumno2").options[document.getElementById("selectAlumno2").selectedIndex];
-    var nota=document.getElementById("modTxtNotaAlu");
+    var oSelectCurso = document.getElementById("selectCursoModificar").options[document.getElementById("selectCursoModificar").selectedIndex];
+   	var oSelecAlumno = document.getElementById("selectAlumnoModificar").options[document.getElementById("selectAlumnoModificar").selectedIndex];
+    var nota = document.getElementById("modTxtNotaAlu");
 
-	academia.modificarNotaAlumno(oSelec.value,oSelec2.value,nota.value);
-	document.getElementById("capaSelectAlumno2").classList.add("ocultar");
-	document.getElementById("CapNotaAlu2").classList.add("ocultar");
-	nota.value="";
+	academia.modificarNotaAlumno(oSelectCurso.value, oSelectAlumno.value, nota.value);
+	document.getElementById("capaSelectAlumnoModificar").classList.add("ocultar");
+	document.getElementById("CapNotaAluModificar").classList.add("ocultar");
+	nota.value = "";
 }
 
 

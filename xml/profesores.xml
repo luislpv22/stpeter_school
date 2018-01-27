@@ -3,12 +3,17 @@
 <profesor>
 	<nombre>Profesor</nombre>
 	<password>profesor</password>
-	<apellido>1</apellido>
+	<apellidos>1</apellidos>
 	<dni>profesor</dni>
 	<telefono>951357258</telefono>
 	<direccion>C/ Puerto Urraca</direccion>
 	<email>ivanSales@gmail.com</email>
 	<activo>si</activo>
 	<estadoCobro>pendiente</estadoCobro>
+	<listadoCursos>
+		<curso>ENA2P</curso>
+		<curso>ENB1S</curso>
+		<curso>FRA2P</curso>
+	</listadoCursos>
 </profesor>
 </listaProfesores>

@@ -29,9 +29,9 @@
             <ul class="list-unstyled components">
                 <li class="active"><a href="#homeSubmenu"><i class="glyphicon glyphicon-home"></i>Inicio</a></li>
                 <li><a href="#frmModAlu" id="enlaceMisDatos"><i class="glyphicon glyphicon-user"></i>Mis Datos</a></li>
-                <li><a href="#capaCalificarAlu" id="enlaceMatricular"><i class="glyphicon glyphicon-education"></i>Añadir Notas</a></li>
-                <li><a href="#frmModNotas" id="enlaceModMatri"><i class="glyphicon glyphicon-education"></i>Modificar Notas</a></li>
-                <li><a href="#pageSubmenu1" id="consNotas"><i class="glyphicon glyphicon-book"></i>Consultar Alumnos</a></li>
+                <li><a href="#capaCalificarAlu" id="enlaceCalificar"><i class="glyphicon glyphicon-education"></i>Añadir Notas</a></li>
+                <li><a href="#frmModNotas" id="enlaceModificar"><i class="glyphicon glyphicon-education"></i>Modificar Notas</a></li>
+                <li><a href="#pageSubmenu1" id="enlaceConsultar"><i class="glyphicon glyphicon-book"></i>Consultar Alumnos</a></li>
             </ul>
         </nav>
 
@@ -52,9 +52,9 @@
                             </div>
                             <!-- Text input-->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="apellidoAlu">Apellidos</label>  
+                                <label class="col-md-4 control-label" for="apellidosAlu">Apellidos</label>  
                                 <div class="col-md-8">
-                                    <input id="apellidoAlu" name="apellidoAlu" type="text" placeholder="apellidos" class="form-control input-md" disabled>
+                                    <input id="apellidosAlu" name="apellidosAlu" type="text" placeholder="Apellidos" class="form-control input-md" disabled>
                                 </div>
                             </div>
                             <!-- Text input-->
@@ -106,23 +106,23 @@
                 <div id="capaCalificarAlu" class="ocultar">
                     <fieldset>
                         <legend>Calificar Alumno</legend>
-                        <form class="form-group"  name="frmPuntuar">
+                        <form class="form-group"  name="frmCalificar">
                             <div id="capaSelectCursos">
-                                <label class="col-md-2 control-label" for="selectCursos">Cursos</label>
-                                <select id="selectCursos" class="form-control">
+                                <label class="col-md-2 control-label" for="selectCursoCalificar">Cursos</label>
+                                <select id="selectCursoCalificar" class="form-control">
                                     <option value="">Seleccionar curso</option>
                                 </select>
                             </div>
-                            <div id="capaSelectAlumno" class="ocultar">
-                                <label class="col-md-2 control-label" for="selectAlumno">Alumnos</label>
-                                <select id="selectAlumno" class="form-control">
+                            <div id="capaSelectAlumnoCalificar" class="ocultar">
+                                <label class="col-md-2 control-label" for="selectAlumnoCalificar">Alumnos</label>
+                                <select id="selectAlumnoCalificar" class="form-control">
                                     <option value="">Seleccionar alumno</option>
                                 </select>
                             </div>
-                            <div class="ocultar" id="CapNotaAlu">
+                            <div class="ocultar" id="CapNotaAluCalificar">
                                 <label class="col-md-2 control-label" for="NotaAlu">Nota</label>
                                 <input type="text" size="4" id="NotaAlu" name="NotaAlu" class="form-control"/>
-                                <button type="button" class="btn btn-success " id="puntuar" name="puntuar">Puntuar</button>
+                                <button type="button" class="btn btn-success " id="calificar" name="calificar">Calificar</button>
                             </div>
                         </form>
                     </fieldset>
@@ -132,7 +132,7 @@
                     <fieldset>
                         <legend>Consultar Notas</legend>
                         <div id="capaSelectCursos" class="form-group">
-                            <select id="selectCursos3" class="form-control">
+                            <select id="selectCursoConsultar" class="form-control">
                                 <option value="Todo">Todo</option>
                             </select>
                         </div>
@@ -142,27 +142,27 @@
 
 
                 <div id="capaModificarNotas" class="ocultar">
-                    <form class="form-group" name="frmModNotas">
+                    <form class="form-group" name="frmModificar">
                         <fieldset>
                             <legend>Modificar Notas</legend>
                             <div id="capaSelectCursos">
-                                <label class="col-md-1 control-label" for="selectCursos2">Cursos</label>
+                                <label class="col-md-1 control-label" for="selectCursoModificar">Cursos</label>
                                 <div class="col-md-4">
-                                    <select id="selectCursos2" class="form-control">
+                                    <select id="selectCursoModificar" class="form-control">
                                         <option value="">Seleccionar curso</option>
                                     </select>
                                 </div>
                             </div>
-                            <div id="capaSelectAlumno2" class="ocultar">
-                                <label class="col-md-2 control-label" for="selectAlumno2">Alumnos</label>
-                                <select id="selectAlumno2" class="form-control">
+                            <div id="capaSelectAlumnoModificar" class="ocultar">
+                                <label class="col-md-2 control-label" for="selectAlumnoModificar">Alumnos</label>
+                                <select id="selectAlumnoModificar" class="form-control">
                                     <option value="">Seleccionar alumno</option>
                                 </select>
                             </div>
-                            <div class="ocultar" id="CapNotaAlu2">
+                            <div class="ocultar" id="CapNotaAluModificar">
                                 <label class="col-md-2 control-label" for="modTxtNotaAlu">Nota</label>
                                 <input type="text" size="4" id="modTxtNotaAlu" name="modTxtNotaAlu" class="form-control"/>
-                                <button type="button" class="btn btn-success" id="editar" name="editar">Modificar</button>
+                                <button type="button" class="btn btn-success" id="modificar" name="modificar">Modificar</button>
                             </div>
                         </fieldset>
                     </form>
@@ -172,7 +172,7 @@
     </div>
     <script type="text/javascript" src="js/objetos.js"></script>
     <script type="text/javascript" src="js/principal.js"></script>
-    <script type="text/javascript" src="js/validaciones/alumno.js"></script>
+    <script type="text/javascript" src="js/alumno.js"></script>
     <script type="text/javascript" src="js/profesor.js"></script>
 </body>
 </html>

@@ -116,10 +116,10 @@ function comprobarFrmModDatosAlu(oEvento)
 		//modificar los daos del alumno
 		oE.preventDefault();
 		sNombre = document.frmModAlu.nombreAlu.value.trim();
-		sApellido = document.frmModAlu.apellidoAlu.value.trim();
+		sApellidos = document.frmModAlu.apellidosAlu.value.trim();
 		sDni = document.frmModAlu.dniAlu.value.trim();
 
-		oAlMod = new Alumno(sNombre, sPassword, sApellido, sDni, sTelefono, sDireccion, sEmail, true, false);//objeto alumno con los datos modificados
+		oAlMod = new Alumno(sNombre, sPassword, sApellidos, sDni, sTelefono, sDireccion, sEmail, true, false);//objeto alumno con los datos modificados
 		academia.modificarUsuario(oAlMod);
 		//modificar los datos de sesión de usuario
 		sessionStorage.setItem('usuario', JSON.stringify(oAlMod));
@@ -166,7 +166,7 @@ function comprobarFrmModMatri(oEvento)
 	var sPassword = document.frmModMatri.passAlu.value.trim();
 	if (sPassword !="")
 	{
-		/*El campo apellido debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios.*/
+		/*El campo apellidos debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios.*/
 		var oExpReg = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}$/i;
 		if (oExpReg.test(sPassword) == false)
 		{
@@ -189,27 +189,27 @@ function comprobarFrmModMatri(oEvento)
 	}
 
 	//apellidos
-	var sApellidos = document.frmModMatri.apellidoAlu.value.trim();
+	var sApellidos = document.frmModMatri.apellidosAlu.value.trim();
 	if (sApellidos !="")
 	{
-		/*El campo apellido debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios.*/
+		/*El campo apellidos debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios.*/
 		var oExpReg = /^[a-z\s]{6,30}$/i;
 		if (oExpReg.test(sApellidos) == false)
 		{
-			document.frmModMatri.apellidoAlu.classList.add("errorFormulario");
-			document.frmModMatri.apellidoAlu.focus();
+			document.frmModMatri.apellidosAlu.classList.add("errorFormulario");
+			document.frmModMatri.apellidosAlu.focus();
 			bValido = false;
-			sError += "El campo apellido debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios \n"; 
+			sError += "El campo apellidos debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios \n"; 
 		}
 		else {
-			document.frmModMatri.apellidoAlu.classList.remove("errorFormulario");
+			document.frmModMatri.apellidosAlu.classList.remove("errorFormulario");
 		}
 	}
 	else
 	{
-		document.frmModMatri.apellidoAlu.classList.add("errorFormulario");
+		document.frmModMatri.apellidosAlu.classList.add("errorFormulario");
 		if(bValido) 
-		  document.frmModMatri.apellidoAlu.focus();
+		  document.frmModMatri.apellidosAlu.focus();
 		bValido = false;
 		sError += "El campo apellidos no puede estar vacio \n";     
 	}
@@ -351,7 +351,7 @@ function cerrarMensaje()
 function cargarDatosUsuario()
 {
 	document.querySelector("#frmModAlu #nombreAlu").value = sesion.nombre;
-	document.querySelector("#frmModAlu #apellidoAlu").value = sesion.apellido;
+	document.querySelector("#frmModAlu #apellidosAlu").value = sesion.apellidos;
 	document.querySelector("#frmModAlu #dniAlu").value = sesion.dni;
 	document.querySelector("#frmModAlu #passAlu").value = sesion.password;
 	document.querySelector("#frmModAlu #telefonoAlu").value = sesion.telefono;
@@ -587,7 +587,7 @@ function realizarMatricula(oEvento)
 	for (var i=0; i<cursosElegidos.length; i++) 
 		sesion.listaCursos.push(cursosElegidos[i].codigo)
 
-	oMatricula = new Matricula(academia.codNuevaMatri(), "abierta", sesion, cursosElegidos);
+	oMatricula = new Matricula(academia.codNuevaMatri(), "abierta", sesion.dni, cursosElegidos);
 
 	academia.addMatricula(oMatricula);
 	document.querySelector("#txtInformacion span").textContent = "";
@@ -658,7 +658,7 @@ function cargarListadoCurso(oEvento)
 
 		for (var i=0; i<listaNotas.length; i++) 
 		{
-			oFila = oTabla.insertRow(-1);
+			oFila = oTBody.insertRow(-1);
 			oCelda = oFila.insertCell(-1);
 			oCelda.textContent = "Examen "+(i+1);
 			oCelda = oFila.insertCell(-1);
@@ -728,9 +728,10 @@ function limpiarListadoCurso()
 
 function filtaTabla()
 {
-	iSele= parseInt(document.querySelector("#filtraNotas").value);
+	iSele= parseFloat(document.querySelector("#filtraNotas").value);
 	var oTabla= document.querySelector("TABLE");
-	var oFilas = oTabla.rows; //el número de filas de una tabla
+	var oTBody= document.querySelector("TBODY");
+	var oFilas = oTBody.rows; //el número de filas de una tabla
 	borrarFiltro(oFilas);
 
 	if (iSele!= 99)
@@ -739,9 +740,9 @@ function filtaTabla()
 		{
 			for (var i=0; i<oFilas.length; i++) 
 			{
-				var oCeldas = oTabla.rows[i].cells;  // las celdas de una fila en concreto
+				var oCeldas = oTBody.rows[i].cells;  // las celdas de una fila en concreto
 				for (var j=0; j<oCeldas.length; j++) 
-					if (parseInt(oCeldas[j].dataset.nota)<iSele)
+					if (parseFloat(oCeldas[j].dataset.nota)<iSele)
 						oFilas[i].classList.add("ocultar");
 			}
 		}
@@ -749,7 +750,7 @@ function filtaTabla()
 		{
 			for (var i=0; i<oFilas.length; i++) 
 			{
-				var oCeldas = oTabla.rows[i].cells;  // las celdas de una fila en concreto
+				var oCeldas = oTBody.rows[i].cells;  // las celdas de una fila en concreto
 				for (var j=0; j<oCeldas.length; j++) 
 					if (parseInt(oCeldas[j].dataset.nota) > iSele)
 						oFilas[i].classList.add("ocultar");
@@ -785,18 +786,18 @@ function ordenaTabla()
 		else
 			var arrayNotaOrdenado= arrayNotas.sort(function(a, b){return a<b}); // ordena de menor a mayor;
 
-		var oFilas = oTabla.rows; // el número de filas de una tabla
+		var oFilas = oTBody.rows; // el número de filas de una tabla
 
 		for (var i=0; i<arrayNotaOrdenado.length; i++) 
 		{
 			for (var j=0; j<oFilas.length; j++) 
 			{
-				var oCeldas = oTabla.rows[j].cells;  // las celdas de una fila en concreto
+				var oCeldas = oFilas[j].cells;  // las celdas de una fila en concreto
 				for (var k=0; k<oCeldas.length; k++) 
 				{
 					if (parseInt(oCeldas[k].dataset.nota )== arrayNotaOrdenado[i])
 					{
-						oTBody.appendChild(oFila[j]);
+						oTBody.appendChild(oFilas[j]);
 					}
 				}
 			}
