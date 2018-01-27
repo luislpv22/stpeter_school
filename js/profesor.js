@@ -19,6 +19,19 @@ function mostrarSidebar()
         sidebar.classList.add('active');
 }
 
+ 	var academia= new Academia();
+  	var btnPuntuar;
+  	var sel;
+ 	var btnEditar;
+
+ 	sel=document.frmPuntuar.selectCursos;
+ 	sel2=document.frmModNotas.selectCursos2;
+ 	sel3=document.getElementById("selectCursos3");
+     btnPuntuar=document.frmPuntuar.puntuar;
+     btnEditar=document.frmModNotas.editar;
+
+
+
 /* Configuración de eventos */
 var enlaces = document.getElementsByTagName("a");
 for (var i = 0; i < enlaces.length ; i++) 
@@ -45,12 +58,14 @@ function mostrar(oEvento)
 		document.getElementById("capaCalificarAlu").classList.remove("ocultar");
 		document.getElementById("capaConsultarNotas").classList.add("ocultar");
 		document.getElementById("capaModificarNotas").classList.add("ocultar");
+		document.getElementById("capaModificarAlu").classList.add("ocultar");
 	}
 	else if (oE.target.id == "consNotas")
 	{
 		document.getElementById("capaConsultarNotas").classList.remove("ocultar");
 		document.getElementById("capaCalificarAlu").classList.add("ocultar");
 		document.getElementById("capaModificarNotas").classList.add("ocultar");
+		document.getElementById("capaModificarAlu").classList.add("ocultar");
 		var oTabla=academia.consultarNotas(sesion.dni,"todo");
 		    var oFieldset = document.querySelectorAll("div #capaNotas");
             oFieldset[0].appendChild(oTabla);
@@ -60,6 +75,7 @@ function mostrar(oEvento)
 		document.getElementById("capaModificarNotas").classList.remove("ocultar");
 		document.getElementById("capaCalificarAlu").classList.add("ocultar");
 		document.getElementById("capaConsultarNotas").classList.add("ocultar");
+		document.getElementById("capaModificarAlu").classList.add("ocultar");
 
 	}
 	else if (oE.target.id == "enlaceMisDatos")
