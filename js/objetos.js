@@ -104,9 +104,9 @@ class Curso
 		this.bArchivado   = bArchivado; // boolean para saber si el curso sigue activo, o ya termino, o se canceló
 	}
 
-	matricularAlumno(oAlumno)
+	matricularAlumno(sDni)
 	{
-		this.listaAlumnos.push(oAlumno); // añade un alumno al curso
+		this.listaAlumnos.push(sDni); // añade un alumno al curso
 	}
 }
 

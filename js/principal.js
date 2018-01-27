@@ -179,13 +179,9 @@ function cargarCursos(oCursos)
 		oCurso = new Curso (codigo, idioma, duracion, precio, tipo, nivel, activo);
 
 		if (listadoAlumnos.length > 0)
-		{
 			for (var j=0; j<listadoAlumnos.length; j++) 
-			{
-				var oAlumno = academia.getUsuario(listadoAlumnos[j].textContent);
-				oCurso.listaAlumnos.push(oAlumno);
-			}
-		}
+				oCurso.listaAlumnos.push(listadoAlumnos[j].textContent);
+
 		academia.addCurso(oCurso);
 	}
 }
