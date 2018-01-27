@@ -401,13 +401,26 @@ class Academia
 		        	oCelda.textContent = oUsuario.nombre;
 
 		        	var oTablaCalif = oUsuario.listaCalificaciones;
-		        
+		        var sinNota=true;
 		        	for (var k=0; k<oTablaCalif.length; k++)
 		        	{
 		        		oCelda = oFila.insertCell(-1);
 		        		if(oTablaCalif[k].codCurso == oTablaCurProv[i].codigo)
+		        		{
 		        			oCelda.textContent = oTablaCalif[k].nota;
+		        			sinNota=false;
+		        		}
+		        		
 		        	}
+		        		if(sinNota)
+		        		{
+		        			oCelda = oFila.insertCell(-1);
+		        			oCelda.textContent = "Sin calificar";
+		        			
+		        		}
+
+
+
 		    	}
 			}
 		}
@@ -415,40 +428,25 @@ class Academia
 		return oTabla;
     }
 
-/*    modificarNotaAlumno(sCodigo,sDni,fNota)
+    modificarNotaAlumno(sDni,oCalificacion)
     {
 
-    	for (var i=0; i<this._profesores[0].listaCurso.length; i++) 
-    	{
+  			for (var i = 0; i < this._usuarios.length; i++) 
+			{
+				if (this._usuarios[i].dni== sDni)
+				{
+					var oCalifca=this._usuarios[i].listaCalificaciones;
 
-    		if (this._profesores[0].listaCurso[i].codigo == sCodigo)
-    		{
-    			var oTR=this._profesores[0].listaCurso[i].listaAlumno;
-    			for (var j=0; j<oTR.length; j++) 
-    			{
+					for (var j = 0; j < oCalifca.length; j++)
+					{
+						if(oCalifca[j].codCurso==oCalificacion.codCurso)
+						oCalifca[j].nota=oCalificacion.nota;
+					}
 
-    				if (this._profesores[0].listaCurso[i].listaAlumno[j].dni == sDni)
-    				{
+				}
+			}
 
-    					var oTR2=this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones;
-    					for (var k=0; k<oTR.length; k++){
-
-    						if (this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones[k].codCurso == sCodigo)
-    						{
-    							this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones[k].nota=fNota;
-
-    						}
-
-
-    					}
-
-
-
-    				}
-    			}
-    		}
-    	}
-    }*/
+    }
 
 	codNuevaMatri()
 	{

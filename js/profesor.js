@@ -226,10 +226,10 @@ function addCalificacion()
 function modificarCalificacion()
 {
     var oSelectCurso = document.getElementById("selectCursoModificar").options[document.getElementById("selectCursoModificar").selectedIndex];
-   	var oSelecAlumno = document.getElementById("selectAlumnoModificar").options[document.getElementById("selectAlumnoModificar").selectedIndex];
+   	var oSelectAlumno = document.getElementById("selectAlumnoModificar").options[document.getElementById("selectAlumnoModificar").selectedIndex];
     var nota = document.getElementById("modTxtNotaAlu");
 
-	academia.modificarNotaAlumno(oSelectCurso.value, oSelectAlumno.value, nota.value);
+	academia.modificarNotaAlumno(oSelectAlumno.value, new Calificaciones(nota.value,oSelectCurso.value));
 	document.getElementById("capaSelectAlumnoModificar").classList.add("ocultar");
 	document.getElementById("CapNotaAluModificar").classList.add("ocultar");
 	nota.value = "";
