@@ -712,11 +712,58 @@ function cargarListadoCurso(oEvento)
 			oCelda.textContent="Examen "+(i+1);
 			oCelda= oFila.insertCell(-1);
 			oCelda.textContent=listaNotas[i];
+			oCelda.dataset.nota=listaNotas[i];
+			oCelda.id="nota";
 		}
 
 		document.querySelector("#listaCalificaciones").appendChild(oTabla);
-	}
-								
+
+		oBr= document.createElement("BR");
+	document.querySelector("#listaCalificaciones").appendChild(oBr);
+	oParrafo= document.createElement("P");
+	oParrafo.textContent="Opciones de filtrado y ordenación";
+	document.querySelector("#listaCalificaciones").appendChild(oParrafo);
+	oBr= document.createElement("BR");
+	document.querySelector("#listaCalificaciones").appendChild(oBr);
+
+	//crear select para los filtrados
+	oSelect= document.createElement("SELECT");
+	oSelect.id="filtraNotas";
+	oP= document.createElement("OPTION");
+	oP.value="99";
+	oP.textContent="Seleccione filtrado";
+	oSelect.appendChild(oP);
+	oP= document.createElement("OPTION");
+	oP.value="5";
+	oP.textContent="Aprobados";
+	oSelect.appendChild(oP);
+	oP= document.createElement("OPTION");
+	oP.value="4.99";
+	oP.textContent="Suspensos";
+	oSelect.appendChild(oP);
+	document.querySelector("#listaCalificaciones").appendChild(oSelect);
+
+	document.querySelector("#filtraNotas").addEventListener("change", filtaTabla, false);
+
+	//crear select para ordenar notas
+	oSelect= document.createElement("SELECT");
+	oSelect.id="ordenaNotas";
+	oP= document.createElement("OPTION");
+	oP.value="nulo";
+	oP.textContent="Seleccione tipo de orden";
+	oSelect.appendChild(oP);
+	oP= document.createElement("OPTION");
+	oP.value="creciente";
+	oP.textContent="De menor a mayor";
+	oSelect.appendChild(oP);
+	oP= document.createElement("OPTION");
+	oP.value="decreciente";
+	oP.textContent="De mayor a menor";
+	oSelect.appendChild(oP);
+	document.querySelector("#listaCalificaciones").appendChild(oSelect);
+
+	document.querySelector("#ordenaNotas").addEventListener("change", ordenaTabla, false);
+	}							
 }
 
 function limpiarListadoCurso()
@@ -728,3 +775,93 @@ function limpiarListadoCurso()
 }
 
 
+function filtaTabla()
+{
+	iSele= parseInt(document.querySelector("#filtraNotas").value);
+	var oTabla= document.querySelector("TABLE");
+	var oFilas = oTabla.rows; //el número de filas de una tabla
+	desfiltrar(oFilas);
+
+	if (iSele!= 99)
+	{
+		if (iSele == 5)
+		{
+			for (var i = 0; i < oFilas.length; i++) 
+			{
+				var oCeldas = oTabla.rows[i].cells;  //las celdas de una fila en concreto
+				for (var j = 0; j < oCeldas.length; j++) 
+			    {
+				    if (parseInt(oCeldas[j].dataset.nota)< iSele)
+					{
+						oFilas[i].classList.add("ocultar");
+					}
+					
+				}
+			}
+		}
+		else
+		{
+			for (var i = 0; i < oFilas.length; i++) 
+			{
+				var oCeldas = oTabla.rows[i].cells;  //las celdas de una fila en concreto
+				for (var j = 0; j < oCeldas.length; j++) 
+			    {
+					if (parseInt(oCeldas[j].dataset.nota)> iSele)
+					{
+						oFilas[i].classList.add("ocultar");
+					}
+				}
+			}
+		}
+	}
+}
+
+function desfiltrar(oFilas)
+{
+	for (var i = 0; i < oFilas.length; i++) 
+	{
+		oFilas[i].classList.remove("ocultar");
+	}
+}
+
+function ordenaTabla()
+{
+	sSele= document.querySelector("#ordenaNotas").value;
+	if (sSele =="creciente" || sSele =="decreciente" )
+	{
+		var oTabla= document.querySelector("TABLE");
+		var oTBody=document.querySelector("TBODY");
+
+		var arrayTrNotas= document.querySelectorAll("#nota");
+		var arrayNotas=[];
+
+		for (var i = 0; i < arrayTrNotas.length; i++)
+		{
+		    arrayNotas[i]=parseInt(arrayTrNotas[i].dataset.nota);
+		}
+
+		if (sSele =="creciente" )
+	       var arrayNotaOrdenado= arrayNotas.sort(function(a, b){return a-b}); //ordena de menor a mayor;
+	    else
+	    	var arrayNotaOrdenado= arrayNotas.sort(function(a, b){return a<b}); //ordena de menor a mayor;
+
+
+	    var oFilas = oTabla.rows; //el número de filas de una tabla
+
+	   for (var i = 0; i < arrayNotaOrdenado.length; i++) 
+	   {
+		    for (var j = 0; j < oFilas.length; j++) 
+				{
+					var oCeldas = oTabla.rows[j].cells;  //las celdas de una fila en concreto
+					for (var k = 0; k < oCeldas.length; k++) 
+					{
+						if (parseInt(oCeldas[k].dataset.nota)== arrayNotaOrdenado[i])
+						{
+							oTBody.appendChild(oFilas[j]);
+						}
+							
+					}
+				}
+		}
+	}	
+}
