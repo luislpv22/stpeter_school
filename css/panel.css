@@ -170,6 +170,10 @@ a.article, a.article:hover {
   width: 100%;
 }
 
+.modal-title {
+  display: inline;
+}
+
 .alert {
   position: absolute;
   top: 120px;

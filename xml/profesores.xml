@@ -3,7 +3,7 @@
 <profesor>
 	<nombre>Profesor</nombre>
 	<password>profesor</password>
-	<apellido>1</apellido>
+	<apellidos>1</apellidos>
 	<dni>profesor</dni>
 	<telefono>951357258</telefono>
 	<direccion>C/ Puerto Urraca</direccion>

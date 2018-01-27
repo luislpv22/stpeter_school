@@ -1,10 +1,10 @@
 class Persona
 {
-	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo)
+	constructor(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo)
 	{
 		this.nombre    = sNombre;
 		this.password  = sPassword;
-		this.apellido  = sApellido;
+		this.apellidos  = sApellidos;
 		this.dni       = sDni;
 		this.telefono  = iTelefono;
 		this.direccion = sDireccion;
@@ -15,9 +15,9 @@ class Persona
 
 class Profesor extends Persona
 {
-	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo, iSalario)
+	constructor(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo, iSalario)
 	{
-		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
+		super(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 
 		this.salario     = iSalario;
 		this.listaCursos = [];
@@ -45,9 +45,9 @@ class Profesor extends Persona
 
 class Alumno extends Persona
 {
-	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo, bEstadoCobro)
+	constructor(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo, bEstadoCobro)
 	{
-		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
+		super(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 
 		this.estadoCobro         = bEstadoCobro;
 		this.listaCursos         = [];
@@ -62,9 +62,9 @@ class Alumno extends Persona
 
 class Administrador extends Persona
 {
-	constructor(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo)
+	constructor(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo)
 	{
-		super(sNombre, sPassword, sApellido, sDni, iTelefono, sDireccion, sCorreo, bActivo);
+		super(sNombre, sPassword, sApellidos, sDni, iTelefono, sDireccion, sCorreo, bActivo);
 	}
 }
 
@@ -169,7 +169,7 @@ class Academia
 
 		if (!bEncontrado) {
 			this._usuarios.push(oUsuario);
-			sessionStorage.setItem('tUsuarios', JSON.stringify(this._usuarios));
+			this.actualizarSesionUsuarios();
 		}
 
 		return !bEncontrado;
@@ -213,7 +213,7 @@ class Academia
 				bEncontrado = true;
 			}
 		}
-		sessionStorage.setItem('tUsuarios', JSON.stringify(this._usuarios));
+		this.actualizarSesionUsuarios();
 	}
 
 	modificarCurso(oCurso)
@@ -306,6 +306,21 @@ class Academia
 				oCurso= this._cursos[i];
 
 		return oCurso;
+	}
+
+	actualizarSesionUsuarios()
+	{
+		var tUsuarios = this._usuarios;
+		for (var i=0; i<tUsuarios.length; i++)
+		{
+	    	if (tUsuarios[i] instanceof Administrador)
+	    		tUsuarios[i].tipo = 'administrador';
+	    	else if (tUsuarios[i] instanceof Profesor)
+	    		tUsuarios[i].tipo = 'profesor';
+	    	else
+	    		tUsuarios[i].tipo = 'alumno';
+		}
+		sessionStorage.setItem('tUsuarios', JSON.stringify(tUsuarios));
 	}
 
     consultarNotas(sDni,SFiltro)

@@ -19,18 +19,7 @@ function datosIniciales()
 	    var oXMLAdministradores = loadXMLDoc("xml/administradores.xml");
 		var oAdministradores = oXMLAdministradores.getElementsByTagName("administrador");
 		cargarAdministradores(oAdministradores);
-
-		var tUsuarios = academia.getUsuarios();
-		for (var i=0; i<tUsuarios.length; i++)
-		{
-	    	if (tUsuarios[i] instanceof Administrador)
-	    		tUsuarios[i].tipo = 'administrador';
-	    	else if (tUsuarios[i] instanceof Profesor)
-	    		tUsuarios[i].tipo = 'profesor';
-	    	else
-	    		tUsuarios[i].tipo = 'alumno';
-		}
-		sessionStorage.setItem('tUsuarios', JSON.stringify(tUsuarios));
+		academia.actualizarSesionUsuarios();
 	}
 	else
 	{
@@ -41,11 +30,11 @@ function datosIniciales()
 			var oUsuario = null;
 			var us = tUsuarios[i];
 	    	if (us.tipo == 'administrador')
-	    		oUsuario = new Administrador(us.nombre, us.password, us.apellido, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.salario);
+	    		oUsuario = new Administrador(us.nombre, us.password, us.apellidos, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.salario);
 	    	else if (us.tipo == 'profesor')
-	    		oUsuario = new Profesor(us.nombre, us.password, us.apellido, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.salario);
+	    		oUsuario = new Profesor(us.nombre, us.password, us.apellidos, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.salario);
 	    	else
-	    		oUsuario = new Alumno(us.nombre, us.password, us.apellido, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.estadoCobro);
+	    		oUsuario = new Alumno(us.nombre, us.password, us.apellidos, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.estadoCobro);
 
 	    	academia.addUsuario(oUsuario);
     	}
@@ -116,51 +105,51 @@ function cargarAlumnos(oAlumnos)
 {
 	for(var i=0; i<oAlumnos.length; i++)
 	{
-		nombre=oAlumnos[i].getElementsByTagName("nombre")[0].textContent;
-		pass=oAlumnos[i].getElementsByTagName("password")[0].textContent;
-		apellido=oAlumnos[i].getElementsByTagName("apellido")[0].textContent;
-		dni=oAlumnos[i].getElementsByTagName("dni")[0].textContent;
-		telefono=oAlumnos[i].getElementsByTagName("telefono")[0].textContent;
-		direccion=oAlumnos[i].getElementsByTagName("direccion")[0].textContent;
-		email=oAlumnos[i].getElementsByTagName("email")[0].textContent;
-		activo=oAlumnos[i].getElementsByTagName("activo")[0].textContent;
-		estadoCobro=oAlumnos[i].getElementsByTagName("estadoCobro")[0].textContent;
+		nombre = oAlumnos[i].getElementsByTagName("nombre")[0].textContent;
+		pass = oAlumnos[i].getElementsByTagName("password")[0].textContent;
+		apellidos = oAlumnos[i].getElementsByTagName("apellidos")[0].textContent;
+		dni = oAlumnos[i].getElementsByTagName("dni")[0].textContent;
+		telefono = oAlumnos[i].getElementsByTagName("telefono")[0].textContent;
+		direccion = oAlumnos[i].getElementsByTagName("direccion")[0].textContent;
+		email = oAlumnos[i].getElementsByTagName("email")[0].textContent;
+		activo = oAlumnos[i].getElementsByTagName("activo")[0].textContent;
+		estadoCobro = oAlumnos[i].getElementsByTagName("estadoCobro")[0].textContent;
 
-		academia.addUsuario(new Alumno(nombre, pass, apellido, dni, telefono, direccion, email, activo, estadoCobro));
+		academia.addUsuario(new Alumno(nombre, pass, apellidos, dni, telefono, direccion, email, activo, estadoCobro));
 	}
 }
 function cargarProfesores(oProfesores)
 {
 	for(var i=0; i<oProfesores.length; i++)
 	{
-		nombre=oProfesores[i].getElementsByTagName("nombre")[0].textContent;
-		pass=oProfesores[i].getElementsByTagName("password")[0].textContent;
-		apellido=oProfesores[i].getElementsByTagName("apellido")[0].textContent;
-		dni=oProfesores[i].getElementsByTagName("dni")[0].textContent;
-		telefono=oProfesores[i].getElementsByTagName("telefono")[0].textContent;
-		direccion=oProfesores[i].getElementsByTagName("direccion")[0].textContent;
-		email=oProfesores[i].getElementsByTagName("email")[0].textContent;
-		activo=oProfesores[i].getElementsByTagName("activo")[0].textContent;
-		salario=oProfesores[i].getElementsByTagName("estadoCobro")[0].textContent;
+		nombre = oProfesores[i].getElementsByTagName("nombre")[0].textContent;
+		pass = oProfesores[i].getElementsByTagName("password")[0].textContent;
+		apellidos = oProfesores[i].getElementsByTagName("apellidos")[0].textContent;
+		dni = oProfesores[i].getElementsByTagName("dni")[0].textContent;
+		telefono = oProfesores[i].getElementsByTagName("telefono")[0].textContent;
+		direccion = oProfesores[i].getElementsByTagName("direccion")[0].textContent;
+		email = oProfesores[i].getElementsByTagName("email")[0].textContent;
+		activo = oProfesores[i].getElementsByTagName("activo")[0].textContent;
+		salario = oProfesores[i].getElementsByTagName("estadoCobro")[0].textContent;
 
-		academia.addUsuario(new Profesor(nombre, pass, apellido, dni, telefono, direccion, email, activo, salario));
+		academia.addUsuario(new Profesor(nombre, pass, apellidos, dni, telefono, direccion, email, activo, salario));
 	}
 }
 function cargarAdministradores(oAdministradores)
 {
 	for(var i=0; i<oAdministradores.length; i++)
 	{
-		nombre=oAdministradores[i].getElementsByTagName("nombre")[0].textContent;
-		pass=oAdministradores[i].getElementsByTagName("password")[0].textContent;
-		apellido=oAdministradores[i].getElementsByTagName("apellido")[0].textContent;
-		dni=oAdministradores[i].getElementsByTagName("dni")[0].textContent;
-		telefono=oAdministradores[i].getElementsByTagName("telefono")[0].textContent;
-		direccion=oAdministradores[i].getElementsByTagName("direccion")[0].textContent;
-		email=oAdministradores[i].getElementsByTagName("email")[0].textContent;
-		activo=oAdministradores[i].getElementsByTagName("activo")[0].textContent;
-		salario=oAdministradores[i].getElementsByTagName("estadoCobro")[0].textContent;
+		nombre = oAdministradores[i].getElementsByTagName("nombre")[0].textContent;
+		pass = oAdministradores[i].getElementsByTagName("password")[0].textContent;
+		apellidos = oAdministradores[i].getElementsByTagName("apellidos")[0].textContent;
+		dni = oAdministradores[i].getElementsByTagName("dni")[0].textContent;
+		telefono = oAdministradores[i].getElementsByTagName("telefono")[0].textContent;
+		direccion = oAdministradores[i].getElementsByTagName("direccion")[0].textContent;
+		email = oAdministradores[i].getElementsByTagName("email")[0].textContent;
+		activo = oAdministradores[i].getElementsByTagName("activo")[0].textContent;
+		salario = oAdministradores[i].getElementsByTagName("estadoCobro")[0].textContent;
 
-		academia.addUsuario(new Administrador(nombre, pass, apellido, dni, telefono, direccion, email, activo, salario));
+		academia.addUsuario(new Administrador(nombre, pass, apellidos, dni, telefono, direccion, email, activo, salario));
 	}
 }
 
@@ -277,7 +266,7 @@ function comprobarEnvio(oEvento)
 	var sPassword = document.frmAlu.passAlu.value.trim();
 	if (sPassword != "")
 	{
-		/*El campo apellido debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios.*/
+		/*El campo apellidos debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios.*/
 		var oExpReg = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}$/i;
 		if (oExpReg.test(sPassword) == false)
 		{
@@ -300,27 +289,27 @@ function comprobarEnvio(oEvento)
 	}
 
 	//apellidos
-	var sApellidos = document.frmAlu.apellidoAlu.value.trim();
+	var sApellidos = document.frmAlu.apellidosAlu.value.trim();
 	if (sApellidos != "")
 	{
-		/*El campo apellido debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios.*/
+		/*El campo apellidos debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios.*/
 		var oExpReg = /^[a-z\s]{6,30}$/i;
 		if (oExpReg.test(sApellidos) == false)
 		{
-			document.frmAlu.apellidoAlu.classList.add("errorFormulario");
-			document.frmAlu.apellidoAlu.focus();
+			document.frmAlu.apellidosAlu.classList.add("errorFormulario");
+			document.frmAlu.apellidosAlu.focus();
 			bValido = false;
-			sError += "El campo apellido debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios \n"; 
+			sError += "El campo apellidos debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios \n"; 
 		}
 		else {
-			document.frmAlu.apellidoAlu.classList.remove("errorFormulario");
+			document.frmAlu.apellidosAlu.classList.remove("errorFormulario");
 		}
 	}
 	else
 	{
-		document.frmAlu.apellidoAlu.classList.add("errorFormulario");
+		document.frmAlu.apellidosAlu.classList.add("errorFormulario");
 		if(bValido) 
-		  document.frmAlu.apellidoAlu.focus();
+		  document.frmAlu.apellidosAlu.focus();
 		bValido = false;
 		sError += "El campo apellidos no puede estar vacio \n";		
 	}
@@ -441,8 +430,6 @@ function comprobarEnvio(oEvento)
 		mensaje(document.createTextNode("Alumno creado con éxito"));
 		btnCerrarMensaje.addEventListener("click", document.frmAlu.submit(), false);	
 	}
-
-
 }
 
 function mensaje(sTexto)
@@ -478,13 +465,13 @@ function capitalize(string) {
  para que puedan modificar sus datos*/
 function cargarDatosUsuario()
 {
-	oNombre=document.querySelector("#frmModAlu #nombreAlu").value=sesion.nombre;
-	oApellido=document.querySelector("#frmModAlu #apellidoAlu").value=sesion.apellido;
-	oDni=document.querySelector("#frmModAlu #dniAlu").value=sesion.dni;
-	oPass=document.querySelector("#frmModAlu #passAlu").value=sesion.password;
-	oTelefono=document.querySelector("#frmModAlu #telefonoAlu").value=sesion.telefono;
-	oDire=document.querySelector("#frmModAlu #direAlu").value=sesion.direccion;
-	oEmail=document.querySelector("#frmModAlu #emailAlu").value=sesion.correo;
+	document.querySelector("#frmModAlu #nombreAlu").value = sesion.nombre;
+	document.querySelector("#frmModAlu #apellidosAlu").value = sesion.apellidos;
+	document.querySelector("#frmModAlu #dniAlu").value = sesion.dni;
+	document.querySelector("#frmModAlu #passAlu").value = sesion.password;
+	document.querySelector("#frmModAlu #telefonoAlu").value = sesion.telefono;
+	document.querySelector("#frmModAlu #direAlu").value = sesion.direccion;
+	document.querySelector("#frmModAlu #emailAlu").value = sesion.correo;
 }
 
 function loadXMLDoc(filename)

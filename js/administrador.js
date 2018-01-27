@@ -14,6 +14,7 @@ document.querySelector('#btnAdministradores').addEventListener("click", function
 document.querySelector('#btnMatriculas').addEventListener("click", function () { mostrarPagina('matriculaciones'); });
 
 document.querySelector('#btnAddCurso').addEventListener("click", crearCurso);
+document.querySelector('#btnAddAlumno').addEventListener("click", crearAlumno);
 
 mostrarPagina('cursos');
 
@@ -80,16 +81,18 @@ function mostrarPagina(pagina)
 			var fila = tablaAlumnos.insertRow(-1);
 			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].dni.toUpperCase()));
 			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].nombre));
-			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].apellido));
+			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].apellidos));
 			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].correo));
+			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].direccion));
 			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].activo.toUpperCase()));
 			var btn = document.createElement("input");
 			btn.type = "button";
 			btn.value = "Editar";
+			btn.classList.add("btn", "btn-danger", "btn-sm");
 			btn.setAttribute("data-toggle", "modal");
 			btn.setAttribute("data-target", "#modal");
-			btn.classList.add("btn", "btn-danger", "btn-sm");
-			btn.addEventListener("click", function() { editarAlumno(alumnos[i].dni); });
+			btn.setAttribute("data-dni", alumnos[i].dni);
+			btn.addEventListener("click", editarAlumno);
 			fila.insertCell(-1).appendChild(btn);
 		}
 
@@ -117,7 +120,7 @@ function mostrarPagina(pagina)
 			var fila = tablaProfesores.insertRow(-1);
 			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].dni.toUpperCase()));
 			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].nombre));
-			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].apellido));
+			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].apellidos));
 			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].correo));
 			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].activo.toUpperCase()));
 			var btn = document.createElement("input");
@@ -154,7 +157,7 @@ function mostrarPagina(pagina)
 			var fila = tablaAdministradores.insertRow(-1);
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].dni.toUpperCase()));
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].nombre));
-			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].apellido));
+			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].apellidos));
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].correo));
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].activo.toUpperCase()));
 			var btn = document.createElement("input");
@@ -242,6 +245,11 @@ function mostrarPagina(pagina)
 
 function editarCurso()
 {
+	document.querySelector('.modal-title').textContent = "Editar curso";
+	var forms = document.querySelectorAll('#modal form');
+	for (var i=0; i<forms.length; i++)
+		forms[i].style.display = "none";
+
 	var codigo = this.getAttribute("data-codigo");
 	var oCurso = academia.getCurso(codigo);
 	var form = document.getElementById("formEditarCurso");
@@ -266,6 +274,11 @@ function editarCurso()
 
 function crearCurso()
 {
+	document.querySelector('.modal-title').textContent = "Crear curso";
+	var forms = document.querySelectorAll('#modal form');
+	for (var i=0; i<forms.length; i++)
+		forms[i].style.display = "none";
+
 	var form = document.getElementById("formEditarCurso");
 	document.querySelector('#modal .btn-success').id = "btnGuardarCurso";
 	document.querySelector('#btnGuardarCurso').removeAttribute("data-codigo");
@@ -320,6 +333,81 @@ function guardarCurso()
 		academia.addCurso(oCurso);
 
 	mostrarPagina('cursos');
+	document.querySelector('#modal .close').click();
+}
+
+function editarAlumno()
+{
+	document.querySelector('.modal-title').textContent = "Editar alumno";
+	var forms = document.querySelectorAll('#modal form');
+	for (var i=0; i<forms.length; i++)
+		forms[i].style.display = "none";
+
+	var dni = this.getAttribute("data-dni");
+	var oAlumno = academia.getUsuario(dni);
+	var form = document.getElementById("formEditarAlumno");
+	form.dni.value = oAlumno.dni;
+	form.password.value = oAlumno.password;
+	form.nombre.value = oAlumno.nombre;
+	form.apellidos.value = oAlumno.apellidos;
+	form.email.value = oAlumno.correo;
+	form.telefono.value = oAlumno.telefono;
+	form.direccion.value = oAlumno.direccion;
+
+	document.querySelector('#modal .btn-success').id = "btnGuardarAlumno";
+	document.querySelector('#btnGuardarAlumno').setAttribute("data-dni", dni);
+	document.querySelector('#btnGuardarAlumno').addEventListener("click", guardarAlumno);
+
+	form.style.display = "block";
+}
+
+function crearAlumno()
+{
+	document.querySelector('.modal-title').textContent = "Nuevo alumno";
+	var forms = document.querySelectorAll('#modal form');
+	for (var i=0; i<forms.length; i++)
+		forms[i].style.display = "none";
+
+	var form = document.getElementById("formEditarAlumno");
+	document.querySelector('#modal .btn-success').id = "btnGuardarAlumno";
+	document.querySelector('#btnGuardarAlumno').removeAttribute("data-dni");
+	document.querySelector('#btnGuardarAlumno').addEventListener("click", guardarAlumno);
+	form.dni.removeAttribute("readonly");
+	form.dni.value = "";
+	form.password.value = "";
+	form.nombre.value = "";
+	form.apellidos.value = "";
+	form.email.value = "";
+	form.telefono.value = "";
+	form.direccion.value = "";
+	form.style.display = "block";
+}
+
+function guardarAlumno()
+{
+	var form = document.getElementById("formEditarAlumno");
+
+	var sDNI = form.dni.value;
+
+	var dataDNI = this.getAttribute("data-dni");
+	if (dataDNI != null)
+		sDNI = dataDNI;
+
+	var sPassword = form.password.value;
+	var sNombre = form.nombre.value;
+	var sApellidos = form.apellidos.value;
+	var sCorreo = form.email.value;
+	var sTelefono = form.telefono.value;
+	var sDireccion = form.direccion.value;
+
+	var oAlumno = new Alumno(sNombre, sPassword, sApellidos, sDNI, sTelefono, sDireccion, sCorreo, "si", "");
+
+	if (dataDNI != null)
+		academia.modificarUsuario(oAlumno);
+	else
+		academia.addUsuario(oAlumno);
+
+	mostrarPagina('alumnos');
 	document.querySelector('#modal .close').click();
 }
 
