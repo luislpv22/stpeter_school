@@ -213,6 +213,21 @@ class Academia
 		sessionStorage.setItem('tUsuarios', JSON.stringify(this._usuarios));
 	}
 
+	modificarCurso(oCurso)
+	{
+		// recorrer la array de cursos hasta encontrar a los que tengan el mismo codigo y modificarlo
+		var bEncontrado = false;
+		for (var i=0; i<this._cursos.length && bEncontrado==false; i++) 
+		{
+			if (this._cursos[i].codigo == oCurso.codigo)
+			{
+				this._cursos[i] = oCurso;
+				bEncontrado = true;
+			}
+		}
+		sessionStorage.setItem('tCursos', JSON.stringify(this._cursos));
+	}
+
 	getUsuarios()
 	{
 		return this._usuarios;
