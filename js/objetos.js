@@ -167,8 +167,10 @@ class Academia
 			if (this._usuarios[i].dni == oUsuario.dni)
 				bEncontrado = true;
 
-		if (!bEncontrado)
+		if (!bEncontrado) {
 			this._usuarios.push(oUsuario);
+			sessionStorage.setItem('tUsuarios', JSON.stringify(this._usuarios));
+		}
 
 		return !bEncontrado;
 	}
@@ -180,8 +182,10 @@ class Academia
 			if (this._cursos[i].codigo == oCurso.codigo)
 				bEncontrado = true;
 
-		if (!bEncontrado)
+		if (!bEncontrado) {
 			this._cursos.push(oCurso);
+			sessionStorage.setItem('tCursos', JSON.stringify(this._cursos));
+		}
 
 		return !bEncontrado;
 	}
@@ -192,9 +196,7 @@ class Academia
 		for (var i=0; i<this._usuarios.length && oUsuario==null; i++)
 		{
 			if (this._usuarios[i].dni == sDni && this._usuarios[i].password == sPass)
-			{
-				oUsuario = this._usuarios[i];
-			}		
+				oUsuario = this._usuarios[i];	
 		}
 		return oUsuario;
 	}
@@ -212,6 +214,21 @@ class Academia
 			}
 		}
 		sessionStorage.setItem('tUsuarios', JSON.stringify(this._usuarios));
+	}
+
+	modificarCurso(oCurso)
+	{
+		// recorrer la array de cursos hasta encontrar a los que tengan el mismo codigo y modificarlo
+		var bEncontrado = false;
+		for (var i=0; i<this._cursos.length && bEncontrado==false; i++) 
+		{
+			if (this._cursos[i].codigo == oCurso.codigo)
+			{
+				this._cursos[i] = oCurso;
+				bEncontrado = true;
+			}
+		}
+		sessionStorage.setItem('tCursos', JSON.stringify(this._cursos));
 	}
 
 	getUsuarios()
@@ -281,40 +298,15 @@ class Academia
 		return this._cursos;
 	}
 
-	getCursoPorCodigo(sCodigo)
+	getCurso(sCodigo)
 	{
-		oCurso=null;
+		var oCurso = null;
 		for (var i=0; i<this._cursos.length && oCurso==null; i++) 
-			if (this._cursos[i].codigo == sCodigo )
+			if (this._cursos[i].codigo == sCodigo)
 				oCurso= this._cursos[i];
 
 		return oCurso;
 	}
-
-	getCurso(sIdioma, sNivel, sTipo)
-	{
-		oCurso=null;
-		for (var i=0; i<this._cursos.length && oCurso==null; i++) 
-			if (this._cursos[i].idioma == sIdioma && this._cursos[i].nivel==sNivel && this._cursos[i].tipo==sTipo )
-				oCurso= this._cursos[i];
-
-		return oCurso;
-	}
-
-	loadXMLDoc(filename)
-	{
-		var xhttp = null;
-
-		if (window.XMLHttpRequest)
-			xhttp = new XMLHttpRequest();
-		else // IE 5/6
-			xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-
-		xhttp.open("GET", filename, false);
-		xhttp.send();
-		return xhttp.responseXML;
-	}
-
 
     consultarNotas(sDni,SFiltro)
     {

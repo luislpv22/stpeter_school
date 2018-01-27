@@ -501,7 +501,11 @@ function cargarCurso()
 	sSelectNivel = document.querySelector("#selectNivel").value;
 	sSelctTipo = document.querySelector("#selectTipo").value;
 
-	var oCurso =academia.getCurso(sSelectIdioma, sSelectNivel, sSelctTipo);
+	var tCursos = academia.getCursos();
+	var oCurso = null;
+	for (var i=0; i<tCursos.length && oCurso==null; i++) 
+		if (tCursos[i].idioma == sSelectIdioma && tCursos[i].nivel == sSelectNivel && tCursos[i].tipo == sSelctTipo)
+			oCurso= tCursos[i];
 
 	oDuracionCurso = document.querySelector("#duraCurso").value = oCurso.duracion;
 	oPrecioCurso = document.querySelector("#preCurso").value = oCurso.precio;

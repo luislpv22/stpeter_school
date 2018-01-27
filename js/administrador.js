@@ -13,6 +13,8 @@ document.querySelector('#btnProfesores').addEventListener("click", function () {
 document.querySelector('#btnAdministradores').addEventListener("click", function () { mostrarPagina('administradores'); });
 document.querySelector('#btnMatriculas').addEventListener("click", function () { mostrarPagina('matriculaciones'); });
 
+document.querySelector('#btnAddCurso').addEventListener("click", crearCurso);
+
 mostrarPagina('cursos');
 
 function mostrarPagina(pagina)
@@ -20,29 +22,38 @@ function mostrarPagina(pagina)
 	if (pagina == 'cursos')
 	{
 		var tablaCursos = document.querySelector('#tablaCursos');
-		
-		if (tablaCursos.rows.length == 1)
+
+		for (var i=tablaCursos.rows.length-1; i>0; i--)
+			tablaCursos.deleteRow(i);
+	
+		var cursos = academia.getCursos();
+		for (var i=0; i<cursos.length; i++)
 		{
-			var cursos = academia.getCursos();
-			for (var i=0; i<cursos.length; i++)
-			{
-				var fila = tablaCursos.insertRow(-1);
-				fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].codigo.toUpperCase()));
-				fila.insertCell(-1).appendChild(document.createTextNode(capitalize(cursos[i].idioma)));
-				fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].nivel.toUpperCase()));
-				fila.insertCell(-1).appendChild(document.createTextNode(capitalize(cursos[i].tipo)));
-				fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].bArchivado.toUpperCase()));
-				var btn = document.createElement("input");
-				btn.type = "button";
-				btn.value = "Editar";
-				btn.setAttribute("onclick", "editarCurso('"+cursos[i].codigo+"');");
-				btn.setAttribute("data-toggle", "modal");
-				btn.setAttribute("data-target", "#modal");
-				btn.classList.add("btn");
-				btn.classList.add("btn-danger");
-				btn.classList.add("btn-sm");
-				fila.insertCell(-1).appendChild(btn);
-			}
+			var fila = tablaCursos.insertRow(-1);
+			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].codigo.toUpperCase()));
+			fila.insertCell(-1).appendChild(document.createTextNode(capitalize(cursos[i].idioma)));
+			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].nivel.toUpperCase()));
+			fila.insertCell(-1).appendChild(document.createTextNode(capitalize(cursos[i].tipo)));
+			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].duracion));
+			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].precio+" €"));
+
+			var swActivo = switchActivo();
+			if (cursos[i].bArchivado == "si")
+				swActivo.querySelector('.switch-activo').checked = "checked";
+
+			swActivo.querySelector('.switch-activo').setAttribute("data-codigo", cursos[i].codigo);
+			swActivo.querySelector('.switch-activo').addEventListener("click", desactivarCurso);
+
+			fila.insertCell(-1).appendChild(swActivo);
+			var btn = document.createElement("input");
+			btn.type = "button";
+			btn.value = "Editar";
+			btn.classList.add("btn", "btn-danger", "btn-sm");
+			btn.setAttribute("data-toggle", "modal");
+			btn.setAttribute("data-target", "#modal");
+			btn.setAttribute("data-codigo", cursos[i].codigo);
+			btn.addEventListener("click", editarCurso);
+			fila.insertCell(-1).appendChild(btn);
 		}
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
@@ -60,28 +71,26 @@ function mostrarPagina(pagina)
 	{
 		var tablaAlumnos = document.querySelector('#tablaAlumnos');
 
-		if (tablaAlumnos.rows.length == 1)
+		for (var i=tablaAlumnos.rows.length-1; i>0; i--)
+			tablaAlumnos.deleteRow(i);
+
+		var alumnos = academia.getAlumnos();
+		for (var i=0; i<alumnos.length; i++)
 		{
-			var alumnos = academia.getAlumnos();
-			for (var i=0; i<alumnos.length; i++)
-			{
-				var fila = tablaAlumnos.insertRow(-1);
-				fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].dni.toUpperCase()));
-				fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].nombre));
-				fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].apellido));
-				fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].correo));
-				fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].activo.toUpperCase()));
-				var btn = document.createElement("input");
-				btn.type = "button";
-				btn.value = "Editar";
-				btn.setAttribute("onclick", "editarAlumno('"+alumnos[i].codigo+"');");
-				btn.setAttribute("data-toggle", "modal");
-				btn.setAttribute("data-target", "#modal");
-				btn.classList.add("btn");
-				btn.classList.add("btn-danger");
-				btn.classList.add("btn-sm");
-				fila.insertCell(-1).appendChild(btn);
-			}
+			var fila = tablaAlumnos.insertRow(-1);
+			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].dni.toUpperCase()));
+			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].nombre));
+			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].apellido));
+			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].correo));
+			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].activo.toUpperCase()));
+			var btn = document.createElement("input");
+			btn.type = "button";
+			btn.value = "Editar";
+			btn.setAttribute("data-toggle", "modal");
+			btn.setAttribute("data-target", "#modal");
+			btn.classList.add("btn", "btn-danger", "btn-sm");
+			btn.addEventListener("click", function() { editarAlumno(alumnos[i].dni); });
+			fila.insertCell(-1).appendChild(btn);
 		}
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
@@ -99,28 +108,26 @@ function mostrarPagina(pagina)
 	{
 		var tablaProfesores = document.querySelector('#tablaProfesores');
 
-		if (tablaProfesores.rows.length == 1)
+		for (var i=tablaProfesores.rows.length-1; i>0; i--)
+			tablaProfesores.deleteRow(i);
+
+		var profesores = academia.getProfesores();
+		for (var i=0; i<profesores.length; i++)
 		{
-			var profesores = academia.getProfesores();
-			for (var i=0; i<profesores.length; i++)
-			{
-				var fila = tablaProfesores.insertRow(-1);
-				fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].dni.toUpperCase()));
-				fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].nombre));
-				fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].apellido));
-				fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].correo));
-				fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].activo.toUpperCase()));
-				var btn = document.createElement("input");
-				btn.type = "button";
-				btn.value = "Editar";
-				btn.setAttribute("onclick", "editarAlumno('"+profesores[i].codigo+"');");
-				btn.setAttribute("data-toggle", "modal");
-				btn.setAttribute("data-target", "#modal");
-				btn.classList.add("btn");
-				btn.classList.add("btn-danger");
-				btn.classList.add("btn-sm");
-				fila.insertCell(-1).appendChild(btn);
-			}
+			var fila = tablaProfesores.insertRow(-1);
+			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].dni.toUpperCase()));
+			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].nombre));
+			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].apellido));
+			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].correo));
+			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].activo.toUpperCase()));
+			var btn = document.createElement("input");
+			btn.type = "button";
+			btn.value = "Editar";
+			btn.setAttribute("data-toggle", "modal");
+			btn.setAttribute("data-target", "#modal");
+			btn.classList.add("btn", "btn-danger", "btn-sm");
+			btn.addEventListener("click", function() { editarProfesor(profesores[i].dni); });
+			fila.insertCell(-1).appendChild(btn);
 		}
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
@@ -138,28 +145,26 @@ function mostrarPagina(pagina)
 	{
 		var tablaAdministradores = document.querySelector('#tablaAdministradores');
 
-		if (tablaAdministradores.rows.length == 1)
+		for (var i=tablaAdministradores.rows.length-1; i>0; i--)
+			tablaAdministradores.deleteRow(i);
+
+		var administradores = academia.getAdministradores();
+		for (var i=0; i<administradores.length; i++)
 		{
-			var administradores = academia.getAdministradores();
-			for (var i=0; i<administradores.length; i++)
-			{
-				var fila = tablaAdministradores.insertRow(-1);
-				fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].dni.toUpperCase()));
-				fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].nombre));
-				fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].apellido));
-				fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].correo));
-				fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].activo.toUpperCase()));
-				var btn = document.createElement("input");
-				btn.type = "button";
-				btn.value = "Editar";
-				btn.setAttribute("onclick", "editarAlumno('"+administradores[i].codigo+"');");
-				btn.setAttribute("data-toggle", "modal");
-				btn.setAttribute("data-target", "#modal");
-				btn.classList.add("btn");
-				btn.classList.add("btn-danger");
-				btn.classList.add("btn-sm");
-				fila.insertCell(-1).appendChild(btn);
-			}
+			var fila = tablaAdministradores.insertRow(-1);
+			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].dni.toUpperCase()));
+			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].nombre));
+			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].apellido));
+			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].correo));
+			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].activo.toUpperCase()));
+			var btn = document.createElement("input");
+			btn.type = "button";
+			btn.value = "Editar";
+			btn.setAttribute("data-toggle", "modal");
+			btn.setAttribute("data-target", "#modal");
+			btn.classList.add("btn", "btn-danger", "btn-sm");
+			btn.addEventListener("click", function() { editarAdministrador(administradores[i].dni); });
+			fila.insertCell(-1).appendChild(btn);
 		}
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
@@ -235,8 +240,55 @@ function mostrarPagina(pagina)
 
 }
 
-function editarCurso(codigo)
+function editarCurso()
 {
+	var codigo = this.getAttribute("data-codigo");
+	var oCurso = academia.getCurso(codigo);
+	var form = document.getElementById("formEditarCurso");
+	form.codigo.value = oCurso.codigo;
+	form.idioma.value = oCurso.idioma;
+	form.nivel.value = oCurso.nivel;
+	form.tipo.value = oCurso.tipo;
+
+	var duracion = oCurso.duracion.split(" ");
+	form.duracion1.value = duracion[0];
+	form.duracion2.value = duracion[1];
+
+	form.precio.value = oCurso.precio;
+	form.activo.value = oCurso.bArchivado;
+
+	document.querySelector('#modal .btn-success').id = "btnGuardarCurso";
+	document.querySelector('#btnGuardarCurso').addEventListener("click", function () { guardarCurso(oCurso.codigo); });
+
+	form.style.display = "block";
+}
+
+function crearCurso()
+{
+	var form = document.getElementById("formEditarCurso");
+	document.querySelector('#modal .btn-success').id = "btnGuardarCurso";
+	document.querySelector('#btnGuardarCurso').addEventListener("click", function () { guardarCurso(null); });
+	form.codigo.removeAttribute("readonly");
+	form.activo.value = "si";
+	form.style.display = "block";
+}
+
+function desactivarCurso()
+{
+	var codigo = this.getAttribute("data-codigo");
+	var oCurso = academia.getCurso(codigo);
+
+	if (oCurso.bArchivado == "si")
+		oCurso.bArchivado = "no";
+	else
+		oCurso.bArchivado = "si";
+
+	academia.modificarCurso(oCurso);
+}
+
+function guardarCurso(codigo)
+{
+<<<<<<< HEAD
 	var curso = academia.getCurso(codigo);
 	document.getElementById("formEditarCurso").style.display = "block";
 }
@@ -251,4 +303,47 @@ function cambiarEstadoMatricula(codigoMatri)
 
 	
 	
+=======
+	var form = document.getElementById("formEditarCurso");
+
+	var sCodigo = form.codigo.value;
+
+	if (codigo != null)
+		sCodigo = codigo;
+
+	var sIdioma = form.idioma.value;
+	var sNivel = form.nivel.value;
+	var sTipo = form.tipo.value;
+	var fPrecio = parseFloat(form.precio.value);
+	var sDuracion = form.duracion1.value + " " + form.duracion2.value;
+	var bActivo = form.activo.value;
+
+	var oCurso = new Curso(sCodigo, sIdioma, sDuracion, fPrecio, sTipo, sNivel, bActivo);
+
+	if (codigo != null)
+		academia.modificarCurso(oCurso);
+	else
+		academia.addCurso(oCurso);
+
+	mostrarPagina('cursos');
+	document.querySelector('#modal .close').click();
+}
+
+function switchActivo()
+{
+	var lblActivo = document.createElement("label");
+	lblActivo.classList.add("switch-container");
+	var chkActivo = document.createElement("input");
+	chkActivo.type = "checkbox";
+	chkActivo.classList.add("switch-activo");
+	var divOuter = document.createElement("div");
+	divOuter.classList.add("switch-outer");
+	var divInner = document.createElement("div");
+	divInner.classList.add("switch-inner");
+	divOuter.appendChild(divInner);
+	lblActivo.appendChild(chkActivo);
+	lblActivo.appendChild(divOuter);
+
+	return lblActivo;
+>>>>>>> 93a5eb60fa22d8ff72735707ed6d544755571c96
 }
