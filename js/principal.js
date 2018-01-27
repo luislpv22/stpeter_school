@@ -4,6 +4,8 @@
 
 var academia = new Academia();
 
+sessionStorage.removeItem("tUsuarios");
+
 datosIniciales();
 
 function datosIniciales()
@@ -103,51 +105,58 @@ function cerrarSesion()
 /******** validación y alta de alumno*************************/
 function cargarAlumnos(oAlumnos)
 {
-	for(var i=0; i<oAlumnos.length; i++)
+	for (var i=0; i<oAlumnos.length; i++)
 	{
-		nombre = oAlumnos[i].getElementsByTagName("nombre")[0].textContent;
-		pass = oAlumnos[i].getElementsByTagName("password")[0].textContent;
-		apellidos = oAlumnos[i].getElementsByTagName("apellidos")[0].textContent;
-		dni = oAlumnos[i].getElementsByTagName("dni")[0].textContent;
-		telefono = oAlumnos[i].getElementsByTagName("telefono")[0].textContent;
-		direccion = oAlumnos[i].getElementsByTagName("direccion")[0].textContent;
-		email = oAlumnos[i].getElementsByTagName("email")[0].textContent;
-		activo = oAlumnos[i].getElementsByTagName("activo")[0].textContent;
-		estadoCobro = oAlumnos[i].getElementsByTagName("estadoCobro")[0].textContent;
+		var nombre = oAlumnos[i].getElementsByTagName("nombre")[0].textContent;
+		var pass = oAlumnos[i].getElementsByTagName("password")[0].textContent;
+		var apellidos = oAlumnos[i].getElementsByTagName("apellidos")[0].textContent;
+		var dni = oAlumnos[i].getElementsByTagName("dni")[0].textContent;
+		var telefono = oAlumnos[i].getElementsByTagName("telefono")[0].textContent;
+		var direccion = oAlumnos[i].getElementsByTagName("direccion")[0].textContent;
+		var email = oAlumnos[i].getElementsByTagName("email")[0].textContent;
+		var activo = oAlumnos[i].getElementsByTagName("activo")[0].textContent;
+		var estadoCobro = oAlumnos[i].getElementsByTagName("estadoCobro")[0].textContent;
 
 		academia.addUsuario(new Alumno(nombre, pass, apellidos, dni, telefono, direccion, email, activo, estadoCobro));
 	}
 }
 function cargarProfesores(oProfesores)
 {
-	for(var i=0; i<oProfesores.length; i++)
+	for (var i=0; i<oProfesores.length; i++)
 	{
-		nombre = oProfesores[i].getElementsByTagName("nombre")[0].textContent;
-		pass = oProfesores[i].getElementsByTagName("password")[0].textContent;
-		apellidos = oProfesores[i].getElementsByTagName("apellidos")[0].textContent;
-		dni = oProfesores[i].getElementsByTagName("dni")[0].textContent;
-		telefono = oProfesores[i].getElementsByTagName("telefono")[0].textContent;
-		direccion = oProfesores[i].getElementsByTagName("direccion")[0].textContent;
-		email = oProfesores[i].getElementsByTagName("email")[0].textContent;
-		activo = oProfesores[i].getElementsByTagName("activo")[0].textContent;
-		salario = oProfesores[i].getElementsByTagName("estadoCobro")[0].textContent;
+		var nombre = oProfesores[i].getElementsByTagName("nombre")[0].textContent;
+		var pass = oProfesores[i].getElementsByTagName("password")[0].textContent;
+		var apellidos = oProfesores[i].getElementsByTagName("apellidos")[0].textContent;
+		var dni = oProfesores[i].getElementsByTagName("dni")[0].textContent;
+		var telefono = oProfesores[i].getElementsByTagName("telefono")[0].textContent;
+		var direccion = oProfesores[i].getElementsByTagName("direccion")[0].textContent;
+		var email = oProfesores[i].getElementsByTagName("email")[0].textContent;
+		var activo = oProfesores[i].getElementsByTagName("activo")[0].textContent;
+		var salario = oProfesores[i].getElementsByTagName("estadoCobro")[0].textContent;
+		var listadoCursos = oProfesores[i].querySelector("listadoCursos").children;
 
-		academia.addUsuario(new Profesor(nombre, pass, apellidos, dni, telefono, direccion, email, activo, salario));
+		var oProfesor = new Profesor(nombre, pass, apellidos, dni, telefono, direccion, email, activo, salario);
+
+		if (listadoCursos.length > 0)
+			for (var j=0; j<listadoCursos.length; j++) 
+				oProfesor.addCurso(listadoCursos[j].textContent);
+
+		academia.addUsuario(oProfesor);
 	}
 }
 function cargarAdministradores(oAdministradores)
 {
-	for(var i=0; i<oAdministradores.length; i++)
+	for (var i=0; i<oAdministradores.length; i++)
 	{
-		nombre = oAdministradores[i].getElementsByTagName("nombre")[0].textContent;
-		pass = oAdministradores[i].getElementsByTagName("password")[0].textContent;
-		apellidos = oAdministradores[i].getElementsByTagName("apellidos")[0].textContent;
-		dni = oAdministradores[i].getElementsByTagName("dni")[0].textContent;
-		telefono = oAdministradores[i].getElementsByTagName("telefono")[0].textContent;
-		direccion = oAdministradores[i].getElementsByTagName("direccion")[0].textContent;
-		email = oAdministradores[i].getElementsByTagName("email")[0].textContent;
-		activo = oAdministradores[i].getElementsByTagName("activo")[0].textContent;
-		salario = oAdministradores[i].getElementsByTagName("estadoCobro")[0].textContent;
+		var nombre = oAdministradores[i].getElementsByTagName("nombre")[0].textContent;
+		var pass = oAdministradores[i].getElementsByTagName("password")[0].textContent;
+		var apellidos = oAdministradores[i].getElementsByTagName("apellidos")[0].textContent;
+		var dni = oAdministradores[i].getElementsByTagName("dni")[0].textContent;
+		var telefono = oAdministradores[i].getElementsByTagName("telefono")[0].textContent;
+		var direccion = oAdministradores[i].getElementsByTagName("direccion")[0].textContent;
+		var email = oAdministradores[i].getElementsByTagName("email")[0].textContent;
+		var activo = oAdministradores[i].getElementsByTagName("activo")[0].textContent;
+		var salario = oAdministradores[i].getElementsByTagName("estadoCobro")[0].textContent;
 
 		academia.addUsuario(new Administrador(nombre, pass, apellidos, dni, telefono, direccion, email, activo, salario));
 	}
@@ -155,24 +164,24 @@ function cargarAdministradores(oAdministradores)
 
 function cargarCursos(oCursos)
 {
-	for(var i=0; i<oCursos.length; i++)
+	for (var i=0; i<oCursos.length; i++)
 	{
-		codigo = oCursos[i].getElementsByTagName("codigo")[0].textContent;
-		idioma = oCursos[i].getElementsByTagName("idioma")[0].textContent;
-		duracion = oCursos[i].getElementsByTagName("duracion")[0].textContent;
-		precio = oCursos[i].getElementsByTagName("precio")[0].textContent;
-		tipo = oCursos[i].getElementsByTagName("tipo")[0].textContent;
-		nivel = oCursos[i].getElementsByTagName("nivel")[0].textContent;
-		activo = oCursos[i].getElementsByTagName("activo")[0].textContent;
-		listadoAlumnos = oCursos[i].querySelector("listadoAlumnos").children;
+		var codigo = oCursos[i].getElementsByTagName("codigo")[0].textContent;
+		var idioma = oCursos[i].getElementsByTagName("idioma")[0].textContent;
+		var duracion = oCursos[i].getElementsByTagName("duracion")[0].textContent;
+		var precio = oCursos[i].getElementsByTagName("precio")[0].textContent;
+		var tipo = oCursos[i].getElementsByTagName("tipo")[0].textContent;
+		var nivel = oCursos[i].getElementsByTagName("nivel")[0].textContent;
+		var activo = oCursos[i].getElementsByTagName("activo")[0].textContent;
+		var listadoAlumnos = oCursos[i].querySelector("listadoAlumnos").children;
 
 		oCurso = new Curso (codigo, idioma, duracion, precio, tipo, nivel, activo);
 
-		if (listadoAlumnos.length!=0)
+		if (listadoAlumnos.length > 0)
 		{
 			for (var j=0; j<listadoAlumnos.length; j++) 
 			{
-				oAlumno = academia.getUsuario(listadoAlumnos[j].textContent)
+				var oAlumno = academia.getUsuario(listadoAlumnos[j].textContent);
 				oCurso.listaAlumnos.push(oAlumno);
 			}
 		}
@@ -182,16 +191,16 @@ function cargarCursos(oCursos)
 
 function cargarMatriculas(oMatriculas)
 {
-	for(var i=0; i<oMatriculas.length; i++)
+	for (var i=0; i<oMatriculas.length; i++)
 	{
-		dni=oMatriculas[i].getAttribute('dni');
-		estado=oMatriculas[i].getElementsByTagName("estado")[0].textContent;
-		codigoMatri=oMatriculas[i].getElementsByTagName("codigo")[0].textContent;
+		var dni = oMatriculas[i].getAttribute('dni');
+		var estado = oMatriculas[i].getElementsByTagName("estado")[0].textContent;
+		var codigoMatri = oMatriculas[i].getElementsByTagName("codigo")[0].textContent;
 
-		oAlumno= academia.getUsuario(dni);
+		var oAlumno = academia.getUsuario(dni);
 
-		listadoCursos=oMatriculas[i].querySelector("listaCursos");
-		cursos=listadoCursos.querySelectorAll("codigo");
+		var listadoCursos = oMatriculas[i].querySelector("listaCursos");
+		var cursos = listadoCursos.querySelectorAll("codigo");
 
 		if (cursos.length !=0)
 		{
@@ -205,24 +214,24 @@ function cargarMatriculas(oMatriculas)
 
 function cargarCalificaciones(oCalificaciones)
 {
-	for(var i = 0; i<oCalificaciones.length; i++)
+	for (var i = 0; i<oCalificaciones.length; i++)
 	{
-		dni=oCalificaciones[i].getAttribute('dni');
+		var dni = oCalificaciones[i].getAttribute('dni');
 		
-		listaCursos=oCalificaciones[i].querySelectorAll("curso");
+		var listaCursos = oCalificaciones[i].querySelectorAll("curso");
 		
-		//por si tiene notas de más de 1 curso
+		// por si tiene notas de más de 1 curso
 		for (var j = 0; j < listaCursos.length; j++) 
 		{
-			listaNotas=[];
-			codCurso=oCalificaciones[i].querySelectorAll("curso")[j].getAttribute('codigo');
-			//obtenemos las notas del curso  que recorre el for
-			notas=listaCursos[j].querySelectorAll("nota");
+			var listaNotas = [];
+			var codCurso = oCalificaciones[i].querySelectorAll("curso")[j].getAttribute('codigo');
+			// obtenemos las notas del curso  que recorre el for
+			var notas = listaCursos[j].querySelectorAll("nota");
 			for (var k = 0; k < notas.length; k++) 
 			{
 				listaNotas[k]=notas[k].textContent;
 			}
-			oCalificacion= new Calificaciones (listaNotas, codCurso);
+			var oCalificacion = new Calificaciones (listaNotas, codCurso);
 			academia.addCalificacionesAlu(dni, oCalificacion);
 		}
 

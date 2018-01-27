@@ -10,5 +10,10 @@
 	<email>ivanSales@gmail.com</email>
 	<activo>si</activo>
 	<estadoCobro>pendiente</estadoCobro>
+	<listadoCursos>
+		<curso>ENA2P</curso>
+		<curso>ENB1S</curso>
+		<curso>FRA2P</curso>
+	</listadoCursos>
 </profesor>
 </listaProfesores>
