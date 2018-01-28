@@ -82,7 +82,6 @@ function datosIniciales()
 	var oXMLCalificaciones = loadXMLDoc("xml/calificaciones.xml");
 	var oCalificaciones = oXMLCalificaciones.getElementsByTagName("alumno");
 	cargarCalificaciones(oCalificaciones);
-
 }
 
 function iniciarSesion(oEvento)

@@ -427,7 +427,7 @@ function resetearSelectNivel()
 		listaOptions[i].parentNode.removeChild(listaOptions[i]);
 
 	oOption = document.createElement("OPTION");
-	oOption.textContent = "Seleccione Idioma";
+	oOption.textContent = "Seleccione Nivel";
 	oOption.value = "seleNi";
 	oSelectNivel.appendChild(oOption); 
 }
@@ -590,7 +590,7 @@ function realizarMatricula(oEvento)
 		sesion.listaCursos.push(cursosElegidos[i].codigo);
 	}
 
-	oMatricula = new Matricula(academia.codNuevaMatri(), "abierta", sesion.dni, tCursos);
+	oMatricula = new Matricula(academia.codNuevaMatri(), "encurso", sesion.dni, tCursos);
 
 	academia.addMatricula(oMatricula);
 	document.querySelector("#txtInformacion span").textContent = "";

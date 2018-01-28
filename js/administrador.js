@@ -582,7 +582,7 @@ function editarMatricula(numero)
 
 		form.seleCurMatri.appendChild(oP);
 	}
-	academia.actualizarSesionMatriculas();
+	//academia.actualizarSesionMatriculas();
 	document.querySelector('#modal .btn-success').id = "btnGuardarMatricula";
 	document.querySelector('#btnGuardarMatricula').setAttribute("data-estado", oMatricula.estado);
 	document.querySelector('#btnGuardarMatricula').addEventListener("click", guardarMatricula);
@@ -607,17 +607,28 @@ function guardarMatricula()
 	}
 
 	var oMatricula = new Matricula (sNumero, dataEstado, sDni, sLisCursos);
-/*
-	//obtenemos la lista de cursos que tiene el alumno antes de la modificación
-	listCurOriginal= academia.getCursos(); 
-	//recorremos dicha array con la de cursos elegidos para ver si 
-*/
 
+	//quitar curso y notas que se hayan quitado
+	var listCurOriginal = academia.getUsuario(sDni).listaCursos; 
+	var cursosQuitarAlu = [];
+	var indice=0;
+	for (var i = 0; i < listCurOriginal.length; i++) 
+	{
+		if (!sLisCursos.includes(listCurOriginal[i]))
+		{
+			cursosQuitarAlu[indice] = listCurOriginal[i];
+			indice++;
+		}
+	}
 
 	if (sNumero != null)
+	{
 		academia.modificarMatricula(oMatricula);
+		academia.borrarCursosAlumno(sDni, cursosQuitarAlu);
+	}
 	else
 		academia.addMatricula(oMatricula);
+
 	location.href = "administrador.html";
 	document.querySelector('#modal .close').click();
 }
