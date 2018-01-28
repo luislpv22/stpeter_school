@@ -40,7 +40,7 @@ document.querySelector('#enlaceConsultar').addEventListener("click", mostrarPagi
 function actualizaSelectConsultar()
 {
 	var selectCursoConsultar = document.getElementById("selectCursoConsultar");
-	var oTabla = academia.consultarNotas(sesion.dni, selectCursoConsultar.value);
+	var oTabla = consultarNotas(sesion.dni, selectCursoConsultar.value);
 	var oFieldset = document.querySelectorAll("div #capaNotas");
     oFieldset[0].appendChild(oTabla);
 }
@@ -105,7 +105,7 @@ function mostrarPagina(oEvento)
 		document.getElementById("capaModificarNotas").classList.add("ocultar");
 		document.getElementById("capaModificarAlu").classList.add("ocultar");
 		document.getElementById("capaConsultarNotas").classList.remove("ocultar");
-		var oTabla = academia.consultarNotas(sesion.dni, "todo");
+		var oTabla = consultarNotas(sesion.dni, "todo");
 		var oFieldset = document.querySelectorAll("div #capaNotas");
         oFieldset[0].appendChild(oTabla);
 
@@ -230,5 +230,112 @@ function modificarCalificacion()
 	nota.value = "";
 }
 
+function consultarNotas(sDni,SFiltro)
+{
+	var oTablaCurProv;
+	var oTablaCurAlumProv;
 
+	var oProfesor = academia.getUsuario(sDni);
+	oTablaCurProv = oProfesor.getCursos();
+
+    var oTabla = document.querySelector("#tablaListadoAlumnos");
+    if (oTabla != null)
+    	oTabla.remove();
+
+	// Creacion de la tabla 
+    oTabla = document.createElement("table");
+    oTabla.id = "tablaListadoAlumnos";
+    oTabla.classList.add("table");
+    oTabla.classList.add("table-hover");
+
+    var oTHead = oTabla.createTHead();
+    var oFila = oTHead.insertRow(-1);
+    var oTH = document.createElement("th");
+    oTH.textContent = "Curso";
+    oFila.appendChild(oTH);
+
+    oTH = document.createElement("th");
+    oTH.textContent = "Idioma";
+    oFila.appendChild(oTH);
+    oTH = document.createElement("th");
+    oTH.textContent = "Duracion";
+    oFila.appendChild(oTH);
+    oTH = document.createElement("th");
+    oTH.textContent = "Tipo";
+    oFila.appendChild(oTH);
+    oTH = document.createElement("th");
+    oTH.textContent = "Nivel";
+    oFila.appendChild(oTH);
+    oTH = document.createElement("th");
+    oTH.textContent = "Alumno";
+    oFila.appendChild(oTH);
+    oTH = document.createElement("th");
+    oTH.textContent = "Acciones";
+    oFila.appendChild(oTH);
+
+    // Cuerpo de la tabla
+    var oTBody = oTabla.createTBody();
+
+	for (var i=0; i<oTablaCurProv.length; i++)
+	{
+		if(oTablaCurProv[i].codigo == SFiltro || SFiltro == "todo")
+		{
+		  	oTablaCurAlumProv=oTablaCurProv[i].listaAlumnos;
+
+	    	for (var j=0; j<oTablaCurAlumProv.length; j++)
+	    	{
+				oFila = oTBody.insertRow(-1);
+				var oCelda = oFila.insertCell(-1);
+			 	oCelda.textContent = oTablaCurProv[i].codigo;
+			 	oCelda = oFila.insertCell(-1);
+			  	oCelda.textContent = oTablaCurProv[i].idioma;
+			  	oCelda = oFila.insertCell(-1);
+			  	oCelda.textContent = oTablaCurProv[i].duracion;
+			  	oCelda = oFila.insertCell(-1);
+			  	oCelda.textContent = oTablaCurProv[i].tipo;
+			   	oCelda = oFila.insertCell(-1);
+			  	oCelda.textContent = oTablaCurProv[i].nivel;
+
+	            var oUsuario = academia.getUsuario(oTablaCurAlumProv[j]);
+	            oCelda = oFila.insertCell(-1);
+	        	oCelda.textContent = oUsuario.nombre;
+
+	        	oCelda = oFila.insertCell(-1);
+				var btn = document.createElement("input");
+				btn.type = "button";
+				btn.value = "Ver notas";
+				btn.classList.add("btn", "btn-warning", "btn-sm");
+				btn.setAttribute("data-toggle", "modal");
+				btn.setAttribute("data-target", "#modal");
+				btn.setAttribute("data-dni", oUsuario.dni);
+				btn.addEventListener("click", verNotasAlumno);
+				oCelda.appendChild(btn);
+	    	}
+		}
+	}
+
+	return oTabla;
+}
+
+function verNotasAlumno()
+{
+	var dni = this.getAttribute("data-dni");
+	var oAlumno = academia.getUsuario(dni);
+
+	document.querySelector('.modal-title').textContent = "Notas de "+oAlumno.nombre+" "+oAlumno.apellidos;
+
+	var oTabla = document.querySelector("#modal #tablaNotasAlumno");
+
+	for (var i=oTabla.rows.length-1; i>0; i--)
+		oTabla.deleteRow(i);
+
+	var tNotas = oAlumno.listaCalificaciones;
+	for (var i=0; i<tNotas.length; i++)
+	{
+		var fila = oTabla.insertRow(-1);
+		fila.insertCell(-1).appendChild(document.createTextNode(tNotas[i].descripcion));
+		fila.insertCell(-1).appendChild(document.createTextNode(tNotas[i].nota));
+		fila.insertCell(-1).appendChild(document.createTextNode(tNotas[i].curso));
+	}
+}
 

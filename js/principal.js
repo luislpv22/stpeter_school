@@ -4,11 +4,6 @@
 
 var academia = new Academia();
 
-sessionStorage.removeItem("tUsuarios");
-sessionStorage.removeItem("tMatriculas");
-sessionStorage.removeItem("tCursos");
-sessionStorage.removeItem("usuario");
-
 datosIniciales();
 
 function datosIniciales()

@@ -373,6 +373,7 @@ class Academia
 		sessionStorage.setItem('tUsuarios', JSON.stringify(tUsuarios));
 	}
 
+<<<<<<< HEAD
     consultarNotas(sDni,SFiltro)
     {
     	var oTablaCurProv;
@@ -479,6 +480,9 @@ class Academia
     }
 
     modificarNotaAlumno(sDni,oCalificacion)
+=======
+/*    modificarNotaAlumno(sCodigo,sDni,fNota)
+>>>>>>> 08d7e113f2803d5df513fd616aef0a1078c10140
     {
 
   			for (var i = 0; i < this._usuarios.length; i++) 
