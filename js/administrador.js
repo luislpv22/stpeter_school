@@ -28,36 +28,53 @@ function mostrarPagina(pagina)
 
 		for (var i=tablaCursos.rows.length-1; i>0; i--)
 			tablaCursos.deleteRow(i);
+
+		var tbody = tablaCursos.createTBody();
 	
 		var cursos = academia.getCursos();
 		for (var i=0; i<cursos.length; i++)
 		{
-			var fila = tablaCursos.insertRow(-1);
+			var fila = tbody.insertRow(-1);
 			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].codigo.toUpperCase()));
 			fila.insertCell(-1).appendChild(document.createTextNode(capitalize(cursos[i].idioma)));
 			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].nivel.toUpperCase()));
 			fila.insertCell(-1).appendChild(document.createTextNode(capitalize(cursos[i].tipo)));
 			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].duracion));
 			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].precio+" €"));
+			fila.insertCell(-1).appendChild(document.createTextNode(cursos[i].bArchivado.toUpperCase()));
 
-			var swActivo = switchActivo();
+			fila.setAttribute("data-activo", cursos[i].bArchivado);
+
+			var btnEditar = document.createElement("input");
+			btnEditar.type = "button";
+			btnEditar.value = "Editar";
+			btnEditar.classList.add("btn", "btn-warning", "btn-sm");
+			btnEditar.setAttribute("data-toggle", "modal");
+			btnEditar.setAttribute("data-target", "#modal");
+			btnEditar.setAttribute("data-codigo", cursos[i].codigo);
+			btnEditar.addEventListener("click", editarCurso);
+			var acciones = fila.insertCell(-1)
+			acciones.appendChild(btnEditar);
+
 			if (cursos[i].bArchivado == "si")
-				swActivo.querySelector('.switch-activo').checked = "checked";
-
-			swActivo.querySelector('.switch-activo').setAttribute("data-codigo", cursos[i].codigo);
-			swActivo.querySelector('.switch-activo').addEventListener("click", desactivarCurso);
-
-			fila.insertCell(-1).appendChild(swActivo);
-			var btn = document.createElement("input");
-			btn.type = "button";
-			btn.value = "Editar";
-			btn.classList.add("btn", "btn-danger", "btn-sm");
-			btn.setAttribute("data-toggle", "modal");
-			btn.setAttribute("data-target", "#modal");
-			btn.setAttribute("data-codigo", cursos[i].codigo);
-			btn.addEventListener("click", editarCurso);
-			fila.insertCell(-1).appendChild(btn);
+			{
+				var btnEliminar = document.createElement("input");
+				btnEliminar.type = "button";
+				btnEliminar.value = "Eliminar";
+				btnEliminar.classList.add("btn", "btn-danger", "btn-sm");
+				btnEliminar.setAttribute("data-toggle", "confirmation");
+				btnEliminar.setAttribute("data-btn-ok-label", "Eliminar");
+				btnEliminar.setAttribute("data-btn-ok-class", "btn-danger btn-sm");
+				btnEliminar.setAttribute("data-btn-cancel-label", "Cancelar");
+				btnEliminar.setAttribute("data-btn-cancel-class", "btn-default btn-sm");
+				btnEliminar.setAttribute("data-title", "¿Eliminar este curso?");
+				btnEliminar.setAttribute("data-btn-ok-icon", "");
+				btnEliminar.setAttribute("data-btn-cancel-icon", "");
+				btnEliminar.setAttribute("data-curso", cursos[i].codigo);
+				acciones.appendChild(btnEliminar);
+			}
 		}
+		filtrarTabla();
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
 		for (var i=0; i<capas.length; i++)
@@ -66,6 +83,9 @@ function mostrarPagina(pagina)
 		var menus = document.querySelectorAll('nav li');
 		for (var i=0; i<menus.length; i++)
 			menus[i].classList.remove('active');
+
+		jQuery('[data-toggle=confirmation]').confirmation({rootSelector: '[data-toggle=confirmation]'});
+		jQuery('[data-toggle=confirmation]').on("confirmed.bs.confirmation", borrarCurso);
 
 		document.querySelector('#paginaCursos').classList.remove('hidden');
 		document.querySelector('#btnCursos').parentNode.classList.add('active');
@@ -87,16 +107,39 @@ function mostrarPagina(pagina)
 			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].correo));
 			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].direccion));
 			fila.insertCell(-1).appendChild(document.createTextNode(alumnos[i].activo.toUpperCase()));
-			var btn = document.createElement("input");
-			btn.type = "button";
-			btn.value = "Editar";
-			btn.classList.add("btn", "btn-danger", "btn-sm");
-			btn.setAttribute("data-toggle", "modal");
-			btn.setAttribute("data-target", "#modal");
-			btn.setAttribute("data-dni", alumnos[i].dni);
-			btn.addEventListener("click", editarAlumno);
-			fila.insertCell(-1).appendChild(btn);
+
+			fila.setAttribute("data-activo", alumnos[i].activo);
+
+			var btnEditar = document.createElement("input");
+			btnEditar.type = "button";
+			btnEditar.value = "Editar";
+			btnEditar.classList.add("btn", "btn-warning", "btn-sm");
+			btnEditar.setAttribute("data-toggle", "modal");
+			btnEditar.setAttribute("data-target", "#modal");
+			btnEditar.setAttribute("data-dni", alumnos[i].dni);
+			btnEditar.addEventListener("click", editarAlumno);
+			var acciones = fila.insertCell(-1)
+			acciones.appendChild(btnEditar);
+
+			if (alumnos[i].activo == "si")
+			{
+				var btnEliminar = document.createElement("input");
+				btnEliminar.type = "button";
+				btnEliminar.value = "Eliminar";
+				btnEliminar.classList.add("btn", "btn-danger", "btn-sm");
+				btnEliminar.setAttribute("data-toggle", "confirmation");
+				btnEliminar.setAttribute("data-btn-ok-label", "Eliminar");
+				btnEliminar.setAttribute("data-btn-ok-class", "btn-danger btn-sm");
+				btnEliminar.setAttribute("data-btn-cancel-label", "Cancelar");
+				btnEliminar.setAttribute("data-btn-cancel-class", "btn-default btn-sm");
+				btnEliminar.setAttribute("data-title", "¿Eliminar este alumno?");
+				btnEliminar.setAttribute("data-btn-ok-icon", "");
+				btnEliminar.setAttribute("data-btn-cancel-icon", "");
+				btnEliminar.setAttribute("data-dni", alumnos[i].dni);
+				acciones.appendChild(btnEliminar);
+			}
 		}
+		filtrarTabla();
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
 		for (var i=0; i<capas.length; i++)
@@ -105,6 +148,9 @@ function mostrarPagina(pagina)
 		var menus = document.querySelectorAll('nav li');
 		for (var i=0; i<menus.length; i++)
 			menus[i].classList.remove('active');
+
+		jQuery('[data-toggle=confirmation]').confirmation({rootSelector: '[data-toggle=confirmation]'});
+		jQuery('[data-toggle=confirmation]').on("confirmed.bs.confirmation", borrarAlumno);
 
 		document.querySelector('#paginaAlumnos').classList.remove('hidden');
 		document.querySelector('#btnAlumnos').parentNode.classList.add('active');
@@ -125,16 +171,39 @@ function mostrarPagina(pagina)
 			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].apellidos));
 			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].correo));
 			fila.insertCell(-1).appendChild(document.createTextNode(profesores[i].activo.toUpperCase()));
-			var btn = document.createElement("input");
-			btn.type = "button";
-			btn.value = "Editar";
-			btn.classList.add("btn", "btn-danger", "btn-sm");
-			btn.setAttribute("data-toggle", "modal");
-			btn.setAttribute("data-target", "#modal");
-			btn.setAttribute("data-dni", profesores[i].dni);
-			btn.addEventListener("click", editarProfesor);
-			fila.insertCell(-1).appendChild(btn);
+
+			fila.setAttribute("data-activo", profesores[i].activo);
+
+			var btnEditar = document.createElement("input");
+			btnEditar.type = "button";
+			btnEditar.value = "Editar";
+			btnEditar.classList.add("btn", "btn-warning", "btn-sm");
+			btnEditar.setAttribute("data-toggle", "modal");
+			btnEditar.setAttribute("data-target", "#modal");
+			btnEditar.setAttribute("data-dni", profesores[i].dni);
+			btnEditar.addEventListener("click", editarProfesor);
+			var acciones = fila.insertCell(-1)
+			acciones.appendChild(btnEditar);
+
+			if (profesores[i].activo == "si")
+			{
+				var btnEliminar = document.createElement("input");
+				btnEliminar.type = "button";
+				btnEliminar.value = "Eliminar";
+				btnEliminar.classList.add("btn", "btn-danger", "btn-sm");
+				btnEliminar.setAttribute("data-toggle", "confirmation");
+				btnEliminar.setAttribute("data-btn-ok-label", "Eliminar");
+				btnEliminar.setAttribute("data-btn-ok-class", "btn-danger btn-sm");
+				btnEliminar.setAttribute("data-btn-cancel-label", "Cancelar");
+				btnEliminar.setAttribute("data-btn-cancel-class", "btn-default btn-sm");
+				btnEliminar.setAttribute("data-title", "¿Eliminar este profesor?");
+				btnEliminar.setAttribute("data-btn-ok-icon", "");
+				btnEliminar.setAttribute("data-btn-cancel-icon", "");
+				btnEliminar.setAttribute("data-dni", profesores[i].dni);
+				acciones.appendChild(btnEliminar);
+			}
 		}
+		filtrarTabla();
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
 		for (var i=0; i<capas.length; i++)
@@ -143,6 +212,9 @@ function mostrarPagina(pagina)
 		var menus = document.querySelectorAll('nav li');
 		for (var i=0; i<menus.length; i++)
 			menus[i].classList.remove('active');
+
+		jQuery('[data-toggle=confirmation]').confirmation({rootSelector: '[data-toggle=confirmation]'});
+		jQuery('[data-toggle=confirmation]').on("confirmed.bs.confirmation", borrarProfesor);
 
 		document.querySelector('#paginaProfesores').classList.remove('hidden');
 		document.querySelector('#btnProfesores').parentNode.classList.add('active');
@@ -164,21 +236,43 @@ function mostrarPagina(pagina)
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].correo));
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].activo.toUpperCase()));
 
+			fila.setAttribute("data-activo", administradores[i].activo);
+
 			if (administradores[i].dni != sesion.dni)
 			{
-				var btn = document.createElement("input");
-				btn.type = "button";
-				btn.value = "Editar";
-				btn.classList.add("btn", "btn-danger", "btn-sm");
-				btn.setAttribute("data-toggle", "modal");
-				btn.setAttribute("data-target", "#modal");
-				btn.setAttribute("data-dni", administradores[i].dni);
-				btn.addEventListener("click", editarAdministrador);
-				fila.insertCell(-1).appendChild(btn);
+				var btnEditar = document.createElement("input");
+				btnEditar.type = "button";
+				btnEditar.value = "Editar";
+				btnEditar.classList.add("btn", "btn-warning", "btn-sm");
+				btnEditar.setAttribute("data-toggle", "modal");
+				btnEditar.setAttribute("data-target", "#modal");
+				btnEditar.setAttribute("data-dni", administradores[i].dni);
+				btnEditar.addEventListener("click", editarAdministrador);
+				var acciones = fila.insertCell(-1)
+				acciones.appendChild(btnEditar);
+
+				if (administradores[i].activo == "si")
+				{
+					var btnEliminar = document.createElement("input");
+					btnEliminar.type = "button";
+					btnEliminar.value = "Eliminar";
+					btnEliminar.classList.add("btn", "btn-danger", "btn-sm");
+					btnEliminar.setAttribute("data-toggle", "confirmation");
+					btnEliminar.setAttribute("data-btn-ok-label", "Eliminar");
+					btnEliminar.setAttribute("data-btn-ok-class", "btn-danger btn-sm");
+					btnEliminar.setAttribute("data-btn-cancel-label", "Cancelar");
+					btnEliminar.setAttribute("data-btn-cancel-class", "btn-default btn-sm");
+					btnEliminar.setAttribute("data-title", "¿Eliminar este administrador?");
+					btnEliminar.setAttribute("data-btn-ok-icon", "");
+					btnEliminar.setAttribute("data-btn-cancel-icon", "");
+					btnEliminar.setAttribute("data-dni", administradores[i].dni);
+					acciones.appendChild(btnEliminar);
+				}
 			}
 			else
 				fila.insertCell(-1);
 		}
+		filtrarTabla();
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
 		for (var i=0; i<capas.length; i++)
@@ -187,6 +281,9 @@ function mostrarPagina(pagina)
 		var menus = document.querySelectorAll('nav li');
 		for (var i=0; i<menus.length; i++)
 			menus[i].classList.remove('active');
+
+		jQuery('[data-toggle=confirmation]').confirmation({rootSelector: '[data-toggle=confirmation]'});
+		jQuery('[data-toggle=confirmation]').on("confirmed.bs.confirmation", borrarAdministrador);
 
 		document.querySelector('#paginaAdministradores').classList.remove('hidden');
 		document.querySelector('#btnAdministradores').parentNode.classList.add('active');
@@ -201,9 +298,12 @@ function mostrarPagina(pagina)
 		var matriculas = academia.getMatriculas();
 		for (var i=0; i<matriculas.length; i++)
 		{
+			var oAlumno = academia.getUsuario(matriculas[i].dniAlumno);
 			var fila = tablaMatriculas.insertRow(-1);
 			fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].numero));
 			fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].dniAlumno));
+			fila.insertCell(-1).appendChild(document.createTextNode(oAlumno.nombre));
+			fila.insertCell(-1).appendChild(document.createTextNode(oAlumno.apellidos));
 
 			//para mostrar los códigos de las asignaturas de la matrícula
 			var celdaCursos = fila.insertCell(-1);
@@ -214,10 +314,29 @@ function mostrarPagina(pagina)
 				div.textContent = oCurso.idioma+" "+oCurso.nivel+" "+oCurso.tipo;
 				celdaCursos.appendChild(div);
 			}
-			oFila = fila.insertCell(-1);
-			oFila.id="estado";
-			oFila.setAttribute("data-estado", matriculas[i].estado);
-			oFila.appendChild(document.createTextNode(matriculas[i].estado));
+
+			var swActivo = switchActivo();
+			var sEstado = "";
+			var btnClass = "";
+			if (matriculas[i].estado == "activa") {
+				swActivo.querySelector('.switch-activo').checked = "checked";
+				swActivo.setAttribute("data-btn-ok-label", "Desactivar");
+				swActivo.setAttribute("data-btn-ok-class", "btn-danger btn-sm");
+				swActivo.setAttribute("data-title", "¿Desactivar esta matrícula?");
+			}
+			else {
+				swActivo.setAttribute("data-btn-ok-label", "Activar");
+				swActivo.setAttribute("data-btn-ok-class", "btn-success btn-sm");
+				swActivo.setAttribute("data-title", "¿Activar esta matrícula?");	
+			}
+
+			swActivo.setAttribute("data-toggle", "confirmation");
+			swActivo.setAttribute("data-btn-cancel-label", "Cancelar");
+			swActivo.setAttribute("data-btn-cancel-class", "btn-default btn-sm");
+			swActivo.setAttribute("data-btn-ok-icon", "");
+			swActivo.setAttribute("data-btn-cancel-icon", "");
+			swActivo.setAttribute("data-matricula", matriculas[i].numero);
+			oFila = fila.insertCell(-1).appendChild(swActivo);
 			
 
 			var btn = document.createElement("input");
@@ -228,26 +347,11 @@ function mostrarPagina(pagina)
 			btn.setAttribute("data-target", "#modal");
 			btn.setAttribute("data-matricula", matriculas[i].numero);
 			btn.addEventListener("click", editarMatricula);
-			var acciones = fila.insertCell(-1);
-			acciones.appendChild(btn);
-			var btn = document.createElement("input");
-			btn.type = "button";
-			btn.value = "Eliminar";
-			btn.classList.add("btn", "btn-danger", "btn-sm");
-			btn.setAttribute("data-toggle", "confirmation");
-			btn.setAttribute("data-btn-ok-label", "Eliminar");
-			btn.setAttribute("data-btn-ok-class", "btn-danger btn-sm");
-			btn.setAttribute("data-btn-cancel-label", "Cancelar");
-			btn.setAttribute("data-btn-cancel-class", "btn-default btn-sm");
-			btn.setAttribute("data-title", "¿Eliminar esta matrícula?");
-			btn.setAttribute("data-btn-ok-icon", "");
-			btn.setAttribute("data-btn-cancel-icon", "");
-			btn.setAttribute("data-matricula", matriculas[i].numero);
-			acciones.appendChild(btn);
+			fila.insertCell(-1).appendChild(btn);
 		}
 
 		jQuery('[data-toggle=confirmation]').confirmation({rootSelector: '[data-toggle=confirmation]'});
-		jQuery('[data-toggle=confirmation]').on("confirmed.bs.confirmation", borrarMatricula);
+		jQuery('[data-toggle=confirmation]').on("confirmed.bs.confirmation", desactivarMatricula);
 
 	    var capas = document.querySelectorAll('#content > .container-fluid');
 		for (var i=0; i<capas.length; i++)
@@ -266,7 +370,7 @@ function mostrarPagina(pagina)
 
 function resetearCamposCurso()
 {
-	var input = document.querySelectorAll('#formEditarCurso input');
+	var input = document.querySelectorAll('#formEditarCurso .errorFormulario');
     for (var i=0; i<input.length; i++)
     input[i].classList.remove("errorFormulario");
 
@@ -335,17 +439,22 @@ function crearCurso()
 	form.style.display = "block";
 }
 
-function desactivarCurso()
+function desactivarMatricula(e)
 {
-	var codigo = this.getAttribute("data-codigo");
-	var oCurso = academia.getCurso(codigo);
+	var numero = this.getAttribute("data-matricula");
+	var oMatricula = academia.getMatricula(numero);
 
-	if (oCurso.bArchivado == "si")
-		oCurso.bArchivado = "no";
-	else
-		oCurso.bArchivado = "si";
+	if (oMatricula.estado == "activa") {
+		oMatricula.estado = "inactiva";
+		this.click();
+	}
+	else {
+		oMatricula.estado = "activa";
+		this.click();
+	}
 
-	academia.modificarCurso(oCurso);
+	academia.modificarMatricula(oMatricula);
+	mostrarPagina('matriculaciones');
 }
 
 function guardarCurso()
@@ -381,7 +490,7 @@ function guardarCurso()
 
 function resetearCamposAlumno()
 {
-	var input = document.querySelectorAll('#formEditarAlumno input');
+	var input = document.querySelectorAll('#formEditarAlumno .errorFormulario');
     for (var i=0; i<input.length; i++)
     input[i].classList.remove("errorFormulario");
 
@@ -613,7 +722,7 @@ function guardarProfesor()
 
 function resetearCamposAdmin()
 {
-	var input = document.querySelectorAll('#formEditarAdministrador input');
+	var input = document.querySelectorAll('#formEditarAdministrador .errorFormulario');
     for (var i=0; i<input.length; i++)
     input[i].classList.remove("errorFormulario");
 
@@ -824,27 +933,53 @@ function guardarMatricula()
 	}
 }
 
-function borrarMatricula()
+function borrarCurso()
 {
-	var numero = this.getAttribute("data-matricula");
-	var oMatricula = academia.getMatricula(numero);
-	if (oMatricula.estado == "activa")
-		oMatricula.estado = "inactiva";
-	else
-		oMatricula.estado = "activa";
+	var codigo = this.getAttribute("data-curso");
+	var oCurso = academia.getCurso(codigo);
+	oCurso.bArchivado = "no";
 
-	academia.modificarMatricula(oMatricula);
-	mostrarPagina('matriculaciones');
+	academia.modificarCurso(oCurso);
+	mostrarPagina('cursos');
 }
 
+function borrarAlumno()
+{
+	var dni = this.getAttribute("data-dni");
+	var oUsuario = academia.getUsuario(dni);
+	oUsuario.activo = "no";
+
+	academia.modificarUsuario(oUsuario);
+	mostrarPagina('alumnos');
+}
+
+function borrarProfesor()
+{
+	var dni = this.getAttribute("data-dni");
+	var oUsuario = academia.getUsuario(dni);
+	oUsuario.activo = "no";
+
+	academia.modificarUsuario(oUsuario);
+	mostrarPagina('profesores');
+}
+
+function borrarAdministrador()
+{
+	var dni = this.getAttribute("data-dni");
+	var oUsuario = academia.getUsuario(dni);
+	oUsuario.activo = "no";
+
+	academia.modificarUsuario(oUsuario);
+	mostrarPagina('administradores');
+}
 
 function filtrarTabla()
 {
-	var filas = document.querySelectorAll("#estado");
+	var filas = document.querySelectorAll("tr");
 
 	for (var i=0; i<filas.length; i++)
 	{
-		if (filas[i].dataset.estado == "inactiva")
-			filas[i].parentNode.style.display = "none";
+		if (filas[i].getAttribute("data-activo") == "no")
+			filas[i].style.display = "none";
 	}
 }

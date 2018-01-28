@@ -119,7 +119,7 @@ function comprobarFrmModDatosAlu(oEvento)
 		sApellidos = document.frmModAlu.apellidosAlu.value.trim();
 		sDni = document.frmModAlu.dniAlu.value.trim();
 
-		oAlMod = new Alumno(sNombre, sPassword, sApellidos, sDni, sTelefono, sDireccion, sEmail, true, false);//objeto alumno con los datos modificados
+		oAlMod = new Alumno(sNombre, sPassword, sApellidos, sDni, sTelefono, sDireccion, sEmail, "si", "");//objeto alumno con los datos modificados
 		academia.modificarUsuario(oAlMod);
 		//modificar los datos de sesión de usuario
 		sessionStorage.setItem('usuario', JSON.stringify(oAlMod));
