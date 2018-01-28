@@ -54,6 +54,12 @@ class Alumno extends Persona
 		this.listaCalificaciones = [];
 	}
 
+	addCurso(codigo)
+	{
+		if (!this.listaCursos.includes(codigo))
+			this.listaCursos.push(codigo); // Añade un curso al alumno
+	}
+
 	addNota(oCalificacion)
 	{
 		this.listaCalificaciones.push(oCalificacion); // Añade una calificacion al alumno
@@ -130,7 +136,7 @@ class Matricula
 		this.numero  = iNumero;
 		this.estado  = sEstado;
 		this.dniAlumno = sDniAlumno;
-		this.listaCursosMatri= sListaCursosMatri;
+		this.listaCursosMatri = sListaCursosMatri;
 	}
 }
 
@@ -155,8 +161,16 @@ class Academia
 				bEncontrado = true;
 
 		if (!bEncontrado)
+		{
 			this._matriculas.push(oMatricula);
+
+			var oAlumno = this.getUsuario(oMatricula.dniAlumno);
+			for (var i=0; i<oMatricula.listaCursosMatri.length; i++)
+				oAlumno.addCurso(oMatricula.listaCursosMatri[i]);
+
+			this.modificarUsuario(oAlumno);
 			sessionStorage.setItem('tMatriculas', JSON.stringify(this._matriculas));
+		}
 
 		return !bEncontrado;
 	}
