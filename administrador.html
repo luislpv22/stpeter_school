@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/panel.css">
+    <link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
     <script>
         if (typeof sessionStorage.usuario === 'undefined')
             location.href = "login.html";
@@ -48,6 +49,9 @@
 
         <div id="content">
             <button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
+
+            <div id="txtInformacion" class="alert alert-dismissible hide"><span></span><button type="button" class="close" data-dismiss="alert">&times;</button></div>
+
             <div id="paginaCursos" class="container-fluid">
             	<h3>Lista de cursos</h3>
 	            <table id="tablaCursos" class="table table-striped">
@@ -384,6 +388,8 @@
     <script type="text/javascript" src="js/bootstrap-confirmation.min.js"></script>
     <script type="text/javascript" src="js/objetos.js"></script>
     <script type="text/javascript" src="js/principal.js"></script>
+    <script type="text/javascript" src="js/validaciones.js"></script>
     <script type="text/javascript" src="js/administrador.js"></script>
+
 </body>
 </html>

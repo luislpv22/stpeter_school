@@ -263,6 +263,17 @@ function mostrarPagina(pagina)
 
 }
 
+function resetearCamposCurso()
+{
+	var input = document.querySelectorAll('#formEditarCurso input');
+    for (var i=0; i<input.length; i++)
+    input[i].classList.remove("errorFormulario");
+
+    var mensajes = document.querySelectorAll('#formEditarCurso .text-error');
+    for (var i=0; i<mensajes.length; i++)
+    mensajes[i].remove();
+}
+
 function editarCurso()
 {
 	document.querySelector('.modal-title').textContent = "Editar curso";
@@ -273,6 +284,9 @@ function editarCurso()
 	var codigo = this.getAttribute("data-codigo");
 	var oCurso = academia.getCurso(codigo);
 	var form = document.getElementById("formEditarCurso");
+
+	resetearCamposCurso();
+
 	form.codigo.value = oCurso.codigo;
 	form.idioma.value = oCurso.idioma;
 	form.nivel.value = oCurso.nivel;
@@ -303,6 +317,11 @@ function crearCurso()
 	document.querySelector('#modal .btn-success').id = "btnGuardarCurso";
 	document.querySelector('#btnGuardarCurso').removeAttribute("data-codigo");
 	document.querySelector('#btnGuardarCurso').addEventListener("click", guardarCurso);
+
+
+	resetearCamposCurso();
+
+
 	form.codigo.removeAttribute("readonly");
 	form.codigo.value = "";
 	form.idioma.value = "Inglés";
@@ -332,29 +351,44 @@ function guardarCurso()
 {
 	var form = document.getElementById("formEditarCurso");
 
-	var sCodigo = form.codigo.value;
+	if (comprobarFormCurso()==true)
+	{
+		var sCodigo = form.codigo.value;
 
-	var dataCod = this.getAttribute("data-codigo");
-	if (dataCod != null)
-		sCodigo = dataCod;
+		var dataCod = this.getAttribute("data-codigo");
+		if (dataCod != null)
+			sCodigo = dataCod;
 
-	var sIdioma = form.idioma.value;
-	var sNivel = form.nivel.value;
-	var sTipo = form.tipo.value;
-	var fPrecio = parseFloat(form.precio.value);
-	var sDuracion = form.duracion1.value + " " + form.duracion2.value;
-	var bActivo = form.activo.value;
+		var sIdioma = form.idioma.value;
+		var sNivel = form.nivel.value;
+		var sTipo = form.tipo.value;
+		var fPrecio = parseFloat(form.precio.value);
+		var sDuracion = form.duracion1.value + " " + form.duracion2.value;
+		var bActivo = form.activo.value;
 
-	var oCurso = new Curso(sCodigo, sIdioma, sDuracion, fPrecio, sTipo, sNivel, bActivo);
+		var oCurso = new Curso(sCodigo, sIdioma, sDuracion, fPrecio, sTipo, sNivel, bActivo);
 
-	if (dataCod != null)
-		academia.modificarCurso(oCurso);
-	else
-		academia.addCurso(oCurso);
+		if (dataCod != null)
+			academia.modificarCurso(oCurso);
+		else
+			academia.addCurso(oCurso);
 
-	mostrarPagina('cursos');
-	document.querySelector('#modal .close').click();
+		mostrarPagina('cursos');
+		document.querySelector('#modal .close').click();
+	}
 }
+
+function resetearCamposAlumno()
+{
+	var input = document.querySelectorAll('#formEditarAlumno input');
+    for (var i=0; i<input.length; i++)
+    input[i].classList.remove("errorFormulario");
+
+    var mensajes = document.querySelectorAll('#formEditarAlumno .text-error');
+    for (var i=0; i<mensajes.length; i++)
+    mensajes[i].remove();
+}
+
 
 function editarAlumno()
 {
@@ -366,6 +400,9 @@ function editarAlumno()
 	var dni = this.getAttribute("data-dni");
 	var oAlumno = academia.getUsuario(dni);
 	var form = document.getElementById("formEditarAlumno");
+
+	resetearCamposAlumno();
+
 	form.dni.value = oAlumno.dni;
 	form.password.value = oAlumno.password;
 	form.nombre.value = oAlumno.nombre;
@@ -377,6 +414,8 @@ function editarAlumno()
 	document.querySelector('#modal .btn-success').id = "btnGuardarAlumno";
 	document.querySelector('#btnGuardarAlumno').setAttribute("data-dni", dni);
 	document.querySelector('#btnGuardarAlumno').addEventListener("click", guardarAlumno);
+
+
 
 	form.style.display = "block";
 }
@@ -392,6 +431,9 @@ function crearAlumno()
 	document.querySelector('#modal .btn-success').id = "btnGuardarAlumno";
 	document.querySelector('#btnGuardarAlumno').removeAttribute("data-dni");
 	document.querySelector('#btnGuardarAlumno').addEventListener("click", guardarAlumno);
+
+	resetearCamposAlumno();
+
 	form.dni.removeAttribute("readonly");
 	form.dni.value = "";
 	form.password.value = "";
@@ -407,29 +449,46 @@ function guardarAlumno()
 {
 	var form = document.getElementById("formEditarAlumno");
 
-	var sDNI = form.dni.value;
+	if (comprobarAltaAlu()==true)
+	{
+		var sDNI = form.dni.value;
 
-	var dataDNI = this.getAttribute("data-dni");
-	if (dataDNI != null)
-		sDNI = dataDNI;
+		var dataDNI = this.getAttribute("data-dni");
+		if (dataDNI != null)
+			sDNI = dataDNI;
 
-	var sPassword = form.password.value;
-	var sNombre = form.nombre.value;
-	var sApellidos = form.apellidos.value;
-	var sCorreo = form.email.value;
-	var sTelefono = form.telefono.value;
-	var sDireccion = form.direccion.value;
+		var sPassword = form.password.value;
+		var sNombre = form.nombre.value;
+		var sApellidos = form.apellidos.value;
+		var sCorreo = form.email.value;
+		var sTelefono = form.telefono.value;
+		var sDireccion = form.direccion.value;
 
-	var oAlumno = new Alumno(sNombre, sPassword, sApellidos, sDNI, sTelefono, sDireccion, sCorreo, "si", "");
+		var oAlumno = new Alumno(sNombre, sPassword, sApellidos, sDNI, sTelefono, sDireccion, sCorreo, "si", "");
 
-	if (dataDNI != null)
-		academia.modificarUsuario(oAlumno);
-	else
-		academia.addUsuario(oAlumno);
+		if (dataDNI != null)
+			academia.modificarUsuario(oAlumno);
+		else
+			academia.addUsuario(oAlumno);
 
-	mostrarPagina('alumnos');
-	document.querySelector('#modal .close').click();
+		mostrarPagina('alumnos');
+		document.querySelector('#modal .close').click();
+	}
+	
 }
+
+
+function resetearCamposProfesor()
+{
+	var input = document.querySelectorAll('#formEditarProfesor input');
+    for (var i=0; i<input.length; i++)
+    input[i].classList.remove("errorFormulario");
+
+    var mensajes = document.querySelectorAll('#formEditarProfesor .text-error');
+    for (var i=0; i<mensajes.length; i++)
+    mensajes[i].remove();
+}
+
 
 function editarProfesor()
 {
@@ -441,6 +500,9 @@ function editarProfesor()
 	var dni = this.getAttribute("data-dni");
 	var oProfesor = academia.getUsuario(dni);
 	var form = document.getElementById("formEditarProfesor");
+
+	resetearCamposProfesor();
+
 	form.dni.value = oProfesor.dni;
 	form.password.value = oProfesor.password;
 	form.nombre.value = oProfesor.nombre;
@@ -484,6 +546,9 @@ function crearProfesor()
 	document.querySelector('#modal .btn-success').id = "btnGuardarProfesor";
 	document.querySelector('#btnGuardarProfesor').removeAttribute("data-dni");
 	document.querySelector('#btnGuardarProfesor').addEventListener("click", guardarProfesor);
+
+	resetearCamposProfesor();
+
 	form.dni.removeAttribute("readonly");
 	form.dni.value = "";
 	form.password.value = "";
@@ -511,36 +576,51 @@ function crearProfesor()
 
 function guardarProfesor()
 {
-	var form = document.getElementById("formEditarProfesor");
+	if (comprobarFormProf()==true)
+	{
+		var form = document.getElementById("formEditarProfesor");
 
-	var sDNI = form.dni.value;
+		var sDNI = form.dni.value;
 
-	var dataDNI = this.getAttribute("data-dni");
-	if (dataDNI != null)
-		sDNI = dataDNI;
+		var dataDNI = this.getAttribute("data-dni");
+		if (dataDNI != null)
+			sDNI = dataDNI;
 
-	var sPassword = form.password.value;
-	var sNombre = form.nombre.value;
-	var sApellidos = form.apellidos.value;
-	var sCorreo = form.email.value;
-	var sTelefono = form.telefono.value;
-	var sDireccion = form.direccion.value;
-	var listaCursos = form.cursos.options;
+		var sPassword = form.password.value;
+		var sNombre = form.nombre.value;
+		var sApellidos = form.apellidos.value;
+		var sCorreo = form.email.value;
+		var sTelefono = form.telefono.value;
+		var sDireccion = form.direccion.value;
+		var listaCursos = form.cursos.options;
 
-	var oProfesor = new Profesor(sNombre, sPassword, sApellidos, sDNI, sTelefono, sDireccion, sCorreo, "si", "");
+		var oProfesor = new Profesor(sNombre, sPassword, sApellidos, sDNI, sTelefono, sDireccion, sCorreo, "si", "");
 
-	for (var i=0; i<listaCursos.length; i++)
-		if (listaCursos[i].selected)
-			oProfesor.addCurso(listaCursos[i].value);
+		for (var i=0; i<listaCursos.length; i++)
+			if (listaCursos[i].selected)
+				oProfesor.addCurso(listaCursos[i].value);
 
-	if (dataDNI != null)
-		academia.modificarUsuario(oProfesor);
-	else
-		academia.addUsuario(oProfesor);
+		if (dataDNI != null)
+			academia.modificarUsuario(oProfesor);
+		else
+			academia.addUsuario(oProfesor);
 
-	mostrarPagina('profesores');
-	document.querySelector('#modal .close').click();
+		mostrarPagina('profesores');
+		document.querySelector('#modal .close').click();
+	}
 }
+
+function resetearCamposAdmin()
+{
+	var input = document.querySelectorAll('#formEditarAdministrador input');
+    for (var i=0; i<input.length; i++)
+    input[i].classList.remove("errorFormulario");
+
+    var mensajes = document.querySelectorAll('#formEditarAdministrador .text-error');
+    for (var i=0; i<mensajes.length; i++)
+    mensajes[i].remove();
+}
+
 
 function editarAdministrador()
 {
@@ -552,6 +632,9 @@ function editarAdministrador()
 	var dni = this.getAttribute("data-dni");
 	var oAdministrador = academia.getUsuario(dni);
 	var form = document.getElementById("formEditarAdministrador");
+
+	resetearCamposAdmin();
+
 	form.dni.value = oAdministrador.dni;
 	form.password.value = oAdministrador.password;
 	form.nombre.value = oAdministrador.nombre;
@@ -578,6 +661,9 @@ function crearAdministrador()
 	document.querySelector('#modal .btn-success').id = "btnGuardarAdministrador";
 	document.querySelector('#btnGuardarAdministrador').removeAttribute("data-dni");
 	document.querySelector('#btnGuardarAdministrador').addEventListener("click", guardarAdministrador);
+
+	resetearCamposAdmin();
+
 	form.dni.removeAttribute("readonly");
 	form.dni.value = "";
 	form.password.value = "";
@@ -593,28 +679,31 @@ function guardarAdministrador()
 {
 	var form = document.getElementById("formEditarAdministrador");
 
-	var sDNI = form.dni.value;
+	if (comprobarFormAdmin()==true)
+	{
+		var sDNI = form.dni.value;
 
-	var dataDNI = this.getAttribute("data-dni");
-	if (dataDNI != null)
-		sDNI = dataDNI;
+		var dataDNI = this.getAttribute("data-dni");
+		if (dataDNI != null)
+			sDNI = dataDNI;
 
-	var sPassword = form.password.value;
-	var sNombre = form.nombre.value;
-	var sApellidos = form.apellidos.value;
-	var sCorreo = form.email.value;
-	var sTelefono = form.telefono.value;
-	var sDireccion = form.direccion.value;
+		var sPassword = form.password.value;
+		var sNombre = form.nombre.value;
+		var sApellidos = form.apellidos.value;
+		var sCorreo = form.email.value;
+		var sTelefono = form.telefono.value;
+		var sDireccion = form.direccion.value;
 
-	var oAdministrador = new Administrador(sNombre, sPassword, sApellidos, sDNI, sTelefono, sDireccion, sCorreo, "si", "");
+		var oAdministrador = new Administrador(sNombre, sPassword, sApellidos, sDNI, sTelefono, sDireccion, sCorreo, "si", "");
 
-	if (dataDNI != null)
-		academia.modificarUsuario(oAdministrador);
-	else
-		academia.addUsuario(oAdministrador);
+		if (dataDNI != null)
+			academia.modificarUsuario(oAdministrador);
+		else
+			academia.addUsuario(oAdministrador);
 
-	mostrarPagina('administradores');
-	document.querySelector('#modal .close').click();
+		mostrarPagina('administradores');
+		document.querySelector('#modal .close').click();
+	}
 }
 
 function switchActivo()
@@ -635,6 +724,18 @@ function switchActivo()
 	return lblActivo;
 }
 
+function resetearCamposMatricula()
+{
+	var input = document.querySelectorAll('#formModMatri input');
+    for (var i=0; i<input.length; i++)
+    input[i].classList.remove("errorFormulario");
+
+	document.querySelector('#formModMatri SELECT').remove("errorFormulario");
+
+    var mensajes = document.querySelectorAll('#formModMatri .text-error');
+    for (var i=0; i<mensajes.length; i++)
+    mensajes[i].remove();
+}
 
 function editarMatricula()
 {
@@ -652,6 +753,8 @@ function editarMatricula()
 	form.numMatri.value = codigo;
 	form.dniMatri.value = dni;
 	var listaCursos = academia.getCursos();
+
+	resetearCamposMatricula();
 
 	var oP = document.querySelectorAll("OPTION");
 	for (var i=0; i<oP.length; i++) 
@@ -675,48 +778,50 @@ function editarMatricula()
 	form.style.display = "block";
 }
 
-
 function guardarMatricula()
 {
-	var form = document.getElementById("formModMatri");
-
-	var dataEstado = this.getAttribute("data-estado");
-
-	var sNumero = form.numMatri.value;
-	var sDni = form.dniMatri.value;
-	var sLisCursos =[];
-
-	listaOp=document.querySelectorAll("OPTION");
-	for (var i = 0; i < listaOp.length; i++) {
-		if (listaOp[i].selected)
-			sLisCursos.push(listaOp[i].value);
-	}
-
-	var oMatricula = new Matricula (sNumero, dataEstado, sDni, sLisCursos);
-
-	//quitar curso y notas que se hayan quitado
-	var listCurOriginal = academia.getUsuario(sDni).listaCursos; 
-	var cursosQuitarAlu = [];
-	var indice=0;
-	for (var i = 0; i < listCurOriginal.length; i++) 
+	if (comprobarFormMatricula()==true)
 	{
-		if (!sLisCursos.includes(listCurOriginal[i]))
-		{
-			cursosQuitarAlu[indice] = listCurOriginal[i];
-			indice++;
+		var form = document.getElementById("formModMatri");
+
+		var dataEstado = this.getAttribute("data-estado");
+
+		var sNumero = form.numMatri.value;
+		var sDni = form.dniMatri.value;
+		var sLisCursos =[];
+
+		listaOp=document.querySelectorAll("OPTION");
+		for (var i = 0; i < listaOp.length; i++) {
+			if (listaOp[i].selected)
+				sLisCursos.push(listaOp[i].value);
 		}
-	}
 
-	if (sNumero != null)
-	{
-		academia.modificarMatricula(oMatricula);
-		academia.borrarCursosAlumno(sDni, cursosQuitarAlu);
-	}
-	else
-		academia.addMatricula(oMatricula);
+		var oMatricula = new Matricula (sNumero, dataEstado, sDni, sLisCursos);
 
-	location.href = "administrador.html";
-	document.querySelector('#modal .close').click();
+		//quitar curso y notas que se hayan quitado
+		var listCurOriginal = academia.getUsuario(sDni).listaCursos; 
+		var cursosQuitarAlu = [];
+		var indice=0;
+		for (var i = 0; i < listCurOriginal.length; i++) 
+		{
+			if (!sLisCursos.includes(listCurOriginal[i]))
+			{
+				cursosQuitarAlu[indice] = listCurOriginal[i];
+				indice++;
+			}
+		}
+
+		if (sNumero != null)
+		{
+			academia.modificarMatricula(oMatricula);
+			academia.borrarCursosAlumno(sDni, cursosQuitarAlu);
+		}
+		else
+			academia.addMatricula(oMatricula);
+
+		location.href = "administrador.html";
+		document.querySelector('#modal .close').click();
+	}
 }
 
 function borrarMatricula()
