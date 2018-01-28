@@ -444,77 +444,96 @@ function cargarListadoCurso(oEvento)
 	}
 	else
 	{
-		borrartabla();
-		oTabla = document.createElement("TABLE");
-		oTabla.classList.add("table");
-		oTabla.classList.add("table-hover");
-		oTabla.classList.add("table-condensed");
-		oTHead = oTabla.createTHead();
-		oFila = oTHead.insertRow(-1);
-		oCelda = oFila.insertCell(-1);
-		oCelda.textContent = "Examenes";
-		oCelda = oFila.insertCell(-1);
-		oCelda.textContent = "Notas";
-		oTBody = oTabla.createTBody();
-
-		for (var i=0; i<listaNotas.length; i++) 
-		{
-			oFila = oTBody.insertRow(-1);
-			oCelda = oFila.insertCell(-1);
-			oCelda.textContent = "Examen "+(i+1);
-			oCelda = oFila.insertCell(-1);
-			oCelda.textContent = listaNotas[i];
-			oCelda.dataset.nota = listaNotas[i];
-			oCelda.id = "nota";
-		}
-
-		document.querySelector("#listaCalificaciones").appendChild(oTabla);
 
 		oBr= document.createElement("BR");
 		document.querySelector("#listaCalificaciones").appendChild(oBr);
 		oParrafo= document.createElement("P");
 		oParrafo.textContent="Opciones de filtrado y ordenación";
 		document.querySelector("#listaCalificaciones").appendChild(oParrafo);
-		oBr= document.createElement("BR");
-		document.querySelector("#listaCalificaciones").appendChild(oBr);
 
 		//crear select para los filtrados
-		oSelect= document.createElement("SELECT");
-		oSelect.id="filtraNotas";
-		oP= document.createElement("OPTION");
-		oP.value="99";
-		oP.textContent="Seleccione filtrado";
+		oSelect = document.createElement("SELECT");
+		oSelect.id ="filtraNotas";
+		oSelect.classList.add("form-control");
+		oSelect.style.display = "inline";
+		oSelect.style.width = "220px";
+		oSelect.style.marginRight = "5px";
+		oP = document.createElement("OPTION");
+		oP.value = "99";
+		oP.textContent = "Seleccione filtrado";
 		oSelect.appendChild(oP);
-		oP= document.createElement("OPTION");
-		oP.value="5";
-		oP.textContent="Aprobados";
+		oP = document.createElement("OPTION");
+		oP.value = "5";
+		oP.textContent = "Aprobados";
 		oSelect.appendChild(oP);
-		oP= document.createElement("OPTION");
-		oP.value="4.99";
-		oP.textContent="Suspensos";
+		oP = document.createElement("OPTION");
+		oP.value = "4.99";
+		oP.textContent = "Suspensos";
 		oSelect.appendChild(oP);
 		document.querySelector("#listaCalificaciones").appendChild(oSelect);
-
 		document.querySelector("#filtraNotas").addEventListener("change", filtaTabla, false);
 
 		//crear select para ordenar notas
-		oSelect= document.createElement("SELECT");
-		oSelect.id="ordenaNotas";
-		oP= document.createElement("OPTION");
-		oP.value="nulo";
-		oP.textContent="Seleccione tipo de orden";
+		oSelect = document.createElement("SELECT");
+		oSelect.id = "ordenaNotas";
+		oSelect.classList.add("form-control");
+		oSelect.style.display = "inline";
+		oSelect.style.width = "220px";
+		oP = document.createElement("OPTION");
+		oP.value = "nulo";
+		oP.textContent = "Seleccione tipo de orden";
 		oSelect.appendChild(oP);
-		oP= document.createElement("OPTION");
+		oP = document.createElement("OPTION");
 		oP.value="creciente";
-		oP.textContent="De menor a mayor";
+		oP.textContent = "De menor a mayor";
 		oSelect.appendChild(oP);
-		oP= document.createElement("OPTION");
-		oP.value="decreciente";
-		oP.textContent="De mayor a menor";
+		oP = document.createElement("OPTION");
+		oP.value = "decreciente";
+		oP.textContent = "De mayor a menor";
 		oSelect.appendChild(oP);
 		document.querySelector("#listaCalificaciones").appendChild(oSelect);
-
 		document.querySelector("#ordenaNotas").addEventListener("change", ordenaTabla, false);
+
+		oBr = document.createElement("BR");
+		document.querySelector("#listaCalificaciones").appendChild(oBr);
+		oBr = document.createElement("BR");
+		document.querySelector("#listaCalificaciones").appendChild(oBr);
+
+
+		borrartabla();
+		oTabla = document.createElement("TABLE");
+		oTabla.classList.add("table", "table-hover");
+		oTabla.style.maxWidth = "300px";
+		oTHead = oTabla.createTHead();
+		oFila = oTHead.insertRow(-1);
+		oCelda = document.createElement("th");
+		oCelda.textContent = " ";
+		oFila.appendChild(oCelda);
+		oCelda = document.createElement("th");
+		oCelda.textContent = "Tarea";
+		oFila.appendChild(oCelda);
+		oCelda = document.createElement("th");
+		oCelda.textContent = "Calificación";
+		oCelda.style.textAlign = "center";
+		oFila.appendChild(oCelda);
+
+		oTBody = oTabla.createTBody();
+
+		for (var i=0; i<listaNotas.length; i++) 
+		{
+			oFila = oTBody.insertRow(-1);
+			oCelda = oFila.insertCell(-1);
+			oCelda.textContent = " ";
+			oCelda = oFila.insertCell(-1);
+			oCelda.textContent = listaNotas[i].descripcion;
+			oCelda = oFila.insertCell(-1);
+			oCelda.textContent = listaNotas[i].nota;
+			oCelda.dataset.nota = listaNotas[i].nota;
+			oCelda.id = "nota";
+			oCelda.style.textAlign = "center";
+		}
+
+		document.querySelector("#listaCalificaciones").appendChild(oTabla);
 	}							
 }
 

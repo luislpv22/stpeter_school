@@ -68,8 +68,8 @@
 </alumno>
 <alumno>
 	<nombre>Ana</nombre>
-	<password>Gordillo</password>
-	<apellidos>Ana123</apellidos>
+	<password>Ana123</password>
+	<apellidos>Gordillo</apellidos>
 	<dni>23645812R</dni>
 	<telefono>658652639</telefono>
 	<direccion>C/ America</direccion>

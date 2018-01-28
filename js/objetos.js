@@ -28,19 +28,6 @@ class Profesor extends Persona
 		if (!this.listaCursos.includes(codigo))
 			this.listaCursos.push(codigo); // Añade un curso al profesor
 	}
-
-	getCursos()
-	{
-		var tCursos = [];
-		var cursos = academia.getCursos();
-
-		for(var i=0; i<this.listaCursos.length; i++)
-			for (var j=0; j<cursos.length; j++)
-				if (this.listaCursos[i] == cursos[j].codigo)
-					tCursos.push(cursos[j]);
-
-		return tCursos;
-	}
 }
 
 class Alumno extends Persona
@@ -363,54 +350,40 @@ class Academia
 		var tUsuarios = this._usuarios;
 		for (var i=0; i<tUsuarios.length; i++)
 		{
-	    	if (tUsuarios[i] instanceof Administrador)
-	    		tUsuarios[i].tipo = 'administrador';
-	    	else if (tUsuarios[i] instanceof Profesor)
-	    		tUsuarios[i].tipo = 'profesor';
-	    	else
-	    		tUsuarios[i].tipo = 'alumno';
+			if (tUsuarios[i] instanceof Administrador)
+				tUsuarios[i].tipo = 'administrador';
+			else if (tUsuarios[i] instanceof Profesor)
+				tUsuarios[i].tipo = 'profesor';
+			else
+				tUsuarios[i].tipo = 'alumno';
 		}
 		sessionStorage.setItem('tUsuarios', JSON.stringify(tUsuarios));
 	}
 
-/*    modificarNotaAlumno(sCodigo,sDni,fNota)
-    {
+	modificarNotaAlumno(sDni, oCalificacion)
+	{
+		for (var i=0; i<this._usuarios.length; i++) 
+		{
+			if (this._usuarios[i].dni == sDni)
+			{
+				var oCalifca = this._usuarios[i].listaCalificaciones;
 
-    	for (var i=0; i<this._profesores[0].listaCurso.length; i++) 
-    	{
+				for (var j=0; j<oCalifca.length; j++)
+				{
+					if (oCalifca[j].curso == oCalificacion.curso && oCalifca[j].descripcion == oCalificacion.descripcion)
+					{
+						oCalifca[j].nota = oCalificacion.nota;
+						this.actualizarSesionUsuarios();
+					}
+				}
 
-    		if (this._profesores[0].listaCurso[i].codigo == sCodigo)
-    		{
-    			var oTR=this._profesores[0].listaCurso[i].listaAlumno;
-    			for (var j=0; j<oTR.length; j++) 
-    			{
-
-    				if (this._profesores[0].listaCurso[i].listaAlumno[j].dni == sDni)
-    				{
-
-    					var oTR2=this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones;
-    					for (var k=0; k<oTR.length; k++){
-
-    						if (this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones[k].codCurso == sCodigo)
-    						{
-    							this._profesores[0].listaCurso[i].listaAlumno[j].listaCalificaciones[k].nota=fNota;
-
-    						}
-
-
-    					}
-
-
-
-    				}
-    			}
-    		}
-    	}
-    }*/
+			}
+		}
+	}
 
 	codNuevaMatri()
 	{
-		var oMatri=this._matriculas[this._matriculas.length -1]; //obteiene el último elemento de una array
+		var oMatri=this._matriculas[this._matriculas.length -1]; // obteiene el último elemento de una array
 		return parseInt(oMatri.numero)+1;
 	}
 
@@ -418,37 +391,22 @@ class Academia
 	{
 		for (var i=0; i<this._usuarios.length; i++) 
 			if (this._usuarios[i].dni == sDni)
-				this._usuarios[i].activo="no";
+				this._usuarios[i].activo = "no";
 			
 		this.actualizarSesionUsuarios();
 	}
 
-
-
 	getCalificaciones(codCurso, dniAlu)
 	{
-		//buscamos en la lista de calificación del alumno que tiene la sesión, las notas que tenga el código del curso,
-		//dichas notas las metemos en un array y la devolvemos
-		var listaCalificaciones=[];
-		var indice=0;
-		var oAlu=null;
-		for (var i=0; i<this._usuarios.length; i++) 
-			if (this._usuarios[i].dni == dniAlu)
-				oAlu=this._usuarios[i];
+		// buscamos en la lista de calificación del alumno que tiene la sesión, las notas que tenga el código del curso,
+		// dichas notas las metemos en un array y la devolvemos
+		var listaCalificaciones = [];
+		var indice = 0;
+		var oAlu = this.getUsuario(dniAlu);
 
-
-			for (var i = 0; i < oAlu.listaCalificaciones.length; i++) 
-			{
-				if (oAlu.listaCalificaciones[i].codCurso== codCurso)
-				{
-					for (var j=0; j< oAlu.listaCalificaciones[i].nota.length; j++)
-					{
-						listaCalificaciones[indice]=oAlu.listaCalificaciones[i].nota[j];
-						indice++;
-					}
-					
-				}
-			}
+		for (var i=0; i<oAlu.listaCalificaciones.length; i++) 
+			if (oAlu.listaCalificaciones[i].curso == codCurso)
+				listaCalificaciones.push(oAlu.listaCalificaciones[i]);
 				
 		return listaCalificaciones;
 	}
@@ -459,6 +417,7 @@ class Academia
 			if (this._usuarios[i].dni == dni)
 				this._usuarios[i].addNota(oCalificacion);
 
+		this.actualizarSesionUsuarios();
 	}
 
 	cambiarEstadoMatri(oMatri)
@@ -468,13 +427,9 @@ class Academia
 			if (this._matriculas[i] == oMatri)
 			{
 				if (oMatri.estado =="encurso")
-				{
 					this._matriculas[i].estado = "cerrado";
-				}
 				else
-				{
 					this._matriculas[i].estado = "encurso";
-				}
 			}
 		}
 	}
@@ -485,21 +440,15 @@ class Academia
 		var indice=0;
 		var listaIndice = [];
 		
-		//para borrar las notas del curso de la lista de calificaciones del alumno
-       	for (var i = 0; i < oAlu.listaCalificaciones.length; i++) 
-       	{
-       		if (oAlu.listaCalificaciones[i].codCurso == cursosQuitarAlu[i])
-       		{
-       				indice= i;
-       		}
-       	}
+		// para borrar las notas del curso de la lista de calificaciones del alumno
+		for (var i = 0; i < oAlu.listaCalificaciones.length; i++) 
+			if (oAlu.listaCalificaciones[i].codCurso == cursosQuitarAlu[i])
+					indice = i;
 
-       	if ( i !== -1 )
-		{
-       		oAlu.listaCalificaciones.splice( indice, 1 );
-       	} 
+		if (i !== -1)
+			oAlu.listaCalificaciones.splice( indice, 1 );
 
-		//para borrar el curso de la lista de cursos del alumno
+		// para borrar el curso de la lista de cursos del alumno
 		var indice = 0;
 		for (var i = 0; i < cursosQuitarAlu.length; i++) 
 		{
@@ -512,19 +461,10 @@ class Academia
 		}
 
 		for (var i = listaIndice.length-1; i >= 0; i--) 
-		{
 			oAlu.listaCursos.splice(listaIndice[i], 1 );
-		}
 
 		this.modificarUsuario(oAlu);
 	}
-
-
-
-
-
-		
-
 }
 
 
