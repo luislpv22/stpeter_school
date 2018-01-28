@@ -5,110 +5,118 @@ function comprobarFrmModDatosAlu(oEvento)
 	var bValido = true;
 	var sError = "";
 
-	//password
-	var sPassword = document.frmModAlu.passAlu.value.trim();
+var form = document.getElementById("frmModAlu");
+resetearCamposModMatricula();
+
+	//password      
+	var sPassword = form.passAlu.value.trim();
 	if (sPassword !="")
 	{
 		/*El campo apellido debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios.*/
 		var oExpReg = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}$/i;
 		if (oExpReg.test(sPassword) == false)
 		{
-			document.frmModAlu.passAlu.classList.add("errorFormulario");
-			document.frmModAlu.passAlu.focus();
-			bValido = false;
-			sError += "La contraseña tiene que tener entre 6 y 15 caracteres, y debe haber números, letras mayusculas y letras minusculas \n";
-		}
-		else {
-			document.frmModAlu.passAlu.classList.remove("errorFormulario");
-		}
+			var div = document.createElement("div");
+	        div.textContent = "La contraseña tiene que tener entre 6 y 15 caracteres, y debe haber números, letras mayusculas y letras minusculas \n"; 
+	        div.classList.add("text-error");
+	        form.passAlu.classList.add("errorFormulario");
+	        form.passAlu.parentNode.appendChild(div);
+	        form.passAlu.focus(); 
+	        var bValido = false;
+	    }
 	}
 	else
 	{
-		document.frmModAlu.passAlu.classList.add("errorFormulario");
-		if(bValido) 
-		  document.frmModAlu.passAlu.focus();
-		bValido = false;
-		sError += "La contraseña no puede estar vacia \n";      
+			var div = document.createElement("div");
+	        div.textContent = "La contraseña no puede estar vacia \n"; 
+	        div.classList.add("text-error");
+	        form.passAlu.classList.add("errorFormulario");
+	        form.passAlu.parentNode.appendChild(div);
+	        form.passAlu.focus(); 
+	        var bValido = false;    
 	}
 
-	//teléfono
-	var sTelefono = document.frmModAlu.telefonoAlu.value.trim();
+	var sTelefono = form.telefonoAlu.value.trim();
 	if (sTelefono != "")
 	{
-		var oExpReg = /^[0-9]{2,3}-? ?[0-9]{6,7}$/i;
+		var oExpReg = /^[679]{1}\d{8}$/;
 		if (oExpReg.test(sTelefono) == false)
 		{
-			document.frmModAlu.telefonoAlu.classList.add("errorFormulario");
-			document.frmModAlu.telefonoAlu.focus();
-			bValido = false;
-			sError += "El campo teléfono solo puede tener 9 dígitos \n"; 
-		}
-		else {
-			document.frmModAlu.telefonoAlu.classList.remove("errorFormulario");
-		}
+			var div = document.createElement("div");
+	        div.textContent = "El campo teléfono solo puede tener 9 dígitos \n";  
+	        div.classList.add("text-error");
+	        form.telefonoAlu.classList.add("errorFormulario");
+	        form.telefonoAlu.parentNode.appendChild(div);
+	        form.telefonoAlu.focus(); 
+	        var bValido = false;
+	    }
 	}
 	else
 	{
-		document.frmModAlu.telefonoAlu.classList.add("errorFormulario");
-		if(bValido) 
-		  document.frmModAlu.telefonoAlu.focus();
-		bValido = false;
-		sError += "El campo teléfono no puede estar vacio \n";      
+		var div = document.createElement("div");
+	    div.textContent = "El teléfono no puede estar vacio \n"; 
+	    div.classList.add("text-error");
+	    form.telefonoAlu.classList.add("errorFormulario");
+	    form.telefonoAlu.parentNode.appendChild(div);
+	    form.telefonoAlu.focus(); 
+	    var bValido = false;    
 	}
 
 	//dirección
-	var sDireccion = document.frmModAlu.direAlu.value.trim();
+	var sDireccion = form.direAlu.value.trim();
 	if (sDireccion != "")
 	{
 		var oExpReg = /^[a-z\d\s\,\º\/]{3,40}$/i;
 		if (oExpReg.test(sDireccion) == false)
 		{
-			document.frmModAlu.direAlu.classList.add("errorFormulario");
-			document.frmModAlu.direAlu.focus();
-			bValido = false;
-			sError += "El campo dirección debe tener entre 3 y 40 carácteres \n"; 
-		}
-		else {
-			document.frmModAlu.direAlu.classList.remove("errorFormulario");
-		}
+			var div = document.createElement("div");
+	        div.textContent = "El campo dirección debe tener entre 3 y 40 carácteres \n"; 
+	        div.classList.add("text-error");
+			form.direAlu.classList.add("errorFormulario");
+	        form.direAlu.parentNode.appendChild(div);
+	        form.direAlu.focus(); 
+	        var bValido = false;
+	    }
 	}
 	else
 	{
-		document.frmModAlu.direAlu.classList.add("errorFormulario");
-		if(bValido) 
-		  document.frmModAlu.direAlu.focus();
-		bValido = false;
-		sError += "El campo dirección no puede estar vacio \n";     
+		var div = document.createElement("div");
+	    div.textContent = "La dirección no puede estar vacio \n"; 
+	    div.classList.add("text-error");
+	    form.direAlu.classList.add("errorFormulario");
+	    form.direAlu.parentNode.appendChild(div);
+	    form.direAlu.focus(); 
+	    var bValido = false;    
 	}
 
 	//email
-	var sEmail = document.frmModAlu.emailAlu.value.trim();
+	var sEmail = form.emailAlu.value.trim();
 	if (sEmail != "")
 	{
 		var oExpReg = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i;
 		if (oExpReg.test(sEmail) == false)
 		{
-			document.frmModAlu.emailAlu.classList.add("errorFormulario");
-			if(bValido) 
-				document.frmModAlu.emailAlu.focus();
-			bValido = false;
-			sError += "El email debe tener la siguiente estructura: Caracteres_permitidos@caracteres_permitidos.caracteres_permitidos \n";
-		}
-		else {
-			document.frmModAlu.emailAlu.classList.remove("errorFormulario");
-		}
+			var div = document.createElement("div");
+	        div.textContent = "El correo electrónico no es correcto \n";  
+	        div.classList.add("text-error");
+			form.emailAlu.classList.add("errorFormulario");
+	        form.emailAlu.parentNode.appendChild(div);
+	        form.emailAlu.focus(); 
+	        var bValido = false;
+	    }
 	}
 	else
 	{
-		document.frmModAlu.emailAlu.classList.add("errorFormulario");
-		if(bValido) 
-		  document.frmModAlu.emailAlu.focus();
-		bValido = false;
-		sError += "El email no puede estar vacio \n";
+		var div = document.createElement("div");
+	    div.textContent = "El correo electrónico no puede estar vacio \n"; 
+	    div.classList.add("text-error");
+	    form.emailAlu.classList.add("errorFormulario");
+	    form.emailAlu.parentNode.appendChild(div);
+	    form.emailAlu.focus(); 
+	    var bValido = false;    
 	}
 
 	if (bValido == false){
-		alert(sError);
 		oE.preventDefault();
 	}
 	else
@@ -260,7 +268,7 @@ function comprobarAltaAlu(oEvento)
 		{
 
 			var div = document.createElement("div");
-           	div.textContent = "El email debe tener la siguiente estructura: Caracteres_permitidos@caracteres_permitidos.caracteres_permitidos \n";	 
+           	div.textContent = "El correo electrónico no es correcto";	 
             div.classList.add("text-error");
             form.email.classList.add("errorFormulario");
             form.email.parentNode.appendChild(div);
@@ -452,7 +460,7 @@ function comprobarFormAdmin(oEvento)
 		if (oExpReg.test(sApellidos) == false)
 		{
 			var div = document.createElement("div");
-           	div.textContent = "El campo apellido debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios \n"; 	 
+           	div.textContent = "El campo apellido debe tener entre 5 y 30 caracteres alfabéticos en mayúsculas o minúsculas o espacios \n"; 	 
             div.classList.add("text-error");
             form.apellidos.classList.add("errorFormulario");
             form.apellidos.parentNode.appendChild(div);
@@ -480,7 +488,7 @@ function comprobarFormAdmin(oEvento)
 		{
 
 			var div = document.createElement("div");
-           	div.textContent = "El email debe tener la siguiente estructura: Caracteres_permitidos@caracteres_permitidos.caracteres_permitidos \n";	 
+           	div.textContent = "El correo electrónico no es correcto";	 
             div.classList.add("text-error");
             form.email.classList.add("errorFormulario");
             form.email.parentNode.appendChild(div);
@@ -703,7 +711,7 @@ function comprobarFormProf(oEvento)
 		{
 
 			var div = document.createElement("div");
-           	div.textContent = "El email debe tener la siguiente estructura: Caracteres_permitidos@caracteres_permitidos.caracteres_permitidos \n";	 
+           	div.textContent = "El correo electrónico no es correcto";	 
             div.classList.add("text-error");
             form.email.classList.add("errorFormulario");
             form.email.parentNode.appendChild(div);

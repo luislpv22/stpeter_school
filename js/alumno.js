@@ -1,132 +1,14 @@
-/*zona de validaciones de formularios*/
-function comprobarFrmModDatosAlu(oEvento)
+function resetearCamposModMatricula()
 {
-	var oE = oEvento || window.event;
-	var bValido = true;
-	var sError = "";
+	var input = document.querySelectorAll('#frmModAlu input');
+    for (var i=0; i<input.length; i++)
+    input[i].classList.remove("errorFormulario");
 
-	//password
-	var sPassword = document.frmModAlu.passAlu.value.trim();
-	if (sPassword !="")
-	{
-		/*El campo apellido debe tener entre 5 y 30 caracteres y utilizar sólo caracteres alfabéticos en mayúsculas o minúsculas o espacios.*/
-		var oExpReg = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}$/i;
-		if (oExpReg.test(sPassword) == false)
-		{
-			document.frmModAlu.passAlu.classList.add("errorFormulario");
-			document.frmModAlu.passAlu.focus();
-			bValido = false;
-			sError += "La contraseña tiene que tener entre 6 y 15 caracteres, y debe haber números, letras mayusculas y letras minusculas \n";
-		}
-		else {
-			document.frmModAlu.passAlu.classList.remove("errorFormulario");
-		}
-	}
-	else
-	{
-		document.frmModAlu.passAlu.classList.add("errorFormulario");
-		if(bValido) 
-		  document.frmModAlu.passAlu.focus();
-		bValido = false;
-		sError += "La contraseña no puede estar vacia \n";      
-	}
-
-	//teléfono
-	var sTelefono = document.frmModAlu.telefonoAlu.value.trim();
-	if (sTelefono != "")
-	{
-		var oExpReg = /^[0-9]{2,3}-? ?[0-9]{6,7}$/i;
-		if (oExpReg.test(sTelefono) == false)
-		{
-			document.frmModAlu.telefonoAlu.classList.add("errorFormulario");
-			document.frmModAlu.telefonoAlu.focus();
-			bValido = false;
-			sError += "El campo teléfono solo puede tener 9 dígitos \n"; 
-		}
-		else {
-			document.frmModAlu.telefonoAlu.classList.remove("errorFormulario");
-		}
-	}
-	else
-	{
-		document.frmModAlu.telefonoAlu.classList.add("errorFormulario");
-		if(bValido) 
-		  document.frmModAlu.telefonoAlu.focus();
-		bValido = false;
-		sError += "El campo teléfono no puede estar vacio \n";      
-	}
-
-	//dirección
-	var sDireccion = document.frmModAlu.direAlu.value.trim();
-	if (sDireccion != "")
-	{
-		var oExpReg = /^[a-z\d\s\,\º\/]{3,40}$/i;
-		if (oExpReg.test(sDireccion) == false)
-		{
-			document.frmModAlu.direAlu.classList.add("errorFormulario");
-			document.frmModAlu.direAlu.focus();
-			bValido = false;
-			sError += "El campo dirección debe tener entre 3 y 40 carácteres \n"; 
-		}
-		else {
-			document.frmModAlu.direAlu.classList.remove("errorFormulario");
-		}
-	}
-	else
-	{
-		document.frmModAlu.direAlu.classList.add("errorFormulario");
-		if(bValido) 
-		  document.frmModAlu.direAlu.focus();
-		bValido = false;
-		sError += "El campo dirección no puede estar vacio \n";     
-	}
-
-	//email
-	var sEmail = document.frmModAlu.emailAlu.value.trim();
-	if (sEmail != "")
-	{
-		var oExpReg = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i;
-		if (oExpReg.test(sEmail) == false)
-		{
-			document.frmModAlu.emailAlu.classList.add("errorFormulario");
-			if(bValido) 
-				document.frmModAlu.emailAlu.focus();
-			bValido = false;
-			sError += "El email debe tener la siguiente estructura: Caracteres_permitidos@caracteres_permitidos.caracteres_permitidos \n";
-		}
-		else {
-			document.frmModAlu.emailAlu.classList.remove("errorFormulario");
-		}
-	}
-	else
-	{
-		document.frmModAlu.emailAlu.classList.add("errorFormulario");
-		if(bValido) 
-		  document.frmModAlu.emailAlu.focus();
-		bValido = false;
-		sError += "El email no puede estar vacio \n";
-	}
-
-	if (bValido == false){
-		alert(sError);
-		oE.preventDefault();
-	}
-	else
-	{
-		//modificar los daos del alumno
-		oE.preventDefault();
-		sNombre = document.frmModAlu.nombreAlu.value.trim();
-		sApellidos = document.frmModAlu.apellidosAlu.value.trim();
-		sDni = document.frmModAlu.dniAlu.value.trim();
-
-		oAlMod = new Alumno(sNombre, sPassword, sApellidos, sDni, sTelefono, sDireccion, sEmail, true, false);//objeto alumno con los datos modificados
-		academia.modificarUsuario(oAlMod);
-		//modificar los datos de sesión de usuario
-		sessionStorage.setItem('usuario', JSON.stringify(oAlMod));
-		location.href = "alumno.html";
-			
-	}
+    var mensajes = document.querySelectorAll('#frmModAlu .text-error');
+    for (var i=0; i<mensajes.length; i++)
+    mensajes[i].remove();
 }
+
 
 function mensaje(sTexto)
 {
