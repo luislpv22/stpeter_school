@@ -68,8 +68,8 @@
 </alumno>
 <alumno>
 	<nombre>Ana</nombre>
-	<password>Ana123</password>
-	<apellidos>Gordillo</apellidos>
+	<password>Gordillo</password>
+	<apellidos>Ana123</apellidos>
 	<dni>23645812R</dni>
 	<telefono>658652639</telefono>
 	<direccion>C/ America</direccion>
@@ -79,8 +79,8 @@
 </alumno>
 <alumno>
 	<nombre>Emilio</nombre>
-	<password>Surarez</password>
-	<apellidos>Emilio1</apellidos>
+	<password>Emilio1</password>
+	<apellidos>Suarez</apellidos>
 	<dni>21345687M</dni>
 	<telefono>965856721</telefono>
 	<direccion>C/ Avenida de la Cigala </direccion>

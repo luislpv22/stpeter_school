@@ -570,7 +570,51 @@ class Academia
 		}
 	}
 
+	borrarCursosAlumno(sDni, cursosQuitarAlu)
+	{
+		var oAlu= this.getUsuario(sDni)
+		var indice=0;
+		var listaIndice = [];
+		
+		//para borrar las notas del curso de la lista de calificaciones del alumno
+       	for (var i = 0; i < oAlu.listaCalificaciones.length; i++) 
+       	{
+       		if (oAlu.listaCalificaciones[i].codCurso == cursosQuitarAlu[i])
+       		{
+       				indice= i;
+       		}
+       	}
 
+       	if ( i !== -1 )
+		{
+       		oAlu.listaCalificaciones.splice( indice, 1 );
+       	} 
+
+		//para borrar el curso de la lista de cursos del alumno
+		var indice = 0;
+		for (var i = 0; i < cursosQuitarAlu.length; i++) 
+		{
+			var ind = oAlu.listaCursos.indexOf( cursosQuitarAlu[i] );
+			if ( ind !== -1 )
+			{
+				listaIndice[indice] = ind;
+				indice++;
+			} 
+		}
+
+		for (var i = listaIndice.length-1; i >= 0; i--) 
+		{
+			oAlu.listaCursos.splice(listaIndice[i], 1 );
+		}
+
+		this.modificarUsuario(oAlu);
+	}
+
+
+
+
+
+		
 
 }
 
