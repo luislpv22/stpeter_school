@@ -87,12 +87,13 @@ class Contabilidad
 }
 
 
-class Calificaciones
+class Calificacion
 {
-	constructor(fNota, sCodigoCurso)
+	constructor(sDescripcion, fNota, sCodigoCurso)
 	{
-		this.nota     = fNota;
-		this.codCurso = sCodigoCurso;
+		this.descripcion = sDescripcion;
+		this.nota        = fNota;
+		this.curso       = sCodigoCurso;
 	}
 }
 
@@ -372,98 +373,6 @@ class Academia
 		sessionStorage.setItem('tUsuarios', JSON.stringify(tUsuarios));
 	}
 
-    consultarNotas(sDni,SFiltro)
-    {
-    	var oTablaCurProv;
-    	var oTablaCurAlumProv;
-
-		var oProfesor = this.getUsuario(sDni);
-		oTablaCurProv = oProfesor.getCursos();
-
-        var oTablas = document.querySelectorAll("table");
-
-        if (oTablas != null)
-        {
-            for (i=0; i<oTablas.length; i++)
-            {
-                var iNumFilas = oTablas[i].rows.length;
-                for (j=0; j<iNumFilas; j++)
-                    oTablas[i].deleteRow(0);
-            }
-        }
-
-		// Creacion de la tabla 
-	    var oTabla = document.createElement("table");
-	    oTabla.classList.add("table");
-	    oTabla.classList.add("table-hover");
-
-	    var oTHead = oTabla.createTHead();
-	    var oFila = oTHead.insertRow(-1);
-	    var oTH = document.createElement("th");
-	    oTH.textContent = "Curso";
-	    oFila.appendChild(oTH);
-
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Idioma";
-	    oFila.appendChild(oTH);
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Duracion";
-	    oFila.appendChild(oTH);
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Tipo";
-	    oFila.appendChild(oTH);
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Nivel";
-	    oFila.appendChild(oTH);
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Alumno";
-	    oFila.appendChild(oTH);
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Nota";
-	    oFila.appendChild(oTH);
-
-	    // Cuerpo de la tabla
-	    var oTBody = oTabla.createTBody();
-
-		for (var i=0; i<oTablaCurProv.length; i++)
-		{
-			if(oTablaCurProv[i].codigo == SFiltro || SFiltro == "todo")
-			{
-			  	oTablaCurAlumProv=oTablaCurProv[i].listaAlumnos;
-
-		    	for (var j=0; j<oTablaCurAlumProv.length; j++)
-		    	{
-					oFila = oTBody.insertRow(-1);
-					var oCelda = oFila.insertCell(-1);
-				 	oCelda.textContent = oTablaCurProv[i].codigo;
-				 	oCelda = oFila.insertCell(-1);
-				  	oCelda.textContent = oTablaCurProv[i].idioma;
-				  	oCelda = oFila.insertCell(-1);
-				  	oCelda.textContent = oTablaCurProv[i].duracion;
-				  	oCelda = oFila.insertCell(-1);
-				  	oCelda.textContent = oTablaCurProv[i].tipo;
-				   	oCelda = oFila.insertCell(-1);
-				  	oCelda.textContent = oTablaCurProv[i].nivel;
-
-		            var oUsuario = this.getUsuario(oTablaCurAlumProv[j]);
-		            oCelda = oFila.insertCell(-1);
-		        	oCelda.textContent = oUsuario.nombre;
-
-		        	var oTablaCalif = oUsuario.listaCalificaciones;
-		        
-		        	for (var k=0; k<oTablaCalif.length; k++)
-		        	{
-		        		oCelda = oFila.insertCell(-1);
-		        		if(oTablaCalif[k].codCurso == oTablaCurProv[i].codigo)
-		        			oCelda.textContent = oTablaCalif[k].nota;
-		        	}
-		    	}
-			}
-		}
-
-		return oTabla;
-    }
-
 /*    modificarNotaAlumno(sCodigo,sDni,fNota)
     {
 
@@ -546,13 +455,9 @@ class Academia
 
 	addCalificacionesAlu(dni, oCalificacion)
 	{
-			for (var i = 0; i < this._usuarios.length; i++) 
-			{
-				if (this._usuarios[i].dni== dni)
-				{
-					this._usuarios[i].addNota(oCalificacion);
-				}
-			}
+		for (var i=0; i<this._usuarios.length; i++) 
+			if (this._usuarios[i].dni == dni)
+				this._usuarios[i].addNota(oCalificacion);
 
 	}
 

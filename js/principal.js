@@ -227,24 +227,19 @@ function cargarMatriculas(oMatriculas)
 
 function cargarCalificaciones(oCalificaciones)
 {
-	for (var i = 0; i<oCalificaciones.length; i++)
+	for (var i=0; i<oCalificaciones.length; i++)
 	{
 		var dni = oCalificaciones[i].getAttribute('dni');
 		
-		var listaCursos = oCalificaciones[i].querySelectorAll("curso");
+		var listaCalificaciones = oCalificaciones[i].querySelectorAll("calificacion");
 		
 		// por si tiene notas de más de 1 curso
-		for (var j = 0; j < listaCursos.length; j++) 
+		for (var j=0; j<listaCalificaciones.length; j++) 
 		{
-			var listaNotas = [];
-			var codCurso = oCalificaciones[i].querySelectorAll("curso")[j].getAttribute('codigo');
-			// obtenemos las notas del curso  que recorre el for
-			var notas = listaCursos[j].querySelectorAll("nota");
-			for (var k = 0; k < notas.length; k++) 
-			{
-				listaNotas[k]=notas[k].textContent;
-			}
-			var oCalificacion = new Calificaciones (listaNotas, codCurso);
+			var descripcion = listaCalificaciones[j].querySelector("descripcion").textContent;
+			var nota = listaCalificaciones[j].querySelector("nota").textContent;
+			var codCurso = listaCalificaciones[j].querySelector("curso").textContent;
+			var oCalificacion = new Calificacion(descripcion, nota, codCurso);
 			academia.addCalificacionesAlu(dni, oCalificacion);
 		}
 

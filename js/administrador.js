@@ -16,6 +16,7 @@ document.querySelector('#btnMatriculas').addEventListener("click", function () {
 document.querySelector('#btnAddCurso').addEventListener("click", crearCurso);
 document.querySelector('#btnAddAlumno').addEventListener("click", crearAlumno);
 document.querySelector('#btnAddProfesor').addEventListener("click", crearProfesor);
+document.querySelector('#btnAddAdministrador').addEventListener("click", crearAdministrador);
 
 mostrarPagina('cursos');
 
@@ -162,14 +163,21 @@ function mostrarPagina(pagina)
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].apellidos));
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].correo));
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].activo.toUpperCase()));
-			var btn = document.createElement("input");
-			btn.type = "button";
-			btn.value = "Editar";
-			btn.setAttribute("data-toggle", "modal");
-			btn.setAttribute("data-target", "#modal");
-			btn.classList.add("btn", "btn-danger", "btn-sm");
-			btn.addEventListener("click", function() { editarAdministrador(administradores[i].dni); });
-			fila.insertCell(-1).appendChild(btn);
+
+			if (administradores[i].dni != sesion.dni)
+			{
+				var btn = document.createElement("input");
+				btn.type = "button";
+				btn.value = "Editar";
+				btn.classList.add("btn", "btn-danger", "btn-sm");
+				btn.setAttribute("data-toggle", "modal");
+				btn.setAttribute("data-target", "#modal");
+				btn.setAttribute("data-dni", administradores[i].dni);
+				btn.addEventListener("click", editarAdministrador);
+				fila.insertCell(-1).appendChild(btn);
+			}
+			else
+				fila.insertCell(-1);
 		}
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
@@ -186,57 +194,59 @@ function mostrarPagina(pagina)
 	else if (pagina == 'matriculaciones')
 	{
 		var tablaMatriculas = document.querySelector('#tablaMatriculas');
-		var oTBody = document.createElement("TBODY");
-		tablaMatriculas.appendChild(oTBody);
-		
 
-		if (tablaMatriculas.rows.length == 1)
+		for (var i=tablaMatriculas.rows.length-1; i>0; i--)
+			tablaMatriculas.deleteRow(i);
+
+		var matriculas = academia.getMatriculas();
+		for (var i=0; i<matriculas.length; i++)
 		{
-			var matriculas = academia.getMatriculas();
-			for (var i=0; i<matriculas.length; i++)
+			var fila = tablaMatriculas.insertRow(-1);
+			fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].numero));
+			fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].dniAlumno));
+
+			//para mostrar los códigos de las asignaturas de la matrícula
+			var sTexto = "";
+			for (var j=0; j<matriculas[i].listaCursosMatri.length; j++)
 			{
-				
-				var fila = oTBody.insertRow(-1);
-				fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].numero));
-				fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].dniAlumno));
-
-					//para mostrar los códigos de las asignaturas de la matrícula
-				sTexto="";
-				for (var j = 0; j < matriculas[i].listaCursosMatri.length; j++)
-				{
-					oCurso= academia.getCurso(matriculas[i].listaCursosMatri[j]);
-					sTexto+=  oCurso.idioma+" "+oCurso.nivel+" "+oCurso.tipo+"\n";
-				}
-				fila.insertCell(-1).appendChild(document.createTextNode(sTexto));
-				oFila = fila.insertCell(-1);
-				oFila.id="estado";
-				oFila.setAttribute("data-estado", matriculas[i].estado);
-				oFila.appendChild(document.createTextNode(matriculas[i].estado));
-				
-
-				var btn = document.createElement("input");
-				btn.type = "button";
-				btn.value = "Editar";
-				btn.setAttribute("onclick", "editarMatricula('"+matriculas[i].numero+"');");
-				btn.setAttribute("data-toggle", "modal");
-				btn.setAttribute("data-target", "#modal");
-				btn.classList.add("btn");
-				btn.classList.add("btn-warning");
-				btn.classList.add("btn-sm");
-				btn.id="btnModMatri";
-				var acciones = fila.insertCell(-1);
-				acciones.appendChild(btn);
-				var btn = document.createElement("input");
-				btn.type = "button";
-				btn.value = "Eliminar";
-				btn.setAttribute("onclick", "borrarMatricula('"+matriculas[i].numero+"');");
-				btn.classList.add("btn");
-				btn.classList.add("btn-danger");
-				btn.classList.add("btn-sm");
-				btn.id="borrarMatri";
-				acciones.appendChild(btn);
+				oCurso = academia.getCurso(matriculas[i].listaCursosMatri[j]);
+				sTexto +=  oCurso.idioma+" "+oCurso.nivel+" "+oCurso.tipo;
 			}
-	     }
+			fila.insertCell(-1).appendChild(document.createTextNode(sTexto));
+			oFila = fila.insertCell(-1);
+			oFila.id="estado";
+			oFila.setAttribute("data-estado", matriculas[i].estado);
+			oFila.appendChild(document.createTextNode(matriculas[i].estado));
+			
+
+			var btn = document.createElement("input");
+			btn.type = "button";
+			btn.value = "Editar";
+			btn.classList.add("btn", "btn-warning", "btn-sm");
+			btn.setAttribute("data-toggle", "modal");
+			btn.setAttribute("data-target", "#modal");
+			btn.setAttribute("data-matricula", matriculas[i].numero);
+			btn.addEventListener("click", editarMatricula);
+			var acciones = fila.insertCell(-1);
+			acciones.appendChild(btn);
+			var btn = document.createElement("input");
+			btn.type = "button";
+			btn.value = "Eliminar";
+			btn.classList.add("btn", "btn-danger", "btn-sm");
+			btn.setAttribute("data-toggle", "confirmation");
+			btn.setAttribute("data-btn-ok-label", "Eliminar");
+			btn.setAttribute("data-btn-ok-class", "btn-danger btn-sm");
+			btn.setAttribute("data-btn-cancel-label", "Cancelar");
+			btn.setAttribute("data-btn-cancel-class", "btn-default btn-sm");
+			btn.setAttribute("data-title", "¿Eliminar esta matrícula?");
+			btn.setAttribute("data-btn-ok-icon", "");
+			btn.setAttribute("data-btn-cancel-icon", "");
+			btn.setAttribute("data-matricula", matriculas[i].numero);
+			acciones.appendChild(btn);
+		}
+
+		jQuery('[data-toggle=confirmation]').confirmation({rootSelector: '[data-toggle=confirmation]'});
+		jQuery('[data-toggle=confirmation]').on("confirmed.bs.confirmation", borrarMatricula);
 
 	    var capas = document.querySelectorAll('#content > .container-fluid');
 		for (var i=0; i<capas.length; i++)
@@ -532,6 +542,81 @@ function guardarProfesor()
 	document.querySelector('#modal .close').click();
 }
 
+function editarAdministrador()
+{
+	document.querySelector('.modal-title').textContent = "Editar administrador";
+	var forms = document.querySelectorAll('#modal form');
+	for (var i=0; i<forms.length; i++)
+		forms[i].style.display = "none";
+
+	var dni = this.getAttribute("data-dni");
+	var oAdministrador = academia.getUsuario(dni);
+	var form = document.getElementById("formEditarAdministrador");
+	form.dni.value = oAdministrador.dni;
+	form.password.value = oAdministrador.password;
+	form.nombre.value = oAdministrador.nombre;
+	form.apellidos.value = oAdministrador.apellidos;
+	form.email.value = oAdministrador.correo;
+	form.telefono.value = oAdministrador.telefono;
+	form.direccion.value = oAdministrador.direccion;
+
+	document.querySelector('#modal .btn-success').id = "btnGuardarAdministrador";
+	document.querySelector('#btnGuardarAdministrador').setAttribute("data-dni", dni);
+	document.querySelector('#btnGuardarAdministrador').addEventListener("click", guardarAdministrador);
+
+	form.style.display = "block";
+}
+
+function crearAdministrador()
+{
+	document.querySelector('.modal-title').textContent = "Nuevo administrador";
+	var forms = document.querySelectorAll('#modal form');
+	for (var i=0; i<forms.length; i++)
+		forms[i].style.display = "none";
+
+	var form = document.getElementById("formEditarAdministrador");
+	document.querySelector('#modal .btn-success').id = "btnGuardarAdministrador";
+	document.querySelector('#btnGuardarAdministrador').removeAttribute("data-dni");
+	document.querySelector('#btnGuardarAdministrador').addEventListener("click", guardarAdministrador);
+	form.dni.removeAttribute("readonly");
+	form.dni.value = "";
+	form.password.value = "";
+	form.nombre.value = "";
+	form.apellidos.value = "";
+	form.email.value = "";
+	form.telefono.value = "";
+	form.direccion.value = "";
+	form.style.display = "block";
+}
+
+function guardarAdministrador()
+{
+	var form = document.getElementById("formEditarAdministrador");
+
+	var sDNI = form.dni.value;
+
+	var dataDNI = this.getAttribute("data-dni");
+	if (dataDNI != null)
+		sDNI = dataDNI;
+
+	var sPassword = form.password.value;
+	var sNombre = form.nombre.value;
+	var sApellidos = form.apellidos.value;
+	var sCorreo = form.email.value;
+	var sTelefono = form.telefono.value;
+	var sDireccion = form.direccion.value;
+
+	var oAdministrador = new Administrador(sNombre, sPassword, sApellidos, sDNI, sTelefono, sDireccion, sCorreo, "si", "");
+
+	if (dataDNI != null)
+		academia.modificarUsuario(oAdministrador);
+	else
+		academia.addUsuario(oAdministrador);
+
+	mostrarPagina('administradores');
+	document.querySelector('#modal .close').click();
+}
+
 function switchActivo()
 {
 	var lblActivo = document.createElement("label");
@@ -551,8 +636,9 @@ function switchActivo()
 }
 
 
-function editarMatricula(numero)
+function editarMatricula()
 {
+	var numero = this.getAttribute('data-matricula');
 	oMatricula = academia.getMatricula(numero);
   	document.querySelector('.modal-title').textContent = "Editar matrícula";
 	var forms = document.querySelectorAll('#modal form');
@@ -633,8 +719,9 @@ function guardarMatricula()
 	document.querySelector('#modal .close').click();
 }
 
-function borrarMatricula(numero)
+function borrarMatricula()
 {
+	var numero = this.getAttribute("data-matricula");
 	var oMatricula = academia.getMatricula(numero);
 	if (oMatricula.estado == "encurso")
 		oMatricula.estado = "cerrado";
@@ -642,20 +729,17 @@ function borrarMatricula(numero)
 		oMatricula.estado = "encurso";
 
 	academia.modificarMatricula(oMatricula);
-	filtrarTabla();
-	location.href = "administrador.html";
+	mostrarPagina('matriculaciones');
 }
 
 
 function filtrarTabla()
 {
-	var filas= document.querySelectorAll("#estado");
+	var filas = document.querySelectorAll("#estado");
 
-	for (var i = 0; i < filas.length; i++) 
+	for (var i=0; i<filas.length; i++)
 	{
-		if (filas[i].dataset.estado=="cerrado")
+		if (filas[i].dataset.estado == "cerrado")
 			filas[i].parentNode.style.display = "none";
-
 	}
-
 }
