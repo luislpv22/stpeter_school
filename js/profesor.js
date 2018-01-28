@@ -155,16 +155,9 @@ function actualizaSelectCalificar()
 		var oAlumno = academia.getUsuario(tAlumnos[i]);
 		var tCalificaciones = oAlumno.listaCalificaciones;
 
-		for (var k=0; k<tCalificaciones.length && !bCursoEnc; k++)
-			if(tCalificaciones[k].codCurso == oSelectCurso.value)
-				bCursoEnc = true;
-
-		if(!bCursoEnc)
-		{
-			var oOption = document.createElement("option");
-			oOption.text = oAlumno.nombre+", "+oAlumno.apellidos;
-			oOption.value = oAlumno.dni;
-		}
+		var oOption = document.createElement("option");
+		oOption.text = oAlumno.nombre+", "+oAlumno.apellidos;
+		oOption.value = oAlumno.dni;
 
 		for (var j=0; j<oSelectAlumno.options.length && !bAluEnc; j++)
 			if(oSelectAlumno.options[j].value == oOption.value)
@@ -213,14 +206,16 @@ function actualizaSelectModificar()
 
 function addCalificacion()
 {
-    var oSelectCurso = document.getElementById("selectCursoCalificar");
-    var oSelectAlumno = document.getElementById("selectAlumnoCalificar");
-    var nota = document.getElementById("NotaAlu");
+    var oSelectCurso = frmCalificar.selectCursoCalificar.value;
+    var oSelectAlumno = frmCalificar.selectAlumnoCalificar.value;
+    var sDescripcion = frmCalificar.descripcion.value;
+    var fNota = frmCalificar.NotaAlu.value;
 
-	academia.addCalificacionesAlu(oSelectAlumno.value,new Calificaciones(nota.value,oSelectCurso.value));
+	academia.addCalificacionesAlu(oSelectAlumno.value,new Calificacion(sDescripcion, nota, oSelectCurso));
 	document.getElementById("capaSelectAlumnoCalificar").classList.add("ocultar");
 	document.getElementById("CapNotaAluCalificar").classList.add("ocultar");
-	nota.value = "";
+	sDescripcion = "";
+	fNota = "";
 }
 
 function modificarCalificacion()

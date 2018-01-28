@@ -6,12 +6,26 @@
  </alumno>
   <alumno dni="23645812R">
  	<calificaciones>
- 		<curso codigo="ENA2P">
+ 		<calificacion>
+ 			<descripcion>Examen 1</descripcion>
  			<nota>4</nota>
+ 			<curso>ENA2P</curso>
+ 		</calificacion>
+  		<calificacion>
+ 			<descripcion>Examen 2</descripcion>
  			<nota>6</nota>
+ 			<curso>ENA2P</curso>
+ 		</calificacion>
+  		<calificacion>
+ 			<descripcion>Examen 3</descripcion>
  			<nota>2</nota>
+ 			<curso>ENA2P</curso>
+ 		</calificacion>
+   		<calificacion>
+ 			<descripcion>Examen 3</descripcion>
  			<nota>8</nota>
- 		</curso>
+ 			<curso>ENA2P</curso>
+ 		</calificacion>
  	</calificaciones>
  </alumno>
   <alumno dni="42010210B">
@@ -20,14 +34,36 @@
  </alumno>
    <alumno dni="04568915V">
  	<calificaciones>
- 		<curso codigo="ENB1S">
+  		<calificacion>
+ 			<descripcion>Examen 1</descripcion>
  			<nota>7</nota>
+ 			<curso>ENB1S</curso>
+ 		</calificacion>
+  		<calificacion>
+ 			<descripcion>Examen 2</descripcion>
  			<nota>8</nota>
+ 			<curso>ENB1S</curso>
+ 		</calificacion>
+  		<calificacion>
+ 			<descripcion>Examen 3</descripcion>
  			<nota>2</nota>
+ 			<curso>ENB1S</curso>
+ 		</calificacion>
+   		<calificacion>
+ 			<descripcion>Practica 1</descripcion>
  			<nota>6</nota>
+ 			<curso>ENB1S</curso>
+ 		</calificacion>
+   		<calificacion>
+ 			<descripcion>Examen 4</descripcion>
  			<nota>9</nota>
+ 			<curso>ENB1S</curso>
+ 		</calificacion>
+   		<calificacion>
+ 			<descripcion>Practica final</descripcion>
  			<nota>10</nota>
- 		</curso>
+ 			<curso>ENB1S</curso>
+ 		</calificacion>
  	</calificaciones>
  </alumno>
  <alumno dni="95425821Q">
@@ -36,15 +72,31 @@
  </alumno>
   <alumno dni="54629812T">
  	<calificaciones>
- 		<curso codigo="ENB2D">
+   		<calificacion>
+ 			<descripcion>Examen 1</descripcion>
  			<nota>6</nota>
+ 			<curso>ENB2D</curso>
+ 		</calificacion>
+   		<calificacion>
+ 			<descripcion>Examen 2</descripcion>
  			<nota>5</nota>
- 		</curso>
- 		<curso codigo="FRB1S">
+ 			<curso>ENB2D</curso>
+ 		</calificacion>
+   		<calificacion>
+ 			<descripcion>Examen 1</descripcion>
  			<nota>9</nota>
+ 			<curso>FRB1S</curso>
+ 		</calificacion>
+   		<calificacion>
+ 			<descripcion>Examen 2</descripcion>
  			<nota>8</nota>
+ 			<curso>FRB1S</curso>
+ 		</calificacion>
+   		<calificacion>
+ 			<descripcion>Examen 3</descripcion>
  			<nota>4</nota>
- 		</curso>
+ 			<curso>FRB1S</curso>
+ 		</calificacion>
  	</calificaciones>
  </alumno>
  <alumno dni="23420102E">
@@ -53,12 +105,26 @@
  </alumno>
   <alumno dni="72158961T">
  	<calificaciones>
- 		<curso codigo="FRA2P">
+   		<calificacion>
+ 			<descripcion>Practica 1</descripcion>
  			<nota>7</nota>
+ 			<curso>FRA2P</curso>
+ 		</calificacion>
+   		<calificacion>
+ 			<descripcion>Examen 1</descripcion>
  			<nota>6</nota>
+ 			<curso>FRA2P</curso>
+ 		</calificacion>
+   		<calificacion>
+ 			<descripcion>Practica 2</descripcion>
  			<nota>6</nota>
+ 			<curso>FRA2P</curso>
+ 		</calificacion>
+   		<calificacion>
+ 			<descripcion>Examen 2</descripcion>
  			<nota>7</nota>
- 		</curso>
+ 			<curso>FRA2P</curso>
+ 		</calificacion>
  	</calificaciones>
  </alumno>
 </listaCalificaciones>

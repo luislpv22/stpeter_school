@@ -87,12 +87,13 @@ class Contabilidad
 }
 
 
-class Calificaciones
+class Calificacion
 {
-	constructor(fNota, sCodigoCurso)
+	constructor(sDescripcion, fNota, sCodigoCurso)
 	{
-		this.nota     = fNota;
-		this.codCurso = sCodigoCurso;
+		this.descripcion = sDescripcion;
+		this.nota        = fNota;
+		this.curso       = sCodigoCurso;
 	}
 }
 
@@ -546,13 +547,9 @@ class Academia
 
 	addCalificacionesAlu(dni, oCalificacion)
 	{
-			for (var i = 0; i < this._usuarios.length; i++) 
-			{
-				if (this._usuarios[i].dni== dni)
-				{
-					this._usuarios[i].addNota(oCalificacion);
-				}
-			}
+		for (var i=0; i<this._usuarios.length; i++) 
+			if (this._usuarios[i].dni == dni)
+				this._usuarios[i].addNota(oCalificacion);
 
 	}
 
