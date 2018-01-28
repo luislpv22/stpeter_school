@@ -28,19 +28,6 @@ class Profesor extends Persona
 		if (!this.listaCursos.includes(codigo))
 			this.listaCursos.push(codigo); // Añade un curso al profesor
 	}
-
-	getCursos()
-	{
-		var tCursos = [];
-		var cursos = academia.getCursos();
-
-		for(var i=0; i<this.listaCursos.length; i++)
-			for (var j=0; j<cursos.length; j++)
-				if (this.listaCursos[i] == cursos[j].codigo)
-					tCursos.push(cursos[j]);
-
-		return tCursos;
-	}
 }
 
 class Alumno extends Persona
@@ -363,145 +350,40 @@ class Academia
 		var tUsuarios = this._usuarios;
 		for (var i=0; i<tUsuarios.length; i++)
 		{
-	    	if (tUsuarios[i] instanceof Administrador)
-	    		tUsuarios[i].tipo = 'administrador';
-	    	else if (tUsuarios[i] instanceof Profesor)
-	    		tUsuarios[i].tipo = 'profesor';
-	    	else
-	    		tUsuarios[i].tipo = 'alumno';
+			if (tUsuarios[i] instanceof Administrador)
+				tUsuarios[i].tipo = 'administrador';
+			else if (tUsuarios[i] instanceof Profesor)
+				tUsuarios[i].tipo = 'profesor';
+			else
+				tUsuarios[i].tipo = 'alumno';
 		}
 		sessionStorage.setItem('tUsuarios', JSON.stringify(tUsuarios));
 	}
 
-//<<<<<<< HEAD
-    consultarNotas(sDni,SFiltro)
-    {
-    	var oTablaCurProv;
-    	var oTablaCurAlumProv;
-
-		var oProfesor = this.getUsuario(sDni);
-		oTablaCurProv = oProfesor.getCursos();
-
-        var oTablas = document.querySelectorAll("table");
-
-        if (oTablas != null)
-        {
-            for (i=0; i<oTablas.length; i++)
-            {
-                var iNumFilas = oTablas[i].rows.length;
-                for (j=0; j<iNumFilas; j++)
-                    oTablas[i].deleteRow(0);
-            }
-        }
-
-		// Creacion de la tabla 
-	    var oTabla = document.createElement("table");
-	    oTabla.classList.add("table");
-	    oTabla.classList.add("table-hover");
-
-	    var oTHead = oTabla.createTHead();
-	    var oFila = oTHead.insertRow(-1);
-	    var oTH = document.createElement("th");
-	    oTH.textContent = "Curso";
-	    oFila.appendChild(oTH);
-
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Idioma";
-	    oFila.appendChild(oTH);
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Duracion";
-	    oFila.appendChild(oTH);
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Tipo";
-	    oFila.appendChild(oTH);
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Nivel";
-	    oFila.appendChild(oTH);
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Alumno";
-	    oFila.appendChild(oTH);
-	    oTH = document.createElement("th");
-	    oTH.textContent = "Nota";
-	    oFila.appendChild(oTH);
-
-	    // Cuerpo de la tabla
-	    var oTBody = oTabla.createTBody();
-
-		for (var i=0; i<oTablaCurProv.length; i++)
+	modificarNotaAlumno(sDni, oCalificacion)
+	{
+		for (var i=0; i<this._usuarios.length; i++) 
 		{
-			if(oTablaCurProv[i].codigo == SFiltro || SFiltro == "todo")
+			if (this._usuarios[i].dni == sDni)
 			{
-			  	oTablaCurAlumProv=oTablaCurProv[i].listaAlumnos;
+				var oCalifca = this._usuarios[i].listaCalificaciones;
 
-		    	for (var j=0; j<oTablaCurAlumProv.length; j++)
-		    	{
-					oFila = oTBody.insertRow(-1);
-					var oCelda = oFila.insertCell(-1);
-				 	oCelda.textContent = oTablaCurProv[i].codigo;
-				 	oCelda = oFila.insertCell(-1);
-				  	oCelda.textContent = oTablaCurProv[i].idioma;
-				  	oCelda = oFila.insertCell(-1);
-				  	oCelda.textContent = oTablaCurProv[i].duracion;
-				  	oCelda = oFila.insertCell(-1);
-				  	oCelda.textContent = oTablaCurProv[i].tipo;
-				   	oCelda = oFila.insertCell(-1);
-				  	oCelda.textContent = oTablaCurProv[i].nivel;
+				for (var j=0; j<oCalifca.length; j++)
+				{
+					if (oCalifca[j].curso == oCalificacion.curso && oCalifca[j].descripcion == oCalificacion.descripcion)
+					{
+						oCalifca[j].nota = oCalificacion.nota;
+						this.actualizarSesionUsuarios();
+					}
+				}
 
-		            var oUsuario = this.getUsuario(oTablaCurAlumProv[j]);
-		            oCelda = oFila.insertCell(-1);
-		        	oCelda.textContent = oUsuario.nombre;
-
-		        	var oTablaCalif = oUsuario.listaCalificaciones;
-		        var sinNota=true;
-		        	for (var k=0; k<oTablaCalif.length; k++)
-		        	{
-		        		oCelda = oFila.insertCell(-1);
-		        		if(oTablaCalif[k].codCurso == oTablaCurProv[i].codigo)
-		        		{
-		        			oCelda.textContent = oTablaCalif[k].nota;
-		        			sinNota=false;
-		        		}
-		        		
-		        	}
-		        		if(sinNota)
-		        		{
-		        			oCelda = oFila.insertCell(-1);
-		        			oCelda.textContent = "Sin calificar";
-		        			
-		        		}
-
-
-
-		    	}
 			}
 		}
-
-		return oTabla;
-    }
-
-    modificarNotaAlumno(sDni,oCalificacion)
-    {
-
-  			for (var i = 0; i < this._usuarios.length; i++) 
-			{
-				if (this._usuarios[i].dni== sDni)
-				{
-					var oCalifca=this._usuarios[i].listaCalificaciones;
-
-					for (var j = 0; j < oCalifca.length; j++)
-					{
-						if(oCalifca[j].codCurso==oCalificacion.codCurso && oCalifca[j].descripcion==oCalificacion.descripcion)
-						oCalifca[j].nota=oCalificacion.nota;
-					}
-
-				}
-			}
-
-    }
+	}
 
 	codNuevaMatri()
 	{
-		var oMatri=this._matriculas[this._matriculas.length -1]; //obteiene el último elemento de una array
+		var oMatri=this._matriculas[this._matriculas.length -1]; // obteiene el último elemento de una array
 		return parseInt(oMatri.numero)+1;
 	}
 
@@ -509,37 +391,22 @@ class Academia
 	{
 		for (var i=0; i<this._usuarios.length; i++) 
 			if (this._usuarios[i].dni == sDni)
-				this._usuarios[i].activo="no";
+				this._usuarios[i].activo = "no";
 			
 		this.actualizarSesionUsuarios();
 	}
 
-
-
 	getCalificaciones(codCurso, dniAlu)
 	{
-		//buscamos en la lista de calificación del alumno que tiene la sesión, las notas que tenga el código del curso,
-		//dichas notas las metemos en un array y la devolvemos
-		var listaCalificaciones=[];
-		var indice=0;
-		var oAlu=null;
-		for (var i=0; i<this._usuarios.length; i++) 
-			if (this._usuarios[i].dni == dniAlu)
-				oAlu=this._usuarios[i];
+		// buscamos en la lista de calificación del alumno que tiene la sesión, las notas que tenga el código del curso,
+		// dichas notas las metemos en un array y la devolvemos
+		var listaCalificaciones = [];
+		var indice = 0;
+		var oAlu = this.getUsuario(dniAlu);
 
-
-			for (var i = 0; i < oAlu.listaCalificaciones.length; i++) 
-			{
-				if (oAlu.listaCalificaciones[i].codCurso== codCurso)
-				{
-					for (var j=0; j< oAlu.listaCalificaciones[i].nota.length; j++)
-					{
-						listaCalificaciones[indice]=oAlu.listaCalificaciones[i].nota[j];
-						indice++;
-					}
-					
-				}
-			}
+		for (var i=0; i<oAlu.listaCalificaciones.length; i++) 
+			if (oAlu.listaCalificaciones[i].curso == codCurso)
+				listaCalificaciones.push(oAlu.listaCalificaciones[i]);
 				
 		return listaCalificaciones;
 	}
@@ -550,6 +417,7 @@ class Academia
 			if (this._usuarios[i].dni == dni)
 				this._usuarios[i].addNota(oCalificacion);
 
+		this.actualizarSesionUsuarios();
 	}
 
 	cambiarEstadoMatri(oMatri)
@@ -559,13 +427,9 @@ class Academia
 			if (this._matriculas[i] == oMatri)
 			{
 				if (oMatri.estado =="encurso")
-				{
 					this._matriculas[i].estado = "cerrado";
-				}
 				else
-				{
 					this._matriculas[i].estado = "encurso";
-				}
 			}
 		}
 	}
@@ -576,21 +440,15 @@ class Academia
 		var indice=0;
 		var listaIndice = [];
 		
-		//para borrar las notas del curso de la lista de calificaciones del alumno
-       	for (var i = 0; i < oAlu.listaCalificaciones.length; i++) 
-       	{
-       		if (oAlu.listaCalificaciones[i].codCurso == cursosQuitarAlu[i])
-       		{
-       				indice= i;
-       		}
-       	}
+		// para borrar las notas del curso de la lista de calificaciones del alumno
+		for (var i = 0; i < oAlu.listaCalificaciones.length; i++) 
+			if (oAlu.listaCalificaciones[i].codCurso == cursosQuitarAlu[i])
+					indice = i;
 
-       	if ( i !== -1 )
-		{
-       		oAlu.listaCalificaciones.splice( indice, 1 );
-       	} 
+		if (i !== -1)
+			oAlu.listaCalificaciones.splice( indice, 1 );
 
-		//para borrar el curso de la lista de cursos del alumno
+		// para borrar el curso de la lista de cursos del alumno
 		var indice = 0;
 		for (var i = 0; i < cursosQuitarAlu.length; i++) 
 		{
@@ -603,19 +461,10 @@ class Academia
 		}
 
 		for (var i = listaIndice.length-1; i >= 0; i--) 
-		{
 			oAlu.listaCursos.splice(listaIndice[i], 1 );
-		}
 
 		this.modificarUsuario(oAlu);
 	}
-
-
-
-
-
-		
-
 }
 
 
