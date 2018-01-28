@@ -197,7 +197,12 @@ class Academia
 		for (var i=0; i<this._usuarios.length && oUsuario==null; i++)
 		{
 			if (this._usuarios[i].dni == sDni && this._usuarios[i].password == sPass)
+			{
+				if (this._usuarios[i].activo == "si")
 				oUsuario = this._usuarios[i];	
+			}
+
+				
 		}
 		return oUsuario;
 	}
@@ -491,6 +496,8 @@ class Academia
 		for (var i=0; i<this._usuarios.length; i++) 
 			if (this._usuarios[i].dni == sDni)
 				this._usuarios[i].activo="no";
+			
+		this.actualizarSesionUsuarios();
 	}
 
 
