@@ -123,9 +123,8 @@ function comprobarFrmModDatosAlu(oEvento)
 		academia.modificarUsuario(oAlMod);
 		//modificar los datos de sesión de usuario
 		sessionStorage.setItem('usuario', JSON.stringify(oAlMod));
-		
-		mensaje(document.createTextNode("Datos modificados"));
-		
+		location.href = "alumno.html";
+			
 	}
 }
 

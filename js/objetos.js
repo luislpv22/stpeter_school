@@ -324,6 +324,20 @@ class Academia
 		return oCurso;
 	}
 
+	getCursosMatriculados(sDni)
+	{
+		oCursos=null;
+		for (var i = 0; i < this._usuarios && oCursos==null; i++) 
+		{
+			if (this._usuarios[i].dni= sDni)
+			{
+				oCursos=this._usuarios[i].listaCursos;
+			}
+			
+		}
+		return oCursos;
+	}
+
 	actualizarSesionUsuarios()
 	{
 		var tUsuarios = this._usuarios;

@@ -184,13 +184,17 @@ function mostrarPagina(pagina)
 	else if (pagina == 'matriculaciones')
 	{
 		var tablaMatriculas = document.querySelector('#tablaMatriculas');
+		var oTBody = document.createElement("TBODY");
+		tablaMatriculas.appendChild(oTBody);
+		
 
 		if (tablaMatriculas.rows.length == 1)
 		{
 			var matriculas = academia.getMatriculas();
 			for (var i=0; i<matriculas.length; i++)
 			{
-				var fila = tablaMatriculas.insertRow(-1);
+				
+				var fila = oTBody.insertRow(-1);
 				fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].numero));
 				fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].dniAlumno));
 
@@ -202,7 +206,11 @@ function mostrarPagina(pagina)
 					sTexto+=  oCurso.idioma+" "+oCurso.nivel+" "+oCurso.tipo+"\n";
 				}
 				fila.insertCell(-1).appendChild(document.createTextNode(sTexto));
-				fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].estado.toUpperCase()));
+				oFila = fila.insertCell(-1);
+				oFila.id="estado";
+				oFila.setAttribute("data-estado", matriculas[i].estado);
+				oFila.appendChild(document.createTextNode(matriculas[i].estado));
+				
 
 				var btn = document.createElement("input");
 				btn.type = "button";
@@ -217,14 +225,12 @@ function mostrarPagina(pagina)
 				fila.insertCell(-1).appendChild(btn);
 				var btn = document.createElement("input");
 				btn.type = "button";
-				btn.value = "Cambiar Estado";
-				btn.setAttribute("onclick", "cambiarEstadoMatricula('"+matriculas[i].numero+"');");
-				btn.setAttribute("data-toggle", "modal");
-				btn.setAttribute("data-target", "#modal");
+				btn.value = "Eliminar";
+				btn.setAttribute("onclick", "borrarMatricula('"+matriculas[i].numero+"');");
 				btn.classList.add("btn");
 				btn.classList.add("btn-danger");
 				btn.classList.add("btn-sm");
-				btn.id="cambiarEstadoMatri";
+				btn.id="borrarMatri";
 				fila.appendChild(btn);
 			}
 	     }
@@ -236,9 +242,10 @@ function mostrarPagina(pagina)
 		var menus = document.querySelectorAll('nav li');
 		for (var i=0; i<menus.length; i++)
 			menus[i].classList.remove('active');
-
+		
 		document.querySelector('#paginaMatriculaciones').classList.remove('hidden');
 		document.querySelector('#btnMatriculas').parentNode.classList.add('active');
+		filtrarTabla();
 	 }
 
 }
@@ -485,6 +492,11 @@ function guardarMatricula()
 	}
 
 	var oMatricula = new Matricula (sNumero, dataEstado, sDni, sLisCursos);
+/*
+	//obtenemos la lista de cursos que tiene el alumno antes de la modificación
+	listCurOriginal= academia.getCursos(); 
+	//recorremos dicha array con la de cursos elegidos para ver si 
+*/
 
 
 	if (sNumero != null)
@@ -493,4 +505,31 @@ function guardarMatricula()
 		academia.addMatricula(oMatricula);
 	location.href = "administrador.html";
 	document.querySelector('#modal .close').click();
+}
+
+function borrarMatricula(numero)
+{
+	var oMatricula = academia.getMatricula(numero);
+	if (oMatricula.estado == "encurso")
+		oMatricula.estado = "cerrado";
+	else
+		oMatricula.estado = "encurso";
+
+	academia.modificarMatricula(oMatricula);
+	filtrarTabla();
+	location.href = "administrador.html";
+}
+
+
+function filtrarTabla()
+{
+	var filas= document.querySelectorAll("#estado");
+
+	for (var i = 0; i < filas.length; i++) 
+	{
+		if (filas[i].dataset.estado=="cerrado")
+			filas[i].parentNode.style.display = "none";
+
+	}
+
 }
