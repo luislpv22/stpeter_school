@@ -595,6 +595,8 @@ function realizarMatricula(oEvento)
 	document.getElementById("capaMatriCurso").classList.add("ocultar");
 	cursosElegidos = []; // resetear el array de los cursos elegidos
 	resetearSelectIdiomas();
+	//prueba
+	academia.modificarUsuario(sesion)
 	menuCursoUsuario();
 	oE.preventDefault();
 }

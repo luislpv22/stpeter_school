@@ -155,8 +155,15 @@ class Academia
 				bEncontrado = true;
 
 		if (!bEncontrado)
+		{
 			this._matriculas.push(oMatricula);
+			var oAlu= academia.getUsuario(oMatricula.dniAlumno);
+			for (var i = 0; i < oMatricula.listaCursosMatri.length; i++) 
+			{
+				oAlu.listaCursos.push(oMatricula.listaCursosMatri[i]);
+			}
 			sessionStorage.setItem('tMatriculas', JSON.stringify(this._matriculas));
+		}
 
 		return !bEncontrado;
 	}
@@ -356,6 +363,12 @@ class Academia
 	    		tUsuarios[i].tipo = 'alumno';
 		}
 		sessionStorage.setItem('tUsuarios', JSON.stringify(tUsuarios));
+	}
+
+	actualizarSesionMatriculas()
+	{
+		var tMatricula = this._matriculas;
+		sessionStorage.setItem('tMatricula', JSON.stringify(tMatricula));
 	}
 
     consultarNotas(sDni,SFiltro)

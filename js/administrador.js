@@ -467,7 +467,7 @@ function editarMatricula(numero)
 		oP.textContent = listaCursos[i].idioma+", "+listaCursos[i].nivel+", "+listaCursos[i].tipo;
 		form.seleCurMatri.appendChild(oP);
 	}
-
+	academia.actualizarSesionMatriculas();
 	document.querySelector('#modal .btn-success').id = "btnGuardarMatricula";
 	document.querySelector('#btnGuardarMatricula').setAttribute("data-estado", oMatricula.estado);
 	document.querySelector('#btnGuardarMatricula').addEventListener("click", guardarMatricula);
