@@ -16,6 +16,7 @@ document.querySelector('#btnMatriculas').addEventListener("click", function () {
 document.querySelector('#btnAddCurso').addEventListener("click", crearCurso);
 document.querySelector('#btnAddAlumno').addEventListener("click", crearAlumno);
 document.querySelector('#btnAddProfesor').addEventListener("click", crearProfesor);
+document.querySelector('#btnAddAdministrador').addEventListener("click", crearAdministrador);
 
 mostrarPagina('cursos');
 
@@ -162,14 +163,21 @@ function mostrarPagina(pagina)
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].apellidos));
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].correo));
 			fila.insertCell(-1).appendChild(document.createTextNode(administradores[i].activo.toUpperCase()));
-			var btn = document.createElement("input");
-			btn.type = "button";
-			btn.value = "Editar";
-			btn.setAttribute("data-toggle", "modal");
-			btn.setAttribute("data-target", "#modal");
-			btn.classList.add("btn", "btn-danger", "btn-sm");
-			btn.addEventListener("click", function() { editarAdministrador(administradores[i].dni); });
-			fila.insertCell(-1).appendChild(btn);
+
+			if (administradores[i].dni != sesion.dni)
+			{
+				var btn = document.createElement("input");
+				btn.type = "button";
+				btn.value = "Editar";
+				btn.classList.add("btn", "btn-danger", "btn-sm");
+				btn.setAttribute("data-toggle", "modal");
+				btn.setAttribute("data-target", "#modal");
+				btn.setAttribute("data-dni", administradores[i].dni);
+				btn.addEventListener("click", editarAdministrador);
+				fila.insertCell(-1).appendChild(btn);
+			}
+			else
+				fila.insertCell(-1);
 		}
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
@@ -529,6 +537,81 @@ function guardarProfesor()
 		academia.addUsuario(oProfesor);
 
 	mostrarPagina('profesores');
+	document.querySelector('#modal .close').click();
+}
+
+function editarAdministrador()
+{
+	document.querySelector('.modal-title').textContent = "Editar administrador";
+	var forms = document.querySelectorAll('#modal form');
+	for (var i=0; i<forms.length; i++)
+		forms[i].style.display = "none";
+
+	var dni = this.getAttribute("data-dni");
+	var oAdministrador = academia.getUsuario(dni);
+	var form = document.getElementById("formEditarAdministrador");
+	form.dni.value = oAdministrador.dni;
+	form.password.value = oAdministrador.password;
+	form.nombre.value = oAdministrador.nombre;
+	form.apellidos.value = oAdministrador.apellidos;
+	form.email.value = oAdministrador.correo;
+	form.telefono.value = oAdministrador.telefono;
+	form.direccion.value = oAdministrador.direccion;
+
+	document.querySelector('#modal .btn-success').id = "btnGuardarAdministrador";
+	document.querySelector('#btnGuardarAdministrador').setAttribute("data-dni", dni);
+	document.querySelector('#btnGuardarAdministrador').addEventListener("click", guardarAdministrador);
+
+	form.style.display = "block";
+}
+
+function crearAdministrador()
+{
+	document.querySelector('.modal-title').textContent = "Nuevo administrador";
+	var forms = document.querySelectorAll('#modal form');
+	for (var i=0; i<forms.length; i++)
+		forms[i].style.display = "none";
+
+	var form = document.getElementById("formEditarAdministrador");
+	document.querySelector('#modal .btn-success').id = "btnGuardarAdministrador";
+	document.querySelector('#btnGuardarAdministrador').removeAttribute("data-dni");
+	document.querySelector('#btnGuardarAdministrador').addEventListener("click", guardarAdministrador);
+	form.dni.removeAttribute("readonly");
+	form.dni.value = "";
+	form.password.value = "";
+	form.nombre.value = "";
+	form.apellidos.value = "";
+	form.email.value = "";
+	form.telefono.value = "";
+	form.direccion.value = "";
+	form.style.display = "block";
+}
+
+function guardarAdministrador()
+{
+	var form = document.getElementById("formEditarAdministrador");
+
+	var sDNI = form.dni.value;
+
+	var dataDNI = this.getAttribute("data-dni");
+	if (dataDNI != null)
+		sDNI = dataDNI;
+
+	var sPassword = form.password.value;
+	var sNombre = form.nombre.value;
+	var sApellidos = form.apellidos.value;
+	var sCorreo = form.email.value;
+	var sTelefono = form.telefono.value;
+	var sDireccion = form.direccion.value;
+
+	var oAdministrador = new Administrador(sNombre, sPassword, sApellidos, sDNI, sTelefono, sDireccion, sCorreo, "si", "");
+
+	if (dataDNI != null)
+		academia.modificarUsuario(oAdministrador);
+	else
+		academia.addUsuario(oAdministrador);
+
+	mostrarPagina('administradores');
 	document.querySelector('#modal .close').click();
 }
 
