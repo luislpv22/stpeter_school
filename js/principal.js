@@ -37,7 +37,11 @@ function datosIniciales()
 				oUsuario.listaCursos = us.listaCursos;
 	    	}
 	    	else
+	    	{
 	    		oUsuario = new Alumno(us.nombre, us.password, us.apellidos, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.estadoCobro);
+	    		oUsuario.listaCursos = us.listaCursos;
+	    		oUsuario.listaCalificaciones = us.listaCalificaciones;
+	    	}
 
 	    	academia.addUsuario(oUsuario);
     	}

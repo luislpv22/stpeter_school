@@ -583,10 +583,14 @@ function addCursoMatri(oEvento)
 function realizarMatricula(oEvento)
 {
 	var oE = oEvento || window.event;
-	for (var i=0; i<cursosElegidos.length; i++) 
-		sesion.listaCursos.push(cursosElegidos[i].codigo)
 
-	oMatricula = new Matricula(academia.codNuevaMatri(), "abierta", sesion.dni, cursosElegidos);
+	var tCursos = [];
+	for (var i=0; i<cursosElegidos.length; i++) {
+		tCursos.push(cursosElegidos[i].codigo);
+		sesion.listaCursos.push(cursosElegidos[i].codigo);
+	}
+
+	oMatricula = new Matricula(academia.codNuevaMatri(), "abierta", sesion.dni, tCursos);
 
 	academia.addMatricula(oMatricula);
 	document.querySelector("#txtInformacion span").textContent = "";

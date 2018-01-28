@@ -54,6 +54,12 @@ class Alumno extends Persona
 		this.listaCalificaciones = [];
 	}
 
+	addCurso(codigo)
+	{
+		if (!this.listaCursos.includes(codigo))
+			this.listaCursos.push(codigo); // Añade un curso al alumno
+	}
+
 	addNota(oCalificacion)
 	{
 		this.listaCalificaciones.push(oCalificacion); // Añade una calificacion al alumno
@@ -130,7 +136,7 @@ class Matricula
 		this.numero  = iNumero;
 		this.estado  = sEstado;
 		this.dniAlumno = sDniAlumno;
-		this.listaCursosMatri= sListaCursosMatri;
+		this.listaCursosMatri = sListaCursosMatri;
 	}
 }
 
@@ -157,11 +163,12 @@ class Academia
 		if (!bEncontrado)
 		{
 			this._matriculas.push(oMatricula);
-			var oAlu= academia.getUsuario(oMatricula.dniAlumno);
-			for (var i = 0; i < oMatricula.listaCursosMatri.length; i++) 
-			{
-				oAlu.listaCursos.push(oMatricula.listaCursosMatri[i]);
-			}
+
+			var oAlumno = this.getUsuario(oMatricula.dniAlumno);
+			for (var i=0; i<oMatricula.listaCursosMatri.length; i++)
+				oAlumno.addCurso(oMatricula.listaCursosMatri[i]);
+
+			this.modificarUsuario(oAlumno);
 			sessionStorage.setItem('tMatriculas', JSON.stringify(this._matriculas));
 		}
 
@@ -363,12 +370,6 @@ class Academia
 	    		tUsuarios[i].tipo = 'alumno';
 		}
 		sessionStorage.setItem('tUsuarios', JSON.stringify(tUsuarios));
-	}
-
-	actualizarSesionMatriculas()
-	{
-		var tMatricula = this._matriculas;
-		sessionStorage.setItem('tMatricula', JSON.stringify(tMatricula));
 	}
 
     consultarNotas(sDni,SFiltro)
