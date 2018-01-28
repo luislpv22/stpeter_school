@@ -481,7 +481,7 @@ function guardarAlumno()
 
 function resetearCamposProfesor()
 {
-	var input = document.querySelectorAll('#formEditarProfesor input');
+	var input = document.querySelectorAll('#formEditarProfesor .errorFormulario');
     for (var i=0; i<input.length; i++)
     input[i].classList.remove("errorFormulario");
 
@@ -727,12 +727,11 @@ function switchActivo()
 
 function resetearCamposMatricula()
 {
-	var input = document.querySelectorAll('#formModMatri input');
+	var input = document.querySelectorAll('#formModMatri .errorFormulario');
     for (var i=0; i<input.length; i++)
     input[i].classList.remove("errorFormulario");
 
-	document.querySelector('#formModMatri SELECT').remove("errorFormulario");
-
+	
     var mensajes = document.querySelectorAll('#formModMatri .text-error');
     for (var i=0; i<mensajes.length; i++)
     mensajes[i].remove();
