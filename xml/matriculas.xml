@@ -7,7 +7,7 @@
 	  <codigo>ENA2P</codigo>
 	</curso>
    </listaCursos>
-   <estado>encurso</estado>
+   <estado>activa</estado>
 </matricula>
 
 <matricula dni="23645812R">
@@ -17,7 +17,7 @@
 	  <codigo>ENA2P</codigo>
 	</curso>
   </listaCursos>
-  <estado>encurso</estado>
+  <estado>activa</estado>
 </matricula>
 
 <matricula dni="42010210B">
@@ -27,7 +27,7 @@
 	  <codigo>ENA2P</codigo>
 	</curso>
   </listaCursos>
-  <estado>encurso</estado>
+  <estado>activa</estado>
 </matricula>
 
 <matricula dni="04568915V">
@@ -37,7 +37,7 @@
 	  <codigo>ENB1S</codigo>
 	</curso>
   </listaCursos>
-  <estado>encurso</estado>
+  <estado>activa</estado>
 </matricula>
 
 <matricula dni="95425821Q">
@@ -47,7 +47,7 @@
 	  <codigo>ENB1S</codigo>
 	</curso>
   </listaCursos>
-  <estado>encurso</estado>
+  <estado>activa</estado>
 </matricula>
 
 <matricula dni="54629812T">
@@ -60,7 +60,7 @@
 	  <codigo>FRB1S</codigo>
 	</curso>
   </listaCursos>
-  <estado>cerrado</estado>
+  <estado>inactiva</estado>
 </matricula>
 
 <matricula dni="23420102E">
@@ -70,7 +70,7 @@
 	  <codigo>FRA2P</codigo>
 	</curso>
   </listaCursos>
-  <estado>encurso</estado>
+  <estado>activa</estado>
 </matricula>
 
 <matricula dni="72158961T">
@@ -80,6 +80,6 @@
 	  <codigo>FRA2P</codigo>
 	</curso>
   </listaCursos>
-  <estado>encurso</estado>
+  <estado>activa</estado>
 </matricula>
 </listaMatriculas>
