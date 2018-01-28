@@ -156,6 +156,7 @@ class Academia
 
 		if (!bEncontrado)
 			this._matriculas.push(oMatricula);
+			sessionStorage.setItem('tMatriculas', JSON.stringify(this._matriculas));
 
 		return !bEncontrado;
 	}
@@ -229,6 +230,21 @@ class Academia
 			}
 		}
 		sessionStorage.setItem('tCursos', JSON.stringify(this._cursos));
+	}
+
+	modificarMatricula(oMatricula)
+	{
+		// recorrer la array de matrícula hasta encontrar al que tengan el mismo número y modificarlo
+		var bEncontrado = false;
+		for (var i=0; i<this._matriculas.length && bEncontrado==false; i++) 
+		{
+			if (this._matriculas[i].numero == oMatricula.numero)
+			{
+				this._matriculas[i] = oMatricula;
+				bEncontrado = true;
+			}
+		}
+		sessionStorage.setItem('tMatriculas', JSON.stringify(this._matriculas));
 	}
 
 	getUsuarios()

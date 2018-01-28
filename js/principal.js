@@ -58,9 +58,22 @@ function datosIniciales()
 			academia.addCurso(tCursos[i]);
 	}
 
-	var oXMLMatriculas = loadXMLDoc("xml/matriculas.xml");
-	var oMatriculas = oXMLMatriculas.getElementsByTagName("matricula");
-	cargarMatriculas(oMatriculas);
+	//añado el sessiontorage de matrícula, (no se si la liare mucho)
+
+	if (typeof sessionStorage.tMatriculas === 'undefined')
+	{
+		var oXMLMatriculas = loadXMLDoc("xml/matriculas.xml");
+		var oMatriculas = oXMLMatriculas.getElementsByTagName("matricula");
+		cargarMatriculas(oMatriculas);
+		var tMatriculas = academia.getMatriculas();
+		sessionStorage.setItem('tMatriculas', JSON.stringify(tMatriculas));
+	}
+	else
+	{
+		var tMatriculas = JSON.parse(sessionStorage.tMatriculas);
+		for (var i=0; i<tMatriculas.length; i++)
+			academia.addMatricula(tMatriculas[i]);
+	}
 
 	var oXMLCalificaciones = loadXMLDoc("xml/calificaciones.xml");
 	var oCalificaciones = oXMLCalificaciones.getElementsByTagName("alumno");

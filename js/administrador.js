@@ -428,3 +428,69 @@ function switchActivo()
 
 	return lblActivo;
 }
+
+
+function editarMatricula(numero)
+{
+	oMatricula= academia.getMatricula(numero);
+  	document.querySelector('.modal-title').textContent = "Editar matrícula";
+	var forms = document.querySelectorAll('#modal form');
+
+	for (var i=0; i<forms.length; i++)
+		forms[i].style.display = "none";
+
+	var codigo = numero;
+	var dni = oMatricula.dniAlumno;
+	var form = document.getElementById("formModMatri");
+	form.numMatri.value = codigo;
+	form.dniMatri.value = dni;
+	listaCursos= academia.getCursos();
+
+	oP=document.querySelectorAll("OPTION");
+	for (var i = 0; i < oP.length; i++) 
+	{
+		oP[i].parentNode.removeChild(oP[i]);
+	}
+
+
+	for (var i = 0; i < listaCursos.length; i++) 
+	{
+		oP = document.createElement("OPTION");
+		oP.value = listaCursos[i].codigo;
+		oP.textContent = listaCursos[i].idioma+", "+listaCursos[i].nivel+", "+listaCursos[i].tipo;
+		form.seleCurMatri.appendChild(oP);
+	}
+
+	document.querySelector('#modal .btn-success').id = "btnGuardarMatricula";
+	document.querySelector('#btnGuardarMatricula').setAttribute("data-estado", oMatricula.estado);
+	document.querySelector('#btnGuardarMatricula').addEventListener("click", guardarMatricula);
+	form.style.display = "block";
+}
+
+
+function guardarMatricula()
+{
+	var form = document.getElementById("formModMatri");
+
+	var dataEstado = this.getAttribute("data-estado");
+
+	var sNumero = form.numMatri.value;
+	var sDni = form.dniMatri.value;
+	var sLisCursos =[];
+
+	listaOp=document.querySelectorAll("OPTION");
+	for (var i = 0; i < listaOp.length; i++) {
+		if (listaOp[i].selected)
+			sLisCursos.push(listaOp[i].value);
+	}
+
+	var oMatricula = new Matricula (sNumero, dataEstado, sDni, sLisCursos);
+
+
+	if (sNumero != null)
+		academia.modificarMatricula(oMatricula);
+	else
+		academia.addMatricula(oMatricula);
+	location.href = "administrador.html";
+	document.querySelector('#modal .close').click();
+}
