@@ -373,7 +373,7 @@ class Academia
 		sessionStorage.setItem('tUsuarios', JSON.stringify(tUsuarios));
 	}
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
     consultarNotas(sDni,SFiltro)
     {
     	var oTablaCurProv;
@@ -480,9 +480,6 @@ class Academia
     }
 
     modificarNotaAlumno(sDni,oCalificacion)
-=======
-/*    modificarNotaAlumno(sCodigo,sDni,fNota)
->>>>>>> 08d7e113f2803d5df513fd616aef0a1078c10140
     {
 
   			for (var i = 0; i < this._usuarios.length; i++) 
@@ -493,7 +490,7 @@ class Academia
 
 					for (var j = 0; j < oCalifca.length; j++)
 					{
-						if(oCalifca[j].codCurso==oCalificacion.codCurso)
+						if(oCalifca[j].codCurso==oCalificacion.codCurso && oCalifca[j].descripcion==oCalificacion.descripcion)
 						oCalifca[j].nota=oCalificacion.nota;
 					}
 
