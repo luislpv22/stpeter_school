@@ -426,10 +426,10 @@ class Academia
 		{
 			if (this._matriculas[i] == oMatri)
 			{
-				if (oMatri.estado =="encurso")
-					this._matriculas[i].estado = "cerrado";
+				if (oMatri.estado == "activa")
+					this._matriculas[i].estado = "inactiva";
 				else
-					this._matriculas[i].estado = "encurso";
+					this._matriculas[i].estado = "activa";
 			}
 		}
 	}

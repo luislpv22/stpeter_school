@@ -206,13 +206,14 @@ function mostrarPagina(pagina)
 			fila.insertCell(-1).appendChild(document.createTextNode(matriculas[i].dniAlumno));
 
 			//para mostrar los códigos de las asignaturas de la matrícula
-			var sTexto = "";
+			var celdaCursos = fila.insertCell(-1);
 			for (var j=0; j<matriculas[i].listaCursosMatri.length; j++)
 			{
-				oCurso = academia.getCurso(matriculas[i].listaCursosMatri[j]);
-				sTexto +=  oCurso.idioma+" "+oCurso.nivel+" "+oCurso.tipo;
+				var div = document.createElement("div");
+				var oCurso = academia.getCurso(matriculas[i].listaCursosMatri[j]);
+				div.textContent = oCurso.idioma+" "+oCurso.nivel+" "+oCurso.tipo;
+				celdaCursos.appendChild(div);
 			}
-			fila.insertCell(-1).appendChild(document.createTextNode(sTexto));
 			oFila = fila.insertCell(-1);
 			oFila.id="estado";
 			oFila.setAttribute("data-estado", matriculas[i].estado);
@@ -480,7 +481,7 @@ function guardarAlumno()
 
 function resetearCamposProfesor()
 {
-	var input = document.querySelectorAll('#formEditarProfesor input');
+	var input = document.querySelectorAll('#formEditarProfesor .errorFormulario');
     for (var i=0; i<input.length; i++)
     input[i].classList.remove("errorFormulario");
 
@@ -726,12 +727,11 @@ function switchActivo()
 
 function resetearCamposMatricula()
 {
-	var input = document.querySelectorAll('#formModMatri input');
+	var input = document.querySelectorAll('#formModMatri .errorFormulario');
     for (var i=0; i<input.length; i++)
     input[i].classList.remove("errorFormulario");
 
-	document.querySelector('#formModMatri SELECT').remove("errorFormulario");
-
+	
     var mensajes = document.querySelectorAll('#formModMatri .text-error');
     for (var i=0; i<mensajes.length; i++)
     mensajes[i].remove();
@@ -819,7 +819,7 @@ function guardarMatricula()
 		else
 			academia.addMatricula(oMatricula);
 
-		location.href = "administrador.html";
+		mostrarPagina('matriculaciones');
 		document.querySelector('#modal .close').click();
 	}
 }
@@ -828,10 +828,10 @@ function borrarMatricula()
 {
 	var numero = this.getAttribute("data-matricula");
 	var oMatricula = academia.getMatricula(numero);
-	if (oMatricula.estado == "encurso")
-		oMatricula.estado = "cerrado";
+	if (oMatricula.estado == "activa")
+		oMatricula.estado = "inactiva";
 	else
-		oMatricula.estado = "encurso";
+		oMatricula.estado = "activa";
 
 	academia.modificarMatricula(oMatricula);
 	mostrarPagina('matriculaciones');
@@ -844,7 +844,7 @@ function filtrarTabla()
 
 	for (var i=0; i<filas.length; i++)
 	{
-		if (filas[i].dataset.estado == "cerrado")
+		if (filas[i].dataset.estado == "inactiva")
 			filas[i].parentNode.style.display = "none";
 	}
 }
