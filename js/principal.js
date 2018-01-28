@@ -13,13 +13,19 @@ function datosIniciales()
 	    var oXMLAlumnos = loadXMLDoc("xml/alumnos.xml");
 		var oAlumnos = oXMLAlumnos.getElementsByTagName("alumno");
 		cargarAlumnos(oAlumnos);
+
 	    var oXMLProfesores = loadXMLDoc("xml/profesores.xml");
 		var oProfesores = oXMLProfesores.getElementsByTagName("profesor");
 		cargarProfesores(oProfesores);
+
 	    var oXMLAdministradores = loadXMLDoc("xml/administradores.xml");
 		var oAdministradores = oXMLAdministradores.getElementsByTagName("administrador");
 		cargarAdministradores(oAdministradores);
 		academia.actualizarSesionUsuarios();
+
+		var oXMLCalificaciones = loadXMLDoc("xml/calificaciones.xml");
+		var oCalificaciones = oXMLCalificaciones.getElementsByTagName("alumno");
+		cargarCalificaciones(oCalificaciones);
 	}
 	else
 	{
@@ -62,7 +68,6 @@ function datosIniciales()
 			academia.addCurso(tCursos[i]);
 	}
 
-	//añado el sessiontorage de matrícula, (no se si la liare mucho)
 
 	if (typeof sessionStorage.tMatriculas === 'undefined')
 	{
@@ -78,10 +83,6 @@ function datosIniciales()
 		for (var i=0; i<tMatriculas.length; i++)
 			academia.addMatricula(tMatriculas[i]);
 	}
-
-	var oXMLCalificaciones = loadXMLDoc("xml/calificaciones.xml");
-	var oCalificaciones = oXMLCalificaciones.getElementsByTagName("alumno");
-	cargarCalificaciones(oCalificaciones);
 }
 
 function iniciarSesion(oEvento)

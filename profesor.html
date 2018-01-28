@@ -5,169 +5,181 @@
 	<title></title>
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/estiloGestionMatricula.css">
-    <link rel="stylesheet" type="text/css" href="css/panel.css">
-    <script>
-        if (typeof sessionStorage.usuario === 'undefined')
-            location.href = "login.html";
-    </script>
+	<link rel="stylesheet" type="text/css" href="css/panel.css">
+	<script>
+		if (typeof sessionStorage.usuario === 'undefined')
+			location.href = "login.html";
+	</script>
 </head>
 <body>	
-    <div class="wrapper">
-        <nav id="sidebar">
-            <!-- Sidebar Header -->
-            <div class="sidebar-header">
-                <h3>St. Peter School</h3>
-                <strong>St.P</strong>
-            </div>
+	<div class="wrapper">
+		<nav id="sidebar">
+			<!-- Sidebar Header -->
+			<div class="sidebar-header">
+				<h3>St. Peter School</h3>
+				<strong>St.P</strong>
+			</div>
 
-            <div class="usuario">
-              <div class="nombre"></div>
-              <button id="btnCerrarSesion" name="btnCerrarSesion" class="btn btn-default btn-sm">Cerrar Sesión</button>
-            </div>
+			<div class="usuario">
+				<div class="nombre"></div>
+				<button id="btnCerrarSesion" name="btnCerrarSesion" class="btn btn-default btn-sm">Cerrar Sesión</button>
+			</div>
 
-            <!-- Sidebar Links -->
-            <ul class="list-unstyled components">
-                <li class="active"><a href="#homeSubmenu"><i class="glyphicon glyphicon-home"></i>Inicio</a></li>
-                <li><a href="#frmModAlu" id="enlaceMisDatos"><i class="glyphicon glyphicon-user"></i>Mis Datos</a></li>
-                <li><a href="#pageSubmenu1" id="enlaceConsultar"><i class="glyphicon glyphicon-book"></i>Consultar Alumnos</a></li>
-            </ul>
-        </nav>
+			<!-- Sidebar Links -->
+			<ul class="list-unstyled components">
+				<li class="active"><a href="#homeSubmenu"><i class="glyphicon glyphicon-home"></i>Inicio</a></li>
+				<li><a href="#frmModAlu" id="enlaceMisDatos"><i class="glyphicon glyphicon-user"></i>Mis Datos</a></li>
+				<li><a href="#cursos" id="enlaceCursos"><i class="glyphicon glyphicon-education"></i>Cursos</a></li>
+				<li><a href="#alumnos" id="enlaceAlumnos"><i class="glyphicon glyphicon-book"></i>Alumnos</a></li>
+			</ul>
+		</nav>
 
-        <div id="content">
-            <button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
-            <div class="container-fluid">
-                <div id="capaModificarAlu" class="ocultar">
-                    <form class="form-horizontal" name="frmModAlu" id="frmModAlu" action="#">
-                        <fieldset>
-                            <!-- Form Name -->
-                            <legend>Modificar datos</legend>
-                            <!-- Text input-->
-                            <div class="form-group" id="mod">
-                                <label class="col-md-4 control-label" for="nombreAlu" >Nombre</label>  
-                                <div class="col-md-8">
-                                    <input id="nombreAlu" name="nombreAlu" type="text" placeholder="nombre" class="form-control input-md" disabled >
-                                </div>
-                            </div>
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="apellidosAlu">Apellidos</label>  
-                                <div class="col-md-8">
-                                    <input id="apellidosAlu" name="apellidosAlu" type="text" placeholder="Apellidos" class="form-control input-md" disabled>
-                                </div>
-                            </div>
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="dniAlu">DNI</label>  
-                                <div class="col-md-8">
-                                    <input id="dniAlu" name="dniAlu" type="text" placeholder="dni" class="form-control input-md" disabled>
-                                </div>
-                            </div>
-                            <!-- password input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="password">Password</label>  
-                                <div class="col-md-8">
-                                    <input id="passAlu" name="passAlu" type="password" placeholder="password" class="form-control input-md" required="">
-                                </div>
-                            </div>
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="telefonoAlu">Teléfono</label>  
-                                <div class="col-md-8">
-                                    <input id="telefonoAlu" name="telefonoAlu" type="text" placeholder="teléfono" class="form-control input-md" required="">
-                                </div>
-                            </div>
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="direAlu">Dirección</label>  
-                                <div class="col-md-8">
-                                    <input id="direAlu" name="direAlu" type="text" placeholder="dirección" class="form-control input-md" required="">
-                                </div>
-                            </div>
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="emailAlu">Email</label>  
-                                <div class="col-md-8">
-                                    <input id="emailAlu" name="emailAlu" type="text" placeholder="email" class="form-control input-md" required="">
-                                </div>
-                            </div>
-                            <!-- Button (Double) -->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="ModAlu"></label>
-                                <div class="col-md-8">
-                                    <button id="btnModDatosAlu" name="btnModDatosAlu" class="btn btn-success">Modificar datos</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
+		<div id="content">
+			<button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
+			<div class="container-fluid">
+				<div id="capaModificarAlu" class="ocultar">
+					<form class="form-horizontal" name="frmModAlu" id="frmModAlu" action="#">
+						<fieldset>
+							<!-- Form Name -->
+							<legend>Modificar datos</legend>
+							<!-- Text input-->
+							<div class="form-group" id="mod">
+								<label class="col-md-2 control-label" for="nombreAlu" >Nombre</label>  
+								<div class="col-md-4">
+									<input id="nombreAlu" name="nombreAlu" type="text" placeholder="nombre" class="form-control input-md" disabled >
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="apellidosAlu">Apellidos</label>  
+								<div class="col-md-4">
+									<input id="apellidosAlu" name="apellidosAlu" type="text" placeholder="Apellidos" class="form-control input-md" disabled>
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="dniAlu">DNI</label>  
+								<div class="col-md-4">
+									<input id="dniAlu" name="dniAlu" type="text" placeholder="dni" class="form-control input-md" disabled>
+								</div>
+							</div>
+							<!-- password input-->
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="password">Password</label>  
+								<div class="col-md-4">
+									<input id="passAlu" name="passAlu" type="password" placeholder="password" class="form-control input-md" required="">
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="telefonoAlu">Teléfono</label>  
+								<div class="col-md-4">
+									<input id="telefonoAlu" name="telefonoAlu" type="text" placeholder="teléfono" class="form-control input-md" required="">
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="direAlu">Dirección</label>  
+								<div class="col-md-4">
+									<input id="direAlu" name="direAlu" type="text" placeholder="dirección" class="form-control input-md" required="">
+								</div>
+							</div>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="emailAlu">Email</label>  
+								<div class="col-md-4">
+									<input id="emailAlu" name="emailAlu" type="text" placeholder="email" class="form-control input-md" required="">
+								</div>
+							</div>
+							<!-- Button (Double) -->
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="ModAlu"></label>
+								<div class="col-md-4">
+									<button id="btnModDatosAlu" name="btnModDatosAlu" class="btn btn-success">Modificar datos</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
 
-            
-                <div id="capaConsultarNotas" class="ocultar">
-                    <fieldset>
-                        <legend>Consultar Notas</legend>
-                        <div id="capaSelectCursos" class="form-group">
-                            <select id="selectCursoConsultar" class="form-control">
-                                <option value="todo">Todo</option>
-                            </select>
-                        </div>
-                        <div id="capaNotas"></div>
-                    </fieldset>
-                </div>
+			
+				<div id="capaConsultarNotas" class="ocultar">
+					<fieldset class="form-inline">
+						<legend>Listado de alumnos</legend>
+						<label for="selectCursoConsultar" class="control-label">Filtrar por curso:</label>
+						&nbsp;&nbsp;
+						<select id="selectCursoConsultar" class="form-control">
+							<option value="todo">Todos</option>
+						</select>
+						<br/><br/><br/>
+						<div id="capaNotas"></div>
+					</fieldset>
+				</div>
 
-                <div class="modal fade" id="modal">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h4 class="modal-title">Notas alumno</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+				<div class="modal fade" id="modal">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+							<h4 class="modal-title">Notas alumno</h4>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
 
-                            <div class="modal-body">
-                                <div class="alert alert-success alert-dismissable ocultar">
-                                   <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                   <span></span>
-                                   </div>
-                                <table id="tablaNotasAlumno" class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Ejercicio</th>
-                                            <th>Nota</th>
-                                            <th>Curso</th>
-                                            <th colspan="2">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                </table>
+							<div class="modal-body">
+								<div class="alert alert-success alert-dismissable ocultar">
+									<button type="button" class="close" data-dismiss="alert">&times;</button>
+								</div>
 
-                                <form id="addNotaAlumno" name="addNotaAlumno" class="ocultar">
-                                <label class="col-md-2 control-label" for="txtNota">Nota</label>
-                                <input type="text" size="4" id="txtNota" name="txtNota" class="form-control"/>
-                                <label class="col-md-2 control-label" for="txtDescr">Descripcion</label>
-                                <input type="text" size="4" id="txtDescr" name="txtDescr" class="form-control"/>
-                                <label class="col-md-2 control-label" for="selectCursoCalificar">Curso</label>
-                                 <select id="selectCursoCalificar" name="selectCursoCalificar" class="form-control">
-                                <option value="" disabled selected>Seleccionar curso</option>
-                                </select>
-                                <button type="button" class="btn btn-primary" id="guardarNota" name="guardarNota">Guardar Nota</button>
-                                </form>
+								<table id="tablaNotasAlumno" class="table">
+									<thead>
+										<tr>
+											<th width="25%">Ejercicio</th>
+											<th width="15%">Nota</th>
+											<th width="15%">Curso</th>
+											<th width="25%">Acciones</th>
+										</tr>
+									</thead>
+								</table>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" id="btnAddNota"  class="btn btn-primary">Añadir nota</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/objetos.js"></script>
-    <script type="text/javascript" src="js/principal.js"></script>
-    <script type="text/javascript" src="js/alumno.js"></script>
-    <script type="text/javascript" src="js/profesor.js"></script>
+								<form id="frmAddNotaAlumno" name="frmAddNotaAlumno" class="form-horizontal ocultar">
+									<div class="form-group">
+										<label class="col-md-2 control-label" for="selectCursoCalificar">Curso</label>
+										<div class="col-md-8">
+											<select id="selectCursoCalificar" name="selectCursoCalificar" class="form-control">
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label" for="txtDescr">Tarea</label>
+										<div class="col-md-8">
+											<input type="text" id="txtDescr" name="txtDescr" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label" for="txtNota">Nota</label>
+										<div class="col-md-8">
+											<input type="number" id="txtNota" name="txtNota" min="0" max="10" step="0.05" class="form-control" />
+										</div>
+									</div>
+								</form>
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" id="btnAddNota" class="btn btn-primary">Añadir nota</button>
+								<button type="button" id="btnCerrarModal" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/objetos.js"></script>
+	<script type="text/javascript" src="js/principal.js"></script>
+	<script type="text/javascript" src="js/alumno.js"></script>
+	<script type="text/javascript" src="js/profesor.js"></script>
 </body>
 </html>
