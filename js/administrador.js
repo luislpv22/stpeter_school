@@ -15,6 +15,7 @@ document.querySelector('#btnMatriculas').addEventListener("click", function () {
 
 document.querySelector('#btnAddCurso').addEventListener("click", crearCurso);
 document.querySelector('#btnAddAlumno').addEventListener("click", crearAlumno);
+document.querySelector('#btnAddProfesor').addEventListener("click", crearProfesor);
 
 mostrarPagina('cursos');
 
@@ -126,10 +127,11 @@ function mostrarPagina(pagina)
 			var btn = document.createElement("input");
 			btn.type = "button";
 			btn.value = "Editar";
+			btn.classList.add("btn", "btn-danger", "btn-sm");
 			btn.setAttribute("data-toggle", "modal");
 			btn.setAttribute("data-target", "#modal");
-			btn.classList.add("btn", "btn-danger", "btn-sm");
-			btn.addEventListener("click", function() { editarProfesor(profesores[i].dni); });
+			btn.setAttribute("data-dni", profesores[i].dni);
+			btn.addEventListener("click", editarProfesor);
 			fila.insertCell(-1).appendChild(btn);
 		}
 
@@ -222,7 +224,8 @@ function mostrarPagina(pagina)
 				btn.classList.add("btn-warning");
 				btn.classList.add("btn-sm");
 				btn.id="btnModMatri";
-				fila.insertCell(-1).appendChild(btn);
+				var acciones = fila.insertCell(-1);
+				acciones.appendChild(btn);
 				var btn = document.createElement("input");
 				btn.type = "button";
 				btn.value = "Eliminar";
@@ -231,7 +234,7 @@ function mostrarPagina(pagina)
 				btn.classList.add("btn-danger");
 				btn.classList.add("btn-sm");
 				btn.id="borrarMatri";
-				fila.appendChild(btn);
+				acciones.appendChild(btn);
 			}
 	     }
 
@@ -418,6 +421,117 @@ function guardarAlumno()
 	document.querySelector('#modal .close').click();
 }
 
+function editarProfesor()
+{
+	document.querySelector('.modal-title').textContent = "Editar profesor";
+	var forms = document.querySelectorAll('#modal form');
+	for (var i=0; i<forms.length; i++)
+		forms[i].style.display = "none";
+
+	var dni = this.getAttribute("data-dni");
+	var oProfesor = academia.getUsuario(dni);
+	var form = document.getElementById("formEditarProfesor");
+	form.dni.value = oProfesor.dni;
+	form.password.value = oProfesor.password;
+	form.nombre.value = oProfesor.nombre;
+	form.apellidos.value = oProfesor.apellidos;
+	form.email.value = oProfesor.correo;
+	form.telefono.value = oProfesor.telefono;
+	form.direccion.value = oProfesor.direccion;
+
+	var tCursos = academia.getCursos();
+	var options = document.querySelectorAll('#formEditarProfesor #selectCursosProf option');
+	for (var i=0; i<options.length; i++)
+		options[i].parentNode.removeChild(options[i]);
+
+	for (var i=0; i<tCursos.length; i++) 
+	{
+		var option = document.createElement("option");
+		option.value = tCursos[i].codigo;
+		option.textContent = tCursos[i].idioma+", "+tCursos[i].nivel+", "+tCursos[i].tipo;
+
+		if (oProfesor.listaCursos.includes(tCursos[i].codigo))
+			option.selected = "selected";
+
+		form.cursos.appendChild(option);
+	}
+
+	document.querySelector('#modal .btn-success').id = "btnGuardarProfesor";
+	document.querySelector('#btnGuardarProfesor').setAttribute("data-dni", dni);
+	document.querySelector('#btnGuardarProfesor').addEventListener("click", guardarProfesor);
+
+	form.style.display = "block";
+}
+
+function crearProfesor()
+{
+	document.querySelector('.modal-title').textContent = "Nuevo profesor";
+	var forms = document.querySelectorAll('#modal form');
+	for (var i=0; i<forms.length; i++)
+		forms[i].style.display = "none";
+
+	var form = document.getElementById("formEditarProfesor");
+	document.querySelector('#modal .btn-success').id = "btnGuardarProfesor";
+	document.querySelector('#btnGuardarProfesor').removeAttribute("data-dni");
+	document.querySelector('#btnGuardarProfesor').addEventListener("click", guardarProfesor);
+	form.dni.removeAttribute("readonly");
+	form.dni.value = "";
+	form.password.value = "";
+	form.nombre.value = "";
+	form.apellidos.value = "";
+	form.email.value = "";
+	form.telefono.value = "";
+	form.direccion.value = "";
+
+	var tCursos = academia.getCursos();
+	var options = document.querySelectorAll('#formEditarProfesor #selectCursosProf option');
+	for (var i=0; i<options.length; i++)
+		options[i].parentNode.removeChild(options[i]);
+
+	for (var i=0; i<tCursos.length; i++) 
+	{
+		var option = document.createElement("option");
+		option.value = tCursos[i].codigo;
+		option.textContent = tCursos[i].idioma+", "+tCursos[i].nivel+", "+tCursos[i].tipo;
+		form.cursos.appendChild(option);
+	}
+
+	form.style.display = "block";
+}
+
+function guardarProfesor()
+{
+	var form = document.getElementById("formEditarProfesor");
+
+	var sDNI = form.dni.value;
+
+	var dataDNI = this.getAttribute("data-dni");
+	if (dataDNI != null)
+		sDNI = dataDNI;
+
+	var sPassword = form.password.value;
+	var sNombre = form.nombre.value;
+	var sApellidos = form.apellidos.value;
+	var sCorreo = form.email.value;
+	var sTelefono = form.telefono.value;
+	var sDireccion = form.direccion.value;
+	var listaCursos = form.cursos.options;
+
+	var oProfesor = new Profesor(sNombre, sPassword, sApellidos, sDNI, sTelefono, sDireccion, sCorreo, "si", "");
+
+	for (var i=0; i<listaCursos.length; i++)
+		if (listaCursos[i].selected)
+			oProfesor.addCurso(listaCursos[i].value);
+
+	if (dataDNI != null)
+		academia.modificarUsuario(oProfesor);
+	else
+		academia.addUsuario(oProfesor);
+
+	mostrarPagina('profesores');
+	document.querySelector('#modal .close').click();
+}
+
 function switchActivo()
 {
 	var lblActivo = document.createElement("label");
@@ -439,7 +553,7 @@ function switchActivo()
 
 function editarMatricula(numero)
 {
-	oMatricula= academia.getMatricula(numero);
+	oMatricula = academia.getMatricula(numero);
   	document.querySelector('.modal-title').textContent = "Editar matrícula";
 	var forms = document.querySelectorAll('#modal form');
 
@@ -451,20 +565,21 @@ function editarMatricula(numero)
 	var form = document.getElementById("formModMatri");
 	form.numMatri.value = codigo;
 	form.dniMatri.value = dni;
-	listaCursos= academia.getCursos();
+	var listaCursos = academia.getCursos();
 
-	oP=document.querySelectorAll("OPTION");
-	for (var i = 0; i < oP.length; i++) 
-	{
+	var oP = document.querySelectorAll("OPTION");
+	for (var i=0; i<oP.length; i++) 
 		oP[i].parentNode.removeChild(oP[i]);
-	}
 
-
-	for (var i = 0; i < listaCursos.length; i++) 
+	for (var i=0; i<listaCursos.length; i++) 
 	{
 		oP = document.createElement("OPTION");
 		oP.value = listaCursos[i].codigo;
 		oP.textContent = listaCursos[i].idioma+", "+listaCursos[i].nivel+", "+listaCursos[i].tipo;
+
+		if (oMatricula.listaCursosMatri.includes(listaCursos[i].codigo))
+			oP.selected = "selected";
+
 		form.seleCurMatri.appendChild(oP);
 	}
 

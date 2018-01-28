@@ -120,11 +120,11 @@
 	            <table id="tablaMatriculas" class="table table-striped">
 					<thead>
 						<tr>
-							<th width="15%">Numero</th>
+							<th width="5%">#</th>
 							<th width="15%">DNI</th>
-							<th width="10%">Cursos</th>
-							<th width="25%">Estado</th>
-							<th width="15%">Acciones</th>
+							<th width="20%">Cursos</th>
+							<th width="10%">Estado</th>
+							<th width="20%">Acciones</th>
 						</tr>
 					</thead>
 	            </table>
@@ -272,6 +272,57 @@
 						<label class="col-md-2 control-label" for="direAlu">Dirección:</label>
 						<div class="col-md-8">
 							<input id="direAlu" name="direccion" type="text" placeholder="Dirección" class="form-control" required>
+						</div>
+					</div>
+				</form>
+				<form id="formEditarProfesor" class="form-horizontal">
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="dniProf">DNI:</label>
+						<div class="col-md-8">
+							<input id="dniProf" name="dni" type="text" placeholder="DNI" class="form-control" required readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="passProf">Contraseña:</label>
+						<div class="col-md-8">
+							<input id="passProf" name="password" type="password" placeholder="Contraseña" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="nombreProf">Nombre:</label>
+						<div class="col-md-8">
+							<input id="nombreProf" name="nombre" type="text" placeholder="Nombre" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="apellidosProf">Apellidos:</label>
+						<div class="col-md-8">
+							<input id="apellidosProf" name="apellidos" type="text" placeholder="Apellidos" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="emailProf">Email:</label>
+						<div class="col-md-8">
+							<input id="emailProf" name="email" type="text" placeholder="Email" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="telefonoProf">Teléfono:</label>
+						<div class="col-md-8">
+							<input id="telefonoProf" name="telefono" type="text" placeholder="Teléfono" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="direProf">Dirección:</label>
+						<div class="col-md-8">
+							<input id="direProf" name="direccion" type="text" placeholder="Dirección" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="selectCursosProf">Cursos:</label>
+						<div class="col-md-8">
+				      		<select id="selectCursosProf" name="cursos" class="form-control" multiple="multiple">
+				      		</select>
 						</div>
 					</div>
 				</form>
