@@ -54,6 +54,12 @@ class Alumno extends Persona
 		this.listaCalificaciones = [];
 	}
 
+	addCurso(codigo)
+	{
+		if (!this.listaCursos.includes(codigo))
+			this.listaCursos.push(codigo); // Añade un curso al alumno
+	}
+
 	addNota(oCalificacion)
 	{
 		this.listaCalificaciones.push(oCalificacion); // Añade una calificacion al alumno
@@ -81,12 +87,13 @@ class Contabilidad
 }
 
 
-class Calificaciones
+class Calificacion
 {
-	constructor(fNota, sCodigoCurso)
+	constructor(sDescripcion, fNota, sCodigoCurso)
 	{
-		this.nota     = fNota;
-		this.codCurso = sCodigoCurso;
+		this.descripcion = sDescripcion;
+		this.nota        = fNota;
+		this.curso       = sCodigoCurso;
 	}
 }
 
@@ -125,12 +132,12 @@ class Aula
 
 class Matricula
 {
-	constructor(iNumero, sEstado, oAlumno, sListaCursosMatri)
+	constructor(iNumero, sEstado, sDniAlumno, sListaCursosMatri)
 	{
 		this.numero  = iNumero;
-		this.oAlumno = oAlumno;
 		this.estado  = sEstado;
-		this.listaCursosMatri= sListaCursosMatri;
+		this.dniAlumno = sDniAlumno;
+		this.listaCursosMatri = sListaCursosMatri;
 	}
 }
 
@@ -155,7 +162,16 @@ class Academia
 				bEncontrado = true;
 
 		if (!bEncontrado)
+		{
 			this._matriculas.push(oMatricula);
+
+			var oAlumno = this.getUsuario(oMatricula.dniAlumno);
+			for (var i=0; i<oMatricula.listaCursosMatri.length; i++)
+				oAlumno.addCurso(oMatricula.listaCursosMatri[i]);
+
+			this.modificarUsuario(oAlumno);
+			sessionStorage.setItem('tMatriculas', JSON.stringify(this._matriculas));
+		}
 
 		return !bEncontrado;
 	}
@@ -196,7 +212,12 @@ class Academia
 		for (var i=0; i<this._usuarios.length && oUsuario==null; i++)
 		{
 			if (this._usuarios[i].dni == sDni && this._usuarios[i].password == sPass)
+			{
+				if (this._usuarios[i].activo == "si")
 				oUsuario = this._usuarios[i];	
+			}
+
+				
 		}
 		return oUsuario;
 	}
@@ -229,6 +250,21 @@ class Academia
 			}
 		}
 		sessionStorage.setItem('tCursos', JSON.stringify(this._cursos));
+	}
+
+	modificarMatricula(oMatricula)
+	{
+		// recorrer la array de matrícula hasta encontrar al que tengan el mismo número y modificarlo
+		var bEncontrado = false;
+		for (var i=0; i<this._matriculas.length && bEncontrado==false; i++) 
+		{
+			if (this._matriculas[i].numero == oMatricula.numero)
+			{
+				this._matriculas[i] = oMatricula;
+				bEncontrado = true;
+			}
+		}
+		sessionStorage.setItem('tMatriculas', JSON.stringify(this._matriculas));
 	}
 
 	getUsuarios()
@@ -306,6 +342,20 @@ class Academia
 				oCurso= this._cursos[i];
 
 		return oCurso;
+	}
+
+	getCursosMatriculados(sDni)
+	{
+		oCursos=null;
+		for (var i = 0; i < this._usuarios && oCursos==null; i++) 
+		{
+			if (this._usuarios[i].dni= sDni)
+			{
+				oCursos=this._usuarios[i].listaCursos;
+			}
+			
+		}
+		return oCursos;
 	}
 
 	actualizarSesionUsuarios()
@@ -459,6 +509,8 @@ class Academia
 		for (var i=0; i<this._usuarios.length; i++) 
 			if (this._usuarios[i].dni == sDni)
 				this._usuarios[i].activo="no";
+			
+		this.actualizarSesionUsuarios();
 	}
 
 
@@ -493,13 +545,9 @@ class Academia
 
 	addCalificacionesAlu(dni, oCalificacion)
 	{
-			for (var i = 0; i < this._usuarios.length; i++) 
-			{
-				if (this._usuarios[i].dni== dni)
-				{
-					this._usuarios[i].addNota(oCalificacion);
-				}
-			}
+		for (var i=0; i<this._usuarios.length; i++) 
+			if (this._usuarios[i].dni == dni)
+				this._usuarios[i].addNota(oCalificacion);
 
 	}
 

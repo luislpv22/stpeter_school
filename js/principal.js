@@ -4,6 +4,11 @@
 
 var academia = new Academia();
 
+sessionStorage.removeItem("tUsuarios");
+sessionStorage.removeItem("tMatriculas");
+sessionStorage.removeItem("tCursos");
+sessionStorage.removeItem("usuario");
+
 datosIniciales();
 
 function datosIniciales()
@@ -37,7 +42,11 @@ function datosIniciales()
 				oUsuario.listaCursos = us.listaCursos;
 	    	}
 	    	else
+	    	{
 	    		oUsuario = new Alumno(us.nombre, us.password, us.apellidos, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.estadoCobro);
+	    		oUsuario.listaCursos = us.listaCursos;
+	    		oUsuario.listaCalificaciones = us.listaCalificaciones;
+	    	}
 
 	    	academia.addUsuario(oUsuario);
     	}
@@ -58,9 +67,22 @@ function datosIniciales()
 			academia.addCurso(tCursos[i]);
 	}
 
-	var oXMLMatriculas = loadXMLDoc("xml/matriculas.xml");
-	var oMatriculas = oXMLMatriculas.getElementsByTagName("matricula");
-	cargarMatriculas(oMatriculas);
+	//añado el sessiontorage de matrícula, (no se si la liare mucho)
+
+	if (typeof sessionStorage.tMatriculas === 'undefined')
+	{
+		var oXMLMatriculas = loadXMLDoc("xml/matriculas.xml");
+		var oMatriculas = oXMLMatriculas.getElementsByTagName("matricula");
+		cargarMatriculas(oMatriculas);
+		var tMatriculas = academia.getMatriculas();
+		sessionStorage.setItem('tMatriculas', JSON.stringify(tMatriculas));
+	}
+	else
+	{
+		var tMatriculas = JSON.parse(sessionStorage.tMatriculas);
+		for (var i=0; i<tMatriculas.length; i++)
+			academia.addMatricula(tMatriculas[i]);
+	}
 
 	var oXMLCalificaciones = loadXMLDoc("xml/calificaciones.xml");
 	var oCalificaciones = oXMLCalificaciones.getElementsByTagName("alumno");
@@ -204,31 +226,26 @@ function cargarMatriculas(oMatriculas)
 			for (var j=0; j<cursos.length; j++) 
 				oAlumno.listaCursos.push(cursos[j].textContent);
 
-			academia.addMatricula(new Matricula(codigoMatri, estado, oAlumno, oAlumno.listaCursos));
+			academia.addMatricula(new Matricula(codigoMatri, estado, oAlumno.dni, oAlumno.listaCursos));
 		}
 	}
 }
 
 function cargarCalificaciones(oCalificaciones)
 {
-	for (var i = 0; i<oCalificaciones.length; i++)
+	for (var i=0; i<oCalificaciones.length; i++)
 	{
 		var dni = oCalificaciones[i].getAttribute('dni');
 		
-		var listaCursos = oCalificaciones[i].querySelectorAll("curso");
+		var listaCalificaciones = oCalificaciones[i].querySelectorAll("calificacion");
 		
 		// por si tiene notas de más de 1 curso
-		for (var j = 0; j < listaCursos.length; j++) 
+		for (var j=0; j<listaCalificaciones.length; j++) 
 		{
-			var listaNotas = [];
-			var codCurso = oCalificaciones[i].querySelectorAll("curso")[j].getAttribute('codigo');
-			// obtenemos las notas del curso  que recorre el for
-			var notas = listaCursos[j].querySelectorAll("nota");
-			for (var k = 0; k < notas.length; k++) 
-			{
-				listaNotas[k]=notas[k].textContent;
-			}
-			var oCalificacion = new Calificaciones (listaNotas, codCurso);
+			var descripcion = listaCalificaciones[j].querySelector("descripcion").textContent;
+			var nota = listaCalificaciones[j].querySelector("nota").textContent;
+			var codCurso = listaCalificaciones[j].querySelector("curso").textContent;
+			var oCalificacion = new Calificacion(descripcion, nota, codCurso);
 			academia.addCalificacionesAlu(dni, oCalificacion);
 		}
 
