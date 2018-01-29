@@ -332,45 +332,47 @@
 
 		function menuCursoUsuario()
 		{
-			oLiCurso=document.querySelector("#pageSubmenu1");
+			var oLiCurso = document.querySelector("#pageSubmenu1");
+
+			borrarLi();
+
+			var oLinkCurso = document.querySelector('a[href="#pageSubmenu1"]');
+			var badge = document.createElement("span");
+			badge.classList.add("badge");
+			badge.id = "numCursos";
+			badge.textContent = sesion.listaCursos.length;
+			oLinkCurso.appendChild(badge);
 
 			if(sesion.listaCursos.length>0)
 			{
-				borrarLi();
-				for (var i = 0; i < sesion.listaCursos.length; i++) 
+				for (var i=0; i<sesion.listaCursos.length; i++) 
 				{
-
-					oCurso= academia.getCurso(sesion.listaCursos[i]);
-					oLi=document.createElement("LI");
-					oA=document.createElement("A");
-					oA.href="#listaCalificaciones";
-					oA.textContent=oCurso.idioma+" "+ oCurso.nivel;
-					oA.id="enlaceMisCursos";
-					oA.value=oCurso.codigo;
-					oA.dataset.codigoCurso=oCurso.codigo;
+					var oCurso = academia.getCurso(sesion.listaCursos[i]);
+					var oLi = document.createElement("LI");
+					var oA = document.createElement("A");
+					oA.href = "#listaCalificaciones";
+					oA.textContent = oCurso.idioma+" "+oCurso.nivel;
+					oA.id = "enlaceMisCursos";
+					oA.value = oCurso.codigo;
+					oA.dataset.codigoCurso = oCurso.codigo;
 					oLi.appendChild(oA);
 					oLiCurso.appendChild(oLi);
-						//meterle eventos a los nuevos a creados
-						document.querySelectorAll("#enlaceMisCursos")[i].addEventListener("click", function (event)
-						{
-							event.preventDefault();
-							mostrar(event);
-						}, false);
+					// meterle eventos a los nuevos a creados
+					document.querySelectorAll("#enlaceMisCursos")[i].addEventListener("click", function (event) { event.preventDefault(); mostrar(event); this.parentNode.classList.add("active"); }, false);
 				}   
 			}
-			else
-			{
-				borrarLi();
-				oLi=document.createElement("LI");
-				oLi.textContent= "No estas matriculado en ningún curso";
-				oLiCurso.appendChild(oLi);
-			}
+
+			oLinkCurso.appendChild(badge);
 		}
 
 		function borrarLi()
 		{
-			oLis= document.querySelectorAll("#pageSubmenu1 LI");
-			for (var i = 0; i < oLis.length; i++) 
+			var badge = document.querySelector('#numCursos');
+			if (badge != null)
+				badge.remove();
+
+			var oLis = document.querySelectorAll("#pageSubmenu1 LI");
+			for (var i=0; i<oLis.length; i++) 
 			{
 				oLis[i].parentNode.removeChild(oLis[i]);
 			}

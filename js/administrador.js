@@ -18,6 +18,11 @@ document.querySelector('#btnAddAlumno').addEventListener("click", crearAlumno);
 document.querySelector('#btnAddProfesor').addEventListener("click", crearProfesor);
 document.querySelector('#btnAddAdministrador').addEventListener("click", crearAdministrador);
 
+document.querySelector("#selectFiltrarCursos").addEventListener("change", filtrarTablaCursos);
+document.querySelector("#selectFiltrarAlumnos").addEventListener("change", filtrarTablaAlumnos);
+document.querySelector("#selectFiltrarProfesores").addEventListener("change", filtrarTablaProfesores);
+document.querySelector("#selectFiltrarAdministradores").addEventListener("change", filtrarTablaAdministradores);
+
 mostrarPagina('cursos');
 
 function mostrarPagina(pagina)
@@ -45,19 +50,19 @@ function mostrarPagina(pagina)
 
 			fila.setAttribute("data-activo", cursos[i].bArchivado);
 
-			var btnEditar = document.createElement("input");
-			btnEditar.type = "button";
-			btnEditar.value = "Editar";
-			btnEditar.classList.add("btn", "btn-warning", "btn-sm");
-			btnEditar.setAttribute("data-toggle", "modal");
-			btnEditar.setAttribute("data-target", "#modal");
-			btnEditar.setAttribute("data-codigo", cursos[i].codigo);
-			btnEditar.addEventListener("click", editarCurso);
-			var acciones = fila.insertCell(-1)
-			acciones.appendChild(btnEditar);
-
+			var acciones = fila.insertCell(-1);
 			if (cursos[i].bArchivado == "si")
 			{
+				var btnEditar = document.createElement("input");
+				btnEditar.type = "button";
+				btnEditar.value = "Editar";
+				btnEditar.classList.add("btn", "btn-warning", "btn-sm");
+				btnEditar.setAttribute("data-toggle", "modal");
+				btnEditar.setAttribute("data-target", "#modal");
+				btnEditar.setAttribute("data-codigo", cursos[i].codigo);
+				btnEditar.addEventListener("click", editarCurso);
+				acciones.appendChild(btnEditar);
+
 				var btnEliminar = document.createElement("input");
 				btnEliminar.type = "button";
 				btnEliminar.value = "Eliminar";
@@ -74,7 +79,7 @@ function mostrarPagina(pagina)
 				acciones.appendChild(btnEliminar);
 			}
 		}
-		filtrarTabla();
+		filtrarTablaCursos();
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
 		for (var i=0; i<capas.length; i++)
@@ -110,19 +115,19 @@ function mostrarPagina(pagina)
 
 			fila.setAttribute("data-activo", alumnos[i].activo);
 
-			var btnEditar = document.createElement("input");
-			btnEditar.type = "button";
-			btnEditar.value = "Editar";
-			btnEditar.classList.add("btn", "btn-warning", "btn-sm");
-			btnEditar.setAttribute("data-toggle", "modal");
-			btnEditar.setAttribute("data-target", "#modal");
-			btnEditar.setAttribute("data-dni", alumnos[i].dni);
-			btnEditar.addEventListener("click", editarAlumno);
-			var acciones = fila.insertCell(-1)
-			acciones.appendChild(btnEditar);
-
+			var acciones = fila.insertCell(-1);
 			if (alumnos[i].activo == "si")
 			{
+				var btnEditar = document.createElement("input");
+				btnEditar.type = "button";
+				btnEditar.value = "Editar";
+				btnEditar.classList.add("btn", "btn-warning", "btn-sm");
+				btnEditar.setAttribute("data-toggle", "modal");
+				btnEditar.setAttribute("data-target", "#modal");
+				btnEditar.setAttribute("data-dni", alumnos[i].dni);
+				btnEditar.addEventListener("click", editarAlumno);
+				acciones.appendChild(btnEditar);
+
 				var btnEliminar = document.createElement("input");
 				btnEliminar.type = "button";
 				btnEliminar.value = "Eliminar";
@@ -139,7 +144,7 @@ function mostrarPagina(pagina)
 				acciones.appendChild(btnEliminar);
 			}
 		}
-		filtrarTabla();
+		filtrarTablaAlumnos();
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
 		for (var i=0; i<capas.length; i++)
@@ -174,19 +179,19 @@ function mostrarPagina(pagina)
 
 			fila.setAttribute("data-activo", profesores[i].activo);
 
-			var btnEditar = document.createElement("input");
-			btnEditar.type = "button";
-			btnEditar.value = "Editar";
-			btnEditar.classList.add("btn", "btn-warning", "btn-sm");
-			btnEditar.setAttribute("data-toggle", "modal");
-			btnEditar.setAttribute("data-target", "#modal");
-			btnEditar.setAttribute("data-dni", profesores[i].dni);
-			btnEditar.addEventListener("click", editarProfesor);
-			var acciones = fila.insertCell(-1)
-			acciones.appendChild(btnEditar);
-
+			var acciones = fila.insertCell(-1);
 			if (profesores[i].activo == "si")
 			{
+				var btnEditar = document.createElement("input");
+				btnEditar.type = "button";
+				btnEditar.value = "Editar";
+				btnEditar.classList.add("btn", "btn-warning", "btn-sm");
+				btnEditar.setAttribute("data-toggle", "modal");
+				btnEditar.setAttribute("data-target", "#modal");
+				btnEditar.setAttribute("data-dni", profesores[i].dni);
+				btnEditar.addEventListener("click", editarProfesor);
+				acciones.appendChild(btnEditar);
+
 				var btnEliminar = document.createElement("input");
 				btnEliminar.type = "button";
 				btnEliminar.value = "Eliminar";
@@ -203,7 +208,7 @@ function mostrarPagina(pagina)
 				acciones.appendChild(btnEliminar);
 			}
 		}
-		filtrarTabla();
+		filtrarTablaProfesores();
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
 		for (var i=0; i<capas.length; i++)
@@ -238,21 +243,22 @@ function mostrarPagina(pagina)
 
 			fila.setAttribute("data-activo", administradores[i].activo);
 
+			var acciones = fila.insertCell(-1);
+
 			if (administradores[i].dni != sesion.dni)
 			{
-				var btnEditar = document.createElement("input");
-				btnEditar.type = "button";
-				btnEditar.value = "Editar";
-				btnEditar.classList.add("btn", "btn-warning", "btn-sm");
-				btnEditar.setAttribute("data-toggle", "modal");
-				btnEditar.setAttribute("data-target", "#modal");
-				btnEditar.setAttribute("data-dni", administradores[i].dni);
-				btnEditar.addEventListener("click", editarAdministrador);
-				var acciones = fila.insertCell(-1)
-				acciones.appendChild(btnEditar);
-
 				if (administradores[i].activo == "si")
 				{
+					var btnEditar = document.createElement("input");
+					btnEditar.type = "button";
+					btnEditar.value = "Editar";
+					btnEditar.classList.add("btn", "btn-warning", "btn-sm");
+					btnEditar.setAttribute("data-toggle", "modal");
+					btnEditar.setAttribute("data-target", "#modal");
+					btnEditar.setAttribute("data-dni", administradores[i].dni);
+					btnEditar.addEventListener("click", editarAdministrador);
+					acciones.appendChild(btnEditar);
+
 					var btnEliminar = document.createElement("input");
 					btnEliminar.type = "button";
 					btnEliminar.value = "Eliminar";
@@ -272,7 +278,7 @@ function mostrarPagina(pagina)
 			else
 				fila.insertCell(-1);
 		}
-		filtrarTabla();
+		filtrarTablaAdministradores();
 
 		var capas = document.querySelectorAll('#content > .container-fluid');
 		for (var i=0; i<capas.length; i++)
@@ -364,8 +370,7 @@ function mostrarPagina(pagina)
 		document.querySelector('#paginaMatriculaciones').classList.remove('hidden');
 		document.querySelector('#btnMatriculas').parentNode.classList.add('active');
 		filtrarTabla();
-	 }
-
+	}
 }
 
 function resetearCamposCurso()
@@ -973,13 +978,50 @@ function borrarAdministrador()
 	mostrarPagina('administradores');
 }
 
-function filtrarTabla()
+function filtrarTablaCursos()
+{
+	var filtro = document.querySelector("#selectFiltrarCursos");
+	filtrarTabla(filtro.value);
+}
+
+function filtrarTablaAlumnos()
+{
+	var filtro = document.querySelector("#selectFiltrarAlumnos");
+	filtrarTabla(filtro.value);
+}
+
+function filtrarTablaProfesores()
+{
+	var filtro = document.querySelector("#selectFiltrarProfesores");
+	filtrarTabla(filtro.value);
+}
+
+function filtrarTablaAdministradores()
+{
+	var filtro = document.querySelector("#selectFiltrarAdministradores");
+	filtrarTabla(filtro.value);
+}
+
+function filtrarTabla(filtro)
 {
 	var filas = document.querySelectorAll("tr");
 
-	for (var i=0; i<filas.length; i++)
+	if (filtro != "todo")
 	{
-		if (filas[i].getAttribute("data-activo") == "no")
-			filas[i].style.display = "none";
+		for (var i=0; i<filas.length; i++)
+		{
+			if (filas[i].getAttribute("data-activo") != null)
+			{
+				if (filas[i].getAttribute("data-activo") == filtro)
+					filas[i].classList.remove("ocultar");
+				else
+					filas[i].classList.add("ocultar");
+			}
+		}
+	}
+	else
+	{
+		for (var i=0; i<filas.length; i++)
+			filas[i].classList.remove("ocultar");	
 	}
 }

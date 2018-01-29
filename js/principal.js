@@ -1,6 +1,6 @@
 /* TODO: */
-// Comprobar estado del usuario al iniciar sesión
-// Guardar resto de tablas en sesión
+// Validar apartado 'Mis datos' en profesor.html
+// Añadir y validar apartado 'Mis datos' en administrador.html
 
 var academia = new Academia();
 

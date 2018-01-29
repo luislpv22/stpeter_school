@@ -201,10 +201,8 @@ class Academia
 			if (this._usuarios[i].dni == sDni && this._usuarios[i].password == sPass)
 			{
 				if (this._usuarios[i].activo == "si")
-				oUsuario = this._usuarios[i];	
-			}
-
-				
+					oUsuario = this._usuarios[i];	
+			}	
 		}
 		return oUsuario;
 	}

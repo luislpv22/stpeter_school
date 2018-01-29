@@ -317,12 +317,13 @@ function cargarListadoCurso(oEvento)
 	limpiarListadoCurso();
 	oE = oEvento || window.event;
 	var listaNotas = academia.getCalificaciones(oE.target.value, sesion.dni);
+
 	if (listaNotas.length == 0)
 	{
-		oP = document.createElement("P");
-		oP.textContent = "No hay calificaciones disponibles";
-		oP.style.color = "red";
-		document.querySelector("#listaCalificaciones").appendChild(oP);
+		var div = document.createElement("div");
+		div.classList.add("alert", "alert-danger");
+		div.textContent = "No hay calificaciones disponibles";
+		document.querySelector("#listaCalificaciones").appendChild(div);
 	}
 	else
 	{
