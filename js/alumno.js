@@ -263,24 +263,20 @@ function realizarMatricula(oEvento)
 	var oE = oEvento || window.event;
 
 	var tCursos = [];
-	for (var i=0; i<cursosElegidos.length; i++) {
+	for (var i=0; i<cursosElegidos.length; i++)
 		tCursos.push(cursosElegidos[i].codigo);
-		sesion.listaCursos.push(cursosElegidos[i].codigo);
-	}
 
 	oMatricula = new Matricula(academia.codNuevaMatri(), "activa", sesion.dni, tCursos);
 
 	academia.addMatricula(oMatricula);
+	sessionStorage.setItem('usuario', JSON.stringify(academia.getUsuario(sesion.dni)));
 	document.querySelector("#txtInformacion span").textContent = "";
 	document.querySelector("#txtInformacion").classList.add("hide");
 	borrartabla();
 	document.getElementById("capaMatriCurso").classList.add("ocultar");
 	cursosElegidos = []; // resetear el array de los cursos elegidos
 	resetearSelectIdiomas();
-	//prueba
-	academia.modificarUsuario(sesion)
 	menuCursoUsuario();
-	oE.preventDefault();
 }
 
 function borrartabla()
@@ -484,10 +480,10 @@ function ordenaTabla()
 			arrayNotas[i]=parseInt(arrayTrNotas[i].dataset.nota);
 		}
 
-		if (sSele =="creciente" )
-			var arrayNotaOrdenado= arrayNotas.sort(function(a, b){return a-b}); // ordena de menor a mayor;
+		if (sSele == "creciente" )
+			var arrayNotaOrdenado = arrayNotas.sort(function(a, b){return a-b}); // ordena de menor a mayor;
 		else
-			var arrayNotaOrdenado= arrayNotas.sort(function(a, b){return a<b}); // ordena de menor a mayor;
+			var arrayNotaOrdenado = arrayNotas.sort(function(a, b){return a<b}); // ordena de menor a mayor;
 
 		var oFilas = oTBody.rows; // el número de filas de una tabla
 

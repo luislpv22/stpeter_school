@@ -215,7 +215,25 @@ class Academia
 		{
 			if (this._usuarios[i].dni == oUsuario.dni)
 			{
-				this._usuarios[i] = oUsuario;
+				var nuevoUsuario = null;
+
+				if (this._usuarios[i] instanceof Administrador)
+				{
+					nuevoUsuario = new Administrador(oUsuario.nombre, oUsuario.password, oUsuario.apellidos, oUsuario.dni, oUsuario.telefono, oUsuario.direccion, oUsuario.correo, oUsuario.activo);
+				}
+				else if (this._usuarios[i] instanceof Profesor)
+				{
+					nuevoUsuario = new Profesor(oUsuario.nombre, oUsuario.password, oUsuario.apellidos, oUsuario.dni, oUsuario.telefono, oUsuario.direccion, oUsuario.correo, oUsuario.activo, 0);
+					nuevoUsuario.listaCursos = oUsuario.listaCursos;
+				}
+				else
+				{
+					nuevoUsuario = new Alumno(oUsuario.nombre, oUsuario.password, oUsuario.apellidos, oUsuario.dni, oUsuario.telefono, oUsuario.direccion, oUsuario.correo, oUsuario.activo, "");
+					nuevoUsuario.listaCursos = oUsuario.listaCursos;
+					nuevoUsuario.listaCalificaciones = oUsuario.listaCalificaciones;
+				}
+
+				this._usuarios[i] = nuevoUsuario;
 				bEncontrado = true;
 			}
 		}
@@ -260,9 +278,10 @@ class Academia
 	getUsuario(dni)
 	{
 		var oUsuario = null;
-		for (var i=0; i<this._usuarios.length && oUsuario==null; i++) 
+		for (var i=0; i<this._usuarios.length && oUsuario == null; i++) 
 			if (this._usuarios[i].dni == dni)
 				oUsuario = this._usuarios[i];
+
 		return oUsuario;
 	}
 

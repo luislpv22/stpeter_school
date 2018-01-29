@@ -8,18 +8,7 @@ document.querySelector('#sidebar .usuario .nombre').appendChild(document.createT
 var btnCerrarSesion = document.querySelector("#btnCerrarSesion");
 btnCerrarSesion.addEventListener("click", cerrarSesion, false);
 
-document.querySelector('#sidebarCollapse').addEventListener("click", mostrarSidebar, false);
-
-function mostrarSidebar()
-{
-	var sidebar = document.querySelector('#sidebar');
-	if (sidebar.classList.contains('active'))
-		sidebar.classList.remove('active');
-	else
-		sidebar.classList.add('active');
-}
-
-var btnAddNota= document.getElementById("btnAddNota");
+var btnAddNota = document.getElementById("btnAddNota");
 btnAddNota.addEventListener("click", mostrarFormularioCalificar, false);
 
 var selectCursoConsultar = document.getElementById("selectCursoConsultar");

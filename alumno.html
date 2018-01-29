@@ -271,18 +271,6 @@
 		if (sesion.tipo != 'alumno')
 			location.href = "index.html";
 
-
-		document.querySelector('#sidebarCollapse').addEventListener("click", mostrarSidebar, false);
-
-		function mostrarSidebar()
-		{
-			var sidebar = document.querySelector('#sidebar');
-			if (sidebar.classList.contains('active'))
-				sidebar.classList.remove('active');
-			else
-				sidebar.classList.add('active');
-		}
-
 		var btnCerrarSesion= document.querySelector("#btnCerrarSesion");
 		btnCerrarSesion.addEventListener("click", cerrarSesion, false);
 

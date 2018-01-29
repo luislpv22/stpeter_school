@@ -245,20 +245,20 @@ function mostrarPagina(pagina)
 
 			var acciones = fila.insertCell(-1);
 
-			if (administradores[i].dni != sesion.dni)
+			if (administradores[i].activo == "si")
 			{
-				if (administradores[i].activo == "si")
-				{
-					var btnEditar = document.createElement("input");
-					btnEditar.type = "button";
-					btnEditar.value = "Editar";
-					btnEditar.classList.add("btn", "btn-warning", "btn-sm");
-					btnEditar.setAttribute("data-toggle", "modal");
-					btnEditar.setAttribute("data-target", "#modal");
-					btnEditar.setAttribute("data-dni", administradores[i].dni);
-					btnEditar.addEventListener("click", editarAdministrador);
-					acciones.appendChild(btnEditar);
+				var btnEditar = document.createElement("input");
+				btnEditar.type = "button";
+				btnEditar.value = "Editar";
+				btnEditar.classList.add("btn", "btn-warning", "btn-sm");
+				btnEditar.setAttribute("data-toggle", "modal");
+				btnEditar.setAttribute("data-target", "#modal");
+				btnEditar.setAttribute("data-dni", administradores[i].dni);
+				btnEditar.addEventListener("click", editarAdministrador);
+				acciones.appendChild(btnEditar);
 
+				if (administradores[i].dni != sesion.dni)
+				{
 					var btnEliminar = document.createElement("input");
 					btnEliminar.type = "button";
 					btnEliminar.value = "Eliminar";

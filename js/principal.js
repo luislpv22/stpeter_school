@@ -35,8 +35,9 @@ function datosIniciales()
 		{
 			var oUsuario = null;
 			var us = tUsuarios[i];
-	    	if (us.tipo == 'administrador')
+	    	if (us.tipo == 'administrador') {
 	    		oUsuario = new Administrador(us.nombre, us.password, us.apellidos, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.salario);
+	    	}
 	    	else if (us.tipo == 'profesor')
 	    	{
 	    		oUsuario = new Profesor(us.nombre, us.password, us.apellidos, us.dni, us.telefono, us.direccion, us.correo, us.activo, us.salario);
