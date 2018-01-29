@@ -8,6 +8,32 @@ document.querySelector('#sidebar .usuario .nombre').appendChild(document.createT
 var btnCerrarSesion = document.querySelector("#btnCerrarSesion");
 btnCerrarSesion.addEventListener("click", cerrarSesion, false);
 
+btnModDatosUsu = document.querySelector("#btnModDatosProf");
+btnModDatosUsu.addEventListener("click", comprobarFrmModDatosProf, false);
+
+function resetearCamposModMatriculaProf()
+{
+	var input = document.querySelectorAll('#frmModProf input');
+    for (var i=0; i<input.length; i++)
+    input[i].classList.remove("errorFormulario");
+
+    var mensajes = document.querySelectorAll('#frmModProf .text-error');
+    for (var i=0; i<mensajes.length; i++)
+    mensajes[i].remove();
+}
+
+function cargarDatosProf()
+{
+	document.querySelector("#frmModProf #nombreUsu").value = sesion.nombre;
+	document.querySelector("#frmModProf #apellidosUsu").value = sesion.apellidos;
+	document.querySelector("#frmModProf #dniUsu").value = sesion.dni;
+	document.querySelector("#frmModProf #passUsu").value = sesion.password;
+	document.querySelector("#frmModProf #telefonoUsu").value = sesion.telefono;
+	document.querySelector("#frmModProf #direUsu").value = sesion.direccion;
+	document.querySelector("#frmModProf #emailUsu").value = sesion.correo;
+}
+
+
 var btnAddNota = document.getElementById("btnAddNota");
 btnAddNota.addEventListener("click", mostrarFormularioCalificar, false);
 
@@ -71,7 +97,9 @@ function mostrarPagina(oEvento)
 		document.getElementById("capaModificarAlu").classList.remove("ocultar");
 		document.getElementById("capaConsultarCursos").classList.add("ocultar");
 		document.querySelector('#enlaceMisDatos').parentNode.classList.add('active');
-		cargarDatosUsuario();
+		cargarDatosProf();
+		resetearCamposModMatriculaProf();
+
 	}else if (oE.target.id == "enlaceCursos")
 	{
 		document.getElementById("capaConsultarNotas").classList.add("ocultar");

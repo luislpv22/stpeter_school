@@ -1,10 +1,10 @@
 function resetearCamposModMatricula()
 {
-	var input = document.querySelectorAll('#frmModAlu input');
+	var input = document.querySelectorAll('#frmModUsuario input');
     for (var i=0; i<input.length; i++)
     input[i].classList.remove("errorFormulario");
 
-    var mensajes = document.querySelectorAll('#frmModAlu .text-error');
+    var mensajes = document.querySelectorAll('#frmModUsuario .text-error');
     for (var i=0; i<mensajes.length; i++)
     mensajes[i].remove();
 }
@@ -27,13 +27,13 @@ function cerrarMensaje()
 /*******************************Cargar datos Usuario ********************************/
 function cargarDatosUsuario()
 {
-	document.querySelector("#frmModAlu #nombreAlu").value = sesion.nombre;
-	document.querySelector("#frmModAlu #apellidosAlu").value = sesion.apellidos;
-	document.querySelector("#frmModAlu #dniAlu").value = sesion.dni;
-	document.querySelector("#frmModAlu #passAlu").value = sesion.password;
-	document.querySelector("#frmModAlu #telefonoAlu").value = sesion.telefono;
-	document.querySelector("#frmModAlu #direAlu").value = sesion.direccion;
-	document.querySelector("#frmModAlu #emailAlu").value = sesion.correo;
+	document.querySelector("#frmModUsuario #nombreUsu").value = sesion.nombre;
+	document.querySelector("#frmModUsuario #apellidosUsu").value = sesion.apellidos;
+	document.querySelector("#frmModUsuario #dniUsu").value = sesion.dni;
+	document.querySelector("#frmModUsuario #passUsu").value = sesion.password;
+	document.querySelector("#frmModUsuario #telefonoUsu").value = sesion.telefono;
+	document.querySelector("#frmModUsuario #direUsu").value = sesion.direccion;
+	document.querySelector("#frmModUsuario #emailUsu").value = sesion.correo;
 }
 
 //método que carga los cursos que existan en los distintos select del div de matriculación

@@ -1,7 +1,3 @@
-/* TODO: */
-// Validar apartado 'Mis datos' en profesor.html
-// Añadir y validar apartado 'Mis datos' en administrador.html
-
 var academia = new Academia();
 
 datosIniciales();
