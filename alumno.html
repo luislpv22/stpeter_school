@@ -30,7 +30,7 @@
 			<!-- Sidebar Links -->
 			<ul class="list-unstyled components">
 				<li class="active">
-					<a href="#frmModAlu" id="enlaceMisDatos"><i class="glyphicon glyphicon-user"></i>Mis Datos</a>
+					<a href="#frmModUsuario" id="enlaceMisDatos"><i class="glyphicon glyphicon-user"></i>Mis Datos</a>
 				</li>
 				<li>
 					<a href="#frmAltaMatri" id="enlaceMatricular"><i class="glyphicon glyphicon-education"></i>Matricularme</a>
@@ -53,7 +53,7 @@
 			<div class="container-fluid">
 				<!-- formulario modificar datos alumno -->
 				<div id="capaModificarAlu" class="ocultar">
-					<form class="form-horizontal" name="frmModAlu" id="frmModAlu" action="#">
+					<form class="form-horizontal" name="frmModUsuario" id="frmModUsuario" action="#">
 						<fieldset>
 
 							<!-- Form Name -->
@@ -64,7 +64,7 @@
 							<div class="form-group" id="mod">
 								<label class="col-md-2 control-label" for="nombreAlu" >Nombre</label>  
 								<div class="col-md-4">
-									<input id="nombreAlu" name="nombreAlu" type="text" placeholder="nombre" class="form-control input-md" disabled >
+									<input id="nombreUsu" name="nombreUsu" type="text" placeholder="nombre" class="form-control input-md" disabled >
 
 								</div>
 							</div>
@@ -73,7 +73,7 @@
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="apellidosAlu">Apellidos</label>  
 								<div class="col-md-4">
-									<input id="apellidosAlu" name="apellidosAlu" type="text" placeholder="apellidos" class="form-control input-md" disabled>
+									<input id="apellidosUsu" name="apellidosUsu" type="text" placeholder="apellidos" class="form-control input-md" disabled>
 
 								</div>
 							</div>
@@ -82,7 +82,7 @@
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="dniAlu">DNI</label>  
 								<div class="col-md-4">
-									<input id="dniAlu" name="dniAlu" type="text" placeholder="dni" class="form-control input-md" disabled>
+									<input id="dniUsu" name="dniUsu" type="text" placeholder="dni" class="form-control input-md" disabled>
 
 								</div>
 							</div>
@@ -91,7 +91,7 @@
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="password">Password</label>  
 								<div class="col-md-4">
-									<input id="passAlu" name="passAlu" type="password" placeholder="password" class="form-control input-md" required="">
+									<input id="passUsu" name="passUsu" type="password" placeholder="password" class="form-control input-md" required="">
 								</div>
 							</div>
 
@@ -99,7 +99,7 @@
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="telefonoAlu">Teléfono</label>  
 								<div class="col-md-4">
-									<input id="telefonoAlu" name="telefonoAlu" type="text" placeholder="teléfono" class="form-control input-md" required="">
+									<input id="telefonoUsu" name="telefonoUsu" type="text" placeholder="teléfono" class="form-control input-md" required="">
 
 								</div>
 							</div>
@@ -108,7 +108,7 @@
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="direAlu">Dirección</label>  
 								<div class="col-md-4">
-									<input id="direAlu" name="direAlu" type="text" placeholder="dirección" class="form-control input-md" required="">
+									<input id="direUsu" name="direUsu" type="text" placeholder="dirección" class="form-control input-md" required="">
 
 								</div>
 							</div>
@@ -117,7 +117,7 @@
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="emailAlu">Email</label>  
 								<div class="col-md-4">
-									<input id="emailAlu" name="emailAlu" type="text" placeholder="email" class="form-control input-md" required="">
+									<input id="emailUsu" name="emailUsu" type="text" placeholder="email" class="form-control input-md" required="">
 
 								</div>
 							</div>
@@ -126,7 +126,7 @@
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="ModAlu"></label>
 								<div class="col-md-4">
-									<button id="btnModDatosAlu" name="btnModDatosAlu" class="btn btn-success">Modificar datos</button>
+									<button id="btnModDatosUsu" name="btnModDatosUsu" class="btn btn-success">Modificar datos</button>
 								</div>
 							</div>
 
@@ -298,9 +298,9 @@
 			}, false);
 		}
 
-		var btnModDatosAlu= document.querySelector("#btnModDatosAlu");
-		btnModDatosAlu.addEventListener("click", comprobarFrmModDatosAlu, false);
-		var btnResetModDatosAlu= document.querySelector("#btnResetModDatosAlu");
+		var btnModDatosAlu= document.querySelector("#btnModDatosUsu");
+		btnModDatosUsu.addEventListener("click", comprobarFrmModDatosUsu, false);
+		//var btnResetModDatosAlu= document.querySelector("#btnResetModDatosAlu");
 
 		oSelectIdioma= document.querySelector("#selectIdioma");
 		oSelectIdioma.addEventListener("change", cargarNivel, false);
