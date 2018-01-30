@@ -5,6 +5,10 @@
     <title>St. Peter School - Iniciar sesión</title>
 
     <link rel="stylesheet" type="text/css" href="css/login.css">
+    <script>
+        if (typeof sessionStorage.usuario !== 'undefined')
+            location.href = "index.html";
+    </script>
 </head>
 <body>	
     <div id="login-form">

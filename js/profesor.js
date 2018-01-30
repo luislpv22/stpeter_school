@@ -44,6 +44,7 @@ document.querySelector('#enlaceMisDatos').addEventListener("click", mostrarPagin
 document.querySelector('#enlaceAlumnos').addEventListener("click", mostrarPagina, false);
 document.querySelector('#enlaceCursos').addEventListener("click", mostrarPagina, false);
 
+document.querySelector('#enlaceCursos').click();
 
 function actualizaSelectConsultar()
 {

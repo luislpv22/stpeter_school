@@ -164,6 +164,7 @@ a.article, a.article:hover {
 }
 
 #content {
+  background: #fff;
   padding: 20px 50px;
   min-height: 100vh;
   transition: all 0.3s;

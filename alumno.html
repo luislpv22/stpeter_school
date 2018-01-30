@@ -46,7 +46,7 @@
 		</nav>
 
 		<div id="content">
-			<button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
+			<!--<button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-menu-hamburger"></i></button>--><br/>
 
 			<!-- hasta aqui todo lo relacionado con el menú -->
 
@@ -55,14 +55,10 @@
 				<div id="capaModificarAlu" class="ocultar">
 					<form class="form-horizontal" name="frmModUsuario" id="frmModUsuario" action="#">
 						<fieldset>
-
-							<!-- Form Name -->
 							<legend>Modificar datos</legend>
-
-							<!-- Text input-->
-
+							<br/>
 							<div class="form-group" id="mod">
-								<label class="col-md-2 control-label" for="nombreAlu" >Nombre</label>  
+								<label class="col-md-2 control-label" for="nombreAlu">Nombre:</label>  
 								<div class="col-md-4">
 									<input id="nombreUsu" name="nombreUsu" type="text" placeholder="nombre" class="form-control input-md" disabled >
 
@@ -71,7 +67,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-2 control-label" for="apellidosAlu">Apellidos</label>  
+								<label class="col-md-2 control-label" for="apellidosAlu">Apellidos:</label>  
 								<div class="col-md-4">
 									<input id="apellidosUsu" name="apellidosUsu" type="text" placeholder="apellidos" class="form-control input-md" disabled>
 
@@ -80,7 +76,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-2 control-label" for="dniAlu">DNI</label>  
+								<label class="col-md-2 control-label" for="dniAlu">DNI:</label>  
 								<div class="col-md-4">
 									<input id="dniUsu" name="dniUsu" type="text" placeholder="dni" class="form-control input-md" disabled>
 
@@ -89,7 +85,7 @@
 
 							<!-- password input-->
 							<div class="form-group">
-								<label class="col-md-2 control-label" for="password">Password</label>  
+								<label class="col-md-2 control-label" for="password">Password:</label>  
 								<div class="col-md-4">
 									<input id="passUsu" name="passUsu" type="password" placeholder="password" class="form-control input-md" required="">
 								</div>
@@ -97,7 +93,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-2 control-label" for="telefonoAlu">Teléfono</label>  
+								<label class="col-md-2 control-label" for="telefonoAlu">Teléfono:</label>  
 								<div class="col-md-4">
 									<input id="telefonoUsu" name="telefonoUsu" type="text" placeholder="teléfono" class="form-control input-md" required="">
 
@@ -106,7 +102,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-2 control-label" for="direAlu">Dirección</label>  
+								<label class="col-md-2 control-label" for="direAlu">Dirección:</label>  
 								<div class="col-md-4">
 									<input id="direUsu" name="direUsu" type="text" placeholder="dirección" class="form-control input-md" required="">
 
@@ -115,7 +111,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-2 control-label" for="emailAlu">Email</label>  
+								<label class="col-md-2 control-label" for="emailAlu">Email:</label>  
 								<div class="col-md-4">
 									<input id="emailUsu" name="emailUsu" type="text" placeholder="email" class="form-control input-md" required="">
 
@@ -285,6 +281,8 @@
 				mostrar(event);
 			}, false);
 		}
+
+		document.querySelector("#enlaceMisDatos").click();
 
 		var btnModDatosAlu= document.querySelector("#btnModDatosUsu");
 		btnModDatosUsu.addEventListener("click", comprobarFrmModDatosUsu, false);
